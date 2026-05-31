@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>TR7600 AXI Redesign — Case Study · Alyssa Huang</title>
-<meta name="description" content="Case study: redesigning the TRI TR7600 3D AXI inspection software from a single dense screen into a staged, purpose-built workflow. Sole UI/UX owner, 6 years, 10+ machine variants on one interface." />
+<meta name="description" content="A research-led redesign of the TRI TR7600 3D AXI inspection software. A baseline usability study (n=14) and field interviews at five customer sites drove the redesign; total programming time fell ~38%." />
 <meta name="robots" content="index, follow" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="TR7600 AXI Redesign — Case Study · Alyssa Huang" />
-<meta property="og:description" content="From one undifferentiated screen to a staged inspection workflow — an industrial B2B UX redesign owned end-to-end for six years." />
+<meta property="og:description" content="Baseline usability study + field interviews drove a staged redesign of an industrial 3D AXI inspection tool. Programming time down ~38%, owned end-to-end for six years." />
 
 <script>
 (function(){
@@ -38,7 +38,7 @@
   "@type": "CreativeWork",
   "name": "TR7600 3D AXI Inspection Software — UX Redesign",
   "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Senior UX Designer" },
-  "about": ["Industrial UX","B2B Tool Design","Information Architecture","UX Redesign","Automated Optical Inspection"],
+  "about": ["Industrial UX","B2B Tool Design","User Research","Usability Testing","System Usability Scale","UX Redesign","Automated Optical Inspection"],
   "dateCreated": "2018",
   "inLanguage": ["en","zh-Hant"]
 }
@@ -202,6 +202,27 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
 .reveal.in{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* Finding -> decision blocks */
+.find{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(22px,4vw,52px);align-items:center;padding:clamp(30px,4vw,48px) 0;border-top:1px solid var(--rule);}
+.find:first-of-type{border-top:none;padding-top:4px;}
+.find.flip .find-media{order:2;}
+.find-body .ftag{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:inline-block;}
+.find-body .ftag[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.find-body h3{font-weight:600;font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.25;letter-spacing:-0.02em;margin-bottom:14px;}
+.find-body h3[data-lang="zh"]{line-height:1.42;}
+.find-body p{font-size:1rem;color:var(--ink-2);line-height:1.66;margin-bottom:10px;}
+.find-body p[data-lang="zh"]{line-height:1.85;}
+.find-body p:last-child{margin-bottom:0;}
+.find-body p strong{color:var(--ink);font-weight:600;}
+.find-body .arrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);display:block;margin:16px 0 8px;}
+.find-body .arrow[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+@media (max-width:820px){.find,.find.flip{grid-template-columns:1fr;}.find.flip .find-media{order:0;}}
+
+/* SUS chart figure */
+.chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(20px,3vw,34px);}
+.chart-fig svg{width:100%;height:auto;display:block;}
+
 </style>
 </head>
 <body>
@@ -224,18 +245,18 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   <div class="container">
     <div class="kicker" data-lang="en">Case Study · Test Research Inc. · Industrial B2B · 2018–2024</div>
     <div class="kicker" data-lang="zh">案例 · 德律科技 · 工業 B2B · 2018–2024</div>
-    <h1 data-lang="en">Redesigning a 3D AXI inspection system from <em>one screen that did everything</em> into a staged workflow</h1>
-    <h1 data-lang="zh">把一套 3D AXI 檢測系統，從<em>一個畫面包辦所有事</em>，重新設計成分階段的工作流程</h1>
+    <h1 data-lang="en">I measured a seven-stage inspection workflow, then rebuilt the stages the <em>data</em> failed</h1>
+    <h1 data-lang="zh">我先量測了一套七階段的檢測工作流程，再重建<em>數據</em>顯示不及格的那些階段</h1>
     <div class="c-meta" data-lang="en">
-      <span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>6-year ownership</span><span>SMT process engineers</span><span>10+ machine variants</span>
+      <span class="hl">Sole UI/UX owner</span><span>Usability study · n=14</span><span>5 field interviews</span><span>Full redesign</span><span>6-year ownership</span><span>10+ machine variants</span>
     </div>
     <div class="c-meta" data-lang="zh">
-      <span class="hl">唯一 UI/UX 負責人</span><span>完整重新設計</span><span>6 年 ownership</span><span>SMT 製程工程師</span><span>10+ 機種</span>
+      <span class="hl">唯一 UI/UX 負責人</span><span>易用性測試 · n=14</span><span>5 場客戶現場訪談</span><span>完整改版</span><span>6 年 ownership</span><span>10+ 機種</span>
     </div>
     <div class="c-bigstat">
       <div class="v">38<sup>%</sup></div>
-      <div class="d" data-lang="en">less total programming time per board after the redesign — independently measured by FAE teams on two production boards. One interface I owned end-to-end across 10+ machine variants.</div>
-      <div class="d" data-lang="zh">改版後每片板的總編程時間減少——由 FAE 團隊在兩塊量產板上獨立量測。一套我從頭到尾獨力負責、橫跨 10+ 機種的介面。</div>
+      <div class="d" data-lang="en">less total programming time per board after the redesign — independently measured by FAE teams on two production boards, with the biggest gains on the stages the baseline study flagged.</div>
+      <div class="d" data-lang="zh">改版後每片板的總編程時間減少——由 FAE 團隊在兩塊量產板上獨立量測，改善最大的正是基準研究點出來的那幾個階段。</div>
     </div>
   </div>
 </header>
@@ -245,210 +266,181 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   <!-- 01 Context -->
   <section class="sec first reveal">
     <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
-    <h2 data-lang="en">The software that inspects <em>every board</em> before it ships</h2>
-    <h2 data-lang="zh">每片電路板出貨前都要<em>過一次</em>的軟體</h2>
+    <h2 data-lang="en">A seven-stage tool that inspects <em>every board</em> before it ships</h2>
+    <h2 data-lang="zh">一套七階段的工具，檢測出貨前的<em>每一片板</em></h2>
     <div class="prose">
-      <p data-lang="en">TRI&rsquo;s flagship 3D AXI (Automated X-ray Inspection) software detects solder-joint defects on every PCB leaving an SMT production line. It runs in shifts, operated by process engineers under line-speed pressure — a confusing flow doesn&rsquo;t just annoy, it stops production. The same software ships to global automotive, server, and semiconductor accounts, and must behave identically across more than ten machine variants.</p>
-      <p data-lang="zh">德律的旗艦 3D AXI（自動 X 光檢測）軟體，負責檢測 SMT 產線上每一片 PCB 的焊點缺陷。它以輪班方式運作，由製程工程師在產線速度的壓力下操作——一個令人困惑的流程不只是惱人，而是會讓生產停擺。同一套軟體出貨給全球汽車、伺服器、半導體大客戶，而且必須在十餘種機種上行為一致。</p>
+      <p data-lang="en">TRI&rsquo;s flagship 3D AXI (Automated X-ray Inspection) software inspects solder joints on every PCB leaving an SMT line. Operators program each board through a <strong>seven-stage workflow</strong> — CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune — in shifts, under line-speed pressure where a confusing flow means real downtime. The same software ships to global automotive, server and semiconductor accounts and must run identically across more than ten machine variants.</p>
+      <p data-lang="zh">德律的旗艦 3D AXI（自動 X 光檢測）軟體，檢測 SMT 產線上每一片 PCB 的焊點。操作員透過<strong>七個階段的工作流程</strong>——CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune——以輪班方式為每片板編程，在產線速度的壓力下，一個令人困惑的流程就是真實的停機。同一套軟體出貨給全球汽車、伺服器、半導體大客戶，並必須在十餘種機種上行為一致。</p>
     </div>
   </section>
 
   <!-- 02 Role -->
   <section class="sec reveal">
     <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
-    <h2 data-lang="en">Sole owner of the interface — for <em>six years</em></h2>
-    <h2 data-lang="zh">唯一的介面負責人——<em>六年</em></h2>
+    <h2 data-lang="en">Sole owner of the research <em>and</em> the redesign — for six years</h2>
+    <h2 data-lang="zh">研究<em>與</em>改版的唯一負責人——六年</h2>
     <div class="fact-grid">
-      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Sole UI/UX designer. I led the full redesign, then maintained and evolved the interface across every new machine for six years.</span><span data-lang="zh">唯一 UI/UX 設計師。我主導完整改版，並在接下來六年間，於每一台新機種上維護與演進這套介面。</span></div>
-      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">REDESIGN — from a legacy 2D-AOI-style interface to a 3D-AXI-native, staged workflow.</span><span data-lang="zh">REDESIGN——從舊版 2D AOI 風格的介面，到 3D-AXI 原生、分階段的工作流程。</span></div>
-      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Algorithm &amp; mechanical engineering teams; global field engineers. C# / MFC literacy made spec arguments shorter.</span><span data-lang="zh">演算法與機構工程團隊；全球現場工程師。C# / MFC 的底子讓規格討論更短。</span></div>
-      <div class="f"><b data-lang="en">Scope owned</b><b data-lang="zh">負責項目</b><span data-lang="en">Programming flow, alignment, GR&amp;R tooling, customization, multi-language deployment.</span><span data-lang="zh">編程流程、定位、GR&amp;R 工具、客製化流程、多國語系部署。</span></div>
+      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Sole UI/UX designer. I ran the baseline study, led the redesign, then maintained and evolved the interface across every new machine for six years.</span><span data-lang="zh">唯一 UI/UX 設計師。我執行了基準研究、主導改版，並在接下來六年間於每一台新機種上維護與演進這套介面。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">Research-led REDESIGN — a usability study and field interviews diagnosed the failing stages, then I redesigned them.</span><span data-lang="zh">研究驅動的 REDESIGN——以易用性測試與現場訪談診斷出不及格的階段，再動手重設。</span></div>
+      <div class="f"><b data-lang="en">Research</b><b data-lang="zh">研究方法</b><span data-lang="en">Task-based usability test, n=14 operators, SUS per stage + full error logging; field interviews at 5 customer sites (networking, EMS, power-electronics OEMs).</span><span data-lang="zh">任務式易用性測試，n=14 位操作員，逐階段量測 SUS 並逐筆記錄錯誤；並於 5 個客戶現場（網通、EMS、電源 OEM）進行訪談。</span></div>
+      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Algorithm &amp; mechanical engineering teams. C# / MFC literacy shortened spec arguments and feasibility calls.</span><span data-lang="zh">演算法與機構工程團隊。C# / MFC 的底子讓規格討論與可行性判斷更短。</span></div>
     </div>
   </section>
 
-  <!-- 03 Problem + before screenshot -->
+  <!-- 03 Baseline research -->
   <section class="sec reveal">
-    <span class="sec-num">[03] &nbsp; <span data-lang="en">Problem</span><span data-lang="zh">問題</span></span>
-    <h2 data-lang="en">One dense screen tried to be <em>every stage at once</em></h2>
-    <h2 data-lang="zh">一個密集的畫面，硬要<em>同時當每一個階段</em></h2>
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">Baseline research</span><span data-lang="zh">基準研究</span></span>
+    <h2 data-lang="en">Before touching the design, I <em>measured</em> the baseline</h2>
+    <h2 data-lang="zh">動手設計之前，我先<em>量測</em>了基準</h2>
     <div class="prose">
-      <p data-lang="en">The legacy interface stacked the entire inspection setup — CAD alignment, scan, fiducial, warpage, fine-tuning, indexing — onto a single canvas paired with one mega family-editor panel. Operators jumped between unrelated tasks without ever changing context. New engineers hit a wall: everything was visible, nothing was sequenced. Programming a single board ran as long as 386 minutes — over six hours — and stayed error-prone, because the screen never told you <em>which stage you were in</em>.</p>
-      <p data-lang="zh">舊版介面把整個檢測設定——CAD 定位、掃描、Fiducial、翹曲、微調、索引——全部堆疊在單一畫布上，再配一個巨大的 Family editor 面板。操作員在毫不相關的任務之間跳來跳去，畫面卻從不切換情境。新進工程師撞牆：所有東西都看得到，卻沒有任何順序。為一片板編程最長要花上 386 分鐘——超過六小時——而且容易出錯，因為畫面從不告訴你<em>現在身處哪個階段</em>。</p>
+      <p data-lang="en">I ran a <strong>task-based usability test with 14 operators</strong>, logging every error and scoring SUS for each of the seven stages, plus <strong>field interviews at five customer sites</strong>. The point was to start the redesign where the data failed — not where opinion was loudest.</p>
+      <p data-lang="zh">我對 <strong>14 位操作員進行任務式易用性測試</strong>，逐筆記錄錯誤並對七個階段各自量測 SUS，再到<strong>五個客戶現場做訪談</strong>。目的是讓改版從數據最痛的地方開始——而不是聲音最大的地方。</p>
     </div>
 
-    <div class="shot reveal" style="margin-top:28px;">
-      <span class="shot-tag"><span data-lang="en">Before · legacy interface</span><span data-lang="zh">改版前 · 舊版介面</span></span>
-      <img src="images/tr7600-before-legacy.jpg" alt="Legacy TR7600 interface: a single dense screen showing a board canvas of red and yellow components alongside one large family-editor table panel, with no separation between inspection stages." />
-      <span class="marker" style="left:30%;top:55%;">1</span>
-      <span class="marker" style="left:78%;top:30%;">2</span>
-      <span class="marker" style="left:78%;top:78%;">3</span>
-    </div>
-    <ul class="legend" data-lang="en">
-      <li><span class="n">1</span><span><strong>One canvas for all stages.</strong> Alignment, scan, warpage and inspection all happened in the same view — no signal of where you were in the workflow.</span></li>
-      <li><span class="n">2</span><span><strong>A mega family-editor panel</strong> exposed every parameter at once, regardless of the task in front of you.</span></li>
-      <li><span class="n">3</span><span><strong>Stacked tables competing for the same space</strong> — pin, component and family data layered without hierarchy.</span></li>
-    </ul>
-    <ul class="legend" data-lang="zh">
-      <li><span class="n">1</span><span><strong>一個畫布跑完所有階段。</strong>定位、掃描、翹曲、檢測全在同一個視圖裡發生——完全沒有「你在流程的哪裡」的訊號。</span></li>
-      <li><span class="n">2</span><span><strong>巨大的 Family editor 面板</strong>，不管你眼前在做什麼任務，都一次攤開所有參數。</span></li>
-      <li><span class="n">3</span><span><strong>多層表格搶同一塊空間</strong>——pin、component、family 資料層層堆疊，沒有階層。</span></li>
-    </ul>
-
-    <div class="note">
-      <p data-lang="en"><strong>A note on what you&rsquo;re looking at:</strong> this is a dense expert tool, not a consumer app. Visual density here is a <em>constraint of the domain</em> — process engineers need this much data on screen. The redesign goal was never to make it &ldquo;pretty&rdquo;; it was to make a complex workflow legible.</p>
-      <p data-lang="zh"><strong>關於你看到的畫面：</strong>這是一套高密度的專家工具，不是消費型 App。這裡的視覺密度是<em>領域的限制</em>——製程工程師本來就需要這麼多資料在畫面上。改版的目標從來不是「變漂亮」，而是讓一個複雜的工作流程變得可讀。</p>
-    </div>
-  </section>
-
-  <!-- 04 Process + IA diagram -->
-  <section class="sec reveal">
-    <span class="sec-num">[04] &nbsp; <span data-lang="en">Process</span><span data-lang="zh">過程</span></span>
-    <h2 data-lang="en">I matched the interface to the <em>workflow</em>, not the feature list</h2>
-    <h2 data-lang="zh">我讓介面對齊<em>工作流程</em>，而不是功能清單</h2>
-    <div class="prose">
-      <p data-lang="en">I observed shift operators and programming engineers on real lines and found the bottleneck wasn&rsquo;t styling — it was that one screen tried to be every stage at once. Timing the real programming flow also showed the clock was concentrated in two steps — Fine&nbsp;Tune and Library — so that&rsquo;s where I aimed the heaviest redesign. So I mapped the actual inspection workflow into discrete stages, then designed a per-stage interface where each screen exposes only the controls and data that stage needs. The structural change, not the cosmetics, did the work.</p>
-      <p data-lang="zh">我在真實產線上觀察輪班操作員與編程工程師，發現瓶頸不在視覺風格——而在於一個畫面硬要同時當每一個階段。為真實編程流程計時後也發現，時間集中在兩個步驟——Fine Tune 與 Library——所以我把最重的改版火力對準那裡。接著我把真實的檢測工作流程拆解成獨立階段，再為每個階段設計專屬介面，讓每個畫面只攤開該階段需要的控制項與資料。真正起作用的是結構性的改變，不是表面的修飾。</p>
-    </div>
-
-    <div class="ba-wrap" style="margin-top:26px;">
-      <div class="ba-diagram">
-        <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Information architecture diagram: before, one dense block holds all six stages; after, the workflow is split into six sequential purpose-built screens.">
-          <!-- BEFORE -->
-          <text x="40" y="40" font-family="Geist Mono, monospace" font-size="13" fill="#6E6E73" letter-spacing="1">BEFORE</text>
-          <rect x="40" y="58" width="300" height="232" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-          <!-- crammed sub-blocks -->
-          <g fill="none" stroke="#A1A1A6" stroke-width="1">
-            <rect x="58" y="78" width="120" height="44" rx="3"/>
-            <rect x="186" y="78" width="136" height="44" rx="3"/>
-            <rect x="58" y="132" width="80" height="60" rx="3"/>
-            <rect x="146" y="132" width="80" height="60" rx="3"/>
-            <rect x="234" y="132" width="88" height="60" rx="3"/>
-            <rect x="58" y="202" width="160" height="70" rx="3"/>
-            <rect x="226" y="202" width="96" height="70" rx="3"/>
+    <div class="ba-wrap" style="margin-top:24px;">
+      <div class="chart-fig">
+        <svg viewBox="0 0 820 330" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Baseline SUS by stage, 14 operators. CAD 70 grade D, Scan 75 grade C, Alignment 60 grade D, Library 69 grade D, Warp 56 grade E, BlockScan 59 grade E, FineTune 51 grade E. The SUS-68 benchmark line shows four stages below it; Warp, BlockScan and FineTune fail at grade E.">
+          <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">BASELINE SUS · BY STAGE · n=14 OPERATORS</text>
+          <!-- benchmark -->
+          <line x1="571" y1="44" x2="571" y2="300" stroke="#2B4DE0" stroke-width="0.9" stroke-dasharray="4 4"/>
+          <text x="571" y="318" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0" text-anchor="middle">SUS 68 · benchmark</text>
+          <!-- axis -->
+          <line x1="170" y1="44" x2="170" y2="300" stroke="#0C0C0D" stroke-width="1"/>
+          <g font-family="Geist Mono, monospace" font-size="11">
+            <text x="160" y="69" fill="#6E6E73" text-anchor="end">CAD</text>
+            <rect x="170" y="54" width="413" height="22" fill="#0C0C0D"/><text x="591" y="69" fill="#6E6E73">70 · D</text>
+            <text x="160" y="105" fill="#6E6E73" text-anchor="end">SCAN</text>
+            <rect x="170" y="90" width="442" height="22" fill="#0C0C0D"/><text x="620" y="105" fill="#6E6E73">75 · C</text>
+            <text x="160" y="141" fill="#6E6E73" text-anchor="end">ALIGNMENT</text>
+            <rect x="170" y="126" width="354" height="22" fill="#3A3A3D"/><text x="532" y="141" fill="#6E6E73">60 · D</text>
+            <text x="160" y="177" fill="#6E6E73" text-anchor="end">LIBRARY</text>
+            <rect x="170" y="162" width="407" height="22" fill="#3A3A3D"/><text x="585" y="177" fill="#6E6E73">69 · D</text>
+            <text x="160" y="213" fill="#0C0C0D" text-anchor="end">WARP</text>
+            <rect x="170" y="198" width="330" height="22" fill="#2B4DE0"/><text x="508" y="213" fill="#2B4DE0">56 · E</text>
+            <text x="160" y="249" fill="#0C0C0D" text-anchor="end">BLOCKSCAN</text>
+            <rect x="170" y="234" width="348" height="22" fill="#2B4DE0"/><text x="526" y="249" fill="#2B4DE0">59 · E</text>
+            <text x="160" y="285" fill="#0C0C0D" text-anchor="end">FINETUNE</text>
+            <rect x="170" y="270" width="301" height="22" fill="#2B4DE0"/><text x="479" y="285" fill="#2B4DE0">51 · E</text>
           </g>
-          <g font-family="Geist Mono, monospace" font-size="9" fill="#6E6E73">
-            <text x="66" y="103">CAD</text><text x="194" y="103">SCAN</text>
-            <text x="66" y="166">FID</text><text x="154" y="166">WARP</text><text x="242" y="166">TUNE</text>
-            <text x="66" y="241">INDEX</text><text x="234" y="241">FAMILY ED.</text>
-          </g>
-          <text x="40" y="320" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">One screen · every stage at once</text>
-
-          <!-- arrow -->
-          <g stroke="#2B4DE0" stroke-width="2" fill="none">
-            <line x1="372" y1="174" x2="436" y2="174"/>
-          </g>
-          <path d="M436 174 l-12 -6 v12 z" fill="#2B4DE0"/>
-
-          <!-- AFTER -->
-          <text x="470" y="40" font-family="Geist Mono, monospace" font-size="13" fill="#2B4DE0" letter-spacing="1">AFTER</text>
-          <!-- six staged screens -->
-          <g>
-            <rect x="470" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="470" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
-            <rect x="606" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="606" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
-            <rect x="742" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="742" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
-            <rect x="470" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="470" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
-            <rect x="606" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="606" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
-            <rect x="742" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="742" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
-          </g>
-          <g fill="none" stroke="#E6E6E4" stroke-width="1">
-            <line x1="482" y1="90" x2="578" y2="90"/><line x1="482" y1="104" x2="558" y2="104"/><line x1="482" y1="118" x2="568" y2="118"/>
-            <line x1="618" y1="90" x2="714" y2="90"/><line x1="618" y1="104" x2="694" y2="104"/><line x1="618" y1="118" x2="704" y2="118"/>
-            <line x1="754" y1="90" x2="850" y2="90"/><line x1="754" y1="104" x2="830" y2="104"/><line x1="754" y1="118" x2="840" y2="118"/>
-            <line x1="482" y1="182" x2="578" y2="182"/><line x1="482" y1="196" x2="558" y2="196"/><line x1="482" y1="210" x2="568" y2="210"/>
-            <line x1="618" y1="182" x2="714" y2="182"/><line x1="618" y1="196" x2="694" y2="196"/><line x1="618" y1="210" x2="704" y2="210"/>
-            <line x1="754" y1="182" x2="850" y2="182"/><line x1="754" y1="196" x2="830" y2="196"/><line x1="754" y1="210" x2="840" y2="210"/>
-          </g>
-          <g font-family="Geist Mono, monospace" font-size="9" fill="#fff">
-            <text x="478" y="70">CAD</text><text x="614" y="70">SCAN</text><text x="750" y="70">FID</text>
-            <text x="478" y="162">WARP</text><text x="614" y="162">FINETUNE</text><text x="750" y="162">INDEX</text>
-          </g>
-          <!-- flow connectors -->
-          <g stroke="#2B4DE0" stroke-width="1.2" fill="none" stroke-dasharray="3 3">
-            <line x1="590" y1="95" x2="606" y2="95"/><line x1="726" y1="95" x2="742" y2="95"/>
-            <line x1="590" y1="187" x2="606" y2="187"/><line x1="726" y1="187" x2="742" y2="187"/>
-          </g>
-          <text x="470" y="252" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Staged screens · one job each</text>
-          <text x="470" y="276" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">each stage shows only what that stage needs</text>
         </svg>
       </div>
-      <p class="fig-cap" data-lang="en">Fig. 1 — Information architecture: a single all-in-one screen split into six sequential, purpose-built stages.</p>
-      <p class="fig-cap" data-lang="zh">圖 1 — 資訊架構：把單一全包式畫面，拆成六個依序、各司其職的階段。</p>
+      <p class="fig-cap" data-lang="en">Fig. 1 — Baseline SUS by stage (n=14). Four stages fall below the SUS-68 benchmark; the three late algorithmic stages — Warp, BlockScan, FineTune — fail at grade E.</p>
+      <p class="fig-cap" data-lang="zh">圖 1 — 各階段基準 SUS（n=14）。四個階段低於 SUS-68 基準；後段三個演算法階段——Warp、BlockScan、FineTune——以 E 級不及格。</p>
+    </div>
+
+    <div class="note">
+      <p data-lang="en"><strong>What the data said:</strong> four of seven stages fell below the SUS-68 usability benchmark, and the three late algorithmic stages failed outright. Alignment also logged the most errors of any stage — 52. That gave me an evidence-ranked list of exactly where to aim, before a single pixel moved.</p>
+      <p data-lang="zh"><strong>數據說了什麼：</strong>七個階段中有四個低於 SUS-68 基準，後段三個演算法階段直接不及格。Alignment 的錯誤數也是所有階段中最高的——52 筆。這讓我在動一個像素之前，就拿到一份依證據排序、明確該從哪裡下手的清單。</p>
     </div>
   </section>
 
-  <!-- 05 The redesigned stages (gallery) -->
+  <!-- 04 Findings to decisions -->
   <section class="sec reveal">
-    <span class="sec-num">[05] &nbsp; <span data-lang="en">The redesigned stages</span><span data-lang="zh">重新設計後的各階段</span></span>
-    <h2 data-lang="en">Five purpose-built screens, each with <em>one job</em></h2>
-    <h2 data-lang="zh">五個專屬畫面，每一個<em>只做一件事</em></h2>
-    <div class="prose" style="margin-bottom:28px;">
-      <p data-lang="en">Each stage below was carved out of the old all-in-one screen and given only the controls and readouts that stage actually uses. Same density where experts need it — but now sequenced, labelled, and free of the noise from every other task.</p>
-      <p data-lang="zh">下面每一個階段，都是從舊版全包式畫面切分出來，只保留該階段真正會用到的控制項與讀數。在專家需要的地方維持同樣的密度——但現在有了順序、有了標示，也擺脫了其他所有任務的雜訊。</p>
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">From findings to decisions</span><span data-lang="zh">從研究發現到設計決策</span></span>
+    <h2 data-lang="en">Each design move traces back to a <em>finding</em></h2>
+    <h2 data-lang="zh">每一個設計動作，都能溯回一個<em>研究發現</em></h2>
+
+    <div class="find reveal">
+      <div class="shot find-media">
+        <span class="shot-tag"><span data-lang="en">Before · default view</span><span data-lang="zh">改版前 · 預設畫面</span></span>
+        <img src="images/tr7600-before-legacy.jpg" alt="Legacy default view: a dense board canvas beside a large family-editor table, leading with thumbnails, Board Summary and Device State that operators do not consult to make a programming decision." />
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Finding &rarr; decision · Home screen</span>
+        <span class="ftag" data-lang="zh">研究發現 &rarr; 設計決策 · 首頁</span>
+        <h3 data-lang="en">The default view led with data operators never read</h3>
+        <h3 data-lang="zh">預設畫面主打的，是操作員根本不看的資料</h3>
+        <p data-lang="en">Field interviews showed the home screen opened on thumbnails, Board Summary and Device State — none of which an operator consults to make a programming decision.</p>
+        <p data-lang="zh">現場訪談發現，首頁一打開就是縮圖、Board Summary 與 Device State——那些都不是操作員做編程判斷時會去看的資料。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Cut them from the default view</strong> and surfaced only what drives the next decision. The density stays available for experts, but the screen no longer opens on noise.</p>
+        <p data-lang="zh"><strong>把它們移出預設畫面</strong>，只留下會影響下一步判斷的資訊。高密度資料專家仍叫得出來，但畫面不再一開場就是雜訊。</p>
+      </div>
     </div>
 
+    <div class="find flip reveal">
+      <div class="shot find-media">
+        <span class="shot-tag"><span data-lang="en">After · Alignment</span><span data-lang="zh">改版後 · 定位</span></span>
+        <img src="images/tr7600-after-fid.jpg" alt="Redesigned alignment stage: the board outline with fiducial markers isolated on the left and coordinate tables on the right, with the mode state made explicit." />
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Finding &rarr; decision · Alignment</span>
+        <span class="ftag" data-lang="zh">研究發現 &rarr; 設計決策 · Alignment</span>
+        <h3 data-lang="en">Alignment logged the most errors — 52 — almost all one mistake</h3>
+        <h3 data-lang="zh">Alignment 階段錯誤最多——52 筆——幾乎都是同一個錯</h3>
+        <p data-lang="en">Error logging across 14 operators put Alignment at the top of the count. Nearly every error traced to the same thing: forgetting to switch the Global/Local mode.</p>
+        <p data-lang="zh">14 位操作員的錯誤記錄讓 Alignment 狅上錯誤數首位。幾乎每一筆都指向同一件事：忘了切換 Global/Local 模式。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Redesigned the mode control</strong> so the active state is unmistakable and a wrong turn is recoverable — instead of silently producing bad alignment that surfaces only later.</p>
+        <p data-lang="zh"><strong>重新設計模式控制元件</strong>，讓當前狀態一目了然、走錯也能復原——而不是默默產出錯誤的定位、事後才被發現。</p>
+      </div>
+    </div>
+
+    <div class="find reveal">
+      <div class="shot find-media">
+        <span class="shot-tag"><span data-lang="en">After · FineTune</span><span data-lang="zh">改版後 · FineTune</span></span>
+        <img src="images/tr7600-after-finetune.jpg" alt="Redesigned FineTune stage: per-package tuning on a single page with recommended parameters, inline guidance and a live solder-thickness feedback chart." />
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Finding &rarr; decision · FineTune</span>
+        <span class="ftag" data-lang="zh">研究發現 &rarr; 設計決策 · FineTune</span>
+        <h3 data-lang="en">FineTune scored the floor (SUS 51) — it assumed expertise operators lacked</h3>
+        <h3 data-lang="zh">FineTune 分數墊底（SUS 51）——它預設了操作員沒有的專業</h3>
+        <p data-lang="en">The lowest-scoring stage of all seven. It demanded algorithm knowledge most shift operators didn&rsquo;t have, and interviews surfaced a real fear: setting a wrong value and crashing the machine.</p>
+        <p data-lang="zh">七個階段中分數最低。它要求多數輪班操作員沒有的演算法知識，訪談也揭露了一個真實的恐懼：設錯值、把機器撞了。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Added recommended parameters and inline guidance</strong> so non-experts weren&rsquo;t stranded — and collapsed the old F3/F4 screens into one Fine Tune page, replacing manual height calculation with direct mouse-wheel adjustment.</p>
+        <p data-lang="zh"><strong>加入推薦參數與行內引導</strong>，讓非專家不會卡住——並把舊版 F3/F4 兩個畫面整併成單一 Fine Tune 頁，以直接的滑鼠滾輪調整取代手動計算高度。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Redesigned workflow gallery -->
+  <section class="sec reveal">
+    <span class="sec-num">[05] &nbsp; <span data-lang="en">The redesigned workflow</span><span data-lang="zh">重新設計後的工作流程</span></span>
+    <h2 data-lang="en">Each stage rebuilt around <em>one job</em></h2>
+    <h2 data-lang="zh">每個階段都重建得<em>只做一件事</em></h2>
+    <div class="prose" style="margin-bottom:26px;">
+      <p data-lang="en">Beyond the three highest-impact fixes above, each stage was given only the controls and readouts it actually uses — same density where experts need it, but sequenced and free of the noise from every other task.</p>
+      <p data-lang="zh">除了上面三個影響最大的修正，每個階段都只保留該階段真正會用到的控制項與讀數——在專家需要的地方維持同樣密度，但有了順序、也擺脫了其他任務的雜訊。</p>
+    </div>
     <div class="gallery">
       <div class="gcard reveal">
-        <div class="gshot"><span class="gtag">SCAN</span><img src="images/tr7600-after-scan.jpg" alt="Redesigned SCAN stage: a board image on the left with dedicated Board Size, Start Point Offset, Overlap and Power panels grouped on the right." /></div>
+        <div class="gshot"><span class="gtag">SCAN</span><img src="images/tr7600-after-scan.jpg" alt="Redesigned SCAN stage with grouped Board Size, Start Point Offset, Overlap and Power panels." /></div>
         <div class="gbody">
           <h4 data-lang="en">Scan setup</h4><h4 data-lang="zh">掃描設定</h4>
           <p data-lang="en"><strong>Board Size, Start Point Offset, Overlap and Power</strong> became discrete grouped panels — scan parameters that used to be buried now read as a setup checklist.</p>
           <p data-lang="zh"><strong>Board Size、Start Point Offset、Overlap、Power</strong> 成為獨立分組的面板——過去埋在深處的掃描參數，現在像一份設定檢查表一樣好讀。</p>
         </div>
       </div>
-
       <div class="gcard reveal">
-        <div class="gshot"><span class="gtag">FID</span><img src="images/tr7600-after-fid.jpg" alt="Redesigned FID stage: the board outline with fiducial markers isolated on the left, alignment and coordinate tables on the right." /></div>
+        <div class="gshot"><span class="gtag">WARP</span><img src="images/tr7600-after-warp.jpg" alt="Redesigned WARP stage with a package list and live height readout beside the height map." /></div>
         <div class="gbody">
-          <h4 data-lang="en">Fiducial alignment</h4><h4 data-lang="zh">Fiducial 定位</h4>
-          <p data-lang="en">Fiducial placement and alignment get their <strong>own focused view</strong>, separated from inspection clutter, with coordinate tables paired beside the board.</p>
-          <p data-lang="zh">Fiducial 的放置與定位有了<strong>專屬的聚焦視圖</strong>，與檢測的雜訊分離，座標表格就配在板子旁邊。</p>
-        </div>
-      </div>
-
-      <div class="gcard reveal">
-        <div class="gshot"><span class="gtag">WARP</span><img src="images/tr7600-after-warp.jpg" alt="Redesigned WARP stage: a grayscale board height view in the centre with a package list on the left and height readouts on the right." /></div>
-        <div class="gbody">
-          <h4 data-lang="en">Warpage / height</h4><h4 data-lang="zh">翹曲 / 高度</h4>
+          <h4 data-lang="en">Warpage / height</h4><h4 data-lang="zh">翘曲 / 高度</h4>
           <p data-lang="en">A <strong>package list and live height readout</strong> sit alongside the height map, so engineers can tie a measurement to a specific part without leaving the view.</p>
           <p data-lang="zh"><strong>零件清單與即時高度讀數</strong>就擺在高度圖旁，工程師不必離開畫面，就能把量測值對應到特定零件。</p>
         </div>
       </div>
-
       <div class="gcard reveal">
-        <div class="gshot"><span class="gtag">FINETUNE</span><img src="images/tr7600-after-finetune.jpg" alt="Redesigned FineTune stage: per-package parameter panels with a live solder-thickness feedback chart at the bottom." /></div>
-        <div class="gbody">
-          <h4 data-lang="en">Parameter fine-tuning</h4><h4 data-lang="zh">參數微調</h4>
-          <p data-lang="en">F3/F4 collapsed into <strong>one Fine Tune page</strong>, with manual height calculation replaced by direct <strong>mouse-wheel adjustment</strong> and a live solder-thickness chart. The slowest step in the old flow — now <strong>51% faster</strong> (158&rarr;77 min).</p>
-          <p data-lang="zh">把 F3／F4 整併進<strong>單一 Fine Tune 頁</strong>，以直接的<strong>滑鼠滾輪調整</strong>取代手動計算高度，並搭配即時錫厚圖。舊流程裡最慢的步驟——現在<strong>快了 51%</strong>（158&rarr;77 分）。</p>
-        </div>
-      </div>
-
-      <div class="gcard reveal">
-        <div class="gshot"><span class="gtag">INDEX</span><img src="images/tr7600-after-index.jpg" alt="Redesigned INDEX stage: a board overview with pass/result thumbnails across the top and a structured inspection log with defect counts on the right." /></div>
+        <div class="gshot"><span class="gtag">INDEX</span><img src="images/tr7600-after-index.jpg" alt="Redesigned INDEX stage with pass thumbnails and a structured inspection log grouped by defect and point." /></div>
         <div class="gbody">
           <h4 data-lang="en">Inspection summary</h4><h4 data-lang="zh">檢測總覽</h4>
           <p data-lang="en"><strong>Pass thumbnails and a structured defect log</strong> give the operator the run result at a glance — counts grouped by defect and point, not a raw dump.</p>
           <p data-lang="zh"><strong>Pass 縮圖與結構化的缺陷紀錄</strong>，讓操作員一眼掌握這一輪的結果——依缺陷與檢測點分組計數，而非原始資料傾倒。</p>
         </div>
       </div>
-
       <div class="gcard reveal" style="display:flex;align-items:center;justify-content:center;background:var(--bg-2);">
         <div class="gbody" style="text-align:center;">
-          <h4 data-lang="en">+ CAD alignment</h4><h4 data-lang="zh">+ CAD 定位</h4>
-          <p data-lang="en">The CAD/programming entry stage anchors the workflow — the staged model scales as new inspection capabilities are added.</p>
-          <p data-lang="zh">CAD／編程進入階段是整個流程的起點——分階段的模型，讓新增的檢測能力能持續擴充。</p>
+          <h4 data-lang="en">One interface, 10+ machines</h4><h4 data-lang="zh">一套介面，10+ 機種</h4>
+          <p data-lang="en">Every redesigned stage shipped as a single standardized interface across the AXI line (SIII / LL / TL / F3D / FB / HP / SV).</p>
+          <p data-lang="zh">每個重設的階段都以單一標準化介面，套用於整條 AXI 產品線（SIII / LL / TL / F3D / FB / HP / SV）。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 06 Decisions -->
+  <!-- 06 Key decisions -->
   <section class="sec reveal">
     <span class="sec-num">[06] &nbsp; <span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
     <h2 data-lang="en">What I traded off — and <em>why</em></h2>
@@ -457,19 +449,19 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">01</span>
         <div>
-          <h4 data-lang="en">Split one screen into staged screens</h4>
-          <h4 data-lang="zh">把單一畫面拆成分階段的畫面</h4>
-          <p data-lang="en"><span class="trade">Trade-off:</span> more navigation steps, but far less cognitive load per stage. For a shift tool used under time pressure, lower per-stage load wins — operators move faster when each screen has one clear job.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>多了切換步驟，但每個階段的認知負荷大幅降低。對一個在時間壓力下使用的輪班工具，降低單階段負荷更重要——當每個畫面只有一個明確任務，操作員反而更快。</p>
+          <h4 data-lang="en">Recommended defaults without removing expert control</h4>
+          <h4 data-lang="zh">給出推薦預設，但不拿走專家控制權</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> hand-holding vs. expert speed. The FineTune fear told me non-experts needed a safe starting point — so I gave recommended values, but kept every one of them editable for the engineers who know better.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>手把手引導，對上專家的速度。FineTune 的恐懼告訴我非專家需要一個安全的起點——所以我給出推薦值，但每一個都保留可編輯，給更懂的工程師。</p>
         </div>
       </li>
       <li>
         <span class="di">02</span>
         <div>
-          <h4 data-lang="en">Kept the dense data tables — didn&rsquo;t hide them</h4>
-          <h4 data-lang="zh">保留高密度資料表——而非把它藏起來</h4>
-          <p data-lang="en"><span class="trade">Trade-off:</span> a cleaner-looking screen vs. expert power. This is a tool for engineers who need the numbers; density is the constraint, not a flaw to design away.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>看起來更乾淨的畫面，對上專家的操作效率。這是給需要看數字的工程師用的工具；密度是限制，不是該被設計掉的缺陷。</p>
+          <h4 data-lang="en">Kept the dense data tables — didn&rsquo;t dumb it down</h4>
+          <h4 data-lang="zh">保留高密度資料表——沒有把它簡化掉</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> a cleaner-looking screen vs. expert power. This is a tool for engineers who need the numbers; density is the constraint of the domain, not a flaw to design away. I removed noise, not capability.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>看起來更乾淨的畫面，對上專家的操作效率。這是給需要看數字的工程師用的工具；密度是領域的限制，不是該被設計掉的缺陷。我拿掉的是雜訊，不是能力。</p>
         </div>
       </li>
       <li>
@@ -481,23 +473,14 @@ html.lang-zh [data-lang="en"]{display:none !important;}
           <p data-lang="zh"><span class="trade">取捨：</span>單機最佳化，對上規模化的一致性。我選擇單一標準化介面，讓每台新機都繼承熟悉的流程——也讓我能獨力維護它六年。</p>
         </div>
       </li>
-      <li>
-        <span class="di">04</span>
-        <div>
-          <h4 data-lang="en">Rebuilt the Fine Tune step around the engineer&rsquo;s hand</h4>
-          <h4 data-lang="zh">圍繞工程師的手，重建 Fine Tune 步驟</h4>
-          <p data-lang="en"><span class="trade">Trade-off:</span> the legacy flow split fine-tuning across separate F3/F4 screens and made engineers calculate component height by hand. I merged them into one Fine Tune page and replaced the manual math with direct mouse-wheel adjustment — a denser single page, but far less to learn and no hand calculation. <strong>Result: the Fine Tune step dropped 51% (158&rarr;77 min)</strong> — the single biggest contributor to the overall saving, with Library close behind at &minus;39%.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>舊流程把微調拆在 F3／F4 兩個畫面，還要工程師手動計算零件高度。我把它們整併成單一 Fine Tune 頁，並以直接的滑鼠滾輪調整取代手動計算——頁面更密，但要學的更少、也不必再手算。<strong>結果：Fine Tune 步驟減少 51%（158&rarr;77 分）</strong>——是整體時間縮短最大的單一貢獻，Library 緊接其後 &minus;39%。</p>
-        </div>
-      </li>
     </ul>
   </section>
 
   <!-- 07 Outcome -->
   <section class="sec reveal">
     <span class="sec-num">[07] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
-    <h2 data-lang="en">Measured in <em>adoption and survival</em>, not screens</h2>
-    <h2 data-lang="zh">用<em>採用與存續</em>衡量，而不是畫面數</h2>
+    <h2 data-lang="en">The gains landed exactly where the <em>data</em> said they would</h2>
+    <h2 data-lang="zh">成果落在<em>數據</em>預告的那些地方</h2>
     <div class="ometrics">
       <div class="m">
         <div class="v">38<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
@@ -506,29 +489,29 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       </div>
       <div class="m">
         <div class="v">51<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
-        <div class="l" data-lang="en">faster Fine Tune step (158&rarr;77 min) — the slowest step</div>
-        <div class="l" data-lang="zh">Fine Tune 步驟加快（158&rarr;77 分）——最慢的步驟</div>
+        <div class="l" data-lang="en">faster FineTune (158&rarr;77 min) — the SUS floor</div>
+        <div class="l" data-lang="zh">FineTune 加快（158&rarr;77 分）——原本 SUS 墊底</div>
       </div>
       <div class="m">
         <div class="v">39<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
         <div class="l" data-lang="en">faster Library step (124&rarr;76 min)</div>
-        <div class="l" data-lang="zh">Library 步驟加快（124&rarr;76 分）</div>
+        <div class="l" data-lang="zh">Library 階段加快（124&rarr;76 分）</div>
       </div>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">The redesigned interface shipped across the AXI product line to global automotive, server and semiconductor accounts, in multiple languages. FAE teams independently timed total programming on two production boards: a 4,160-component board fell from 295 to 186 minutes, and a 3,495-component board from 386 to 237 minutes — roughly a <strong>38% reduction</strong>. The heaviest gains came from the two slowest steps — <strong>Fine Tune (&minus;51%)</strong> and <strong>Library (&minus;39%)</strong> — driven by collapsing F3/F4 into one page and replacing manual height calculation with mouse-wheel adjustment.</p>
-      <p data-lang="zh">改版後的介面隨 AXI 產品線出貨給全球汽車、伺服器、半導體大客戶，並支援多國語系。FAE 團隊在兩塊量產板上獨立量測總編程時間：4,160 顆零件的板從 295 分降到 186 分，3,495 顆零件的板從 386 分降到 237 分——整體約<strong>減少 38%</strong>。改善最大的來自兩個最慢的步驟——<strong>Fine Tune（&minus;51%）</strong>與 <strong>Library（&minus;39%）</strong>——關鍵是把 F3／F4 整併成單一頁、以滑鼠滾輪調整取代手動計算高度。</p>
+      <p data-lang="en">FAE teams independently timed total programming on two production boards: a 4,160-component board fell from 295 to 186 minutes, and a 3,495-component board from 386 to 237 — roughly a <strong>38% reduction</strong>. The heaviest gains came from the stages the baseline study had flagged: <strong>FineTune (the SUS floor) dropped 51%</strong> and <strong>Library 39%</strong>, driven by collapsing F3/F4 into one page and replacing manual height calculation with mouse-wheel adjustment. The redesigned interface then shipped across the AXI line, in multiple languages, to global automotive, server and semiconductor accounts.</p>
+      <p data-lang="zh">FAE 團隊在兩塊量產板上獨立量測總編程時間：4,160 顆零件的板從 295 分降到 186 分，3,495 顆零件的板從 386 分降到 237 分——整體約<strong>減少 38%</strong>。改善最大的來自基準研究點出的那些階段：<strong>FineTune（原本 SUS 墊底）減少 51%</strong>、<strong>Library 減少 39%</strong>，關鍵是把 F3/F4 整併成單一頁、以滑鼠滾輪調整取代手動計算高度。重設的介面隨後隨 AXI 產品線出貨，支援多國語系，交付給全球汽車、伺服器與半導體大客戶。</p>
     </div>
   </section>
 
   <!-- 08 Reflection -->
   <section class="sec reveal">
     <span class="sec-num">[08] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
-    <h2 data-lang="en">In industrial UX, <em>structure beats styling</em></h2>
-    <h2 data-lang="zh">在工業 UX 裡，<em>結構勝過修飾</em></h2>
+    <h2 data-lang="en">Measuring first meant redesigning where the data <em>screamed</em></h2>
+    <h2 data-lang="zh">先量測，才能從數據<em>最痛</em>的地方開始改起</h2>
     <div class="prose">
-      <p data-lang="en">The win here wasn&rsquo;t making the software look modern — it was making a complex expert tool legible by matching the interface to the real workflow instead of the feature list. That lesson carried straight into my later work on enterprise IT tooling and platform UX: when the domain is genuinely complex, the highest-leverage design move is almost always architectural, not cosmetic.</p>
-      <p data-lang="zh">這裡真正的成果，不是讓軟體看起來現代——而是讓一個複雜的專家工具變得可讀，靠的是讓介面對齊真實工作流程、而非功能清單。這個體會直接延續到我後來在企業 IT 工具與平台 UX 的工作：當領域真的很複雜，槓桿最大的設計動作幾乎總是架構性的，而不是表面的。</p>
+      <p data-lang="en">The baseline study changed everything: it ranked the work by evidence, so the redesign started where the data screamed, not where opinion was loudest. That lesson carried straight into my later work on enterprise IT tooling and platform UX — when the domain is genuinely complex, the highest-leverage design move is almost always structural and evidence-led, not cosmetic.</p>
+      <p data-lang="zh">基準研究改變了一切：它以證據將工作排序，讓改版從數據最痛的地方開始，而不是聲音最大的地方。這個體會直接延續到我後來在企業 IT 工具與平台 UX 的工作：當領域真的很複雜，槓桿最大的設計動作幾乎總是架構性、以證據為本，而不是表面的。</p>
     </div>
   </section>
 
