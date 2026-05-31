@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alyssa Huang — Senior UX Designer | Industrial Tools, Enterprise B2B & Platform UX</title>
+
+<meta name="description" content="Senior UX Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background. Introduced UX practice at a hardware manufacturer; building AI workflows for design teams at ASUS." />
+<meta name="keywords" content="Senior UX Designer, Lead UX Designer, B2B SaaS UX, Enterprise UX, Industrial Software UX, IT Management Tools, Platform UX, System-level UX, Design Operations, AI Tool Development for Design, Internal Tool Building, UX Redesign, Figma, AxureRP, Cross-functional Collaboration, Engineering Collaboration, Taipei" />
+<meta name="author" content="Alyssa Huang" />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Alyssa Huang — Senior UX Designer | Industrial Tools, Enterprise B2B & Platform UX" />
+<meta property="og:description" content="Eight years designing tools — industrial AXI inspection, enterprise IT consoles, Android platform UX. CS + Design background. Building AI workflows for design teams." />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="zh_TW" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Alyssa Huang — Senior UX Designer" />
+<meta name="twitter:description" content="Designing tools across industrial, enterprise B2B, and mobile platforms. Engineer-turned-designer with eight years of tool-shaped work." />
+
+<!-- Set language before paint to avoid flash -->
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alyssa Huang",
+  "jobTitle": "Senior UX Designer",
+  "description": "Senior UX Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Taipei", "addressCountry": "TW" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "National Taipei University of Technology", "description": "Master of Interaction Design, 2014-2016" },
+    { "@type": "CollegeOrUniversity", "name": "Shih Hsin University", "description": "Bachelor of Information Management - IT Group, 2010-2014" }
+  ],
+  "worksFor": { "@type": "Organization", "name": "ASUSTeK Computer Inc." },
+  "knowsAbout": ["B2B SaaS UX","Enterprise UX","Industrial Software UX","Platform UX","Design Operations","AI Tooling for Design","Information Architecture","Cross-functional Collaboration"],
+  "knowsLanguage": ["en","zh-Hant"]
+}
+</script>
+
+<style>
+:root {
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:1280px; --gutter:clamp(1.25rem,4vw,4rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
+p{margin:0;}
+
+/* Language toggle visibility */
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+[data-lang="zh"] em{font-style:normal;}
+
+.eyebrow{font-family:var(--ff-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.eyebrow .ix{color:var(--accent);}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:border-color .3s ease;}
+.nav.scrolled{border-color:var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:15px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.brand small{color:var(--muted);}
+.nav-right{display:flex;align-items:center;gap:22px;}
+.nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-family:var(--ff-mono);font-size:0.81rem;letter-spacing:.02em;}
+.nav-links a{color:var(--ink-2);transition:color .18s;}
+.nav-links a:hover{color:var(--accent);}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+.nav-cta{font-family:var(--ff-mono);font-size:0.79rem;letter-spacing:.03em;padding:9px 15px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--ink);color:#fff;}
+@media (max-width:760px){.brand small{display:none;}.nav-links{gap:16px;font-size:.74rem;}.nav-links li:nth-child(3){display:none;}.nav-cta{display:none;}.nav-right{gap:14px;}}
+@media (max-width:440px){.nav-links li:nth-child(2){display:none;}}
+
+/* Hero */
+.hero{padding:clamp(60px,9vw,130px) 0 clamp(44px,6vw,84px);}
+.hero .status{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-mono);font-size:0.77rem;letter-spacing:.02em;color:var(--ink-2);padding:8px 14px;background:var(--bg-2);border:1px solid var(--rule);border-radius:6px;margin-bottom:clamp(30px,4vw,46px);}
+.hero .status .pip{width:7px;height:7px;border-radius:50%;background:#2C8A3E;box-shadow:0 0 0 0 rgba(44,138,62,.5);animation:pulse 2.4s infinite;flex:none;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(44,138,62,.45);}50%{box-shadow:0 0 0 6px rgba(44,138,62,0);}}
+.hero h1{font-weight:500;font-size:clamp(2.5rem,6vw,5.6rem);line-height:1.04;letter-spacing:-0.035em;max-width:18ch;margin-bottom:clamp(30px,4vw,46px);}
+.hero h1[data-lang="zh"]{line-height:1.22;max-width:22ch;font-weight:600;letter-spacing:-0.01em;}
+.hero h1 em{font-style:normal;color:var(--accent);font-weight:500;}
+.hero-foot{display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,60px);align-items:end;padding-top:clamp(30px,4vw,42px);border-top:1px solid var(--rule);}
+.hero-foot .who{max-width:44ch;}
+.hero-foot .who .name{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:13px;}
+.hero-foot .who p{font-size:1.04rem;line-height:1.6;color:var(--ink-2);}
+.hero-foot .who p[data-lang="zh"]{line-height:1.85;}
+.hero-foot .who p strong{color:var(--ink);font-weight:600;}
+.hero-foot .links{display:flex;flex-direction:column;gap:11px;text-align:right;}
+.hero-foot .links a{font-family:var(--ff-mono);font-size:.84rem;color:var(--ink-2);display:inline-flex;gap:8px;align-items:center;justify-content:flex-end;transition:color .18s;}
+.hero-foot .links a:hover{color:var(--accent);}
+@media (max-width:720px){.hero-foot{grid-template-columns:1fr;}.hero-foot .links{text-align:left;align-items:flex-start;}.hero-foot .links a{justify-content:flex-start;}}
+
+/* Credibility strip */
+.cred-strip{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px 0;display:flex;align-items:center;gap:clamp(20px,5vw,56px);flex-wrap:wrap;}
+.cred-strip .lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.cred-strip .co{font-family:var(--ff-display);font-weight:600;font-size:1.35rem;letter-spacing:-0.02em;}
+.cred-strip .co span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);letter-spacing:.03em;vertical-align:.6em;margin-left:5px;}
+
+/* Impact band */
+.impact-band{background:var(--bg-2);padding:clamp(64px,9vw,120px) 0;margin-top:clamp(48px,6vw,80px);}
+.impact-band .lead-line{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.2;letter-spacing:-0.03em;max-width:24ch;margin-bottom:clamp(44px,5vw,66px);}
+.impact-band .lead-line[data-lang="zh"]{line-height:1.5;font-weight:600;letter-spacing:-0.005em;}
+.impact-band .lead-line em{font-style:normal;color:var(--accent);}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);}
+.metrics .m{padding:34px 28px 34px 0;border-right:1px solid var(--rule);}
+.metrics .m:last-child{border-right:none;}
+.metrics .m .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.9rem,5vw,4.6rem);line-height:.92;letter-spacing:-0.04em;}
+.metrics .m .v sup{font-size:.36em;vertical-align:.95em;font-family:var(--ff-mono);font-weight:500;color:var(--accent);letter-spacing:0;}
+.metrics .m .l{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.04em;color:var(--muted);margin-top:18px;line-height:1.5;text-transform:uppercase;}
+.metrics .m .l[data-lang="zh"]{text-transform:none;letter-spacing:normal;line-height:1.65;font-size:.82rem;}
+@media (max-width:820px){.metrics{grid-template-columns:1fr 1fr;}.metrics .m:nth-child(2){border-right:none;}.metrics .m:nth-child(1),.metrics .m:nth-child(2){border-bottom:1px solid var(--rule);}}
+
+/* Section head */
+.sec-head{padding:clamp(64px,9vw,120px) 0 clamp(34px,4vw,52px);}
+.sec-head .eyebrow{margin-bottom:22px;display:block;}
+.sec-head h2{font-weight:500;font-size:clamp(2rem,4.4vw,3.5rem);line-height:1.05;letter-spacing:-0.035em;max-width:20ch;}
+.sec-head h2[data-lang="zh"]{line-height:1.3;font-weight:600;max-width:26ch;letter-spacing:-0.01em;}
+.sec-head h2 em{font-style:normal;color:var(--accent);}
+
+/* Cases */
+.case{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,72px);padding:clamp(48px,6vw,84px) 0;border-top:1px solid var(--rule);align-items:start;}
+.case.flip .case-visual{order:2;}
+.case-visual{position:relative;background:var(--bg-3);border:1px solid var(--rule);border-radius:10px;overflow:hidden;aspect-ratio:4/3;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;}
+.case:hover .case-visual{transform:translateY(-5px);box-shadow:0 26px 54px -30px rgba(12,12,13,.35);}
+.case-visual .tape{position:absolute;top:15px;left:15px;z-index:2;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;}
+.case-visual .tape [data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
+.viz{position:absolute;inset:0;}
+.viz svg{width:100%;height:100%;display:block;}
+.viz-foot{position:absolute;bottom:0;left:0;right:0;padding:12px 15px;display:flex;justify-content:space-between;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--rule-2);background:color-mix(in srgb,var(--bg-3) 85%,transparent);}
+.viz-foot .live{color:var(--accent);}
+.case-body{padding-top:4px;}
+.case-kicker{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:15px;}
+.case-kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.case-title{font-weight:500;font-size:clamp(1.55rem,2.9vw,2.35rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:18px;}
+.case-title[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
+.case-context{display:flex;flex-wrap:wrap;gap:6px 7px;margin-bottom:24px;}
+.case-context span{font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:4px 9px;border:1px solid var(--rule);border-radius:5px;}
+.case-context[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
+.case-context span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.case-bigstat{display:flex;align-items:baseline;gap:18px;padding:22px 0;margin-bottom:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.case-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.6rem,4.5vw,3.5rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
+.case-bigstat .v sup{font-size:.36em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.case-bigstat .d{font-size:.95rem;color:var(--ink-2);line-height:1.45;max-width:26ch;}
+.case-bigstat .d[data-lang="zh"]{line-height:1.65;}
+.case-desc{font-size:1.01rem;line-height:1.62;color:var(--ink-2);margin-bottom:20px;max-width:56ch;}
+.case-desc[data-lang="zh"]{line-height:1.85;}
+.case-desc strong{color:var(--ink);font-weight:600;}
+.case-desc .fill{color:var(--accent-2);border-bottom:1.5px dashed var(--accent);font-style:italic;}
+[data-lang="zh"] .case-desc .fill,.case-desc[data-lang="zh"] .fill{font-style:normal;}
+.case-points{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:12px;}
+.case-points li{font-size:.94rem;color:var(--ink-2);padding-left:26px;position:relative;line-height:1.55;}
+.case-points[data-lang="zh"] li{line-height:1.75;}
+.case-points li::before{content:"";position:absolute;left:0;top:.6em;width:15px;height:2px;background:var(--accent);border-radius:1px;}
+.case-points li strong{color:var(--ink);font-weight:600;}
+.case-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;text-transform:uppercase;padding:11px 17px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;}
+.case-link [data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
+.case-link:hover{background:var(--ink);color:#fff;}
+.case-link .ar{transition:transform .2s;}
+.case-link:hover .ar{transform:translateX(4px);}
+@media (max-width:880px){.case,.case.flip{grid-template-columns:1fr;}.case.flip .case-visual{order:0;}}
+
+/* Leadership / impact (dark) */
+.lead-impact{background:var(--dark);color:#fff;padding:clamp(76px,10vw,132px) 0;margin-top:clamp(48px,6vw,80px);}
+.lead-impact .eyebrow{color:var(--muted-2);}
+.lead-impact .eyebrow .ix{color:var(--accent);}
+.lead-impact .sec-head h2{color:#fff;}
+.lead-impact .sec-head h2 em{color:#6E8BFF;}
+.li-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,40px);margin-top:24px;}
+.li-card{border:1px solid var(--dark-rule);background:var(--dark-2);border-radius:10px;padding:clamp(28px,3vw,40px);position:relative;transition:border-color .25s,transform .25s;}
+.li-card:hover{border-color:var(--accent);transform:translateY(-3px);}
+.li-card .badge{position:absolute;top:24px;right:24px;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:#8FA5FF;padding:4px 9px;border:1px solid #3A437A;border-radius:5px;}
+.li-card .badge[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.li-card h3{font-weight:600;font-size:clamp(1.4rem,2.3vw,1.9rem);line-height:1.15;letter-spacing:-0.025em;max-width:18ch;margin-bottom:8px;}
+.li-card h3[data-lang="zh"]{line-height:1.38;max-width:20ch;letter-spacing:-0.01em;}
+.li-card h3 em{font-style:normal;color:#8FA5FF;}
+.li-card .org{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);margin-bottom:26px;}
+.li-card .rows{list-style:none;margin:0;padding:0;}
+.li-card .rows li{display:grid;grid-template-columns:78px 1fr;gap:16px;padding:15px 0;border-top:1px solid var(--dark-rule);}
+.li-card .rows[data-lang="zh"] li{grid-template-columns:64px 1fr;}
+.li-card .rows li b{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);padding-top:2px;font-weight:500;}
+.li-card .rows[data-lang="zh"] li b{text-transform:none;letter-spacing:.03em;}
+.li-card .rows li span{color:#D6D6D2;font-size:.95rem;line-height:1.55;}
+.li-card .rows[data-lang="zh"] li span{line-height:1.75;}
+@media (max-width:820px){.li-grid{grid-template-columns:1fr;}}
+
+/* About */
+.about{padding-bottom:clamp(52px,6vw,92px);}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;}
+.about-grid p{font-size:1.07rem;line-height:1.7;color:var(--ink-2);margin-bottom:1.25em;}
+.about-grid p[data-lang="zh"]{line-height:2;}
+.about-grid p:last-of-type{margin-bottom:0;}
+.about-grid p strong{color:var(--ink);font-weight:600;}
+.about-grid p em{font-style:normal;color:var(--accent-2);font-weight:500;}
+.cv{background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;padding:30px 28px;}
+.cv h4{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+.cv h4[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
+.cv-row{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--rule);}
+.cv-row:first-of-type{border-top:none;padding-top:0;}
+.cv-row .yr{font-family:var(--ff-mono);font-size:.75rem;color:var(--muted);}
+.cv-row .d b{display:block;font-weight:600;font-size:.97rem;margin-bottom:3px;letter-spacing:-0.01em;}
+.cv-row .d span{color:var(--muted);font-size:.85rem;}
+.tools{margin-top:clamp(42px,5vw,62px);padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;align-items:center;gap:18px 42px;}
+.tools .lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.tools .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
+.tools .t{font-family:var(--ff-display);font-weight:600;font-size:1.22rem;letter-spacing:-0.02em;}
+.tools .t span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);vertical-align:.6em;margin-left:4px;}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr;}}
+
+/* Footer */
+.footer{background:var(--dark);color:#fff;padding:clamp(76px,9vw,124px) 0 32px;}
+.footer .big{font-weight:600;font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.02;letter-spacing:-0.04em;max-width:15ch;margin-bottom:clamp(44px,5vw,66px);}
+.footer .big[data-lang="zh"]{line-height:1.25;letter-spacing:-0.01em;}
+.footer .big em{font-style:normal;color:#6E8BFF;}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,4vw,56px);padding-top:48px;border-top:1px solid var(--dark-rule);}
+.foot-col h5{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:18px;font-weight:500;}
+.foot-col h5[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
+.foot-col a{display:block;font-family:var(--ff-display);font-weight:500;font-size:1.28rem;margin-bottom:8px;letter-spacing:-0.02em;transition:color .2s;}
+.foot-col a:hover{color:#6E8BFF;}
+.foot-col p{font-size:.91rem;color:#C2C2BE;line-height:1.6;}
+.foot-col p[data-lang="zh"]{line-height:1.85;}
+.foot-base{margin-top:56px;padding-top:22px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--ff-mono);font-size:.73rem;color:var(--muted-2);}
+@media (max-width:720px){.foot-grid{grid-template-columns:1fr;}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.hero .status .pip{animation:none;}}
+
+/* =======================================================================
+   Responsive refinement — tablet / phone / small phone
+   ======================================================================= */
+
+/* Safety: never overflow horizontally; long tokens wrap */
+html, body { overflow-x: clip; }
+.foot-col a { overflow-wrap: anywhere; word-break: break-word; }
+
+/* ---- Tablet & below (<= 900px) ---- */
+@media (max-width:900px){
+  .sec-head{padding:clamp(56px,8vw,84px) 0 clamp(26px,4vw,40px);}
+  .impact-band{padding:clamp(56px,8vw,84px) 0;}
+  .lead-impact{padding:clamp(60px,8vw,90px) 0;}
+  .footer{padding:clamp(60px,8vw,90px) 0 28px;}
+  .case{padding:clamp(40px,6vw,60px) 0;}
+}
+
+/* ---- Phones (<= 640px) ---- */
+@media (max-width:640px){
+  body{font-size:16px;}
+
+  /* Nav: drop inline links, keep brand + language toggle + compact CTA */
+  .nav .inner{padding:12px 0;}
+  .nav-links{display:none;}
+  .nav-right{gap:10px;}
+  .nav-cta{display:inline-flex;align-items:center;padding:8px 13px;font-size:.75rem;}
+  .brand{font-size:.82rem;gap:8px;}
+
+  /* Hero */
+  .hero{padding:40px 0 36px;}
+  .hero .status{font-size:.72rem;padding:7px 12px;margin-bottom:24px;gap:8px;}
+  .hero h1{font-size:clamp(1.85rem,7.6vw,2.6rem);line-height:1.1;letter-spacing:-0.025em;max-width:100%;margin-bottom:26px;}
+  .hero h1[data-lang="zh"]{font-size:clamp(1.7rem,7vw,2.3rem);line-height:1.32;}
+  .hero-foot{padding-top:26px;gap:22px;}
+  .hero-foot .who p{font-size:1rem;}
+  .hero-foot .links{flex-direction:row;flex-wrap:wrap;gap:8px 20px;}
+
+  /* Credibility strip — tidy grouped wrap, labels on own line */
+  .cred-strip{padding:18px 0;gap:8px 20px;}
+  .cred-strip .lbl{flex-basis:100%;margin:0 !important;}
+  .cred-strip .lbl + .co{margin-top:-2px;}
+  .cred-strip .co{font-size:1.15rem;}
+
+  /* Impact metrics */
+  .impact-band .lead-line{font-size:clamp(1.3rem,5.6vw,1.85rem);line-height:1.28;margin-bottom:34px;max-width:100%;}
+  .impact-band .lead-line[data-lang="zh"]{line-height:1.5;}
+  .metrics .m{padding:22px 14px 22px 0;}
+  .metrics .m .v{font-size:clamp(2.2rem,11vw,3rem);}
+  .metrics .m .l{font-size:.72rem;margin-top:12px;}
+  .metrics .m .l[data-lang="zh"]{font-size:.78rem;}
+
+  /* Section heads */
+  .sec-head{padding:48px 0 24px;}
+  .sec-head h2{font-size:clamp(1.65rem,6.2vw,2.2rem);line-height:1.14;letter-spacing:-0.02em;max-width:100%;}
+  .sec-head h2[data-lang="zh"]{font-size:clamp(1.55rem,6vw,2rem);line-height:1.34;}
+
+  /* Cases */
+  .case{padding:38px 0;gap:22px;}
+  .case-visual{border-radius:8px;}
+  .case-kicker{font-size:.72rem;margin-bottom:12px;}
+  .case-title{font-size:clamp(1.45rem,5.8vw,1.95rem);line-height:1.16;margin-bottom:16px;}
+  .case-title[data-lang="zh"]{font-size:clamp(1.4rem,5.6vw,1.8rem);line-height:1.36;}
+  .case-bigstat{padding:18px 0;margin-bottom:20px;gap:14px;}
+  .case-bigstat .v{font-size:clamp(2.2rem,9vw,3rem);}
+  .case-desc{font-size:1rem;max-width:100%;}
+  .case-points li{font-size:.95rem;}
+
+  /* Leadership cards */
+  .lead-impact{padding:58px 0;}
+  .li-card{padding:26px 22px;}
+  .li-card .badge{position:static;display:inline-block;margin-bottom:16px;}
+  .li-card h3{font-size:clamp(1.35rem,5.4vw,1.7rem);max-width:100%;padding-right:0;}
+  .li-card .rows li{grid-template-columns:1fr;gap:4px;padding:13px 0;}
+  .li-card .rows[data-lang="zh"] li{grid-template-columns:1fr;}
+
+  /* About */
+  .about-grid p{font-size:1.02rem;}
+  .cv{padding:26px 22px;}
+
+  /* Tools wrap cleaner */
+  .tools{gap:14px 28px;padding:22px 0;}
+  .tools .lbl[style]{margin-left:0 !important;flex-basis:100%;}
+
+  /* Footer */
+  .footer{padding:58px 0 28px;}
+  .footer .big{font-size:clamp(2rem,8.2vw,2.9rem);line-height:1.08;margin-bottom:36px;max-width:100%;}
+  .footer .big[data-lang="zh"]{line-height:1.3;}
+  .foot-grid{gap:32px;padding-top:36px;}
+  .foot-col a{font-size:1.15rem;}
+  .foot-base{margin-top:40px;font-size:.7rem;gap:8px;}
+}
+
+/* ---- Small phones (<= 400px) ---- */
+@media (max-width:400px){
+  :root{--gutter:1.15rem;}
+  .nav-cta{display:none;}
+  .brand small{display:none;}
+  .hero h1{font-size:clamp(1.7rem,8.4vw,2.2rem);}
+  .metrics .m .v{font-size:2.3rem;}
+  .case-bigstat{flex-wrap:wrap;}
+  .foot-col a{font-size:1.05rem;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong><small data-lang="en">Senior UX Designer</small><small data-lang="zh">資深 UX 設計師</small></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#work"><span data-lang="en">Work</span><span data-lang="zh">作品</span></a></li>
+        <li><a href="#impact"><span data-lang="en">Impact</span><span data-lang="zh">影響力</span></a></li>
+        <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">關於</span></a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="Language / 語言">
+        <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+      </div>
+      <a class="nav-cta" href="#contact"><span data-lang="en">Get in touch</span><span data-lang="zh">聯絡我</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header id="top" class="hero">
+  <div class="container">
+    <span class="status"><span class="pip" aria-hidden="true"></span><span data-lang="en">Open to Senior &amp; Lead UX roles · Taipei / Remote</span><span data-lang="zh">開放 Senior / Lead UX 職缺 · 台北 / 遠端</span></span>
+
+    <h1 data-lang="en">I design the <em>tools</em> that engineers, IT admins, and operators rely on — and I build the AI tools my design team plans with.</h1>
+    <h1 data-lang="zh">我設計工程師、IT 管理者與產線操作員每天依賴的<em>工具</em>——也親手打造設計團隊用來規劃的 AI 工具。</h1>
+
+    <div class="hero-foot">
+      <div class="who">
+        <div class="name" data-lang="en">Alyssa Huang — Senior UX Designer</div>
+        <div class="name" data-lang="zh">Alyssa Huang — 資深 UX 設計師</div>
+        <p data-lang="en">Eight years of pure UX across three domains most designers never touch: <strong>industrial inspection systems</strong>, <strong>enterprise IT tooling</strong>, and <strong>Android platform UX</strong>. CS &amp; Interaction-Design hybrid; six years shipping software before I shipped screens.</p>
+        <p data-lang="zh">八年純 UX 經歷，橫跨多數設計師不會碰的三個領域：<strong>工業檢測系統</strong>、<strong>企業 IT 工具</strong>，以及 <strong>Android 平台 UX</strong>。資訊管理與互動設計雙背景；在設計介面之前，先寫了六年軟體。</p>
+      </div>
+      <div class="links">
+        <a href="#work"><span data-lang="en">View work</span><span data-lang="zh">檢視作品</span> <span aria-hidden="true">→</span></a>
+        <a href="mailto:alyssa.huang.ux@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
+        <a href="#" rel="noopener">LinkedIn <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Credibility strip -->
+<div class="container">
+  <div class="cred-strip reveal" data-lang="en">
+    <span class="lbl">Shipped at</span>
+    <span class="co">ASUS <span>2024–now</span></span>
+    <span class="co">Test Research Inc. <span>2018–24</span></span>
+    <span class="lbl" style="margin-left:auto">Education</span>
+    <span class="co">M.S. Interaction Design</span>
+    <span class="co">B.A. Info Management</span>
+  </div>
+  <div class="cred-strip reveal" data-lang="zh">
+    <span class="lbl">任職於</span>
+    <span class="co">ASUS 華碩 <span>2024–至今</span></span>
+    <span class="co">德律科技 <span>2018–24</span></span>
+    <span class="lbl" style="margin-left:auto">學歷</span>
+    <span class="co">互動設計碩士</span>
+    <span class="co">資訊管理學士</span>
+  </div>
+</div>
+
+<!-- Impact band -->
+<section class="impact-band">
+  <div class="container">
+    <p class="lead-line reveal" data-lang="en">A portfolio measured in <em>ownership and outcomes</em> — not screens shipped.</p>
+    <p class="lead-line reveal" data-lang="zh">這份作品集衡量的是 <em>ownership 與成果</em>——不是交付了幾個畫面。</p>
+    <div class="metrics reveal">
+      <div class="m">
+        <div class="v">8<sup>YRS</sup></div>
+        <div class="l" data-lang="en">Pure UX across industrial,<br>enterprise &amp; platform</div>
+        <div class="l" data-lang="zh">純 UX，橫跨工業、<br>企業與平台</div>
+      </div>
+      <div class="m">
+        <div class="v">10<sup>+</sup></div>
+        <div class="l" data-lang="en">AXI machine variants<br>on one UI I owned</div>
+        <div class="l" data-lang="zh">由我獨力負責的單一介面，<br>套用於 10+ 機種</div>
+      </div>
+      <div class="m">
+        <div class="v">2<sup>×</sup></div>
+        <div class="l" data-lang="en">Faster BIOS &amp; driver mgmt<br>vs. standard SCCM</div>
+        <div class="l" data-lang="zh">BIOS 與驅動管理速度，<br>較標準 SCCM 快 2 倍</div>
+      </div>
+      <div class="m">
+        <div class="v">1<sup>ST</sup></div>
+        <div class="l" data-lang="en">UX practice introduced<br>at a hardware OEM</div>
+        <div class="l" data-lang="zh">在硬體 OEM<br>從零導入 UX 實踐</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Work -->
+<section id="work">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow"><span class="ix">[01]</span> &nbsp; <span data-lang="en">Selected Work — 5 cases</span><span data-lang="zh">精選作品 — 5 個案例</span></span>
+      <h2 data-lang="en">Problems I solved, framed by <em>outcome</em> — not by feature.</h2>
+      <h2 data-lang="zh">以<em>成果</em>定義的問題——而非功能清單。</h2>
+    </div>
+
+    <!-- CASE 01 -->
+    <article class="case reveal">
+      <div class="case-visual">
+        <span class="tape"><span data-lang="en">Redesign · 6-yr ownership</span><span data-lang="zh">改版 · 6 年 ownership</span></span>
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#FFFFFF"/>
+            <g stroke="#E6E6E4" stroke-width="0.5">
+              <line x1="0" y1="60" x2="400" y2="60"/><line x1="0" y1="120" x2="400" y2="120"/><line x1="0" y1="180" x2="400" y2="180"/><line x1="0" y1="240" x2="400" y2="240"/>
+              <line x1="80" y1="0" x2="80" y2="300"/><line x1="160" y1="0" x2="160" y2="300"/><line x1="240" y1="0" x2="240" y2="300"/><line x1="320" y1="0" x2="320" y2="300"/>
+            </g>
+            <rect x="70" y="70" width="260" height="160" fill="none" stroke="#0C0C0D" stroke-width="1.2"/>
+            <rect x="96" y="96" width="44" height="22" fill="#0C0C0D"/><rect x="160" y="96" width="60" height="22" fill="none" stroke="#0C0C0D"/><rect x="240" y="96" width="64" height="22" fill="#0C0C0D"/>
+            <rect x="96" y="150" width="90" height="54" fill="none" stroke="#0C0C0D"/>
+            <g fill="#0C0C0D"><circle cx="220" cy="160" r="3"/><circle cx="238" cy="160" r="3"/><circle cx="256" cy="160" r="3"/><circle cx="220" cy="178" r="3"/><circle cx="238" cy="178" r="3"/><circle cx="256" cy="178" r="3"/><circle cx="220" cy="196" r="3"/><circle cx="238" cy="196" r="3"/><circle cx="256" cy="196" r="3"/></g>
+            <rect x="276" y="150" width="34" height="54" fill="none" stroke="#0C0C0D"/>
+            <circle cx="238" cy="150" r="58" fill="none" stroke="#2B4DE0" stroke-width="1.4" stroke-dasharray="3 4"/><circle cx="238" cy="150" r="5" fill="#2B4DE0"/>
+            <line x1="238" y1="92" x2="238" y2="208" stroke="#2B4DE0" stroke-width="0.6"/><line x1="180" y1="150" x2="296" y2="150" stroke="#2B4DE0" stroke-width="0.6"/>
+          </svg>
+          <div class="viz-foot"><span>TR7600 / AXI</span><span class="live">● 3D Scan</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-kicker" data-lang="en">Test Research Inc. · Industrial B2B · 2018–2024</div>
+        <div class="case-kicker" data-lang="zh">德律科技 · 工業 B2B · 2018–2024</div>
+        <h2 class="case-title" data-lang="en">Redesigning the X-ray system that inspects every board before it ships</h2>
+        <h2 class="case-title" data-lang="zh">重新設計每片電路板出貨前都要過的 X 光檢測系統</h2>
+        <div class="case-context" data-lang="en"><span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>Quantified impact</span><span>SMT process engineers</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">唯一 UI/UX 負責人</span><span>完整重新設計</span><span>量化成效</span><span>SMT 製程工程師</span></div>
+        <div class="case-bigstat">
+          <div class="v">38<sup>%</sup></div>
+          <div class="d" data-lang="en">less total programming time after the redesign — measured on two production boards (295&rarr;186 &amp; 386&rarr;237 min)</div>
+          <div class="d" data-lang="zh">改版後總編程時間減少——以兩塊量產板量測（295&rarr;186、386&rarr;237 分鐘）</div>
+        </div>
+        <p class="case-desc" data-lang="en">TRI&rsquo;s flagship 3D AXI software detects solder-joint defects on every PCB leaving a production line — operated in shifts, where a confusing flow costs real downtime. I led the <strong>full redesign from a legacy 2D AOI interface</strong> into a 3D-AXI-native workflow, then owned it for six years as the sole UI/UX designer. The redesign cut <strong>total programming time by ~38%</strong> — independently measured by FAE teams on two production boards (a 4,160-component board: 295&rarr;186 min; a 3,495-component board: 386&rarr;237 min), with the heaviest gains in the Fine Tune and Library steps.</p>
+        <p class="case-desc" data-lang="zh">德律的旗艦 3D AXI 軟體負責檢測產線上每一片 PCB 的焊點缺陷——以輪班方式操作，一個令人困惑的流程就是真實的停機損失。我主導了從舊版 2D AOI 介面到 3D-AXI 原生工作流程的<strong>完整重新設計</strong>，並以唯一 UI/UX 設計師的身分負責了六年。改版讓<strong>總編程時間減少約 38%</strong>——由 FAE 團隊在兩塊量產板上獨立量測（4,160 顆零件的板：295&rarr;186 分；3,495 顆零件的板：386&rarr;237 分），改善最大的是 Fine Tune 與 Library 兩個步驟。</p>
+        <ul class="case-points" data-lang="en">
+          <li><strong>Fine Tune &minus;51% (158&rarr;77 min), Library &minus;39% (124&rarr;76 min)</strong> — the two slowest steps. Collapsing F3/F4 into one Fine Tune page and replacing manual height calculation with mouse-wheel adjustment is what drove most of the saving.</li>
+          <li><strong>One standardized interface across the entire AXI line</strong> (SIII / LL / TL / F3D / FB / HP / SV families) — consistency that survives every new machine.</li>
+          <li>Owned programming, alignment, GR&amp;R, and multi-language deployment for global major accounts (automotive, server, semiconductor).</li>
+          <li>Worked directly with algorithm &amp; mechanical teams; C# / MFC literacy made spec arguments shorter and feasibility calls faster.</li>
+        </ul>
+        <ul class="case-points" data-lang="zh">
+          <li><strong>Fine Tune &minus;51%（158&rarr;77 分）、Library &minus;39%（124&rarr;76 分）</strong>——兩個最慢的步驟。把 F3／F4 整併進單一 Fine Tune 頁、以滑鼠滾輪取代手動計算高度，是時間縮短的主因。</li>
+          <li><strong>單一標準化介面套用於整條 AXI 產品線</strong>（SIII / LL / TL / F3D / FB / HP / SV 系列）——每出一台新機都能維持一致性。</li>
+          <li>獨力負責編程、定位、GR&amp;R 與多國語系部署，服務汽車、伺服器、半導體等全球大客戶。</li>
+          <li>直接與演算法與機構團隊協作；C# / MFC 的底子讓規格討論更短、可行性判斷更快。</li>
+        </ul>
+        <a class="case-link" href="case-tr7600.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <!-- CASE 02 -->
+    <article class="case flip reveal">
+      <div class="case-visual">
+        <span class="tape"><span data-lang="en">0 → 1 · Standalone app</span><span data-lang="zh">0 → 1 · 獨立 App</span></span>
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#FFFFFF"/>
+            <rect x="56" y="54" width="288" height="192" rx="6" fill="#F4F4F3" stroke="#0C0C0D" stroke-width="1.2"/>
+            <rect x="56" y="54" width="288" height="34" rx="6" fill="#0C0C0D"/><rect x="56" y="78" width="288" height="10" fill="#0C0C0D"/>
+            <circle cx="72" cy="71" r="3.4" fill="#F4F4F3"/><circle cx="84" cy="71" r="3.4" fill="#F4F4F3"/><circle cx="96" cy="71" r="3.4" fill="#F4F4F3"/>
+            <rect x="76" y="104" width="248" height="30" rx="15" fill="#FFFFFF" stroke="#0C0C0D"/>
+            <circle cx="94" cy="119" r="6" fill="none" stroke="#0C0C0D" stroke-width="1.4"/><line x1="98" y1="123" x2="103" y2="128" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="112" y="116" width="120" height="6" rx="3" fill="#A1A1A6"/>
+            <g font-family="Geist Mono, monospace" font-size="7.5" fill="#6E6E73">
+              <rect x="80" y="152" width="14" height="16" fill="#2B4DE0"/><rect x="104" y="156" width="150" height="5" rx="2.5" fill="#0C0C0D"/><rect x="104" y="165" width="90" height="4" rx="2" fill="#A1A1A6"/><text x="296" y="163">LOCAL</text>
+              <rect x="80" y="184" width="14" height="16" fill="none" stroke="#0C0C0D"/><rect x="104" y="188" width="130" height="5" rx="2.5" fill="#0C0C0D"/><rect x="104" y="197" width="76" height="4" rx="2" fill="#A1A1A6"/><text x="296" y="195">CLOUD</text>
+              <rect x="80" y="216" width="14" height="16" fill="#0C0C0D"/><rect x="104" y="220" width="160" height="5" rx="2.5" fill="#0C0C0D"/><rect x="104" y="229" width="64" height="4" rx="2" fill="#A1A1A6"/><text x="296" y="227">LOCAL</text>
+            </g>
+          </svg>
+          <div class="viz-foot"><span>MyExpert / File Search</span><span class="live">● Ships 2026</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-kicker" data-lang="en">ASUS · Enterprise B2B · 2024–present</div>
+        <div class="case-kicker" data-lang="zh">ASUS · 企業 B2B · 2024–至今</div>
+        <h2 class="case-title" data-lang="en">Taking a standalone search app from zero onto every 2026 ASUS commercial device</h2>
+        <h2 class="case-title" data-lang="zh">把獨立搜尋 App 從零打造，預載進 2026 年每一台華碩商用裝置</h2>
+        <div class="case-context" data-lang="en"><span class="hl">Product-level ownership</span><span>0 → 1</span><span>IA &amp; competitive strategy</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">產品級 ownership</span><span>0 → 1</span><span>資訊架構與競品策略</span></div>
+        <div class="case-bigstat">
+          <div class="v">1<sup>/ 5</sup></div>
+          <div class="d" data-lang="en">sibling apps in MyExpert — File Search is an app, not a feature buried in a menu</div>
+          <div class="d" data-lang="zh">MyExpert 中的並列 App——File Search 是一個 App，而非藏在選單裡的功能</div>
+        </div>
+        <p class="case-desc" data-lang="en">File Search unifies local and cloud files behind a single query and <strong>pre-installs on ASUS Commercial notebooks, AiOs, and desktops from 2026 onward</strong>. I owned its UX from zero to launch: product positioning, competitive teardown, information architecture, result hierarchy, and the integration boundary with the rest of MyExpert (Chat, Knowledge Hub, ExpertMeet).</p>
+        <p class="case-desc" data-lang="zh">File Search 將本機與雲端檔案整合在單一查詢之後，<strong>從 2026 年起預載於華碩商用筆電、AiO 與桌機</strong>。我從零到上線負責它的 UX：產品定位、競品拆解、資訊架構、搜尋結果階層，以及與 MyExpert 其他模組（Chat、Knowledge Hub、ExpertMeet）的整合邊界。</p>
+        <ul class="case-points" data-lang="en">
+          <li>Reconciled <strong>two mental models in one result list</strong> — file-manager behaviour (browse, sort) and search behaviour (rank, snippet) — without making either feel bolted on.</li>
+          <li>Scoped it as a <strong>peer app</strong> to Chat and Knowledge Hub, defending product-level boundaries against feature-creep pressure.</li>
+          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.</li>
+        </ul>
+        <ul class="case-points" data-lang="zh">
+          <li>在同一份結果清單中調和<strong>兩種心智模型</strong>——檔案管理（瀏覽、排序）與搜尋（排名、摘要）——讓兩者都不像勉強拼裝。</li>
+          <li>把它定位為與 Chat、Knowledge Hub <strong>並列的 App</strong>，在功能擴張的壓力下守住產品級邊界。</li>
+          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI 工作流程，而不必重構其資訊架構。</li>
+        </ul>
+        <a class="case-link" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">See ASUS MyExpert</span><span data-lang="zh">檢視 ASUS MyExpert</span><span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <!-- CASE 03 -->
+    <article class="case reveal">
+      <div class="case-visual">
+        <span class="tape"><span data-lang="en">DesignOps · Lead signal</span><span data-lang="zh">DesignOps · Lead 訊號</span></span>
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#FFFFFF"/>
+            <g stroke="#0C0C0D" stroke-width="1"><line x1="86" y1="86" x2="200" y2="150"/><line x1="200" y1="150" x2="314" y2="86"/><line x1="200" y1="150" x2="100" y2="226"/><line x1="200" y1="150" x2="200" y2="238"/><line x1="200" y1="150" x2="300" y2="226"/></g>
+            <line x1="86" y1="86" x2="314" y2="86" stroke="#2B4DE0" stroke-width="0.8" stroke-dasharray="3 3"/>
+            <rect x="64" y="70" width="44" height="32" rx="3" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/><rect x="292" y="70" width="44" height="32" rx="3" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="166" y="128" width="68" height="44" rx="4" fill="#2B4DE0"/>
+            <circle cx="100" cy="226" r="15" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/><circle cx="200" cy="238" r="15" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/><circle cx="300" cy="226" r="15" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <g font-family="Geist Mono, monospace" fill="#0C0C0D"><text x="75" y="90" font-size="8">brief</text><text x="303" y="90" font-size="8">spec</text></g>
+            <text x="187" y="155" font-family="Geist Mono, monospace" font-size="11" fill="#FFFFFF">AI</text>
+          </svg>
+          <div class="viz-foot"><span>Internal / AI Planning</span><span class="live">● In use</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-kicker" data-lang="en">ASUS · Internal tool · 2024–present</div>
+        <div class="case-kicker" data-lang="zh">ASUS · 內部工具 · 2024–至今</div>
+        <h2 class="case-title" data-lang="en">Building the AI planning tool my own design team now works with</h2>
+        <h2 class="case-title" data-lang="zh">打造設計團隊現在用來規劃的 AI 工具</h2>
+        <div class="case-context" data-lang="en"><span class="hl">DesignOps</span><span>0 → 1 build</span><span>Shipped &amp; adopted</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">DesignOps</span><span>0 → 1 自建</span><span>已上線並被採用</span></div>
+        <div class="case-bigstat">
+          <div class="v" data-lang="en">Built</div>
+          <div class="v" data-lang="zh">自建</div>
+          <div class="d" data-lang="en">&amp; shipped an internal AI tool — not just adopted AI into my own work</div>
+          <div class="d" data-lang="zh">並上線一套內部 AI 工具——不只是把 AI 用在自己的工作上</div>
+        </div>
+        <p class="case-desc" data-lang="en">My team was repeatedly slow and inconsistent on early-stage architecture work — IA exploration, scope framing, cross-feature impact. So I designed and shipped a web tool that uses AI to draft consistent first-pass plans the team can <strong>edit instead of start from blank</strong>. This is the rarest line on my CV: I don&rsquo;t just use AI — I design and ship the AI tools my design team relies on.</p>
+        <p class="case-desc" data-lang="zh">我的團隊在早期架構工作上反覆地慢、且不一致——資訊架構探索、範圍界定、跨功能影響評估。於是我設計並上線一套網站工具，用 AI 產出一致的初版規劃，讓團隊可以<strong>直接修改、而不是從空白開始</strong>。這是我履歷上最罕見的一行：我不只是用 AI——我設計並交付設計團隊賴以工作的 AI 工具。</p>
+        <ul class="case-points" data-lang="en">
+          <li>Diagnosed the bottleneck through internal interviews — <strong>planning, not visual execution</strong>, was the slow part.</li>
+          <li>Designed the AI-assisted workflow, the editable output format, and the adoption rollout.</li>
+          <li>Adoption &amp; efficiency change: <span class="fill">[insert how many designers use it / time saved per plan]</span>.</li>
+        </ul>
+        <ul class="case-points" data-lang="zh">
+          <li>透過內部訪談找出瓶頸——慢的是<strong>規劃，而非視覺執行</strong>。</li>
+          <li>設計了 AI 輔助流程、可編輯的產出格式，以及導入採用的推動方式。</li>
+          <li>採用情況與效率改變：<span class="fill">[填入有多少設計師在用 / 每份規劃省下多少時間]</span>。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- CASE 04 -->
+    <article class="case flip reveal">
+      <div class="case-visual">
+        <span class="tape"><span data-lang="en">Takeover · multi-feature</span><span data-lang="zh">接手 · 多功能</span></span>
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#FFFFFF"/>
+            <rect x="48" y="56" width="304" height="188" rx="5" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.2"/>
+            <rect x="48" y="56" width="86" height="188" fill="#ECECEA"/>
+            <rect x="62" y="84" width="56" height="6" rx="3" fill="#0C0C0D"/><rect x="62" y="100" width="44" height="4" rx="2" fill="#A1A1A6"/><rect x="62" y="114" width="50" height="4" rx="2" fill="#A1A1A6"/><rect x="62" y="128" width="58" height="6" rx="3" fill="#2B4DE0"/><rect x="62" y="144" width="40" height="4" rx="2" fill="#A1A1A6"/>
+            <rect x="150" y="74" width="110" height="7" rx="3.5" fill="#0C0C0D"/>
+            <g font-family="Geist Mono, monospace" font-size="8" fill="#0C0C0D">
+              <rect x="150" y="100" width="186" height="26" fill="#ECECEA"/><text x="160" y="117">device-001</text><circle cx="322" cy="113" r="4" fill="#2C8A3E"/>
+              <rect x="150" y="130" width="186" height="26" fill="none" stroke="#EFEFED"/><text x="160" y="147">device-002</text><circle cx="322" cy="143" r="4" fill="#2C8A3E"/>
+              <rect x="150" y="160" width="186" height="26" fill="none" stroke="#EFEFED"/><text x="160" y="177">device-003</text><circle cx="322" cy="173" r="4" fill="#2B4DE0"/>
+              <rect x="150" y="190" width="186" height="26" fill="none" stroke="#EFEFED"/><text x="160" y="207">device-004</text><circle cx="322" cy="203" r="4" fill="#2C8A3E"/>
+            </g>
+          </svg>
+          <div class="viz-foot"><span>ASUS Config Manager</span><span class="live">● SCCM + Intune</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-kicker" data-lang="en">ASUS · Enterprise IT · 2024–present</div>
+        <div class="case-kicker" data-lang="zh">ASUS · 企業 IT · 2024–至今</div>
+        <h2 class="case-title" data-lang="en">Making fleet-scale BIOS &amp; driver control something IT admins can trust</h2>
+        <h2 class="case-title" data-lang="zh">讓大規模 BIOS 與驅動管理，成為 IT 管理者能信任的工具</h2>
+        <div class="case-context" data-lang="en"><span class="hl">Feature ownership</span><span>Takeover</span><span>Corporate IT admins</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">功能 ownership</span><span>接手</span><span>企業 IT 管理者</span></div>
+        <div class="case-bigstat">
+          <div class="v">2<sup>×</sup></div>
+          <div class="d" data-lang="en">faster BIOS &amp; driver management than standard SCCM, per ASUS</div>
+          <div class="d" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
+        </div>
+        <p class="case-desc" data-lang="en">ASUS Config Manager extends Microsoft SCCM — adding BIOS configuration, faster updates, and remote management via Intune/DFCI. I inherited a queue of <strong>high-stakes features touching enterprise device fleets</strong>, where a confusing flow means real downtime on real machines. My job: make cryptographic and policy complexity legible to non-developer IT admins.</p>
+        <p class="case-desc" data-lang="zh">ASUS Config Manager 擴充了微軟 SCCM——加入 BIOS 設定、加速更新，並透過 Intune/DFCI 進行遠端管理。我接手了一系列<strong>牽動企業裝置群的高風險功能</strong>，在這裡，一個令人困惑的流程就代表真實機器的停機。我的工作：把密碼學與政策的複雜度，翻譯成非開發背景的 IT 管理者也能讀懂的介面。</p>
+        <ul class="case-points" data-lang="en">
+          <li><strong>Encrypted BIOS deployment</strong> &amp; <strong>Silent Update</strong> — surfaced security posture and update state without burying admins in jargon.</li>
+          <li><strong>Driver Command Policy</strong> — designed version detection, severity filters, and customizable update cadence.</li>
+          <li><strong>BIOS Asset Tag</strong> &amp; <strong>JSON deployment / response</strong> — built a structured input flow admins can configure confidently.</li>
+        </ul>
+        <ul class="case-points" data-lang="zh">
+          <li><strong>加密 BIOS 派送</strong>與<strong>靜默更新</strong>——把安全狀態與更新狀態清楚呈現，而不讓管理者淹沒在術語裡。</li>
+          <li><strong>Driver Command Policy</strong>——設計版本偵測、嚴重度篩選與可自訂的更新頻率。</li>
+          <li><strong>BIOS Asset Tag</strong> 與 <strong>JSON 派送／回傳</strong>——建立結構化輸入流程，讓管理者能放心設定。</li>
+        </ul>
+        <a class="case-link" href="https://www.asus.com/business/services/bios-and-drivers-management/" target="_blank" rel="noopener noreferrer"><span data-lang="en">See BIOS &amp; Drivers Management</span><span data-lang="zh">檢視 BIOS &amp; Drivers Management</span><span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <!-- CASE 05 -->
+    <article class="case reveal">
+      <div class="case-visual">
+        <span class="tape"><span data-lang="en">0 → 1 · Conflict design</span><span data-lang="zh">0 → 1 · 衝突設計</span></span>
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#FFFFFF"/>
+            <g transform="translate(108 56)">
+              <rect x="0" y="0" width="84" height="188" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/><rect x="7" y="22" width="70" height="148" rx="3" fill="#ECECEA"/>
+              <rect x="18" y="36" width="48" height="6" rx="3" fill="#0C0C0D"/><rect x="18" y="48" width="34" height="3" rx="1.5" fill="#A1A1A6"/>
+              <rect x="18" y="64" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/><rect x="18" y="88" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/><rect x="18" y="112" width="48" height="18" rx="3" fill="#2B4DE0"/><rect x="18" y="136" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/>
+              <text x="14" y="182" font-family="Geist Mono, monospace" font-size="6" fill="#6E6E73">ZENFONE</text>
+            </g>
+            <g transform="translate(208 56)">
+              <rect x="0" y="0" width="84" height="188" rx="12" fill="#0C0C0D" stroke="#0C0C0D" stroke-width="1.4"/><rect x="7" y="22" width="70" height="148" rx="3" fill="#08080A"/>
+              <rect x="18" y="36" width="48" height="6" rx="3" fill="#2B4DE0"/><rect x="18" y="48" width="34" height="3" rx="1.5" fill="#6E6E73"/>
+              <rect x="18" y="64" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/><rect x="18" y="88" width="48" height="18" rx="3" fill="#2B4DE0"/><rect x="18" y="112" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/><rect x="18" y="136" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/>
+              <text x="26" y="182" font-family="Geist Mono, monospace" font-size="6" fill="#6E6E73">ROG</text>
+            </g>
+            <line x1="192" y1="150" x2="208" y2="150" stroke="#2B4DE0" stroke-width="1" stroke-dasharray="2 2"/>
+            <circle cx="200" cy="150" r="9" fill="#F4F4F3" stroke="#2B4DE0" stroke-width="1.2"/><text x="196" y="154" font-family="Geist Mono, monospace" font-size="9" fill="#2B4DE0">!</text>
+          </svg>
+          <div class="viz-foot"><span>ASUS / Mobile Platform</span><span class="live">● ROG · Zenfone</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-kicker" data-lang="en">ASUS · Platform UX · 2024–present</div>
+        <div class="case-kicker" data-lang="zh">ASUS · 平台 UX · 2024–至今</div>
+        <h2 class="case-title" data-lang="en">Designing platform features from zero — and resolving the conflicts no single feature owns</h2>
+        <h2 class="case-title" data-lang="zh">從零設計平台功能——並解決沒有任何單一功能會負責的衝突</h2>
+        <div class="case-context" data-lang="en"><span class="hl">System-level UX</span><span>0 → 1</span><span>Cross-product</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">系統級 UX</span><span>0 → 1</span><span>跨產品線</span></div>
+        <div class="case-bigstat">
+          <div class="v">6+</div>
+          <div class="d" data-lang="en">platform features designed from zero across two product lines</div>
+          <div class="d" data-lang="zh">跨兩條產品線、從零設計的平台功能</div>
+        </div>
+        <p class="case-desc" data-lang="en">When Android ships a platform capability, every OEM must design the UX above it — settings IA, entry points, toggle behaviour, and the <strong>conflicts between features that can&rsquo;t coexist</strong>. I led from-zero UX for Predictive Back, Edge-to-edge, Circle to Search, Auto Rotate, default Gemini assistant, and gaming-phone gyroscope on ROG and Zenfone. The hardest work isn&rsquo;t any single feature — it&rsquo;s the <strong>system view</strong>.</p>
+        <p class="case-desc" data-lang="zh">當 Android 推出一個平台能力，每家 OEM 都得設計它之上的 UX——設定的資訊架構、入口、開關行為，以及<strong>無法並存的功能之間的衝突</strong>。我在 ROG 與 Zenfone 上，從零主導了 Predictive Back、Edge-to-edge、Circle to Search、Auto Rotate、預設 Gemini 助理，以及電競手機陀螺儀的 UX。最難的不是任何單一功能——而是<strong>系統視角</strong>。</p>
+        <ul class="case-points" data-lang="en">
+          <li><strong>Conflict resolution</strong> — for mutually exclusive features, defined the rule set, the resolution UI, and the recovery path.</li>
+          <li><strong>Cross-product differentiation</strong> — ROG (gaming, tunable) vs Zenfone (general); diverged the IA only where it earned its keep.</li>
+          <li>Also redesigned and stabilized <strong>Screen Recording</strong> after takeover.</li>
+        </ul>
+        <ul class="case-points" data-lang="zh">
+          <li><strong>衝突處理</strong>——針對互斥功能，定義規則集、衝突解決的 UI 與復原路徑。</li>
+          <li><strong>跨產品線差異化</strong>——ROG（電競、可調校）對比 Zenfone（一般消費）；只在值得的地方讓資訊架構分流。</li>
+          <li>另接手並重新設計、穩定了<strong>螢幕錄影</strong>功能。</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Leadership / impact -->
+<section id="impact" class="lead-impact">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow"><span class="ix">[02]</span> &nbsp; <span data-lang="en">Impact Beyond Design</span><span data-lang="zh">設計之外的影響力</span></span>
+      <h2 data-lang="en">Two things <em>most UX designers</em> can&rsquo;t put on a CV.</h2>
+      <h2 data-lang="zh">兩件<em>多數 UX 設計師</em>寫不進履歷的事。</h2>
+    </div>
+    <div class="li-grid">
+      <div class="li-card reveal">
+        <div class="badge" data-lang="en">Senior signal</div>
+        <div class="badge" data-lang="zh">資深訊號</div>
+        <h3 data-lang="en">Introduced <em>UX practice</em> into a hardware manufacturer</h3>
+        <h3 data-lang="zh">在硬體製造公司<em>從零導入 UX 實踐</em></h3>
+        <div class="org" data-lang="en">Test Research Inc. · 2018–2024</div>
+        <div class="org" data-lang="zh">德律科技 · 2018–2024</div>
+        <ul class="rows" data-lang="en">
+          <li><b>Before</b><span>A precision-instrument company where engineering owned every screen and &ldquo;UX&rdquo; was not a function.</span></li>
+          <li><b>I did</b><span>Built UX into requirements review, trained internal teams, onboarded new hires, made design reviews part of the release cycle.</span></li>
+          <li><b>Result</b><span>UX now exists as a function inside a hardware OEM that never had one — and outlasted my tenure.</span></li>
+        </ul>
+        <ul class="rows" data-lang="zh">
+          <li><b>之前</b><span>一家精密儀器公司，每個畫面都由工程主導，「UX」並不是一個職能。</span></li>
+          <li><b>我做了</b><span>把 UX 帶進需求審查、訓練內部團隊、負責新人訓練，並讓設計審查成為發布流程的一環。</span></li>
+          <li><b>成果</b><span>UX 如今在一家原本沒有 UX 的硬體 OEM 裡，成為一個職能——並在我離開後延續下來。</span></li>
+        </ul>
+      </div>
+      <div class="li-card reveal">
+        <div class="badge" data-lang="en">Lead signal</div>
+        <div class="badge" data-lang="zh">Lead 訊號</div>
+        <h3 data-lang="en">Built an <em>AI planning tool</em> for the design team I&rsquo;m on</h3>
+        <h3 data-lang="zh">為所屬設計團隊打造<em>AI 規劃工具</em></h3>
+        <div class="org" data-lang="en">ASUS · 2024–present</div>
+        <div class="org" data-lang="zh">ASUS · 2024–至今</div>
+        <ul class="rows" data-lang="en">
+          <li><b>Pain</b><span>The team was slow and inconsistent on early architecture work — IA, scope framing, cross-feature impact.</span></li>
+          <li><b>I built</b><span>An internal web tool that drafts consistent first-pass plans with AI, for the team to edit rather than start from blank.</span></li>
+          <li><b>Why</b><span>Designing &amp; shipping the AI tool a design team relies on — DesignOps in practice, not slideware.</span></li>
+        </ul>
+        <ul class="rows" data-lang="zh">
+          <li><b>痛點</b><span>團隊在早期架構工作上又慢又不一致——資訊架構、範圍界定、跨功能影響。</span></li>
+          <li><b>我打造</b><span>一套內部網站工具，用 AI 產出一致的初版規劃，讓團隊修改、而非從空白開始。</span></li>
+          <li><b>為何</b><span>設計並交付設計團隊賴以工作的 AI 工具——這是實作出來的 DesignOps，不是簡報。</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow"><span class="ix">[03]</span> &nbsp; <span data-lang="en">About</span><span data-lang="zh">關於</span></span>
+      <h2 data-lang="en">A designer who shipped <em>software</em> before she shipped <em>screens.</em></h2>
+      <h2 data-lang="zh">在設計<em>介面</em>之前，先交付過<em>軟體</em>的設計師。</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p data-lang="en">I&rsquo;m a pure UX designer working on <strong>tool-shaped products</strong> — the kind operators, IT admins, and developers depend on daily. My undergraduate degree is in <strong>Information Management</strong>; my master&rsquo;s is in <strong>Interaction Design</strong>. That dual root means I read engineering tickets the way I read research notes.</p>
+        <p data-lang="zh">我是專注於<strong>工具型產品</strong>的純 UX 設計師——那種產線操作員、IT 管理者與開發者每天依賴的產品。我的學士是<strong>資訊管理</strong>，碩士是<strong>互動設計</strong>。這雙重根基讓我讀工程票券，就像讀研究筆記一樣自然。</p>
+        <p data-lang="en">I spent six years shipping <em>C# / MFC desktop software</em> and built an <em>AR rehabilitation game in Unity</em> for my thesis. Code isn&rsquo;t my output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room.</p>
+        <p data-lang="zh">我花了六年交付 <em>C# / MFC 桌面軟體</em>，碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式不再是我的產出，但它形塑了我對可行性、系統限制，以及該向工程師要什麼的判斷——這也是為什麼有我在的跨職能團隊跑得更快。</p>
+        <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
+        <p data-lang="zh">我偏好的工具都不華麗：高密度資料、專家使用者、長時間的任務、彼此衝突的模式。我的工作是讓這些變得清晰可讀——而且越來越多時候，是<em>親手打造設計團隊用來規劃的工具。</em></p>
+      </div>
+      <aside class="cv" aria-label="Career and education">
+        <h4 data-lang="en">→ &nbsp; Career &amp; Education</h4>
+        <h4 data-lang="zh">→ &nbsp; 經歷與學歷</h4>
+        <div class="cv-row" data-lang="en"><div class="yr">2024 →</div><div class="d"><b>UX Designer · ASUS</b><span>Mobile platform UX · Commercial B2B IT tools</span></div></div>
+        <div class="cv-row" data-lang="zh"><div class="yr">2024 →</div><div class="d"><b>UX Designer · ASUS</b><span>行動平台 UX · 商用 B2B IT 工具</span></div></div>
+        <div class="cv-row" data-lang="en"><div class="yr">2018–24</div><div class="d"><b>UX Designer · Test Research Inc.</b><span>Sole UI/UX owner — TR7600 AXI inspection</span></div></div>
+        <div class="cv-row" data-lang="zh"><div class="yr">2018–24</div><div class="d"><b>UX Designer · 德律科技</b><span>唯一 UI/UX 負責人 — TR7600 AXI 檢測</span></div></div>
+        <div class="cv-row" data-lang="en"><div class="yr">2014–16</div><div class="d"><b>M.S. Interaction Design</b><span>National Taipei University of Technology · 互動設計</span></div></div>
+        <div class="cv-row" data-lang="zh"><div class="yr">2014–16</div><div class="d"><b>互動設計碩士</b><span>國立臺北科技大學 · 互動設計研究所</span></div></div>
+        <div class="cv-row" data-lang="en"><div class="yr">2010–14</div><div class="d"><b>B.A. Information Management — IT</b><span>Shih Hsin University · 資訊管理</span></div></div>
+        <div class="cv-row" data-lang="zh"><div class="yr">2010–14</div><div class="d"><b>資訊管理學士 — 資訊科技組</b><span>世新大學 · 資訊管理系</span></div></div>
+      </aside>
+    </div>
+
+    <div class="tools reveal">
+      <span class="lbl" data-lang="en">Design</span><span class="lbl" data-lang="zh">設計工具</span>
+      <span class="t">Figma <span>2y</span></span>
+      <span class="t">AxureRP <span>6y</span></span>
+      <span class="lbl" style="margin-left:auto" data-lang="en">Engineering literacy</span><span class="lbl" style="margin-left:auto" data-lang="zh">工程素養</span>
+      <span class="t">C# · Unity3D</span>
+      <span class="t">MFC · Visual Studio</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="footer">
+  <div class="container">
+    <p class="big" data-lang="en">Let&rsquo;s talk about <em>hard tools.</em></p>
+    <p class="big" data-lang="zh">聊聊<em>難搞的工具</em>吧。</p>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5 data-lang="en">Email</h5><h5 data-lang="zh">Email</h5>
+        <a href="mailto:alyssa.huang.ux@gmail.com">alyssa.huang.ux@gmail.com</a>
+        <p data-lang="en" style="margin-top:14px">Open to Senior &amp; Lead UX, Senior Product Designer (UX-leaning), Design Operations Lead, and Senior UX Researcher roles.</p>
+        <p data-lang="zh" style="margin-top:14px">開放 Senior / Lead UX、資深產品設計師（偏 UX）、Design Operations Lead 與資深 UX 研究員職缺。</p>
+      </div>
+      <div class="foot-col">
+        <h5 data-lang="en">Profiles</h5><h5 data-lang="zh">個人檔案</h5>
+        <a href="#" rel="noopener">LinkedIn</a>
+        <a href="#" rel="noopener"><span data-lang="en">Résumé (PDF)</span><span data-lang="zh">履歷（PDF）</span></a>
+      </div>
+      <div class="foot-col">
+        <h5 data-lang="en">Based in</h5><h5 data-lang="zh">所在地</h5>
+        <a style="cursor:default" data-lang="en">Taipei, Taiwan</a>
+        <a style="cursor:default" data-lang="zh">台灣 · 台北</a>
+        <p data-lang="en" style="margin-top:14px">Open to remote &amp; hybrid.<br>English &amp; Mandarin.</p>
+        <p data-lang="zh" style="margin-top:14px">開放遠端與混合辦公。<br>中英文皆可。</p>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Alyssa Huang · Senior UX Designer</span>
+      <span data-lang="en">Built by hand · HTML, restraint &amp; a tight grotesque</span>
+      <span data-lang="zh">手工打造 · HTML、克制與一套俐落的無襯線</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
+
+  // Scroll reveal
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.12, rootMargin:'0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Nav border on scroll
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>20); }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+})();
+</script>
+
+</body>
+</html>

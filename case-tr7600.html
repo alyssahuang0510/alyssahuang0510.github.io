@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TR7600 AXI Redesign — Case Study · Alyssa Huang</title>
+<meta name="description" content="Case study: redesigning the TRI TR7600 3D AXI inspection software from a single dense screen into a staged, purpose-built workflow. Sole UI/UX owner, 6 years, 10+ machine variants on one interface." />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TR7600 AXI Redesign — Case Study · Alyssa Huang" />
+<meta property="og:description" content="From one undifferentiated screen to a staged inspection workflow — an industrial B2B UX redesign owned end-to-end for six years." />
+
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "TR7600 3D AXI Inspection Software — UX Redesign",
+  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Senior UX Designer" },
+  "about": ["Industrial UX","B2B Tool Design","Information Architecture","UX Redesign","Automated Optical Inspection"],
+  "dateCreated": "2018",
+  "inLanguage": ["en","zh-Hant"]
+}
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:1180px; --gutter:clamp(1.25rem,4vw,4rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
+p{margin:0;}
+
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+
+.eyebrow{font-family:var(--ff-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.eyebrow .ix{color:var(--accent);}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.back-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.back-link:hover{color:var(--accent);}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+@media (max-width:560px){.brand small{display:none;}.nav-right{gap:12px;}.back-link span.bt{display:none;}}
+
+/* Hero */
+.c-hero{padding:clamp(46px,7vw,92px) 0 clamp(34px,4vw,56px);}
+.c-hero .kicker{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
+.c-hero .kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.c-hero h1{font-weight:500;font-size:clamp(2.1rem,5vw,4.1rem);line-height:1.06;letter-spacing:-0.035em;max-width:20ch;margin-bottom:clamp(26px,3vw,38px);}
+.c-hero h1[data-lang="zh"]{line-height:1.26;font-weight:600;max-width:24ch;letter-spacing:-0.01em;}
+.c-hero h1 em{font-style:normal;color:var(--accent);}
+.c-meta{display:flex;flex-wrap:wrap;gap:7px 8px;margin-bottom:clamp(30px,4vw,44px);}
+.c-meta span{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border:1px solid var(--rule);border-radius:5px;}
+.c-meta[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
+.c-meta span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
+.c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+.c-bigstat .d[data-lang="zh"]{line-height:1.7;}
+
+/* Generic section */
+.sec{padding:clamp(40px,5.5vw,72px) 0;border-top:1px solid var(--rule);}
+.sec.first{border-top:none;}
+.sec-num{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.sec h2{font-weight:500;font-size:clamp(1.55rem,3.4vw,2.5rem);line-height:1.1;letter-spacing:-0.03em;max-width:22ch;margin-bottom:clamp(22px,3vw,32px);}
+.sec h2[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
+.sec h2 em{font-style:normal;color:var(--accent);}
+.prose{max-width:62ch;}
+.prose p{font-size:1.06rem;line-height:1.72;color:var(--ink-2);margin-bottom:1.2em;}
+.prose p[data-lang="zh"]{line-height:2;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--ink);font-weight:600;}
+.prose .fill{color:var(--accent-2);border-bottom:1.5px dashed var(--accent);font-style:italic;}
+[data-lang="zh"] .prose .fill,.prose p[data-lang="zh"] .fill{font-style:normal;}
+
+/* Two-col meta grid (context / role) */
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-top:8px;}
+.fact-grid .f{background:var(--surface);padding:24px 26px;}
+.fact-grid .f b{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.fact-grid .f b[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.fact-grid .f span{font-size:1rem;color:var(--ink);line-height:1.5;}
+.fact-grid .f span[data-lang="zh"]{line-height:1.7;}
+@media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
+
+/* Before / after structural diagram */
+.ba-wrap{margin-top:8px;}
+.ba-diagram{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(22px,3vw,40px);}
+.ba-diagram svg{width:100%;height:auto;display:block;}
+.fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
+.fig-cap[data-lang="zh"]{line-height:1.8;}
+
+/* Screenshot figure with annotation overlay */
+.shot{position:relative;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#222;margin-top:8px;}
+.shot img{width:100%;display:block;}
+.shot .marker{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--ff-mono);font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(43,77,224,.28),0 4px 12px rgba(0,0,0,.4);transform:translate(-50%,-50%);}
+.shot-tag{position:absolute;top:12px;left:12px;font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;z-index:3;}
+.shot-tag[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
+.legend{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px;max-width:60ch;}
+.legend li{display:grid;grid-template-columns:26px 1fr;gap:13px;align-items:start;font-size:.97rem;color:var(--ink-2);line-height:1.55;}
+.legend li[data-lang="zh"]{line-height:1.75;}
+.legend li .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--ff-mono);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+.legend li strong{color:var(--ink);font-weight:600;}
+
+/* Gallery of redesigned stages */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);margin-top:10px;}
+.gcard{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;}
+.gcard:hover{transform:translateY(-4px);box-shadow:0 22px 48px -30px rgba(12,12,13,.4);}
+.gcard .gshot{position:relative;background:#222;border-bottom:1px solid var(--rule);}
+.gcard .gshot img{width:100%;display:block;}
+.gcard .gtag{position:absolute;top:10px;left:10px;font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 9px;border-radius:4px;}
+.gcard .gbody{padding:18px 20px 22px;}
+.gcard .gbody h4{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;}
+.gcard .gbody h4[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.gcard .gbody p{font-size:.95rem;color:var(--ink-2);line-height:1.6;}
+.gcard .gbody p[data-lang="zh"]{line-height:1.8;}
+.gcard .gbody p strong{color:var(--ink);font-weight:600;}
+@media (max-width:720px){.gallery{grid-template-columns:1fr;}}
+
+/* Decisions list */
+.dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
+.dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
+.dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
+.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
+.dec li p[data-lang="zh"]{line-height:1.8;}
+.dec li p .trade{color:var(--muted);}
+
+/* Note / disclosure band */
+.note{background:var(--bg-2);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin-top:26px;}
+.note p{font-size:.92rem;color:var(--ink-2);line-height:1.65;}
+.note p[data-lang="zh"]{line-height:1.85;}
+
+/* Outcome metrics */
+.ometrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:8px;}
+.ometrics .m{padding:30px 24px 30px 0;border-right:1px solid var(--rule);}
+.ometrics .m:last-child{border-right:none;}
+.ometrics .m .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.2rem,4vw,3.2rem);line-height:.92;letter-spacing:-0.04em;color:var(--ink);}
+.ometrics .m .v .fill{color:var(--accent-2);border-bottom:2px dashed var(--accent);font-style:italic;font-size:.6em;}
+.ometrics .m .l{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.5;}
+.ometrics .m .l[data-lang="zh"]{line-height:1.65;font-size:.78rem;}
+@media (max-width:720px){.ometrics{grid-template-columns:1fr;}.ometrics .m{border-right:none;border-bottom:1px solid var(--rule);padding:22px 0;}.ometrics .m:last-child{border-bottom:none;}}
+
+/* Footer */
+.c-foot{background:var(--dark);color:#fff;padding:clamp(60px,8vw,104px) 0 30px;margin-top:clamp(48px,6vw,80px);}
+.c-foot .big{font-weight:600;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;letter-spacing:-0.03em;max-width:18ch;margin-bottom:34px;}
+.c-foot .big[data-lang="zh"]{line-height:1.3;letter-spacing:-0.01em;}
+.c-foot .big em{font-style:normal;color:#6E8BFF;}
+.c-foot .actions{display:flex;flex-wrap:wrap;gap:14px;}
+.c-foot a.btn{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.03em;padding:13px 20px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
+.c-foot a.btn.primary{background:#fff;color:var(--ink);}
+.c-foot a.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.c-foot .base{margin-top:54px;padding-top:22px;border-top:1px solid var(--dark-rule);font-family:var(--ff-mono);font-size:.72rem;color:var(--muted-2);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
+    <div class="nav-right">
+      <a class="back-link" href="index.html"><span aria-hidden="true">←</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language / 語言">
+        <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="c-hero">
+  <div class="container">
+    <div class="kicker" data-lang="en">Case Study · Test Research Inc. · Industrial B2B · 2018–2024</div>
+    <div class="kicker" data-lang="zh">案例 · 德律科技 · 工業 B2B · 2018–2024</div>
+    <h1 data-lang="en">Redesigning a 3D AXI inspection system from <em>one screen that did everything</em> into a staged workflow</h1>
+    <h1 data-lang="zh">把一套 3D AXI 檢測系統，從<em>一個畫面包辦所有事</em>，重新設計成分階段的工作流程</h1>
+    <div class="c-meta" data-lang="en">
+      <span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>6-year ownership</span><span>SMT process engineers</span><span>10+ machine variants</span>
+    </div>
+    <div class="c-meta" data-lang="zh">
+      <span class="hl">唯一 UI/UX 負責人</span><span>完整重新設計</span><span>6 年 ownership</span><span>SMT 製程工程師</span><span>10+ 機種</span>
+    </div>
+    <div class="c-bigstat">
+      <div class="v">38<sup>%</sup></div>
+      <div class="d" data-lang="en">less total programming time per board after the redesign — independently measured by FAE teams on two production boards. One interface I owned end-to-end across 10+ machine variants.</div>
+      <div class="d" data-lang="zh">改版後每片板的總編程時間減少——由 FAE 團隊在兩塊量產板上獨立量測。一套我從頭到尾獨力負責、橫跨 10+ 機種的介面。</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 01 Context -->
+  <section class="sec first reveal">
+    <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
+    <h2 data-lang="en">The software that inspects <em>every board</em> before it ships</h2>
+    <h2 data-lang="zh">每片電路板出貨前都要<em>過一次</em>的軟體</h2>
+    <div class="prose">
+      <p data-lang="en">TRI&rsquo;s flagship 3D AXI (Automated X-ray Inspection) software detects solder-joint defects on every PCB leaving an SMT production line. It runs in shifts, operated by process engineers under line-speed pressure — a confusing flow doesn&rsquo;t just annoy, it stops production. The same software ships to global automotive, server, and semiconductor accounts, and must behave identically across more than ten machine variants.</p>
+      <p data-lang="zh">德律的旗艦 3D AXI（自動 X 光檢測）軟體，負責檢測 SMT 產線上每一片 PCB 的焊點缺陷。它以輪班方式運作，由製程工程師在產線速度的壓力下操作——一個令人困惑的流程不只是惱人，而是會讓生產停擺。同一套軟體出貨給全球汽車、伺服器、半導體大客戶，而且必須在十餘種機種上行為一致。</p>
+    </div>
+  </section>
+
+  <!-- 02 Role -->
+  <section class="sec reveal">
+    <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
+    <h2 data-lang="en">Sole owner of the interface — for <em>six years</em></h2>
+    <h2 data-lang="zh">唯一的介面負責人——<em>六年</em></h2>
+    <div class="fact-grid">
+      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Sole UI/UX designer. I led the full redesign, then maintained and evolved the interface across every new machine for six years.</span><span data-lang="zh">唯一 UI/UX 設計師。我主導完整改版，並在接下來六年間，於每一台新機種上維護與演進這套介面。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">REDESIGN — from a legacy 2D-AOI-style interface to a 3D-AXI-native, staged workflow.</span><span data-lang="zh">REDESIGN——從舊版 2D AOI 風格的介面，到 3D-AXI 原生、分階段的工作流程。</span></div>
+      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Algorithm &amp; mechanical engineering teams; global field engineers. C# / MFC literacy made spec arguments shorter.</span><span data-lang="zh">演算法與機構工程團隊；全球現場工程師。C# / MFC 的底子讓規格討論更短。</span></div>
+      <div class="f"><b data-lang="en">Scope owned</b><b data-lang="zh">負責項目</b><span data-lang="en">Programming flow, alignment, GR&amp;R tooling, customization, multi-language deployment.</span><span data-lang="zh">編程流程、定位、GR&amp;R 工具、客製化流程、多國語系部署。</span></div>
+    </div>
+  </section>
+
+  <!-- 03 Problem + before screenshot -->
+  <section class="sec reveal">
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">Problem</span><span data-lang="zh">問題</span></span>
+    <h2 data-lang="en">One dense screen tried to be <em>every stage at once</em></h2>
+    <h2 data-lang="zh">一個密集的畫面，硬要<em>同時當每一個階段</em></h2>
+    <div class="prose">
+      <p data-lang="en">The legacy interface stacked the entire inspection setup — CAD alignment, scan, fiducial, warpage, fine-tuning, indexing — onto a single canvas paired with one mega family-editor panel. Operators jumped between unrelated tasks without ever changing context. New engineers hit a wall: everything was visible, nothing was sequenced. Programming a single board ran as long as 386 minutes — over six hours — and stayed error-prone, because the screen never told you <em>which stage you were in</em>.</p>
+      <p data-lang="zh">舊版介面把整個檢測設定——CAD 定位、掃描、Fiducial、翹曲、微調、索引——全部堆疊在單一畫布上，再配一個巨大的 Family editor 面板。操作員在毫不相關的任務之間跳來跳去，畫面卻從不切換情境。新進工程師撞牆：所有東西都看得到，卻沒有任何順序。為一片板編程最長要花上 386 分鐘——超過六小時——而且容易出錯，因為畫面從不告訴你<em>現在身處哪個階段</em>。</p>
+    </div>
+
+    <div class="shot reveal" style="margin-top:28px;">
+      <span class="shot-tag"><span data-lang="en">Before · legacy interface</span><span data-lang="zh">改版前 · 舊版介面</span></span>
+      <img src="images/tr7600-before-legacy.jpg" alt="Legacy TR7600 interface: a single dense screen showing a board canvas of red and yellow components alongside one large family-editor table panel, with no separation between inspection stages." />
+      <span class="marker" style="left:30%;top:55%;">1</span>
+      <span class="marker" style="left:78%;top:30%;">2</span>
+      <span class="marker" style="left:78%;top:78%;">3</span>
+    </div>
+    <ul class="legend" data-lang="en">
+      <li><span class="n">1</span><span><strong>One canvas for all stages.</strong> Alignment, scan, warpage and inspection all happened in the same view — no signal of where you were in the workflow.</span></li>
+      <li><span class="n">2</span><span><strong>A mega family-editor panel</strong> exposed every parameter at once, regardless of the task in front of you.</span></li>
+      <li><span class="n">3</span><span><strong>Stacked tables competing for the same space</strong> — pin, component and family data layered without hierarchy.</span></li>
+    </ul>
+    <ul class="legend" data-lang="zh">
+      <li><span class="n">1</span><span><strong>一個畫布跑完所有階段。</strong>定位、掃描、翹曲、檢測全在同一個視圖裡發生——完全沒有「你在流程的哪裡」的訊號。</span></li>
+      <li><span class="n">2</span><span><strong>巨大的 Family editor 面板</strong>，不管你眼前在做什麼任務，都一次攤開所有參數。</span></li>
+      <li><span class="n">3</span><span><strong>多層表格搶同一塊空間</strong>——pin、component、family 資料層層堆疊，沒有階層。</span></li>
+    </ul>
+
+    <div class="note">
+      <p data-lang="en"><strong>A note on what you&rsquo;re looking at:</strong> this is a dense expert tool, not a consumer app. Visual density here is a <em>constraint of the domain</em> — process engineers need this much data on screen. The redesign goal was never to make it &ldquo;pretty&rdquo;; it was to make a complex workflow legible.</p>
+      <p data-lang="zh"><strong>關於你看到的畫面：</strong>這是一套高密度的專家工具，不是消費型 App。這裡的視覺密度是<em>領域的限制</em>——製程工程師本來就需要這麼多資料在畫面上。改版的目標從來不是「變漂亮」，而是讓一個複雜的工作流程變得可讀。</p>
+    </div>
+  </section>
+
+  <!-- 04 Process + IA diagram -->
+  <section class="sec reveal">
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">Process</span><span data-lang="zh">過程</span></span>
+    <h2 data-lang="en">I matched the interface to the <em>workflow</em>, not the feature list</h2>
+    <h2 data-lang="zh">我讓介面對齊<em>工作流程</em>，而不是功能清單</h2>
+    <div class="prose">
+      <p data-lang="en">I observed shift operators and programming engineers on real lines and found the bottleneck wasn&rsquo;t styling — it was that one screen tried to be every stage at once. Timing the real programming flow also showed the clock was concentrated in two steps — Fine&nbsp;Tune and Library — so that&rsquo;s where I aimed the heaviest redesign. So I mapped the actual inspection workflow into discrete stages, then designed a per-stage interface where each screen exposes only the controls and data that stage needs. The structural change, not the cosmetics, did the work.</p>
+      <p data-lang="zh">我在真實產線上觀察輪班操作員與編程工程師，發現瓶頸不在視覺風格——而在於一個畫面硬要同時當每一個階段。為真實編程流程計時後也發現，時間集中在兩個步驟——Fine Tune 與 Library——所以我把最重的改版火力對準那裡。接著我把真實的檢測工作流程拆解成獨立階段，再為每個階段設計專屬介面，讓每個畫面只攤開該階段需要的控制項與資料。真正起作用的是結構性的改變，不是表面的修飾。</p>
+    </div>
+
+    <div class="ba-wrap" style="margin-top:26px;">
+      <div class="ba-diagram">
+        <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Information architecture diagram: before, one dense block holds all six stages; after, the workflow is split into six sequential purpose-built screens.">
+          <!-- BEFORE -->
+          <text x="40" y="40" font-family="Geist Mono, monospace" font-size="13" fill="#6E6E73" letter-spacing="1">BEFORE</text>
+          <rect x="40" y="58" width="300" height="232" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+          <!-- crammed sub-blocks -->
+          <g fill="none" stroke="#A1A1A6" stroke-width="1">
+            <rect x="58" y="78" width="120" height="44" rx="3"/>
+            <rect x="186" y="78" width="136" height="44" rx="3"/>
+            <rect x="58" y="132" width="80" height="60" rx="3"/>
+            <rect x="146" y="132" width="80" height="60" rx="3"/>
+            <rect x="234" y="132" width="88" height="60" rx="3"/>
+            <rect x="58" y="202" width="160" height="70" rx="3"/>
+            <rect x="226" y="202" width="96" height="70" rx="3"/>
+          </g>
+          <g font-family="Geist Mono, monospace" font-size="9" fill="#6E6E73">
+            <text x="66" y="103">CAD</text><text x="194" y="103">SCAN</text>
+            <text x="66" y="166">FID</text><text x="154" y="166">WARP</text><text x="242" y="166">TUNE</text>
+            <text x="66" y="241">INDEX</text><text x="234" y="241">FAMILY ED.</text>
+          </g>
+          <text x="40" y="320" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">One screen · every stage at once</text>
+
+          <!-- arrow -->
+          <g stroke="#2B4DE0" stroke-width="2" fill="none">
+            <line x1="372" y1="174" x2="436" y2="174"/>
+          </g>
+          <path d="M436 174 l-12 -6 v12 z" fill="#2B4DE0"/>
+
+          <!-- AFTER -->
+          <text x="470" y="40" font-family="Geist Mono, monospace" font-size="13" fill="#2B4DE0" letter-spacing="1">AFTER</text>
+          <!-- six staged screens -->
+          <g>
+            <rect x="470" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="470" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
+            <rect x="606" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="606" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
+            <rect x="742" y="58" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="742" y="58" width="120" height="16" rx="6" fill="#2B4DE0"/>
+            <rect x="470" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="470" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
+            <rect x="606" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="606" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
+            <rect x="742" y="150" width="120" height="74" rx="6" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="742" y="150" width="120" height="16" rx="6" fill="#2B4DE0"/>
+          </g>
+          <g fill="none" stroke="#E6E6E4" stroke-width="1">
+            <line x1="482" y1="90" x2="578" y2="90"/><line x1="482" y1="104" x2="558" y2="104"/><line x1="482" y1="118" x2="568" y2="118"/>
+            <line x1="618" y1="90" x2="714" y2="90"/><line x1="618" y1="104" x2="694" y2="104"/><line x1="618" y1="118" x2="704" y2="118"/>
+            <line x1="754" y1="90" x2="850" y2="90"/><line x1="754" y1="104" x2="830" y2="104"/><line x1="754" y1="118" x2="840" y2="118"/>
+            <line x1="482" y1="182" x2="578" y2="182"/><line x1="482" y1="196" x2="558" y2="196"/><line x1="482" y1="210" x2="568" y2="210"/>
+            <line x1="618" y1="182" x2="714" y2="182"/><line x1="618" y1="196" x2="694" y2="196"/><line x1="618" y1="210" x2="704" y2="210"/>
+            <line x1="754" y1="182" x2="850" y2="182"/><line x1="754" y1="196" x2="830" y2="196"/><line x1="754" y1="210" x2="840" y2="210"/>
+          </g>
+          <g font-family="Geist Mono, monospace" font-size="9" fill="#fff">
+            <text x="478" y="70">CAD</text><text x="614" y="70">SCAN</text><text x="750" y="70">FID</text>
+            <text x="478" y="162">WARP</text><text x="614" y="162">FINETUNE</text><text x="750" y="162">INDEX</text>
+          </g>
+          <!-- flow connectors -->
+          <g stroke="#2B4DE0" stroke-width="1.2" fill="none" stroke-dasharray="3 3">
+            <line x1="590" y1="95" x2="606" y2="95"/><line x1="726" y1="95" x2="742" y2="95"/>
+            <line x1="590" y1="187" x2="606" y2="187"/><line x1="726" y1="187" x2="742" y2="187"/>
+          </g>
+          <text x="470" y="252" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Staged screens · one job each</text>
+          <text x="470" y="276" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">each stage shows only what that stage needs</text>
+        </svg>
+      </div>
+      <p class="fig-cap" data-lang="en">Fig. 1 — Information architecture: a single all-in-one screen split into six sequential, purpose-built stages.</p>
+      <p class="fig-cap" data-lang="zh">圖 1 — 資訊架構：把單一全包式畫面，拆成六個依序、各司其職的階段。</p>
+    </div>
+  </section>
+
+  <!-- 05 The redesigned stages (gallery) -->
+  <section class="sec reveal">
+    <span class="sec-num">[05] &nbsp; <span data-lang="en">The redesigned stages</span><span data-lang="zh">重新設計後的各階段</span></span>
+    <h2 data-lang="en">Five purpose-built screens, each with <em>one job</em></h2>
+    <h2 data-lang="zh">五個專屬畫面，每一個<em>只做一件事</em></h2>
+    <div class="prose" style="margin-bottom:28px;">
+      <p data-lang="en">Each stage below was carved out of the old all-in-one screen and given only the controls and readouts that stage actually uses. Same density where experts need it — but now sequenced, labelled, and free of the noise from every other task.</p>
+      <p data-lang="zh">下面每一個階段，都是從舊版全包式畫面切分出來，只保留該階段真正會用到的控制項與讀數。在專家需要的地方維持同樣的密度——但現在有了順序、有了標示，也擺脫了其他所有任務的雜訊。</p>
+    </div>
+
+    <div class="gallery">
+      <div class="gcard reveal">
+        <div class="gshot"><span class="gtag">SCAN</span><img src="images/tr7600-after-scan.jpg" alt="Redesigned SCAN stage: a board image on the left with dedicated Board Size, Start Point Offset, Overlap and Power panels grouped on the right." /></div>
+        <div class="gbody">
+          <h4 data-lang="en">Scan setup</h4><h4 data-lang="zh">掃描設定</h4>
+          <p data-lang="en"><strong>Board Size, Start Point Offset, Overlap and Power</strong> became discrete grouped panels — scan parameters that used to be buried now read as a setup checklist.</p>
+          <p data-lang="zh"><strong>Board Size、Start Point Offset、Overlap、Power</strong> 成為獨立分組的面板——過去埋在深處的掃描參數，現在像一份設定檢查表一樣好讀。</p>
+        </div>
+      </div>
+
+      <div class="gcard reveal">
+        <div class="gshot"><span class="gtag">FID</span><img src="images/tr7600-after-fid.jpg" alt="Redesigned FID stage: the board outline with fiducial markers isolated on the left, alignment and coordinate tables on the right." /></div>
+        <div class="gbody">
+          <h4 data-lang="en">Fiducial alignment</h4><h4 data-lang="zh">Fiducial 定位</h4>
+          <p data-lang="en">Fiducial placement and alignment get their <strong>own focused view</strong>, separated from inspection clutter, with coordinate tables paired beside the board.</p>
+          <p data-lang="zh">Fiducial 的放置與定位有了<strong>專屬的聚焦視圖</strong>，與檢測的雜訊分離，座標表格就配在板子旁邊。</p>
+        </div>
+      </div>
+
+      <div class="gcard reveal">
+        <div class="gshot"><span class="gtag">WARP</span><img src="images/tr7600-after-warp.jpg" alt="Redesigned WARP stage: a grayscale board height view in the centre with a package list on the left and height readouts on the right." /></div>
+        <div class="gbody">
+          <h4 data-lang="en">Warpage / height</h4><h4 data-lang="zh">翹曲 / 高度</h4>
+          <p data-lang="en">A <strong>package list and live height readout</strong> sit alongside the height map, so engineers can tie a measurement to a specific part without leaving the view.</p>
+          <p data-lang="zh"><strong>零件清單與即時高度讀數</strong>就擺在高度圖旁，工程師不必離開畫面，就能把量測值對應到特定零件。</p>
+        </div>
+      </div>
+
+      <div class="gcard reveal">
+        <div class="gshot"><span class="gtag">FINETUNE</span><img src="images/tr7600-after-finetune.jpg" alt="Redesigned FineTune stage: per-package parameter panels with a live solder-thickness feedback chart at the bottom." /></div>
+        <div class="gbody">
+          <h4 data-lang="en">Parameter fine-tuning</h4><h4 data-lang="zh">參數微調</h4>
+          <p data-lang="en">F3/F4 collapsed into <strong>one Fine Tune page</strong>, with manual height calculation replaced by direct <strong>mouse-wheel adjustment</strong> and a live solder-thickness chart. The slowest step in the old flow — now <strong>51% faster</strong> (158&rarr;77 min).</p>
+          <p data-lang="zh">把 F3／F4 整併進<strong>單一 Fine Tune 頁</strong>，以直接的<strong>滑鼠滾輪調整</strong>取代手動計算高度，並搭配即時錫厚圖。舊流程裡最慢的步驟——現在<strong>快了 51%</strong>（158&rarr;77 分）。</p>
+        </div>
+      </div>
+
+      <div class="gcard reveal">
+        <div class="gshot"><span class="gtag">INDEX</span><img src="images/tr7600-after-index.jpg" alt="Redesigned INDEX stage: a board overview with pass/result thumbnails across the top and a structured inspection log with defect counts on the right." /></div>
+        <div class="gbody">
+          <h4 data-lang="en">Inspection summary</h4><h4 data-lang="zh">檢測總覽</h4>
+          <p data-lang="en"><strong>Pass thumbnails and a structured defect log</strong> give the operator the run result at a glance — counts grouped by defect and point, not a raw dump.</p>
+          <p data-lang="zh"><strong>Pass 縮圖與結構化的缺陷紀錄</strong>，讓操作員一眼掌握這一輪的結果——依缺陷與檢測點分組計數，而非原始資料傾倒。</p>
+        </div>
+      </div>
+
+      <div class="gcard reveal" style="display:flex;align-items:center;justify-content:center;background:var(--bg-2);">
+        <div class="gbody" style="text-align:center;">
+          <h4 data-lang="en">+ CAD alignment</h4><h4 data-lang="zh">+ CAD 定位</h4>
+          <p data-lang="en">The CAD/programming entry stage anchors the workflow — the staged model scales as new inspection capabilities are added.</p>
+          <p data-lang="zh">CAD／編程進入階段是整個流程的起點——分階段的模型，讓新增的檢測能力能持續擴充。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Decisions -->
+  <section class="sec reveal">
+    <span class="sec-num">[06] &nbsp; <span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
+    <h2 data-lang="en">What I traded off — and <em>why</em></h2>
+    <h2 data-lang="zh">我取捨了什麼——以及<em>為什麼</em></h2>
+    <ul class="dec">
+      <li>
+        <span class="di">01</span>
+        <div>
+          <h4 data-lang="en">Split one screen into staged screens</h4>
+          <h4 data-lang="zh">把單一畫面拆成分階段的畫面</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> more navigation steps, but far less cognitive load per stage. For a shift tool used under time pressure, lower per-stage load wins — operators move faster when each screen has one clear job.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>多了切換步驟，但每個階段的認知負荷大幅降低。對一個在時間壓力下使用的輪班工具，降低單階段負荷更重要——當每個畫面只有一個明確任務，操作員反而更快。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">02</span>
+        <div>
+          <h4 data-lang="en">Kept the dense data tables — didn&rsquo;t hide them</h4>
+          <h4 data-lang="zh">保留高密度資料表——而非把它藏起來</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> a cleaner-looking screen vs. expert power. This is a tool for engineers who need the numbers; density is the constraint, not a flaw to design away.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>看起來更乾淨的畫面，對上專家的操作效率。這是給需要看數字的工程師用的工具；密度是限制，不是該被設計掉的缺陷。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">03</span>
+        <div>
+          <h4 data-lang="en">One interface across all machine variants</h4>
+          <h4 data-lang="zh">一套介面，套用所有機種</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> per-machine optimisation vs. consistency at scale. I chose a single standardised interface so every new machine inherits a familiar flow — and so I could maintain it alone for six years.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>單機最佳化，對上規模化的一致性。我選擇單一標準化介面，讓每台新機都繼承熟悉的流程——也讓我能獨力維護它六年。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">04</span>
+        <div>
+          <h4 data-lang="en">Rebuilt the Fine Tune step around the engineer&rsquo;s hand</h4>
+          <h4 data-lang="zh">圍繞工程師的手，重建 Fine Tune 步驟</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> the legacy flow split fine-tuning across separate F3/F4 screens and made engineers calculate component height by hand. I merged them into one Fine Tune page and replaced the manual math with direct mouse-wheel adjustment — a denser single page, but far less to learn and no hand calculation. <strong>Result: the Fine Tune step dropped 51% (158&rarr;77 min)</strong> — the single biggest contributor to the overall saving, with Library close behind at &minus;39%.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>舊流程把微調拆在 F3／F4 兩個畫面，還要工程師手動計算零件高度。我把它們整併成單一 Fine Tune 頁，並以直接的滑鼠滾輪調整取代手動計算——頁面更密，但要學的更少、也不必再手算。<strong>結果：Fine Tune 步驟減少 51%（158&rarr;77 分）</strong>——是整體時間縮短最大的單一貢獻，Library 緊接其後 &minus;39%。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 07 Outcome -->
+  <section class="sec reveal">
+    <span class="sec-num">[07] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
+    <h2 data-lang="en">Measured in <em>adoption and survival</em>, not screens</h2>
+    <h2 data-lang="zh">用<em>採用與存續</em>衡量，而不是畫面數</h2>
+    <div class="ometrics">
+      <div class="m">
+        <div class="v">38<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
+        <div class="l" data-lang="en">less total programming time per board (295&rarr;186 &amp; 386&rarr;237 min)</div>
+        <div class="l" data-lang="zh">每片板總編程時間減少（295&rarr;186、386&rarr;237 分）</div>
+      </div>
+      <div class="m">
+        <div class="v">51<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
+        <div class="l" data-lang="en">faster Fine Tune step (158&rarr;77 min) — the slowest step</div>
+        <div class="l" data-lang="zh">Fine Tune 步驟加快（158&rarr;77 分）——最慢的步驟</div>
+      </div>
+      <div class="m">
+        <div class="v">39<sup style="font-size:.4em;color:var(--accent);">%</sup></div>
+        <div class="l" data-lang="en">faster Library step (124&rarr;76 min)</div>
+        <div class="l" data-lang="zh">Library 步驟加快（124&rarr;76 分）</div>
+      </div>
+    </div>
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en">The redesigned interface shipped across the AXI product line to global automotive, server and semiconductor accounts, in multiple languages. FAE teams independently timed total programming on two production boards: a 4,160-component board fell from 295 to 186 minutes, and a 3,495-component board from 386 to 237 minutes — roughly a <strong>38% reduction</strong>. The heaviest gains came from the two slowest steps — <strong>Fine Tune (&minus;51%)</strong> and <strong>Library (&minus;39%)</strong> — driven by collapsing F3/F4 into one page and replacing manual height calculation with mouse-wheel adjustment.</p>
+      <p data-lang="zh">改版後的介面隨 AXI 產品線出貨給全球汽車、伺服器、半導體大客戶，並支援多國語系。FAE 團隊在兩塊量產板上獨立量測總編程時間：4,160 顆零件的板從 295 分降到 186 分，3,495 顆零件的板從 386 分降到 237 分——整體約<strong>減少 38%</strong>。改善最大的來自兩個最慢的步驟——<strong>Fine Tune（&minus;51%）</strong>與 <strong>Library（&minus;39%）</strong>——關鍵是把 F3／F4 整併成單一頁、以滑鼠滾輪調整取代手動計算高度。</p>
+    </div>
+  </section>
+
+  <!-- 08 Reflection -->
+  <section class="sec reveal">
+    <span class="sec-num">[08] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
+    <h2 data-lang="en">In industrial UX, <em>structure beats styling</em></h2>
+    <h2 data-lang="zh">在工業 UX 裡，<em>結構勝過修飾</em></h2>
+    <div class="prose">
+      <p data-lang="en">The win here wasn&rsquo;t making the software look modern — it was making a complex expert tool legible by matching the interface to the real workflow instead of the feature list. That lesson carried straight into my later work on enterprise IT tooling and platform UX: when the domain is genuinely complex, the highest-leverage design move is almost always architectural, not cosmetic.</p>
+      <p data-lang="zh">這裡真正的成果，不是讓軟體看起來現代——而是讓一個複雜的專家工具變得可讀，靠的是讓介面對齊真實工作流程、而非功能清單。這個體會直接延續到我後來在企業 IT 工具與平台 UX 的工作：當領域真的很複雜，槓桿最大的設計動作幾乎總是架構性的，而不是表面的。</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="c-foot">
+  <div class="container">
+    <p class="big" data-lang="en">More <em>hard tools</em> where this came from.</p>
+    <p class="big" data-lang="zh">還有更多<em>難搞的工具</em>。</p>
+    <div class="actions">
+      <a class="btn primary" href="index.html#work"><span data-lang="en">See all work</span><span data-lang="zh">檢視所有作品</span> <span aria-hidden="true">→</span></a>
+      <a class="btn" href="https://www.tri.com.tw/tw/product/product-18-2.html" target="_blank" rel="noopener noreferrer"><span data-lang="en">TRI AXI product line</span><span data-lang="zh">TRI AXI 產品線</span> <span aria-hidden="true">↗</span></a>
+      <a class="btn" href="mailto:alyssa.huang.ux@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX Designer · Taipei</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
