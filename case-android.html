@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ASUS Platform UX Redesign — Case Study · Alyssa Huang</title>
+<meta name="description" content="From-zero UX for 6+ Android platform features across ROG and Zenfone, plus the system-level work no single feature owns: resolving mutually exclusive gesture conflicts and deciding where two product lines should diverge." />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ASUS Platform UX Redesign — Case Study · Alyssa Huang" />
+<meta property="og:description" content="System-level platform UX at ASUS: from-zero feature design across ROG & Zenfone, and resolving the cross-feature conflicts that no single feature owns." />
+
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "ASUS Android Platform UX — System-level Redesign & Conflict Resolution",
+  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Senior UX Designer" },
+  "about": ["Platform UX","System-level UX","Android OEM UX","Conflict Resolution","Information Architecture","Cross-product Strategy","ROG","Zenfone"],
+  "dateCreated": "2024",
+  "inLanguage": ["en","zh-Hant"]
+}
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:1180px; --gutter:clamp(1.25rem,4vw,4rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
+p{margin:0;}
+
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+
+.eyebrow{font-family:var(--ff-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.eyebrow .ix{color:var(--accent);}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.back-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.back-link:hover{color:var(--accent);}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+@media (max-width:560px){.brand small{display:none;}.nav-right{gap:12px;}.back-link span.bt{display:none;}}
+
+/* Hero */
+.c-hero{padding:clamp(46px,7vw,92px) 0 clamp(34px,4vw,56px);}
+.c-hero .kicker{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
+.c-hero .kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.c-hero h1{font-weight:500;font-size:clamp(2.1rem,5vw,4.1rem);line-height:1.06;letter-spacing:-0.035em;max-width:20ch;margin-bottom:clamp(26px,3vw,38px);}
+.c-hero h1[data-lang="zh"]{line-height:1.26;font-weight:600;max-width:24ch;letter-spacing:-0.01em;}
+.c-hero h1 em{font-style:normal;color:var(--accent);}
+.c-meta{display:flex;flex-wrap:wrap;gap:7px 8px;margin-bottom:clamp(30px,4vw,44px);}
+.c-meta span{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border:1px solid var(--rule);border-radius:5px;}
+.c-meta[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
+.c-meta span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
+.c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+.c-bigstat .d[data-lang="zh"]{line-height:1.7;}
+
+/* Generic section */
+.sec{padding:clamp(40px,5.5vw,72px) 0;border-top:1px solid var(--rule);}
+.sec.first{border-top:none;}
+.sec-num{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.sec h2{font-weight:500;font-size:clamp(1.55rem,3.4vw,2.5rem);line-height:1.1;letter-spacing:-0.03em;max-width:22ch;margin-bottom:clamp(22px,3vw,32px);}
+.sec h2[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
+.sec h2 em{font-style:normal;color:var(--accent);}
+.prose{max-width:62ch;}
+.prose p{font-size:1.06rem;line-height:1.72;color:var(--ink-2);margin-bottom:1.2em;}
+.prose p[data-lang="zh"]{line-height:2;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--ink);font-weight:600;}
+.prose .fill{color:var(--accent-2);border-bottom:1.5px dashed var(--accent);font-style:italic;}
+[data-lang="zh"] .prose .fill,.prose p[data-lang="zh"] .fill{font-style:normal;}
+
+/* Two-col meta grid (context / role) */
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-top:8px;}
+.fact-grid .f{background:var(--surface);padding:24px 26px;}
+.fact-grid .f b{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.fact-grid .f b[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.fact-grid .f span{font-size:1rem;color:var(--ink);line-height:1.5;}
+.fact-grid .f span[data-lang="zh"]{line-height:1.7;}
+@media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
+
+.fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
+.fig-cap[data-lang="zh"]{line-height:1.8;}
+
+/* Note / disclosure band */
+.note{background:var(--bg-2);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin-top:26px;}
+.note p{font-size:.92rem;color:var(--ink-2);line-height:1.65;}
+.note p[data-lang="zh"]{line-height:1.85;}
+.note .arrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);display:block;margin:14px 0 6px;}
+.note .arrow[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+
+/* Decisions list */
+.dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
+.dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
+.dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
+.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
+.dec li p[data-lang="zh"]{line-height:1.8;}
+.dec li p .trade{color:var(--muted);}
+
+/* Outcome metrics */
+.ometrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:8px;}
+.ometrics .m{padding:30px 24px 30px 0;border-right:1px solid var(--rule);}
+.ometrics .m:last-child{border-right:none;}
+.ometrics .m .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.2rem,4vw,3.2rem);line-height:.92;letter-spacing:-0.04em;color:var(--ink);}
+.ometrics .m .l{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.5;}
+.ometrics .m .l[data-lang="zh"]{line-height:1.65;font-size:.78rem;}
+@media (max-width:720px){.ometrics{grid-template-columns:1fr;}.ometrics .m{border-right:none;border-bottom:1px solid var(--rule);padding:22px 0;}.ometrics .m:last-child{border-bottom:none;}}
+
+/* Footer */
+.c-foot{background:var(--dark);color:#fff;padding:clamp(60px,8vw,104px) 0 30px;margin-top:clamp(48px,6vw,80px);}
+.c-foot .big{font-weight:600;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;letter-spacing:-0.03em;max-width:18ch;margin-bottom:34px;}
+.c-foot .big[data-lang="zh"]{line-height:1.3;letter-spacing:-0.01em;}
+.c-foot .big em{font-style:normal;color:#6E8BFF;}
+.c-foot .actions{display:flex;flex-wrap:wrap;gap:14px;}
+.c-foot a.btn{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.03em;padding:13px 20px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
+.c-foot a.btn.primary{background:#fff;color:var(--ink);}
+.c-foot a.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.c-foot .base{margin-top:54px;padding-top:22px;border-top:1px solid var(--dark-rule);font-family:var(--ff-mono);font-size:.72rem;color:var(--muted-2);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* Finding -> decision blocks */
+.find{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(22px,4vw,52px);align-items:center;padding:clamp(30px,4vw,48px) 0;border-top:1px solid var(--rule);}
+.find:first-of-type{border-top:none;padding-top:4px;}
+.find.flip .find-media{order:2;}
+.find-body .ftag{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:inline-block;}
+.find-body .ftag[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.find-body h3{font-weight:600;font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.25;letter-spacing:-0.02em;margin-bottom:14px;}
+.find-body h3[data-lang="zh"]{line-height:1.42;}
+.find-body p{font-size:1rem;color:var(--ink-2);line-height:1.66;margin-bottom:10px;}
+.find-body p[data-lang="zh"]{line-height:1.85;}
+.find-body p:last-child{margin-bottom:0;}
+.find-body p strong{color:var(--ink);font-weight:600;}
+.find-body .arrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);display:block;margin:16px 0 8px;}
+.find-body .arrow[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+@media (max-width:820px){.find,.find.flip{grid-template-columns:1fr;}.find.flip .find-media{order:0;}}
+
+/* Figure chart */
+.chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(20px,3vw,34px);}
+.chart-fig svg{width:100%;height:auto;display:block;}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
+    <div class="nav-right">
+      <a class="back-link" href="index.html"><span aria-hidden="true">←</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language / 語言">
+        <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="c-hero">
+  <div class="container">
+    <div class="kicker" data-lang="en">Case Study · ASUS · Platform UX · ROG &amp; Zenfone · 2024–present</div>
+    <div class="kicker" data-lang="zh">案例 · ASUS · 平台 UX · ROG 與 Zenfone · 2024–至今</div>
+    <h1 data-lang="en">I designed platform features from zero — then resolved the conflicts no single feature <em>owns</em></h1>
+    <h1 data-lang="zh">我從零設計平台功能——再解決沒有任何單一功能會<em>負責</em>的衝突</h1>
+    <div class="c-meta" data-lang="en">
+      <span class="hl">System-level UX</span><span>0 → 1</span><span>6+ features</span><span>Cross-product</span><span>Conflict resolution</span><span>ROG · Zenfone</span>
+    </div>
+    <div class="c-meta" data-lang="zh">
+      <span class="hl">系統級 UX</span><span>0 → 1</span><span>6+ 功能</span><span>跨產品線</span><span>衝突處理</span><span>ROG · Zenfone</span>
+    </div>
+    <div class="c-bigstat">
+      <div class="v">6<sup>+</sup></div>
+      <div class="d" data-lang="en">platform features designed from zero across two product lines — but the hardest, most senior work was the system view between them: the conflicts.</div>
+      <div class="d" data-lang="zh">跨兩條產品線、從零設計的平台功能——但最難、最資深的工作，是它們之間的系統視角：那些衝突。</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 01 Context -->
+  <section class="sec first reveal">
+    <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
+    <h2 data-lang="en">When Android ships a capability, every OEM still has to design the <em>UX above it</em></h2>
+    <h2 data-lang="zh">Android 推出一個能力時，每家 OEM 仍得設計<em>它之上的 UX</em></h2>
+    <div class="prose">
+      <p data-lang="en">Gesture navigation, Circle to Search, Predictive Back, edge-to-edge — Android ships the underlying capability, but the experience around it is the OEM&rsquo;s to design: the settings IA, the entry points, the toggle behaviour, and how each feature behaves on real hardware. At ASUS I owned that layer for two product lines with very different users — <strong>ROG</strong> (gaming, power users who tune everything) and <strong>Zenfone</strong> (general consumer). Same Android base, two front doors.</p>
+      <p data-lang="zh">手勢導航、Circle to Search、Predictive Back、edge-to-edge——Android 提供底層能力，但圍繞它的體驗得由 OEM 設計：設定的資訊架構、入口、開關行為，以及每個功能在真實硬體上的表現。在 ASUS，我為兩條使用者差異極大的產品線負責這一層——<strong>ROG</strong>（電競、什麼都要能調的玩家）與 <strong>Zenfone</strong>（一般消費者）。同一個 Android 底層，兩道不同的前門。</p>
+    </div>
+  </section>
+
+  <!-- 02 Role -->
+  <section class="sec reveal">
+    <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
+    <h2 data-lang="en">From-zero feature design — <em>and</em> the system view between features</h2>
+    <h2 data-lang="zh">從零的功能設計——<em>以及</em>功能之間的系統視角</h2>
+    <div class="fact-grid">
+      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">From-zero UX for 6+ platform features across ROG &amp; Zenfone, plus the Screen Recording redesign after takeover.</span><span data-lang="zh">跨 ROG 與 Zenfone、從零設計 6+ 平台功能的 UX，並在接手後重新設計螢幕錄影。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">System-level, 0 → 1. Not &ldquo;integrating Google features&rdquo; — designing the OEM UX layer under real platform constraints.</span><span data-lang="zh">系統級、0 → 1。不是「整合 Google 功能」，而是在真實平台約束下設計 OEM 端的 UX 層。</span></div>
+      <div class="f"><b data-lang="en">Scope</b><b data-lang="zh">範圍</b><span data-lang="en">Predictive Back, Edge-to-edge, Circle to Search, Auto Rotate, default Gemini assistant, gaming-phone gyroscope — plus cross-feature conflict resolution.</span><span data-lang="zh">Predictive Back、Edge-to-edge、Circle to Search、Auto Rotate、預設 Gemini 助理、電競手機陀螺儀——以及跨功能衝突處理。</span></div>
+      <div class="f"><b data-lang="en">Hardest part</b><b data-lang="zh">最難的地方</b><span data-lang="en">The system view — features that can&rsquo;t coexist, and deciding where two product lines should diverge and where they shouldn&rsquo;t.</span><span data-lang="zh">系統視角——無法並存的功能，以及決定兩條產品線該在哪裡分流、哪裡不該。</span></div>
+    </div>
+  </section>
+
+  <!-- 03 The system problem -->
+  <section class="sec reveal">
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">The system problem</span><span data-lang="zh">系統性問題</span></span>
+    <h2 data-lang="en">The features are the easy part — the <em>rules between them</em> are the work</h2>
+    <h2 data-lang="zh">功能是容易的部分——功能<em>之間的規則</em>才是真正的工作</h2>
+    <div class="prose">
+      <p data-lang="en">The hardest work on a platform team isn&rsquo;t any single feature — it&rsquo;s everything between them. Two capabilities can each be correct in isolation and still collide when they share an input, a gesture, or a screen region. And the same feature often can&rsquo;t behave identically on a gaming phone and a general consumer phone. My job was to hold that system view: <strong>define the rules where features conflict</strong>, and decide where the two product lines should diverge — and where they shouldn&rsquo;t.</p>
+      <p data-lang="zh">平台團隊最難的工作不是任何單一功能——而是功能與功能之間的一切。兩個能力各自單看都對，但一旦共用同一個輸入、手勢或畫面區域，就會相撞。而同一個功能，在電競手機與一般消費機上往往不能有完全一樣的行為。我的工作是守住那個系統視角：<strong>在功能衝突處定義規則</strong>，並決定兩條產品線該在哪裡分流、哪裡不該。</p>
+    </div>
+  </section>
+
+  <!-- 04 Conflict deep-dive -->
+  <section class="sec reveal">
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">From conflict to rule</span><span data-lang="zh">從衝突到規則</span></span>
+    <h2 data-lang="en">A gesture two features both wanted — and only one could <em>have</em></h2>
+    <h2 data-lang="zh">一個兩個功能都想要、卻只能給一個的<em>手勢</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p data-lang="en">Under 3-button navigation, a long-press of the center button is the platform-default trigger for the assistant — and it&rsquo;s the natural trigger for Circle to Search too. On ASUS devices both were mapped to it, so they were <strong>mutually exclusive</strong>: enabling one silently disabled the other. Before designing a fix, I mapped how the trigger behaves across the ecosystem to see how others avoided the clash.</p>
+      <p data-lang="zh">在三鍵導航下，長按中間鍵是平台預設的助理觸發手勢——它也是 Circle to Search 最自然的觸發點。在 ASUS 裝置上兩者都被綁在這裡，於是<strong>互斥</strong>：開了一個，另一個就默默失效。在設計解法之前，我先把這個觸發行為攤在整個生態上，看別人怎麼避開相撞。</p>
+    </div>
+
+    <div class="chart-fig">
+      <svg viewBox="0 0 820 442" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Conflict matrix under 3-button navigation. Samsung and Pixel route the assistant to a separate gesture, so Circle to Search keeps long-press center with no clash. ASUS currently maps both Circle to Search and the assistant to long-press center, which is mutually exclusive. The proposed fix moves the assistant to bottom swipe plus power key, freeing the center gesture.">
+        <text x="0" y="18" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.2" fill="#6E6E73">TRIGGER CONFLICT · 3-BUTTON NAVIGATION · 4 OEMs</text>
+        <text x="0" y="42" font-family="Geist, sans-serif" font-size="14" fill="#3A3A3D">Who owns &ldquo;long-press center&rdquo; &mdash; Circle to Search or the assistant?</text>
+
+        <rect x="195" y="244" width="625" height="76" fill="#ECECEA"/>
+        <rect x="195" y="320" width="625" height="76" fill="#EDF0FC"/>
+
+        <text x="200" y="80" font-family="Geist Mono, monospace" font-size="11" letter-spacing=".5" fill="#0C0C0D">CIRCLE TO SEARCH</text>
+        <text x="515" y="80" font-family="Geist Mono, monospace" font-size="11" letter-spacing=".5" fill="#0C0C0D">ASSISTANT</text>
+
+        <line x1="0" y1="92" x2="820" y2="92" stroke="#0C0C0D" stroke-width="1"/>
+        <line x1="0" y1="168" x2="820" y2="168" stroke="#E6E6E4" stroke-width="1"/>
+        <line x1="0" y1="244" x2="820" y2="244" stroke="#E6E6E4" stroke-width="1"/>
+        <line x1="0" y1="320" x2="820" y2="320" stroke="#E6E6E4" stroke-width="1"/>
+        <line x1="0" y1="396" x2="820" y2="396" stroke="#0C0C0D" stroke-width="1"/>
+        <line x1="195" y1="92" x2="195" y2="396" stroke="#E6E6E4" stroke-width="1"/>
+        <line x1="510" y1="92" x2="510" y2="396" stroke="#E6E6E4" stroke-width="1"/>
+
+        <text x="12" y="134" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">Samsung</text>
+        <text x="210" y="134" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">long-press center</text>
+        <text x="525" y="134" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">bottom swipe / power key</text>
+
+        <text x="12" y="210" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">Pixel</text>
+        <text x="210" y="210" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">long-press center</text>
+        <text x="525" y="210" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">power key only</text>
+
+        <text x="12" y="276" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">ASUS</text>
+        <text x="12" y="294" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#6E6E73">CURRENT</text>
+        <text x="210" y="274" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
+        <text x="525" y="274" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
+        <path d="M269 286 L269 292 L584 292 L584 286" fill="none" stroke="#3A3A3D" stroke-width="1"/>
+        <text x="426" y="310" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing=".4" fill="#3A3A3D" text-anchor="middle">same trigger &mdash; mutually exclusive</text>
+
+        <text x="12" y="352" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">ASUS</text>
+        <text x="12" y="370" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#2B4DE0">PROPOSED</text>
+        <text x="210" y="364" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
+        <rect x="520" y="346" width="288" height="32" rx="6" fill="#2B4DE0"/>
+        <text x="534" y="366" font-family="Geist Mono, monospace" font-size="12" fill="#FFFFFF">bottom swipe + power key</text>
+
+        <text x="0" y="420" font-family="Geist Mono, monospace" font-size="10.5" fill="#A1A1A6">On 3-button nav, long-press center is the platform-default assistant gesture &mdash; the constraint that forced the collision.</text>
+      </svg>
+    </div>
+    <p class="fig-cap" data-lang="en">Fig. 1 — Mapping the long-press-center conflict across the gesture-navigation ecosystem. Samsung and Pixel route the assistant elsewhere, so the clash never arises; ASUS had both features on the same trigger.</p>
+    <p class="fig-cap" data-lang="zh">圖 1 — 將「長按中間」的觸發衝突攤在整個手勢導航生態上。Samsung 與 Pixel 把助理放到別處，衝突根本不會發生；ASUS 兩個功能都綁在同一個觸發點。</p>
+
+    <div class="note">
+      <p data-lang="en"><strong>Finding:</strong> both Circle to Search and the assistant claimed long-press-center, and the assistant trigger is the platform default — it can&rsquo;t simply be removed.</p>
+      <span class="arrow" data-lang="en">So I did &rarr;</span>
+      <p data-lang="en"><strong>Re-homed the assistant to bottom-swipe + power-key</strong> — where Samsung already puts it — freeing long-press-center for Circle to Search. The clash is resolved without fighting the platform default, and neither feature silently cancels the other anymore. I also deliberately preserved one quirky existing behaviour, because removing it would have blocked a real path users relied on to trigger the feature.</p>
+      <p data-lang="zh"><strong>研究發現：</strong>Circle to Search 與助理都搶長按中間，而助理的觸發是平台預設——無法直接拿掉。</p>
+      <span class="arrow" data-lang="zh">於是我 &rarr;</span>
+      <p data-lang="zh"><strong>把助理改到底部上滑＋電源鍵長按</strong>——也就是 Samsung 既有的位置——把長按中間讓給 Circle to Search。在不對抗平台預設的前提下解掉衝突，兩個功能不再互相默默取消。我也刻意保留了一個既有的特殊行為，因為拿掉它會擋掉使用者真正用來觸發這個功能的一條路徑。</p>
+    </div>
+  </section>
+
+  <!-- 05 Native vs custom -->
+  <section class="sec reveal">
+    <span class="sec-num">[05] &nbsp; <span data-lang="en">Native vs custom</span><span data-lang="zh">原生 vs 自建</span></span>
+    <h2 data-lang="en">When the platform shipped its own version of something I&rsquo;d <em>already built</em></h2>
+    <h2 data-lang="zh">當平台推出了我<em>已經做過</em>的東西</h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p data-lang="en">I inherited and stabilised Screen Recording. Mid-cycle, Android shipped a native status-bar recording chip — overlapping the in-house mini-panel we already had. Shipping both produced real redundancy: two controls, sometimes two countdowns running at once. Before deciding, I compared what each could actually do.</p>
+      <p data-lang="zh">我接手並穩定了螢幕錄影。期間 Android 推出了原生的狀態列錄影 chip——和我們既有的自建迷你面板重疊。兩者並存造成真實的冗餘：兩個控制項，有時甚至同時跑兩個倒數。在決定之前，我先比較了兩者實際能做到什麼。</p>
+    </div>
+
+    <div class="chart-fig">
+      <svg viewBox="0 0 820 432" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Screen recording control comparison. A, the in-house mini panel, can be re-positioned, stop, delete the clip and screenshot. B, the native status-bar chip, can stop with an extra confirm but cannot move, delete or screenshot. C, the current state, ships both, creating redundancy and sometimes a double countdown. The recommendation is to consolidate to the in-house panel.">
+        <text x="0" y="18" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.2" fill="#6E6E73">SCREEN RECORDING · CONTROL SURFACE · 3 APPROACHES</text>
+
+        <text x="137" y="52" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D" text-anchor="middle">A · In-house panel</text>
+        <text x="137" y="70" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing=".5" fill="#2B4DE0" text-anchor="middle">RECOMMENDED</text>
+        <text x="410" y="52" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D" text-anchor="middle">B · Native chip</text>
+        <text x="683" y="52" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D" text-anchor="middle">C · Both (current)</text>
+
+        <!-- Phone A -->
+        <rect x="77" y="80" width="120" height="190" rx="16" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <line x1="90" y1="98" x2="184" y2="98" stroke="#E6E6E4" stroke-width="1"/>
+        <rect x="90" y="110" width="94" height="16" rx="8" fill="#F4F4F3"/>
+        <rect x="120" y="218" width="58" height="22" rx="11" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.2"/>
+        <rect x="127" y="225" width="8" height="8" rx="1.5" fill="#0C0C0D"/>
+        <text x="155" y="232" font-family="Geist Mono, monospace" font-size="8" fill="#3A3A3D" text-anchor="middle">00:03</text>
+
+        <!-- Phone B -->
+        <rect x="350" y="80" width="120" height="190" rx="16" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <rect x="358" y="90" width="40" height="13" rx="6.5" fill="#0C0C0D"/>
+        <text x="378" y="100" font-family="Geist Mono, monospace" font-size="7.5" fill="#FFFFFF" text-anchor="middle">00:03</text>
+        <line x1="363" y1="110" x2="457" y2="110" stroke="#E6E6E4" stroke-width="1"/>
+        <rect x="363" y="122" width="94" height="16" rx="8" fill="#F4F4F3"/>
+
+        <!-- Phone C -->
+        <rect x="623" y="80" width="120" height="190" rx="16" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <rect x="631" y="90" width="40" height="13" rx="6.5" fill="#0C0C0D"/>
+        <text x="651" y="100" font-family="Geist Mono, monospace" font-size="7.5" fill="#FFFFFF" text-anchor="middle">00:03</text>
+        <line x1="636" y1="110" x2="730" y2="110" stroke="#E6E6E4" stroke-width="1"/>
+        <rect x="636" y="122" width="94" height="16" rx="8" fill="#F4F4F3"/>
+        <rect x="666" y="218" width="58" height="22" rx="11" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <rect x="673" y="225" width="8" height="8" rx="1.5" fill="#0C0C0D"/>
+        <text x="701" y="232" font-family="Geist Mono, monospace" font-size="8" fill="#3A3A3D" text-anchor="middle">00:03</text>
+
+        <!-- Capability lists -->
+        <g font-family="Geist Mono, monospace" font-size="10.5">
+          <text x="77" y="298" fill="#0C0C0D">&#10003; Re-positionable</text>
+          <text x="77" y="320" fill="#0C0C0D">&#10003; Stop</text>
+          <text x="77" y="342" fill="#0C0C0D">&#10003; Delete clip</text>
+          <text x="77" y="364" fill="#0C0C0D">&#10003; Screenshot</text>
+
+          <text x="350" y="298" fill="#0C0C0D">&#10003; Stop (extra confirm)</text>
+          <text x="350" y="320" fill="#A1A1A6">&#10007; Fixed position</text>
+          <text x="350" y="342" fill="#A1A1A6">&#10007; No delete</text>
+          <text x="350" y="364" fill="#A1A1A6">&#10007; No screenshot</text>
+
+          <text x="623" y="298" fill="#3A3A3D">Both controls coexist</text>
+          <text x="623" y="320" fill="#A1A1A6">&#10007; Redundant surface</text>
+          <text x="623" y="342" fill="#A1A1A6">&#10007; Double countdown</text>
+        </g>
+
+        <text x="0" y="412" font-family="Geist Mono, monospace" font-size="10.5" fill="#6E6E73">Decision: consolidate to the capability-complete panel; suppress the redundant native countdown.</text>
+      </svg>
+    </div>
+    <p class="fig-cap" data-lang="en">Fig. 2 — Comparing the in-house panel, the native chip, and the redundant current state. Capability, not platform-default, drove the call.</p>
+    <p class="fig-cap" data-lang="zh">圖 2 — 比較自建面板、原生 chip 與重複並存的現況。決定的依據是能力，而非平台預設。</p>
+
+    <div class="note">
+      <p data-lang="en"><strong>Finding:</strong> the native chip couldn&rsquo;t move, delete a recording, or screenshot; the in-house panel could — but the native chip carried platform consistency.</p>
+      <span class="arrow" data-lang="en">So I did &rarr;</span>
+      <p data-lang="en"><strong>Consolidated to the capable in-house panel</strong> and suppressed the redundant native countdown, so users get one control that does the whole job instead of two that half-overlap.</p>
+      <p data-lang="zh"><strong>研究發現：</strong>原生 chip 無法移動、刪除錄影或截圖；自建面板可以——但原生 chip 帶有平台一致性。</p>
+      <span class="arrow" data-lang="zh">於是我 &rarr;</span>
+      <p data-lang="zh"><strong>收斂到功能完整的自建面板</strong>，並關掉重複的原生倒數，讓使用者得到一個能完成整件事的控制項，而不是兩個半重疊的。</p>
+    </div>
+  </section>
+
+  <!-- 06 Key decisions -->
+  <section class="sec reveal">
+    <span class="sec-num">[06] &nbsp; <span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
+    <h2 data-lang="en">What I traded off — and <em>why</em></h2>
+    <h2 data-lang="zh">我取捨了什麼——以及<em>為什麼</em></h2>
+    <ul class="dec">
+      <li>
+        <span class="di">01</span>
+        <div>
+          <h4 data-lang="en">Resolve conflicts with a rule, not a silent default</h4>
+          <h4 data-lang="zh">用規則解衝突，而不是默默的預設</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> platform default vs. user intent. For mutually exclusive features I defined an explicit rule and a recovery path, instead of letting the last-toggled feature silently win and the other quietly break.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>平台預設，對上使用者意圖。針對互斥功能，我定義明確的規則與復原路徑，而不是讓最後被切換的功能默默勝出、另一個悄悄壞掉。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">02</span>
+        <div>
+          <h4 data-lang="en">Diverge the two product lines only where it earns its keep</h4>
+          <h4 data-lang="zh">只在值得的地方讓兩條產品線分流</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> per-line optimisation vs. one maintainable system. ROG (tunable, gaming) and Zenfone (general) share the same IA everywhere they can; I let them diverge only where the user genuinely differs.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>單線最佳化，對上一套可維護的系統。ROG（可調校、電競）與 Zenfone（一般）能共用的地方就共用同一套資訊架構；只在使用者真的不同時才讓它們分流。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">03</span>
+        <div>
+          <h4 data-lang="en">Capability over platform-default</h4>
+          <h4 data-lang="zh">能力優先於平台預設</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> native consistency vs. feature completeness. For Screen Recording I kept the control that could actually do the job over the native chip that merely matched convention — then removed the redundancy.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>原生一致性，對上功能完整度。螢幕錄影上，我選擇真正能完成任務的控制項，而非只是符合慣例的原生 chip——再把重複拿掉。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 07 Outcome -->
+  <section class="sec reveal">
+    <span class="sec-num">[07] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
+    <h2 data-lang="en">Shipped across two lines, with the <em>system</em> made coherent</h2>
+    <h2 data-lang="zh">在兩條產品線上交付，並讓<em>系統</em>變得一致</h2>
+    <div class="ometrics">
+      <div class="m">
+        <div class="v">6<sup style="font-size:.4em;color:var(--accent);">+</sup></div>
+        <div class="l" data-lang="en">platform features shipped 0 → 1 across ROG &amp; Zenfone</div>
+        <div class="l" data-lang="zh">跨 ROG 與 Zenfone、從 0 → 1 交付的平台功能</div>
+      </div>
+      <div class="m">
+        <div class="v">2</div>
+        <div class="l" data-lang="en">product lines on one shared, maintainable system</div>
+        <div class="l" data-lang="zh">產品線，共用一套可維護的系統</div>
+      </div>
+      <div class="m">
+        <div class="v">1</div>
+        <div class="l" data-lang="en">conflict ruleset future features inherit</div>
+        <div class="l" data-lang="zh">套衝突規則，未來功能可直接沿用</div>
+      </div>
+    </div>
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en">The from-zero features shipped across ROG and Zenfone. The Circle-to-Search / assistant clash was resolved by re-homing the assistant, so both features now work under 3-button navigation without silently cancelling each other; the Screen Recording redundancy was consolidated to a single capable control. <span class="fill">[Add any adoption / regional-default figures you can disclose — e.g. the data-led split that set the Predictive Back default per region.]</span></p>
+      <p data-lang="zh">從零的功能在 ROG 與 Zenfone 上交付。Circle to Search 與助理的衝突，透過把助理改位解掉，兩個功能如今在三鍵導航下都能運作、不再互相默默取消；螢幕錄影的冗餘也收斂成單一、功能完整的控制項。<span class="fill">[補上可揭露的採用／分區預設數據——例如以數據決定 Predictive Back 各區預設的那組。]</span></p>
+    </div>
+  </section>
+
+  <!-- 08 Reflection -->
+  <section class="sec reveal">
+    <span class="sec-num">[08] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
+    <h2 data-lang="en">On a platform team, the leverage is in <em>seeing the system</em></h2>
+    <h2 data-lang="zh">在平台團隊，槓桿在於<em>看見系統</em></h2>
+    <div class="prose">
+      <p data-lang="en">The leverage isn&rsquo;t in polishing one feature — it&rsquo;s in seeing the system: which features fight, where two products should look the same, and where the platform&rsquo;s default is worth overriding. The features are the easy part; the rules between them are the work. That same instinct — diagnose the structure first, then design — is what carried over from my industrial-tools years into platform UX.</p>
+      <p data-lang="zh">槓桿不在把單一功能磨亮——而在看見系統：哪些功能會打架、兩個產品該在哪裡長得一樣、平台預設又值不值得被推翻。功能是容易的部分；功能之間的規則，才是真正的工作。這個直覺——先診斷結構、再設計——正是我從工業工具那幾年，一路帶進平台 UX 的東西。</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="c-foot">
+  <div class="container">
+    <p class="big" data-lang="en">More <em>hard tools</em> where this came from.</p>
+    <p class="big" data-lang="zh">還有更多<em>難搞的工具</em>。</p>
+    <div class="actions">
+      <a class="btn primary" href="index.html#work"><span data-lang="en">See all work</span><span data-lang="zh">檢視所有作品</span> <span aria-hidden="true">→</span></a>
+      <a class="btn" href="case-tr7600.html"><span data-lang="en">TR7600 AXI redesign</span><span data-lang="zh">TR7600 AXI 改版</span> <span aria-hidden="true">→</span></a>
+      <a class="btn" href="mailto:alyssa.huang.ux@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX Designer · Taipei</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
