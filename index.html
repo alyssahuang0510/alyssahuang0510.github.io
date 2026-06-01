@@ -674,25 +674,35 @@ html, body { overflow-x: clip; }
     <article class="case reveal">
       <div class="case-visual">
         <span class="tape"><span data-lang="en">0 → 1 · Conflict design</span><span data-lang="zh">0 → 1 · 衝突設計</span></span>
-        <div class="viz" aria-hidden="true">
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#FFFFFF"/>
-            <g transform="translate(108 56)">
-              <rect x="0" y="0" width="84" height="188" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/><rect x="7" y="22" width="70" height="148" rx="3" fill="#ECECEA"/>
-              <rect x="18" y="36" width="48" height="6" rx="3" fill="#0C0C0D"/><rect x="18" y="48" width="34" height="3" rx="1.5" fill="#A1A1A6"/>
-              <rect x="18" y="64" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/><rect x="18" y="88" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/><rect x="18" y="112" width="48" height="18" rx="3" fill="#2B4DE0"/><rect x="18" y="136" width="48" height="18" rx="3" fill="none" stroke="#E6E6E4"/>
-              <text x="14" y="182" font-family="Geist Mono, monospace" font-size="6" fill="#6E6E73">ZENFONE</text>
-            </g>
-            <g transform="translate(208 56)">
-              <rect x="0" y="0" width="84" height="188" rx="12" fill="#0C0C0D" stroke="#0C0C0D" stroke-width="1.4"/><rect x="7" y="22" width="70" height="148" rx="3" fill="#08080A"/>
-              <rect x="18" y="36" width="48" height="6" rx="3" fill="#2B4DE0"/><rect x="18" y="48" width="34" height="3" rx="1.5" fill="#6E6E73"/>
-              <rect x="18" y="64" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/><rect x="18" y="88" width="48" height="18" rx="3" fill="#2B4DE0"/><rect x="18" y="112" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/><rect x="18" y="136" width="48" height="18" rx="3" fill="none" stroke="#2A2A2C"/>
-              <text x="26" y="182" font-family="Geist Mono, monospace" font-size="6" fill="#6E6E73">ROG</text>
-            </g>
-            <line x1="192" y1="150" x2="208" y2="150" stroke="#2B4DE0" stroke-width="1" stroke-dasharray="2 2"/>
-            <circle cx="200" cy="150" r="9" fill="#F4F4F3" stroke="#2B4DE0" stroke-width="1.2"/><text x="196" y="154" font-family="Geist Mono, monospace" font-size="9" fill="#2B4DE0">!</text>
-          </svg>
-          <div class="viz-foot"><span>ASUS / Mobile Platform</span><span class="live">● ROG · Zenfone</span></div>
+          <div class="viz" role="img" aria-label="Mini conflict matrix: under 3-button navigation, long-press center is claimed by both search and the assistant on ASUS, a conflict; the fix moves the assistant elsewhere.">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="300" fill="#FFFFFF"/>
+              <text x="16" y="30" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1" fill="#6E6E73">LONG-PRESS CENTER · WHO GETS IT?</text>
+              <rect x="120" y="128" width="264" height="58" fill="#ECECEA"/>
+              <rect x="120" y="186" width="264" height="58" fill="#EDF0FC"/>
+              <text x="130" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">SEARCH</text>
+              <text x="262" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">ASSISTANT</text>
+              <line x1="16" y1="72" x2="384" y2="72" stroke="#0C0C0D" stroke-width="1"/>
+              <line x1="16" y1="128" x2="384" y2="128" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="16" y1="186" x2="384" y2="186" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="16" y1="244" x2="384" y2="244" stroke="#0C0C0D" stroke-width="1"/>
+              <line x1="120" y1="72" x2="120" y2="244" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="256" y1="72" x2="256" y2="244" stroke="#E6E6E4" stroke-width="1"/>
+              <text x="16" y="104" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">Others</text>
+              <text x="130" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">center</text>
+              <text x="262" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">elsewhere</text>
+              <text x="16" y="156" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
+              <text x="16" y="170" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#6E6E73">NOW</text>
+              <text x="130" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <text x="262" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <path d="M150 166 L150 172 L300 172 L300 166" fill="none" stroke="#3A3A3D" stroke-width="0.8"/>
+              <text x="16" y="214" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
+              <text x="16" y="228" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#2B4DE0">FIX</text>
+              <text x="130" y="220" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <rect x="262" y="207" width="104" height="22" rx="11" fill="#2B4DE0"/>
+              <text x="276" y="221" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">moved</text>
+            </svg>
+            <div class="viz-foot"><span>Gesture conflict</span><span class="live">● resolved</span></div>
         </div>
       </div>
       <div class="case-body">
