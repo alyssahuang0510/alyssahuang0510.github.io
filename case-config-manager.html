@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ASUS Config Manager — Security UX Case Study · Alyssa Huang</title>
+<meta name="description" content="A security-UX case study: making fleet-scale BIOS and credential management legible and safe-by-default for enterprise IT admins, on a console that extends Microsoft SCCM. All visuals are abstracted reconstructions — no confidential material." />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ASUS Config Manager — Security UX Case Study · Alyssa Huang" />
+<meta property="og:description" content="Encrypted-credential handling and safe-by-default fleet deployment for non-developer IT admins. Extends Microsoft SCCM; 2× faster BIOS & driver management per ASUS." />
+
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "ASUS Config Manager — Security UX for Fleet BIOS & Credential Management",
+  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Senior UX Designer" },
+  "about": ["Security UX","Enterprise IT","BIOS Management","Credential Management","SCCM","Intune","DFCI","Usability","Trust and Safety Design"],
+  "dateCreated": "2024",
+  "inLanguage": ["en","zh-Hant"]
+}
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:1180px; --gutter:clamp(1.25rem,4vw,4rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
+p{margin:0;}
+
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+
+.eyebrow{font-family:var(--ff-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.eyebrow .ix{color:var(--accent);}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.back-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.back-link:hover{color:var(--accent);}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+@media (max-width:560px){.brand small{display:none;}.nav-right{gap:12px;}.back-link span.bt{display:none;}}
+
+/* Hero */
+.c-hero{padding:clamp(46px,7vw,92px) 0 clamp(34px,4vw,56px);}
+.c-hero .kicker{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
+.c-hero .kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.c-hero h1{font-weight:500;font-size:clamp(2.1rem,5vw,4.1rem);line-height:1.06;letter-spacing:-0.035em;max-width:20ch;margin-bottom:clamp(26px,3vw,38px);}
+.c-hero h1[data-lang="zh"]{line-height:1.26;font-weight:600;max-width:24ch;letter-spacing:-0.01em;}
+.c-hero h1 em{font-style:normal;color:var(--accent);}
+.c-meta{display:flex;flex-wrap:wrap;gap:7px 8px;margin-bottom:clamp(30px,4vw,44px);}
+.c-meta span{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border:1px solid var(--rule);border-radius:5px;}
+.c-meta[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
+.c-meta span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
+.c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+.c-bigstat .d[data-lang="zh"]{line-height:1.7;}
+
+/* Generic section */
+.sec{padding:clamp(40px,5.5vw,72px) 0;border-top:1px solid var(--rule);}
+.sec.first{border-top:none;}
+.sec-num{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.sec h2{font-weight:500;font-size:clamp(1.55rem,3.4vw,2.5rem);line-height:1.1;letter-spacing:-0.03em;max-width:22ch;margin-bottom:clamp(22px,3vw,32px);}
+.sec h2[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
+.sec h2 em{font-style:normal;color:var(--accent);}
+.prose{max-width:62ch;}
+.prose p{font-size:1.06rem;line-height:1.72;color:var(--ink-2);margin-bottom:1.2em;}
+.prose p[data-lang="zh"]{line-height:2;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--ink);font-weight:600;}
+.prose .fill{color:var(--accent-2);border-bottom:1.5px dashed var(--accent);font-style:italic;}
+[data-lang="zh"] .prose .fill,.prose p[data-lang="zh"] .fill{font-style:normal;}
+
+/* Two-col meta grid (context / role) */
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-top:8px;}
+.fact-grid .f{background:var(--surface);padding:24px 26px;}
+.fact-grid .f b{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.fact-grid .f b[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.fact-grid .f span{font-size:1rem;color:var(--ink);line-height:1.5;}
+.fact-grid .f span[data-lang="zh"]{line-height:1.7;}
+@media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
+
+.fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
+.fig-cap[data-lang="zh"]{line-height:1.8;}
+
+/* Decisions list */
+.dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
+.dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
+.dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
+.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
+.dec li p[data-lang="zh"]{line-height:1.8;}
+.dec li p .trade{color:var(--muted);}
+
+/* Note / disclosure band */
+.note{background:var(--bg-2);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin-top:26px;}
+.note p{font-size:.92rem;color:var(--ink-2);line-height:1.65;}
+.note p[data-lang="zh"]{line-height:1.85;}
+
+/* Outcome metrics */
+.ometrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:8px;}
+.ometrics .m{padding:30px 24px 30px 0;border-right:1px solid var(--rule);}
+.ometrics .m:last-child{border-right:none;}
+.ometrics .m .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.2rem,4vw,3.2rem);line-height:.92;letter-spacing:-0.04em;color:var(--ink);}
+.ometrics .m .v .fill{color:var(--accent-2);border-bottom:2px dashed var(--accent);font-style:italic;font-size:.6em;}
+.ometrics .m .l{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.5;}
+.ometrics .m .l[data-lang="zh"]{line-height:1.65;font-size:.78rem;}
+@media (max-width:720px){.ometrics{grid-template-columns:1fr;}.ometrics .m{border-right:none;border-bottom:1px solid var(--rule);padding:22px 0;}.ometrics .m:last-child{border-bottom:none;}}
+
+/* Footer */
+.c-foot{background:var(--dark);color:#fff;padding:clamp(60px,8vw,104px) 0 30px;margin-top:clamp(48px,6vw,80px);}
+.c-foot .big{font-weight:600;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;letter-spacing:-0.03em;max-width:18ch;margin-bottom:34px;}
+.c-foot .big[data-lang="zh"]{line-height:1.3;letter-spacing:-0.01em;}
+.c-foot .big em{font-style:normal;color:#6E8BFF;}
+.c-foot .actions{display:flex;flex-wrap:wrap;gap:14px;}
+.c-foot a.btn{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.03em;padding:13px 20px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
+.c-foot a.btn.primary{background:#fff;color:var(--ink);}
+.c-foot a.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.c-foot .base{margin-top:54px;padding-top:22px;border-top:1px solid var(--dark-rule);font-family:var(--ff-mono);font-size:.72rem;color:var(--muted-2);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* Finding -> decision blocks */
+.find{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(22px,4vw,52px);align-items:center;padding:clamp(30px,4vw,48px) 0;border-top:1px solid var(--rule);}
+.find:first-of-type{border-top:none;padding-top:4px;}
+.find.flip .find-media{order:2;}
+.find-body .ftag{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:inline-block;}
+.find-body .ftag[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.find-body h3{font-weight:600;font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.25;letter-spacing:-0.02em;margin-bottom:14px;}
+.find-body h3[data-lang="zh"]{line-height:1.42;}
+.find-body p{font-size:1rem;color:var(--ink-2);line-height:1.66;margin-bottom:10px;}
+.find-body p[data-lang="zh"]{line-height:1.85;}
+.find-body p:last-child{margin-bottom:0;}
+.find-body p strong{color:var(--ink);font-weight:600;}
+.find-body .arrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);display:block;margin:16px 0 8px;}
+.find-body .arrow[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+@media (max-width:820px){.find,.find.flip{grid-template-columns:1fr;}.find.flip .find-media{order:0;}}
+
+/* Schematic figure */
+.chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(18px,2.6vw,30px);}
+.chart-fig svg{width:100%;height:auto;display:block;}
+.fig-tag{position:relative;}
+.fig-tag .tg{position:absolute;top:0;left:0;font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;z-index:3;}
+.fig-tag .tg[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
+    <div class="nav-right">
+      <a class="back-link" href="index.html"><span aria-hidden="true">←</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language / 語言">
+        <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="c-hero">
+  <div class="container">
+    <div class="kicker" data-lang="en">Case Study · ASUS · Enterprise IT / Security · 2024–present</div>
+    <div class="kicker" data-lang="zh">案例 · ASUS · 企業 IT／資安 · 2024–至今</div>
+    <h1 data-lang="en">I made fleet-scale BIOS and credential management <em>legible</em> — and safe by default — for IT admins</h1>
+    <h1 data-lang="zh">我讓大規模 BIOS 與憑證管理，對 IT 管理者既<em>看得懂</em>、又預設安全</h1>
+    <div class="c-meta" data-lang="en">
+      <span class="hl">Feature ownership · takeover</span><span>Security UX</span><span>Extends Microsoft SCCM</span><span>Intune / DFCI</span><span>Corporate IT admins</span><span>Architecture input</span>
+    </div>
+    <div class="c-meta" data-lang="zh">
+      <span class="hl">功能 ownership · 接手</span><span>資安 UX</span><span>擴充 Microsoft SCCM</span><span>Intune / DFCI</span><span>企業 IT 管理者</span><span>架構參與</span>
+    </div>
+    <div class="c-bigstat">
+      <div class="v">2<sup>×</sup></div>
+      <div class="d" data-lang="en">faster BIOS &amp; driver management than standard SCCM (per ASUS) — by making high-stakes, fleet-wide actions both legible and hard to get wrong.</div>
+      <div class="d" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）——靠的是讓高風險的全機隊操作既看得懂、又難以出錯。</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 01 Context -->
+  <section class="sec first reveal">
+    <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
+    <h2 data-lang="en">A console that controls <em>thousands of machines</em> at once</h2>
+    <h2 data-lang="zh">一個一次掌控<em>數千台機器</em>的主控台</h2>
+    <div class="prose">
+      <p data-lang="en">ASUS Config Manager extends Microsoft SCCM — adding BIOS configuration, encrypted BIOS deployment, faster updates, and remote management via Intune / DFCI. Its users are <strong>corporate IT admins</strong>, not developers, and a single action can reconfigure firmware, rotate credentials, or push a BIOS update across an entire device fleet. In that context a confusing flow isn&rsquo;t a cosmetic problem — it is downtime on real machines, or a fleet locked out of its own firmware.</p>
+      <p data-lang="zh">ASUS Config Manager 擴充了 Microsoft SCCM——加入 BIOS 設定、加密 BIOS 派送、加速更新，並透過 Intune / DFCI 進行遠端管理。它的使用者是<strong>企業 IT 管理者</strong>，不是開發者；而一個動作就可能重設韌體、輪替憑證，或把一次 BIOS 更新推送到整批裝置。在這種情境下，一個令人困惑的流程不是表面問題——而是真實機器的停機，或整批機隊被鎖在自己的韌體之外。</p>
+    </div>
+  </section>
+
+  <!-- 02 Role -->
+  <section class="sec reveal">
+    <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
+    <h2 data-lang="en">I took over a queue of the <em>highest-stakes</em> features</h2>
+    <h2 data-lang="zh">我接手了一連串<em>風險最高</em>的功能</h2>
+    <div class="fact-grid">
+      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Feature-level UX ownership on takeover — the encrypted-credential and fleet-deploy flows below, plus input into the console&rsquo;s overall architecture.</span><span data-lang="zh">接手後的功能級 UX ownership——下方的加密憑證與機隊部署流程，並參與主控台整體架構。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">Security UX — translating cryptographic and policy complexity into flows a non-developer admin can operate with confidence.</span><span data-lang="zh">資安 UX——把密碼學與政策的複雜度，翻譯成非開發背景管理者能放心操作的流程。</span></div>
+      <div class="f"><b data-lang="en">Users</b><b data-lang="zh">使用者</b><span data-lang="en">Corporate IT administrators managing enterprise device fleets — high responsibility, low tolerance for an action that silently does the wrong thing.</span><span data-lang="zh">管理企業裝置群的 IT 管理者——責任高、對「默默做錯事」的動作零容忍。</span></div>
+      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Firmware / security engineering teams. Reading the constraints around BIOS, certificates and DFCI directly shortened spec and feasibility loops.</span><span data-lang="zh">韌體／資安工程團隊。直接讀懂 BIOS、憑證與 DFCI 的限制，縮短了規格與可行性的來回。</span></div>
+    </div>
+  </section>
+
+  <!-- 03 Problem -->
+  <section class="sec reveal">
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">The problem</span><span data-lang="zh">問題</span></span>
+    <h2 data-lang="en">Cryptographic state is <em>invisible</em> until it bites</h2>
+    <h2 data-lang="zh">密碼學的狀態是<em>看不見</em>的，直到它咬你一口</h2>
+    <div class="prose">
+      <p data-lang="en">The hard part of this tool isn&rsquo;t any single screen — it&rsquo;s that the riskiest state is hidden. A certificate key might itself be encrypted; a BIOS password might not match; a deploy might force a reboot on a machine someone is mid-task on. Each of these is a security or trust state the admin can&rsquo;t see until something fails. My job was to <strong>surface those states, gate progression on them, and make the unsafe path structurally hard to take</strong> — without dumbing the tool down for the experts who depend on its depth.</p>
+      <p data-lang="zh">這個工具難的不是任何單一畫面——而是最危險的狀態是隱藏的。憑證金鑰本身可能被加密；BIOS 密碼可能對不上；一次部署可能在某人工作到一半時強制重啟他的機器。這每一項都是管理者在出錯之前看不見的資安／信任狀態。我的工作是<strong>把這些狀態浮出來、用它們把流程「卡」住，並讓不安全的路徑在結構上就難以走到</strong>——同時不為了簡化，犧牲仰賴其深度的專家。</p>
+    </div>
+  </section>
+
+  <!-- 04 Decisions -->
+  <section class="sec reveal">
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">Design decisions</span><span data-lang="zh">設計決策</span></span>
+    <h2 data-lang="en">Two flows, one principle: <em>never fail silently</em></h2>
+    <h2 data-lang="zh">兩條流程，一個原則：<em>絕不默默失敗</em></h2>
+
+    <!-- Decision A -->
+    <div class="find reveal">
+      <div class="find-media">
+        <div class="chart-fig fig-tag">
+          <span class="tg"><span data-lang="en">Schematic · Encrypted credential</span><span data-lang="zh">示意 · 加密憑證</span></span>
+          <svg viewBox="0 0 840 320" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="Schematic of the encrypted-credential flow: an encrypted key is detected, progression is held and a password is requested with an explanation, then a decision on whether the password is correct branches to a clear re-enter path or to unlocked progression.">
+            <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">ENCRYPTED-CREDENTIAL FLOW · STATE-GATED</text>
+            <!-- Node 1 -->
+            <rect x="0" y="58" width="186" height="74" rx="9" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <text x="20" y="92" font-family="Geist, sans-serif" font-size="14" fill="#0C0C0D">Encrypted key</text>
+            <text x="20" y="112" font-family="Geist, sans-serif" font-size="14" fill="#0C0C0D">detected</text>
+            <!-- arrow -->
+            <line x1="186" y1="95" x2="226" y2="95" stroke="#0C0C0D" stroke-width="1.4"/>
+            <path d="M226 95 l-9 -5 l0 10 z" fill="#0C0C0D"/>
+            <!-- Node 2 -->
+            <rect x="228" y="50" width="214" height="90" rx="9" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="246" y="70" width="14" height="11" rx="2" fill="none" stroke="#2B4DE0" stroke-width="1.6"/>
+            <path d="M249 70 v-3 a4 4 0 0 1 8 0 v3" fill="none" stroke="#2B4DE0" stroke-width="1.6"/>
+            <text x="270" y="80" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Next held</text>
+            <text x="246" y="104" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Password required,</text>
+            <text x="246" y="122" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">explained inline</text>
+            <!-- arrow to diamond -->
+            <line x1="442" y1="95" x2="486" y2="95" stroke="#0C0C0D" stroke-width="1.4"/>
+            <path d="M486 95 l-9 -5 l0 10 z" fill="#0C0C0D"/>
+            <!-- Diamond -->
+            <polygon points="560,52 624,95 560,138 496,95" fill="#F4F4F3" stroke="#0C0C0D" stroke-width="1.4"/>
+            <text x="560" y="91" font-family="Geist, sans-serif" font-size="12.5" fill="#0C0C0D" text-anchor="middle">Password</text>
+            <text x="560" y="108" font-family="Geist, sans-serif" font-size="12.5" fill="#0C0C0D" text-anchor="middle">correct?</text>
+            <!-- branch NO up -->
+            <line x1="560" y1="52" x2="560" y2="32" stroke="#6E6E73" stroke-width="1.4"/>
+            <line x1="560" y1="32" x2="664" y2="32" stroke="#6E6E73" stroke-width="1.4"/>
+            <line x1="664" y1="32" x2="664" y2="40" stroke="#6E6E73" stroke-width="1.4"/>
+            <path d="M664 40 l-5 -9 l10 0 z" fill="#6E6E73"/>
+            <text x="566" y="27" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">NO</text>
+            <rect x="664" y="40" width="160" height="56" rx="9" fill="#FFFFFF" stroke="#6E6E73" stroke-width="1.3"/>
+            <text x="682" y="66" font-family="Geist, sans-serif" font-size="13" fill="#3A3A3D">Clear error,</text>
+            <text x="682" y="84" font-family="Geist, sans-serif" font-size="13" fill="#3A3A3D">re-enter</text>
+            <!-- loop back dashed -->
+            <path d="M744 96 v44 a8 8 0 0 1 -8 8 H 348 a8 8 0 0 1 -8 -8 V 142" fill="none" stroke="#A1A1A6" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <path d="M340 142 l-5 9 l10 0 z" fill="#A1A1A6"/>
+            <!-- branch YES down -->
+            <line x1="560" y1="138" x2="560" y2="190" stroke="#2B4DE0" stroke-width="1.4"/>
+            <line x1="560" y1="190" x2="664" y2="190" stroke="#2B4DE0" stroke-width="1.4"/>
+            <line x1="664" y1="190" x2="664" y2="198" stroke="#2B4DE0" stroke-width="1.4"/>
+            <path d="M664 198 l-5 -9 l10 0 z" fill="#2B4DE0"/>
+            <text x="566" y="160" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">YES</text>
+            <rect x="664" y="198" width="160" height="56" rx="9" fill="#2B4DE0"/>
+            <text x="682" y="224" font-family="Geist, sans-serif" font-size="13" fill="#FFFFFF">Unlocked,</text>
+            <text x="682" y="242" font-family="Geist, sans-serif" font-size="13" fill="#FFFFFF">Next enabled</text>
+          </svg>
+        </div>
+        <p class="fig-cap" data-lang="en">Fig. 1 — Encrypted-credential handling (abstracted reconstruction). The state, not the user, decides when the step can advance.</p>
+        <p class="fig-cap" data-lang="zh">圖 1 — 加密憑證處理（示意重繪）。決定步驟能否前進的是「狀態」，不是使用者的硬闖。</p>
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Decision · Encrypted credentials</span>
+        <span class="ftag" data-lang="zh">設計決策 · 加密憑證</span>
+        <h3 data-lang="en">A password-encrypted key shouldn&rsquo;t become a dead end</h3>
+        <h3 data-lang="zh">被密碼加密的金鑰，不該變成死路</h3>
+        <p data-lang="en">A certificate key used in BIOS credential operations can itself be encrypted with a password. The naive behaviour is a cryptic failure the admin only meets after committing.</p>
+        <p data-lang="zh">BIOS 憑證操作所用的金鑰，本身可能被密碼加密。最直覺（但最糟）的行為，是讓管理者在已經送出之後，才撞上一個看不懂的錯誤。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Detected the encrypted state and gated progression</strong> — the next action stays disabled and the flow explains the state in plain language, asking for the key password with the reason rather than an error code. A wrong password returns a clear re-enter path; a correct one unlocks the step. Security state becomes legible and <strong>recoverable</strong>, never a wall.</p>
+        <p data-lang="zh"><strong>偵測到加密狀態並把流程卡住</strong>——下一步維持停用，流程用白話解釋目前狀態，附上原因地請使用者輸入金鑰密碼，而不是丟出一串錯誤碼。密碼錯了，給出清楚的重新輸入路徑；對了，就解鎖該步驟。資安狀態變得看得懂、而且<strong>可復原</strong>，不再是一面牆。</p>
+      </div>
+    </div>
+
+    <!-- Decision B -->
+    <div class="find flip reveal">
+      <div class="find-media">
+        <div class="chart-fig fig-tag">
+          <span class="tg"><span data-lang="en">Schematic · Safe deploy</span><span data-lang="zh">示意 · 安全部署</span></span>
+          <svg viewBox="0 0 840 360" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="Schematic of the fleet-deploy flow: a dense screen split into a stepped wizard, with a do-not-force-reboot default, a hide-progress-on-client option, and deploy controls that enable and disable together so an invalid combination can't be reached.">
+            <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">FLEET-DEPLOY FLOW · SAFE BY DEFAULT</text>
+
+            <!-- Panel L : stepped wizard + advanced -->
+            <rect x="0" y="46" width="396" height="296" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="0" y="46" width="396" height="32" rx="12" fill="#0C0C0D"/>
+            <rect x="0" y="62" width="396" height="16" fill="#0C0C0D"/>
+            <text x="18" y="68" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">Task sequence</text>
+            <!-- stepper dots -->
+            <g font-family="Geist Mono, monospace" font-size="10">
+              <circle cx="30" cy="112" r="9" fill="#2B4DE0"/><text x="30" y="116" fill="#FFFFFF" text-anchor="middle">1</text>
+              <circle cx="30" cy="146" r="9" fill="none" stroke="#A1A1A6"/><text x="30" y="150" fill="#A1A1A6" text-anchor="middle">2</text>
+              <circle cx="30" cy="180" r="9" fill="none" stroke="#A1A1A6"/><text x="30" y="184" fill="#A1A1A6" text-anchor="middle">3</text>
+              <line x1="30" y1="121" x2="30" y2="137" stroke="#E6E6E4"/><line x1="30" y1="155" x2="30" y2="171" stroke="#E6E6E4"/>
+            </g>
+            <!-- default name field -->
+            <rect x="60" y="102" width="300" height="26" rx="5" fill="#F4F4F3" stroke="#E6E6E4"/>
+            <text x="72" y="119" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Model_BiosUpdate_date</text>
+            <circle cx="372" cy="98" r="9" fill="#0C0C0D"/><text x="372" y="102" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF" text-anchor="middle">1</text>
+            <!-- advanced settings -->
+            <text x="60" y="172" font-family="Geist, sans-serif" font-size="13" font-weight="600" fill="#0C0C0D">Advanced settings</text>
+            <!-- toggle off : don't auto reboot -->
+            <rect x="60" y="190" width="34" height="18" rx="9" fill="#E6E6E4"/>
+            <circle cx="69" cy="199" r="7" fill="#FFFFFF" stroke="#A1A1A6"/>
+            <text x="104" y="203" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Don&rsquo;t force reboot mid-work</text>
+            <circle cx="372" cy="199" r="9" fill="#0C0C0D"/><text x="372" y="203" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF" text-anchor="middle">2</text>
+            <!-- nav -->
+            <rect x="296" y="298" width="80" height="26" rx="13" fill="#2B4DE0"/><text x="336" y="315" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Next</text>
+
+            <!-- arrow between panels -->
+            <line x1="404" y1="194" x2="436" y2="194" stroke="#0C0C0D" stroke-width="1.4"/>
+            <path d="M436 194 l-9 -5 l0 10 z" fill="#0C0C0D"/>
+
+            <!-- Panel R : deploy with interlock -->
+            <rect x="444" y="46" width="396" height="296" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <rect x="444" y="46" width="396" height="32" rx="12" fill="#0C0C0D"/>
+            <rect x="444" y="62" width="396" height="16" fill="#0C0C0D"/>
+            <text x="462" y="68" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">Choose deploy device</text>
+            <!-- master checkbox -->
+            <rect x="476" y="104" width="16" height="16" rx="3" fill="#2B4DE0"/>
+            <path d="M480 112 l3 3 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="502" y="117" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Deploy to selected device</text>
+            <!-- interlock bracket -->
+            <path d="M484 124 v118" fill="none" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <!-- device field (enabled) -->
+            <line x1="484" y1="156" x2="500" y2="156" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <rect x="504" y="144" width="210" height="26" rx="5" fill="#FFFFFF" stroke="#0C0C0D"/>
+            <text x="516" y="161" font-family="Geist, sans-serif" font-size="12" fill="#A1A1A6">Device</text>
+            <rect x="724" y="144" width="78" height="26" rx="5" fill="#2B4DE0"/><text x="763" y="161" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Browse</text>
+            <!-- hide progress -->
+            <line x1="484" y1="200" x2="500" y2="200" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <rect x="504" y="192" width="16" height="16" rx="3" fill="none" stroke="#0C0C0D"/>
+            <text x="530" y="205" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Hide progress on client devices</text>
+            <!-- interlock label -->
+            <text x="476" y="252" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">INTERLOCKED &mdash; ENABLE / DISABLE TOGETHER</text>
+            <text x="476" y="276" font-family="Geist, sans-serif" font-size="12" fill="#6E6E73">No invalid combination is reachable</text>
+            <rect x="724" y="298" width="80" height="26" rx="13" fill="#2B4DE0"/><text x="764" y="315" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Next</text>
+          </svg>
+        </div>
+        <p class="fig-cap" data-lang="en">Fig. 2 — Safe-by-default deployment (abstracted reconstruction). Defaults protect the end-user; interlocks protect the admin from themselves.</p>
+        <p class="fig-cap" data-lang="zh">圖 2 — 預設安全的部署（示意重繪）。預設值保護終端使用者；連動式控制保護管理者不出錯。</p>
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Decision · Fleet deployment</span>
+        <span class="ftag" data-lang="zh">設計決策 · 機隊部署</span>
+        <h3 data-lang="en">A fleet update should never surprise the people using the machines</h3>
+        <h3 data-lang="zh">一次機隊更新，不該驚擾正在用機器的人</h3>
+        <p data-lang="en">A single dense configuration screen forced the admin to hold every choice in their head at once — including choices that, combined wrongly, push a disruptive update across a fleet.</p>
+        <p data-lang="zh">原本一個高密度的設定畫面，逼管理者一次把所有選項記在腦中——其中有些選項一旦組合錯誤，就會把擾人的更新推送到整批機器。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Split it into a guided flow with safe defaults and interlocked controls.</strong> Admins can suppress the forced reboot so an update never restarts someone mid-task, and hide the install progress bar so end-users on managed machines aren&rsquo;t alarmed. The deploy controls enable and disable together, so an invalid combination simply can&rsquo;t be reached — the structure prevents the unsafe state instead of warning about it afterwards.</p>
+        <p data-lang="zh"><strong>把它拆成引導式流程，搭配安全預設值與連動式控制項。</strong>管理者可關閉強制重啟，讓更新不會在使用者工作中重開機；也可隱藏安裝進度條，避免驚擾受管機器上的終端使用者。部署相關控制項會一起啟用、一起停用，因此根本走不到無效的組合——是用結構防止不安全狀態，而不是事後才警告。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <p data-lang="en"><strong>On confidentiality:</strong> every interface visual on this page is an abstracted schematic created for this portfolio. No confidential ASUS design files, production screenshots, or internal copy are reproduced; the diagrams illustrate design <em>decisions</em>, not shipping screens.</p>
+      <p data-lang="zh"><strong>關於機密：</strong>本頁所有介面圖都是為作品集重繪的抽象示意。未複製任何 ASUS 機密設計檔、產品截圖或內部文案；圖示呈現的是設計<em>決策</em>，而非實際出貨畫面。</p>
+    </div>
+  </section>
+
+  <!-- 05 Key decisions -->
+  <section class="sec reveal">
+    <span class="sec-num">[05] &nbsp; <span data-lang="en">Key trade-offs</span><span data-lang="zh">關鍵取捨</span></span>
+    <h2 data-lang="en">What I traded off — and <em>why</em></h2>
+    <h2 data-lang="zh">我取捨了什麼——以及<em>為什麼</em></h2>
+    <ul class="dec">
+      <li>
+        <span class="di">01</span>
+        <div>
+          <h4 data-lang="en">Gated progression on valid state, not on trust</h4>
+          <h4 data-lang="zh">用「有效狀態」卡流程，而不是靠信任</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> a few extra seconds vs. shipping a broken or insecure action across a fleet. I chose to disable the next step until an encrypted key is unlocked and a password validates. At fleet scale, a blocked step is cheap; a bad deployment is not.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>多花幾秒，對上把壞掉或不安全的動作推送到整批機器。我選擇在加密金鑰解鎖、密碼驗證通過之前停用下一步。在機隊規模下，被卡住的步驟很便宜；錯誤的部署不是。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">02</span>
+        <div>
+          <h4 data-lang="en">Explained the security state instead of hiding it</h4>
+          <h4 data-lang="zh">把資安狀態說清楚，而不是藏起來</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> a denser prompt vs. an admin stuck at a cryptic wall. I surfaced <em>why</em> a step is blocked — encrypted key, wrong password — in language a non-developer can act on, rather than a silent failure or an error code.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>較密的提示，對上管理者卡在看不懂的牆前。我把步驟「為什麼」被擋——金鑰加密、密碼錯誤——用非開發者能據以行動的白話講出來，而不是默默失敗或丟一串錯誤碼。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">03</span>
+        <div>
+          <h4 data-lang="en">Let structure prevent invalid states</h4>
+          <h4 data-lang="zh">讓結構本身防止無效狀態</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> less raw flexibility vs. fewer fleet-scale mistakes. Interlocked controls and stepped disclosure remove whole classes of error before they happen — I&rsquo;d rather make the wrong action unreachable than warn about it.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>較少的原始彈性，對上較少的機隊級錯誤。連動式控制與分步揭露，在錯誤發生前就消去整類問題——我寧可讓錯誤動作走不到，也不要事後才警告。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 06 Outcome -->
+  <section class="sec reveal">
+    <span class="sec-num">[06] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
+    <h2 data-lang="en">Faster <em>because</em> it&rsquo;s harder to get wrong</h2>
+    <h2 data-lang="zh">更快，<em>正因為</em>更難出錯</h2>
+    <div class="ometrics">
+      <div class="m">
+        <div class="v">2<sup style="font-size:.4em;color:var(--accent);">×</sup></div>
+        <div class="l" data-lang="en">faster BIOS &amp; driver management than standard SCCM (per ASUS)</div>
+        <div class="l" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
+      </div>
+      <div class="m">
+        <div class="v"><span class="fill">[填]</span></div>
+        <div class="l" data-lang="en">reduction in mis-config / support tickets (add if available)</div>
+        <div class="l" data-lang="zh">設定錯誤／客服工單下降（有數據再填）</div>
+      </div>
+      <div class="m">
+        <div class="v"><span class="fill">[填]</span></div>
+        <div class="l" data-lang="en">enterprise accounts or devices reached (add if available)</div>
+        <div class="l" data-lang="zh">服務的企業客戶或裝置數（有數據再填）</div>
+      </div>
+    </div>
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en">The encrypted-credential and safe-deploy flows shipped as part of ASUS Config Manager, which extends Microsoft SCCM with BIOS configuration and remote management via Intune / DFCI, and is positioned by ASUS as roughly <strong>2× faster for BIOS &amp; driver management</strong> than standard SCCM. <span class="fill">[填：你想補的採用情況／錯誤下降／客戶回饋——例如導入企業數、工單變化、IT 管理者訪談引言]</span></p>
+      <p data-lang="zh">加密憑證與安全部署這兩條流程，隨 ASUS Config Manager 出貨；該產品以 BIOS 設定與 Intune / DFCI 遠端管理擴充 Microsoft SCCM，並由華碩定位為 BIOS 與驅動管理約<strong>較標準 SCCM 快 2 倍</strong>。<span class="fill">[填：你想補的採用情況／錯誤下降／客戶回饋——例如導入企業數、工單變化、IT 管理者訪談引言]</span></p>
+    </div>
+  </section>
+
+  <!-- 07 Reflection -->
+  <section class="sec reveal">
+    <span class="sec-num">[07] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
+    <h2 data-lang="en">Security UX is making the <em>unsafe path</em> hard to take</h2>
+    <h2 data-lang="zh">資安 UX，是讓<em>不安全的路</em>難以走到</h2>
+    <div class="prose">
+      <p data-lang="en">Security UX isn&rsquo;t decoration on top of cryptography. It is making cryptographic and policy state legible, and making the unsafe action structurally hard — ideally impossible — to reach. On a fleet tool the highest-leverage move is to prevent an invalid or insecure action before it ships, then explain every blocked state in language a non-developer admin can act on. That same conviction — that complex, high-stakes systems deserve interfaces that reduce fear rather than add to it — is what I want to bring to security products at scale.</p>
+      <p data-lang="zh">資安 UX 不是在密碼學上面貼裝飾。它是把密碼學與政策的狀態變得看得懂，並讓不安全的動作在結構上難以——最好是不可能——走到。在機隊工具上，槓桿最大的動作，是在錯誤動作送出之前就先防止它，再把每一個被擋的狀態，用非開發者能據以行動的語言講清楚。同樣的信念——複雜、高風險的系統，值得一個降低恐懼而非製造恐懼的介面——就是我想帶進大規模資安產品的東西。</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="c-foot">
+  <div class="container">
+    <p class="big" data-lang="en">More <em>hard tools</em> where this came from.</p>
+    <p class="big" data-lang="zh">還有更多<em>難搞的工具</em>。</p>
+    <div class="actions">
+      <a class="btn primary" href="index.html#work"><span data-lang="en">See all work</span><span data-lang="zh">檢視所有作品</span> <span aria-hidden="true">→</span></a>
+      <a class="btn" href="https://www.asus.com/business/services/bios-and-drivers-management/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS BIOS &amp; Drivers Management</span><span data-lang="zh">ASUS BIOS &amp; Drivers Management</span> <span aria-hidden="true">↗</span></a>
+      <a class="btn" href="mailto:alyssa.huang.ux@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX Designer · Taipei</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
