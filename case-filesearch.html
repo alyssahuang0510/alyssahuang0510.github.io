@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>File Search — Case Study · Alyssa Huang</title>
+<meta name="description" content="A 0 to 1, product-level case study: designing a self-governing index lifecycle so semantic search ships pre-installed on resource-constrained commercial devices without degrading them." />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="File Search — Case Study · Alyssa Huang" />
+<meta property="og:description" content="Owned File Search from zero to a pre-installed peer app — including the invisible system that keeps semantic search from stalling the machine it runs on." />
+
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "ASUS MyExpert File Search — UX & System Design",
+  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Senior UX Designer" },
+  "about": ["Enterprise UX","B2B Tool Design","Product Design","Information Architecture","System-level UX","Search UX","Resource-aware Systems"],
+  "dateCreated": "2024",
+  "inLanguage": ["en","zh-Hant"]
+}
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:1180px; --gutter:clamp(1.25rem,4vw,4rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
+p{margin:0;}
+
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+
+.eyebrow{font-family:var(--ff-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.eyebrow .ix{color:var(--accent);}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.back-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.back-link:hover{color:var(--accent);}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+@media (max-width:560px){.brand small{display:none;}.nav-right{gap:12px;}.back-link span.bt{display:none;}}
+
+/* Hero */
+.c-hero{padding:clamp(46px,7vw,92px) 0 clamp(34px,4vw,56px);}
+.c-hero .kicker{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
+.c-hero .kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.c-hero h1{font-weight:500;font-size:clamp(2.1rem,5vw,4.1rem);line-height:1.06;letter-spacing:-0.035em;max-width:20ch;margin-bottom:clamp(26px,3vw,38px);}
+.c-hero h1[data-lang="zh"]{line-height:1.26;font-weight:600;max-width:24ch;letter-spacing:-0.01em;}
+.c-hero h1 em{font-style:normal;color:var(--accent);}
+.c-meta{display:flex;flex-wrap:wrap;gap:7px 8px;margin-bottom:clamp(30px,4vw,44px);}
+.c-meta span{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border:1px solid var(--rule);border-radius:5px;}
+.c-meta[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
+.c-meta span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
+.c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:36ch;}
+.c-bigstat .d[data-lang="zh"]{line-height:1.7;}
+
+/* Generic section */
+.sec{padding:clamp(40px,5.5vw,72px) 0;border-top:1px solid var(--rule);}
+.sec.first{border-top:none;}
+.sec-num{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.sec h2{font-weight:500;font-size:clamp(1.55rem,3.4vw,2.5rem);line-height:1.1;letter-spacing:-0.03em;max-width:22ch;margin-bottom:clamp(22px,3vw,32px);}
+.sec h2[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
+.sec h2 em{font-style:normal;color:var(--accent);}
+.prose{max-width:62ch;}
+.prose p{font-size:1.06rem;line-height:1.72;color:var(--ink-2);margin-bottom:1.2em;}
+.prose p[data-lang="zh"]{line-height:2;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--ink);font-weight:600;}
+
+/* Two-col meta grid */
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-top:8px;}
+.fact-grid .f{background:var(--surface);padding:24px 26px;}
+.fact-grid .f b{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.fact-grid .f b[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.fact-grid .f span{font-size:1rem;color:var(--ink);line-height:1.5;}
+.fact-grid .f span[data-lang="zh"]{line-height:1.7;}
+@media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
+
+.fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
+.fig-cap[data-lang="zh"]{line-height:1.8;}
+
+/* Decisions list */
+.dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
+.dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
+.dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
+.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
+.dec li p[data-lang="zh"]{line-height:1.8;}
+.dec li p .trade{color:var(--muted);}
+
+/* Note band */
+.note{background:var(--bg-2);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin-top:26px;}
+.note p{font-size:.92rem;color:var(--ink-2);line-height:1.65;}
+.note p[data-lang="zh"]{line-height:1.85;}
+
+/* Chart figure */
+.chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(20px,3vw,34px);margin-top:8px;}
+.chart-fig svg{width:100%;height:auto;display:block;}
+
+/* Footer */
+.c-foot{background:var(--dark);color:#fff;padding:clamp(60px,8vw,104px) 0 30px;margin-top:clamp(48px,6vw,80px);}
+.c-foot .big{font-weight:600;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;letter-spacing:-0.03em;max-width:18ch;margin-bottom:34px;}
+.c-foot .big[data-lang="zh"]{line-height:1.3;letter-spacing:-0.01em;}
+.c-foot .big em{font-style:normal;color:#6E8BFF;}
+.c-foot .actions{display:flex;flex-wrap:wrap;gap:14px;}
+.c-foot a.btn{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.03em;padding:13px 20px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
+.c-foot a.btn.primary{background:#fff;color:var(--ink);}
+.c-foot a.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.c-foot .base{margin-top:54px;padding-top:22px;border-top:1px solid var(--dark-rule);font-family:var(--ff-mono);font-size:.72rem;color:var(--muted-2);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
+    <div class="nav-right">
+      <a class="back-link" href="index.html"><span aria-hidden="true">&larr;</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language / 語言">
+        <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="c-hero">
+  <div class="container">
+    <div class="kicker" data-lang="en">Case Study · ASUS · Enterprise B2B · 2024–present</div>
+    <div class="kicker" data-lang="zh">案例 · ASUS · 企業 B2B · 2024–至今</div>
+    <h1 data-lang="en">Two indexes, very different costs — so I made the heavy one <em>govern itself</em></h1>
+    <h1 data-lang="zh">兩種索引，成本天差地遠——所以我讓那個重的<em>自己管自己</em></h1>
+    <div class="c-meta" data-lang="en">
+      <span class="hl">Product-level owner</span><span>0 → 1</span><span>IA &amp; result hierarchy</span><span>System &amp; index mechanism</span><span>Ships on 2026 ASUS commercial line</span>
+    </div>
+    <div class="c-meta" data-lang="zh">
+      <span class="hl">產品級負責人</span><span>0 → 1</span><span>資訊架構與結果階層</span><span>系統與索引機制</span><span>隨 2026 ASUS 商用線出貨</span>
+    </div>
+    <div class="c-bigstat">
+      <div class="v">0<sup>&rarr;1</sup></div>
+      <div class="d" data-lang="en">owned from a blank page to a peer app pre-installed across ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops — including the invisible system that keeps semantic search from degrading the machine.</div>
+      <div class="d" data-lang="zh">從一張白紙負責到底，直到它成為預載於 ASUS 2026 商用筆電、AiO 與桌機的並列 App——包含讓語意搜尋不拖垮機器的那套隱形系統。</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 01 Context -->
+  <section class="sec first reveal">
+    <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
+    <h2 data-lang="en">A search app that unifies <em>local and cloud</em> behind one query</h2>
+    <h2 data-lang="zh">一個把<em>本機與雲端</em>整合在單一查詢後的搜尋 App</h2>
+    <div class="prose">
+      <p data-lang="en">File Search lets people query local and cloud files from one place, and ships pre-installed on ASUS Commercial notebooks, AiOs and desktops from 2026 onward. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
+      <p data-lang="zh">File Search 讓使用者從單一入口查詢本機與雲端檔案，並自 2026 年起預載於 ASUS 商用筆電、AiO 與桌機。它不是藏在選單裡的功能，而是 MyExpert 內與 Chat、Knowledge Hub、ExpertMeet 並列的 App。正因為它跑在一般商用機器上，就必須在沒有專屬伺服器、也沒有專家盯著的情況下持續好用。</p>
+    </div>
+  </section>
+
+  <!-- 02 Role -->
+  <section class="sec reveal">
+    <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
+    <h2 data-lang="en">Product-level ownership, from <em>zero</em></h2>
+    <h2 data-lang="zh">從<em>零</em>開始的產品級 ownership</h2>
+    <div class="fact-grid">
+      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Sole UX owner of File Search — product positioning, IA, result hierarchy, and the index mechanism beneath it.</span><span data-lang="zh">File Search 的唯一 UX 負責人——產品定位、資訊架構、結果階層，以及底下的索引機制。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">0 → 1. Designed from a blank page to a shipping, pre-installed app.</span><span data-lang="zh">0 → 1。從一張白紙設計到上線、預載的 App。</span></div>
+      <div class="f"><b data-lang="en">Scope</b><b data-lang="zh">設計範圍</b><span data-lang="en">Competitive teardown, result hierarchy, the integration boundary with the rest of MyExpert, and the resource-aware indexing system.</span><span data-lang="zh">競品拆解、結果階層、與 MyExpert 其餘模組的整合邊界，以及資源感知的索引系統。</span></div>
+      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Algorithm &amp; platform engineering — the index behaviour lives exactly where UX meets memory, disk and power constraints.</span><span data-lang="zh">演算法與平台工程——索引行為正落在 UX 與記憶體、磁碟、電源限制的交界。</span></div>
+    </div>
+  </section>
+
+  <!-- 03 The problem under the UI -->
+  <section class="sec reveal">
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">The problem under the UI</span><span data-lang="zh">介面底下的問題</span></span>
+    <h2 data-lang="en">The hard part wasn&rsquo;t the <em>search screen</em></h2>
+    <h2 data-lang="zh">難的不是<em>搜尋畫面</em></h2>
+    <div class="prose">
+      <p data-lang="en">File Search runs two indexes with very different costs. A light exact-match index can run continuously and is essentially free. A semantic index — the one that makes search feel intelligent — is far heavier: left unmanaged, it keeps consuming memory until the machine slows or stalls. On a commercial laptop that isn&rsquo;t an edge case; it&rsquo;s the default failure mode. So the real design problem was never the result list. It was this: <strong>how do you keep semantic search fresh without letting it degrade the device it runs on?</strong></p>
+      <p data-lang="zh">File Search 跑兩種成本天差地遠的索引。一個輕量的精準比對索引可以持續運作、幾乎沒有成本。而讓搜尋變聰明的語意索引重得多：若不加管理，它會不斷吃記憶體，直到機器變慢或卡死。在商用筆電上，這不是邊緣案例，而是預設會發生的失敗。所以真正的設計難題從來不是結果清單，而是：<strong>如何讓語意搜尋保持即時，又不拖垮它所運行的那台機器？</strong></p>
+    </div>
+    <div class="fact-grid" style="margin-top:24px;">
+      <div class="f"><b data-lang="en">Exact-match index</b><b data-lang="zh">精準比對索引</b><span data-lang="en">Continuous, low cost, needs no governance, no real risk.</span><span data-lang="zh">持續運作、成本低、不需治理、幾乎無風險。</span></div>
+      <div class="f"><b data-lang="en">Semantic index</b><b data-lang="zh">語意索引</b><span data-lang="en">Periodic and heavy; high performance cost; needs active resource management; risk is memory exhaustion.</span><span data-lang="zh">週期性且沉重；效能成本高；需要主動的資源管理；風險是把記憶體吃滿。</span></div>
+    </div>
+  </section>
+
+  <!-- 04 The system I designed -->
+  <section class="sec reveal">
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">The system I designed</span><span data-lang="zh">我設計的系統</span></span>
+    <h2 data-lang="en">A self-regulating index <em>lifecycle</em></h2>
+    <h2 data-lang="zh">一套會自我調節的索引<em>生命週期</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p data-lang="en">I designed the semantic index to govern itself — a four-state lifecycle driven by live memory, disk headroom and the device&rsquo;s power state.</p>
+      <p data-lang="zh">我把語意索引設計成自我治理——一套由即時記憶體、磁碟餘量與電源狀態驅動的四狀態生命週期。</p>
+    </div>
+
+    <div class="chart-fig">
+      <svg viewBox="0 0 820 384" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="The semantic index as a four-state loop. Indexing builds the index while resources are sufficient; as resources tighten it moves to Paused and stops adding; when pressure peaks it moves to Pruning, freeing the least-recently-used entries first; once space is recovered it Settles and stops freeing, then resumes Indexing when resources free up. Governed by live memory and disk headroom.">
+        <defs>
+          <marker id="fsar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#0C0C0D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text x="0" y="24" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">SEMANTIC INDEX · SELF-GOVERNING LIFECYCLE</text>
+
+        <rect x="80" y="56" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <text x="185" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">INDEXING</text>
+        <text x="185" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">build new index</text>
+
+        <rect x="530" y="56" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <text x="635" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PAUSED</text>
+        <text x="635" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">hold — stop adding</text>
+
+        <rect x="80" y="272" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <text x="185" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">SETTLED</text>
+        <text x="185" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">stop freeing space</text>
+
+        <rect x="530" y="272" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <text x="635" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PRUNING</text>
+        <text x="635" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">free oldest first</text>
+
+        <line x1="300" y1="92" x2="520" y2="92" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
+        <text x="410" y="80" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="middle">resources tighten</text>
+
+        <line x1="635" y1="138" x2="635" y2="262" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
+        <text x="620" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="end">pressure peaks</text>
+
+        <line x1="520" y1="308" x2="300" y2="308" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
+        <text x="410" y="296" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">space recovered</text>
+
+        <line x1="185" y1="262" x2="185" y2="138" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
+        <text x="200" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="start">resources free up</text>
+      </svg>
+      <p class="fig-cap" data-lang="en">Fig. 1 — The semantic index governs itself: it builds while resources are sufficient, pauses as they tighten, prunes least-recently-used entries when pressure peaks, then settles once headroom returns.</p>
+      <p class="fig-cap" data-lang="zh">圖 1 — 語意索引自我治理：資源充足時建立，緊縮時暫停，壓力達臨界時優先釋放最久未使用的項目，餘量恢復後停止釋放。</p>
+    </div>
+
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en">When resources are sufficient it builds; as they tighten it pauses; when pressure peaks it prunes, freeing the least-recently-used entries first; once headroom returns it settles and stops freeing. The one trade-off I refused to hide: <strong>a pruned entry briefly leaves semantic results</strong> — so recovery is ordered to bring the most-used files back first. The system never asks the user to manage any of this; it simply behaves.</p>
+      <p data-lang="zh">資源充足時建立；緊縮時暫停；壓力達臨界時釋放，優先清掉最久未使用的項目；餘量恢復後停止釋放、回到穩定。我唯一拒絕藏起來的取捨：<strong>被釋放的項目會暫時離開語意結果</strong>——所以恢復時依使用頻率排序，先把最常用的檔帶回來。整套系統不要求使用者管理任何一環，它只是自己運作。</p>
+    </div>
+  </section>
+
+  <!-- 05 The conflict -->
+  <section class="sec reveal">
+    <span class="sec-num">[05] &nbsp; <span data-lang="en">The conflict</span><span data-lang="zh">衝突</span></span>
+    <h2 data-lang="en">A conflict <em>no single screen</em> owns</h2>
+    <h2 data-lang="zh">一個<em>沒有任何單一畫面</em>會負責的衝突</h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p data-lang="en">The sharpest decision didn&rsquo;t come from a layout. The first design gated indexing on a simple condition — the machine being idle and plugged in. But idle and sleep are two different timers, and a user can set sleep shorter than idle. When that happens, the machine sleeps before the idle threshold is ever reached, so indexing never runs and search silently goes stale.</p>
+      <p data-lang="zh">最關鍵的決策不是來自排版。初版把索引綁在一個簡單條件上——機器閒置且插電。但閒置與睡眠是兩個不同的計時器，使用者可以把睡眠設得比閒置還短。一旦如此，機器會在到達閒置門檻前就先睡著，索引永遠不會執行，搜尋就悄悄地過期。</p>
+    </div>
+
+    <div class="chart-fig">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="A timeline of two timers. The sleep timer fires before the idle threshold is reached, so the machine sleeps first and indexing is never triggered.">
+        <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">WHY INDEXING COULD STALL · A TIMER CONFLICT</text>
+
+        <text x="20" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">SLEEP TIMER</text>
+        <rect x="150" y="68" width="160" height="12" rx="3" fill="#0C0C0D"/>
+        <circle cx="310" cy="74" r="5" fill="#2B4DE0"/>
+        <text x="324" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0">machine sleeps</text>
+
+        <text x="20" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">IDLE THRESHOLD</text>
+        <rect x="150" y="128" width="330" height="12" rx="3" fill="#E6E6E4"/>
+        <rect x="150" y="128" width="160" height="12" rx="3" fill="#A1A1A6"/>
+        <circle cx="480" cy="134" r="5" fill="none" stroke="#6E6E73" stroke-width="1.4"/>
+        <text x="494" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">idle would trigger indexing</text>
+
+        <line x1="310" y1="50" x2="310" y2="172" stroke="#2B4DE0" stroke-width="0.9" stroke-dasharray="4 4"/>
+        <text x="150" y="194" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Sleep fires first &rarr; idle is never reached &rarr; the index never updates.</text>
+      </svg>
+      <p class="fig-cap" data-lang="en">Fig. 2 — When the sleep timer is shorter than the idle threshold, idle never triggers — so the redesigned condition can&rsquo;t strand the index.</p>
+      <p class="fig-cap" data-lang="zh">圖 2 — 當睡眠時間短於閒置門檻，閒置永遠不會觸發——所以重新設計的條件不能把索引晾在那裡。</p>
+    </div>
+
+    <div class="note">
+      <p data-lang="en"><strong>Why it matters:</strong> catching that timing conflict — and redesigning the trigger so it can&rsquo;t strand the index — mattered more than any screen in the app. This is the kind of system-level conflict that belongs to no single feature, which is exactly why it&rsquo;s easy to ship a product without it.</p>
+      <p data-lang="zh"><strong>為什麼重要：</strong>抓出這個時序衝突、並重新設計觸發條件讓它無法把索引晾在那裡——這比 App 裡任何一個畫面都重要。這類系統級衝突不屬於任何單一功能，這也正是為什麼很容易做出一個少了它的產品。</p>
+    </div>
+  </section>
+
+  <!-- 06 Key decisions -->
+  <section class="sec reveal">
+    <span class="sec-num">[06] &nbsp; <span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
+    <h2 data-lang="en">What I traded off — and <em>why</em></h2>
+    <h2 data-lang="zh">我取捨了什麼——以及<em>為什麼</em></h2>
+    <ul class="dec">
+      <li>
+        <span class="di">01</span>
+        <div>
+          <h4 data-lang="en">Pruned least-recently-used first — and never hid the cost</h4>
+          <h4 data-lang="zh">優先釋放最久未使用——且不隱藏代價</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> freshness vs. honesty. Dropping an index frees memory but removes that file from semantic results, so I ordered both pruning and recovery by access recency — and made the behaviour predictable rather than silent.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>即時性，對上誠實。釋放索引能省記憶體，但也讓該檔離開語意結果，所以我讓釋放與恢復都依存取頻率排序——讓行為可預期，而非默默發生。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">02</span>
+        <div>
+          <h4 data-lang="en">Two indexes, two policies — didn&rsquo;t manage them the same way</h4>
+          <h4 data-lang="zh">兩種索引，兩套政策——沒有用同一套管</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> simplicity vs. fit. Managing both indexes identically would&rsquo;ve been simpler — but the cheap one needs no governance and the expensive one needs all of it. Matching policy to cost kept the light index always-on and the heavy one safe.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>簡單，對上合身。用同一套方式管兩個索引比較省事，但便宜的那個根本不需要治理，貴的那個則需要全部。讓政策貼合成本，才能讓輕量索引永遠在線、沉重的那個保持安全。</p>
+        </div>
+      </li>
+      <li>
+        <span class="di">03</span>
+        <div>
+          <h4 data-lang="en">Scoped as a peer app, not a buried feature</h4>
+          <h4 data-lang="zh">定位為並列 App，而非被埋的功能</h4>
+          <p data-lang="en"><span class="trade">Trade-off:</span> discoverability vs. scope creep. I defended File Search as an app sibling to Chat and Knowledge Hub — not a search box inside something else — so it carries its own IA and can grow without being constrained by a host feature.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>可發現性，對上範圍蔓延。我守住 File Search 作為與 Chat、Knowledge Hub 並列的 App——而不是塞在別的東西裡的搜尋框——讓它擁有自己的資訊架構，能獨立成長、不被宿主功能綁住。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 07 Outcome -->
+  <section class="sec reveal">
+    <span class="sec-num">[07] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
+    <h2 data-lang="en">It ships where most prototypes <em>wouldn&rsquo;t survive</em></h2>
+    <h2 data-lang="zh">它出貨在多數原型<em>活不下來</em>的地方</h2>
+    <div class="prose">
+      <p data-lang="en">File Search ships pre-installed across ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops, as a peer app inside MyExpert. The part I&rsquo;m proudest of is the part users never see: the self-governing index is what lets semantic search run on ordinary, resource-constrained commercial machines — without a server behind it and without anyone tending it. The product-level decisions — peer-app scope, a clean result hierarchy, a defined MyExpert integration boundary — are what made it a product rather than a feature.</p>
+      <p data-lang="zh">File Search 以 MyExpert 內的並列 App，預載於 ASUS 2026 商用筆電、AiO 與桌機。我最自豪的，是使用者永遠看不到的那一塊：自我治理的索引，讓語意搜尋能在一般、資源受限的商用機器上運作——背後沒有伺服器，也沒有任何人在照顧它。那些產品級決策——並列 App 的範圍、乾淨的結果階層、明確的 MyExpert 整合邊界——才讓它成為一個產品，而不是一個功能。</p>
+    </div>
+  </section>
+
+  <!-- 08 Reflection -->
+  <section class="sec reveal">
+    <span class="sec-num">[08] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
+    <h2 data-lang="en">In tool products, the best UX is often the part you <em>never see</em></h2>
+    <h2 data-lang="zh">在工具型產品裡，最好的 UX 常常是你<em>看不見</em>的那塊</h2>
+    <div class="prose">
+      <p data-lang="en">File Search reinforced what the TR7600 redesign first taught me: in genuinely complex tools, the highest-leverage design move is usually structural, not cosmetic. A polished result list means nothing if the index behind it stalls the machine, and the most important decision in the whole project belonged to no single screen. Designing the system — and the conflicts between systems — is the work.</p>
+      <p data-lang="zh">File Search 印證了 TR7600 改版最早教會我的事：在真正複雜的工具裡，槓桿最大的設計動作通常是架構性的，而非表面的。如果背後的索引會卡死機器，再精緻的結果清單也沒有意義；而整個專案最重要的決策，不屬於任何一個畫面。設計系統——以及系統與系統之間的衝突——才是真正的工作。</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="c-foot">
+  <div class="container">
+    <p class="big" data-lang="en">More <em>hard tools</em> where this came from.</p>
+    <p class="big" data-lang="zh">還有更多<em>難搞的工具</em>。</p>
+    <div class="actions">
+      <a class="btn primary" href="index.html#work"><span data-lang="en">See all work</span><span data-lang="zh">檢視所有作品</span> <span aria-hidden="true">&rarr;</span></a>
+      <a class="btn" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
+      <a class="btn" href="mailto:alyssa.huang.ux@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX Designer · Taipei</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
