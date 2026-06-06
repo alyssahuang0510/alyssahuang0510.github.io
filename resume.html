@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>履歷 · Alyssa Huang — Senior UX Designer</title>
+<meta name="description" content="Alyssa Huang 履歷 — 8+ 年資深 UX 設計師，跨足企業級系統與端側 AI 產品。工業檢測系統 redesign（核心工作流 -37%）、ASUS Config Manager、File Search。" />
+<meta name="robots" content="index, follow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Sans+TC:wght@300..700&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
+  --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
+  --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
+  --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
+  --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
+  --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
+  --container:980px; --gutter:clamp(1.25rem,4vw,3.5rem);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.01em;font-family:var(--ff-display);}
+p{margin:0;}
+.mono{font-family:var(--ff-mono);}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+.accent{color:var(--accent-2);font-weight:600;}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:.86rem;white-space:nowrap;}
+.brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+.brand strong{font-weight:500;letter-spacing:-0.01em;}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.nav-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.nav-link:hover{color:var(--accent);}
+.nav-print{font-family:var(--ff-mono);font-size:.76rem;letter-spacing:.03em;padding:8px 14px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;}
+.nav-print:hover{background:var(--ink);color:#fff;}
+
+/* Header */
+.r-head{padding:clamp(44px,6vw,80px) 0 clamp(30px,3.5vw,44px);}
+.r-head .role{font-family:var(--ff-mono);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+.r-head h1{font-weight:600;font-size:clamp(2.4rem,6vw,4rem);line-height:1.04;letter-spacing:-0.03em;margin-bottom:22px;}
+.r-head .contact{display:flex;flex-wrap:wrap;gap:8px 10px;}
+.r-head .contact a,.r-head .contact span{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.02em;color:var(--ink-2);padding:6px 12px;border:1px solid var(--rule);border-radius:6px;transition:all .18s;}
+.r-head .contact a:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Section */
+.sec{padding:clamp(34px,4.5vw,54px) 0;border-top:1px solid var(--rule);}
+.sec-num{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;}
+.sec h2{font-weight:600;font-size:clamp(1.4rem,3vw,2rem);line-height:1.2;letter-spacing:-0.02em;margin-bottom:clamp(20px,2.5vw,28px);}
+
+/* Summary */
+.summary{max-width:72ch;font-size:1.04rem;line-height:2;color:var(--ink-2);}
+.summary strong{color:var(--ink);font-weight:600;}
+
+/* Skills */
+.skills{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+.skills .row{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:20px;padding:16px 22px;}
+.skills .row b{font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.03em;color:var(--accent-2);font-weight:600;padding-top:2px;}
+.skills .row span{font-size:.95rem;color:var(--ink-2);line-height:1.7;}
+@media (max-width:640px){.skills .row{grid-template-columns:1fr;gap:6px;}}
+
+/* Experience */
+.job{padding:clamp(26px,3vw,40px) 0;border-top:1px solid var(--rule);}
+.job:first-of-type{border-top:none;padding-top:4px;}
+.job-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:6px;}
+.job-head h3{font-weight:600;font-size:1.32rem;letter-spacing:-0.01em;}
+.job-head .when{font-family:var(--ff-mono);font-size:.78rem;color:var(--muted);white-space:nowrap;}
+.job .title{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.02em;color:var(--accent-2);margin-bottom:18px;}
+.block{margin-top:22px;}
+.block .bt{font-family:var(--ff-display);font-weight:600;font-size:1.06rem;letter-spacing:-0.01em;margin-bottom:6px;}
+.block .ctx{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:12px;max-width:74ch;}
+.block ul{list-style:none;margin:0;padding:0;display:grid;gap:11px;}
+.block ul li{font-size:.96rem;color:var(--ink-2);line-height:1.7;padding-left:24px;position:relative;}
+.block ul li::before{content:"";position:absolute;left:0;top:.75em;width:13px;height:2px;background:var(--accent);border-radius:1px;}
+.block ul li strong{color:var(--ink);font-weight:600;}
+
+/* Education */
+.edu{display:grid;gap:0;border-top:1px solid var(--rule);}
+.edu .e{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline;}
+.edu .e b{font-weight:600;font-size:1.06rem;letter-spacing:-0.01em;display:block;margin-bottom:4px;}
+.edu .e .meta{font-size:.9rem;color:var(--muted);line-height:1.6;}
+.edu .e .when{font-family:var(--ff-mono);font-size:.78rem;color:var(--muted);white-space:nowrap;}
+@media (max-width:560px){.edu .e{grid-template-columns:1fr;}.edu .e .when{order:-1;}}
+
+/* Footer */
+.r-foot{background:var(--dark);color:#fff;padding:clamp(48px,6vw,76px) 0 28px;margin-top:clamp(40px,5vw,64px);}
+.r-foot .big{font-weight:600;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.1;letter-spacing:-0.02em;margin-bottom:26px;}
+.r-foot .big em{font-style:normal;color:#6E8BFF;}
+.r-foot .actions{display:flex;flex-wrap:wrap;gap:12px;}
+.r-foot a.btn{font-family:var(--ff-mono);font-size:.8rem;letter-spacing:.03em;padding:12px 18px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
+.r-foot a.btn.primary{background:#fff;color:var(--ink);}
+.r-foot a.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.r-foot .base{margin-top:44px;padding-top:20px;border-top:1px solid var(--dark-rule);font-family:var(--ff-mono);font-size:.72rem;color:var(--muted-2);}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* Print — clean A4 PDF */
+@media print{
+  @page{margin:14mm 14mm;}
+  body{font-size:10.5pt;line-height:1.5;}
+  .nav,.r-foot{display:none !important;}
+  .reveal{opacity:1 !important;transform:none !important;}
+  .container{max-width:none;padding:0;}
+  a{color:var(--ink);}
+  .sec,.job,.edu .e,.block{break-inside:avoid;}
+  .r-head{padding:0 0 14px;}
+  .r-head h1{font-size:24pt;}
+  .sec{padding:16px 0;}
+  .summary{font-size:10.5pt;line-height:1.55;}
+  .skills .row{padding:8px 12px;}
+  .block ul{gap:5px;}
+  .accent,.skills .row b,.job .title,.sec-num,.r-head .role{color:#1E3AC0 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html"><span aria-hidden="true">←</span> 回到作品</a>
+      <button class="nav-print" type="button" onclick="window.print()">列印 / 存 PDF</button>
+    </div>
+  </div>
+</nav>
+
+<header class="r-head">
+  <div class="container">
+    <div class="role">Senior UX Designer · Enterprise Systems &amp; On-device AI</div>
+    <h1>Alyssa Huang</h1>
+    <div class="contact">
+      <span>台北</span>
+      <a href="mailto:alyssahuang0510@gmail.com">alyssahuang0510@gmail.com</a>
+      <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a href="index.html">作品集 →</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 個人簡介 -->
+  <section class="sec reveal">
+    <span class="sec-num">[01] &nbsp; 個人簡介</span>
+    <p class="summary">8+ 年資深 UX 設計師，跨足<strong>企業級系統</strong>（工業檢測、IT 端點管理）與<strong>端側 AI 產品</strong>（AI 助理整合、智能搜尋、系統級 AI 功能）兩大領域，專注將高度資訊密度與複雜技術產品轉譯為高可用性體驗。曾主導工業檢測系統完整 redesign，將核心工作流時間縮短 <strong>37%</strong>（295 → 186 分鐘），部署於 Tier-1 全球 EMS 製造商。現於華碩同時負責企業 IT 管理工具 ACM 與端側 AI 助理產品 File Search 設計，並建立跨產品線 UX 準則與 AI 輔助設計工作流，獲設計團隊採用。具備資訊管理（學士）與互動設計（碩士）雙背景，以及 6 年軟體開發實戰，能以工程共同語言推進設計決策、降低技術可行性溝通成本，加速跨團隊收斂。</p>
+  </section>
+
+  <!-- 核心技能 -->
+  <section class="sec reveal">
+    <span class="sec-num">[02] &nbsp; 核心技能</span>
+    <h2>能力組合</h2>
+    <div class="skills">
+      <div class="row"><b>Design Focus</b><span>Product Design / UX Strategy / End-to-end Product Ownership / Systems Design / Cross-product UX Standards</span></div>
+      <div class="row"><b>UX Methods</b><span>Information Architecture / Sitemap Design / User Flow / Wireframing / Prototyping / Interaction Design / Design System / Design Guideline / Accessibility (WCAG) / Cross-platform Design</span></div>
+      <div class="row"><b>User Research &amp; Analysis</b><span>User Interview (Qualitative) / Field Study &amp; Contextual Inquiry / Survey Research (Quantitative) / Competitive Analysis / Usability Testing / Heuristic Evaluation / Analytics-driven Design (Google Analytics) / Experience Risk Assessment / Trade-off Analysis</span></div>
+      <div class="row"><b>Enterprise Systems</b><span>SCCM / Endpoint Management / Driver Management / BIOS Management / IT Management Tools / Industrial Inspection Software / Automated X-Ray Inspection (AXI) / B2B SaaS / Mission-critical Software / High-density Information Design</span></div>
+      <div class="row"><b>On-device AI</b><span>AI Assistant UX / Gemini Integration / Circle to Search / On-device AI Features / AI Feature Integration / AI-augmented Workflow / Multi-source Data Unification</span></div>
+      <div class="row"><b>AI Technical Knowledge</b><span>On-device Model Familiarity (Embedding / CLIP / OCR) / Technical Constraint Assessment / AI Feature Feasibility Evaluation / Application Boundary Judgment</span></div>
+      <div class="row"><b>Platform &amp; Mobile</b><span>Android / Windows / System-level UX / Mobile UX / Multi-product Line Design / Cross-feature Conflict Resolution / Settings Architecture</span></div>
+      <div class="row"><b>Cross-functional</b><span>Stakeholder Management / Customer Feedback Translation / Cross-product Collaboration / Engineering Handoff / Crisis Response / Multi-channel Voice of Customer Monitoring / Cross-department Process Design</span></div>
+      <div class="row"><b>Project Management</b><span>Jira / Trello / Notion</span></div>
+      <div class="row"><b>Design Tools</b><span>Figma / FigJam / Visio / AxureRP</span></div>
+      <div class="row"><b>AI Tools</b><span>Claude / Gemini / ChatGPT / NotebookLM / Vibe Coding for Rapid Prototyping &amp; Scenario Modeling</span></div>
+      <div class="row"><b>Engineering Background</b><span>MFC / C# / Unity3D / HTML / CSS / JavaScript / Python</span></div>
+    </div>
+  </section>
+
+  <!-- 工作經歷 -->
+  <section class="sec reveal">
+    <span class="sec-num">[03] &nbsp; 工作經歷</span>
+    <h2>工作經歷</h2>
+
+    <!-- ASUS -->
+    <div class="job">
+      <div class="job-head">
+        <h3>華碩電腦股份有限公司 ASUS · UX Designer</h3>
+        <span class="when">2024.06 – 至今 · 台北</span>
+      </div>
+
+      <div class="block">
+        <div class="bt">Enterprise IT Management — ASUS Config Manager (ACM)</div>
+        <p class="ctx">ACM 為 ASUS Control Center 套件中的 SCCM 擴展工具，支援 ASUS Commercial 全產品線（Notebook / Desktop / All-in-One，2020 年後機種）。</p>
+        <ul>
+          <li><strong>達成 BIOS 與 Driver 管理效率為標準 SCCM 兩倍</strong>，支援 Silent Update，作為 ASUS Control Center 套件中的 SCCM 擴展模組</li>
+          <li>完成 v1.0 (2024.10) 至 v2.0 (2026.02) 多版本 UX 端到端交付，涵蓋 Information Architecture、User Flow、Wireframe 至 Prototype；跨 RD、PM、QTC 團隊協調規格收斂</li>
+          <li>設計 Driver Management（Driver Package Creator、Driver Updater、Driver Updater Policy）與 BIOS Management（BIOS Updater、BIOS Authentication with Certificate Key、BIOS Configuration、BIOS Asset Tag）核心模組 UX</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">On-device AI Products — File Search (MyExpert AI Assistant)</div>
+        <p class="ctx">File Search 為 ASUS MyExpert（2026 商務 AI 助理產品）旗下獨立 APP，定位為 all-in-one file manager，整合本地與雲端檔案於單一介面。</p>
+        <ul>
+          <li><strong>主動建立 MyExpert、IT Console、MyASUS 三產品線共同 UX 行為準則</strong>，推動團隊持續新增與維護，提升跨產品設計一致性</li>
+          <li>唯一 UX 負責人，從概念到上市完整主導 File Search 產品設計，作為 MyExpert AI 助理生態下整合本地與雲端檔案之獨立 APP</li>
+          <li>定義 unified search 資訊架構與漸進式揭露策略；規劃並實作 Accessibility（WCAG）合規設計，確保產品於企業部署環境符合無障礙標準</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">Mobile Platform &amp; On-device AI Integration — ROG / Zenfone</div>
+        <p class="ctx">Android GMS 平台與 AI 功能於電競（ROG）與商用（Zenfone）行動產品線之系統層級 UX 設計。</p>
+        <ul>
+          <li><strong>緊急處理中國區陀螺儀客訴危機，1 個月內完成 7 件客訴解決與 4 件退貨案件挽回</strong>，跨部門協調（客服、RD、MKT）並基於玩家行為研究調整設計，避免品牌與營收損失</li>
+          <li>從零設計 ROG 陀螺儀控制體驗——介面呈現為單一開關，背後進行深度研究涵蓋靈敏度極端值範圍與射擊遊戲玩家習慣模式，完成靈敏度校準、遊戲內整合與用戶校準流程</li>
+          <li>設計 Gemini Assistant 預設整合與 Circle to Search 等 6+ Android 平台功能 UX，跨 ROG（電競）與 Zenfone（商用）兩條產品線，涵蓋 Settings Architecture、入口設計、跨功能衝突處理與既有 ASUS AI 功能共存策略</li>
+          <li>整合電競選手深度訪談、ROG 用戶大規模研究與 Google Analytics 數據作為設計決策依據；常態監控 ZenTalk 繁中論壇、ROG Forum、官方社群與客服等多元管道用戶反饋</li>
+          <li>跨部門協作對象涵蓋 MKT、SQ (QTC)、RD、SWPM、SPM，進行需求收斂與可行性評估</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">Cross-product Module Design &amp; AI Workflow Methodology</div>
+        <ul>
+          <li><strong>建立 AI 輔助 UX 設計工作流框架並文件化方法論，獲 10 人設計團隊採用</strong>於 sitemap 規劃與 UIRS 文件流程</li>
+          <li>實作並推廣部門使用 AI 工具（Claude、Gemini、ChatGPT、NotebookLM）進行 vibe coding，快速生成情境分析、prototype 與簡報，加速跨團隊問題討論與設計分析</li>
+          <li>負責 IT Console（開發中，2026 規劃上線）核心模組 UX：電池管理、儲存空間設定、警報狀態、預測結果、電源計畫部署與結果回報、更新部署與更新狀態</li>
+          <li>跨產品線常態執行競品分析、使用者訪談（質化）、問卷調查（量化）、體驗風險評估與優劣分析，作為跨部門溝通與設計決策依據</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TRI -->
+    <div class="job">
+      <div class="job-head">
+        <h3>德律科技股份有限公司 TRI · 高級軟體工程師</h3>
+        <span class="when">2017.04 – 2023.04 · 台北</span>
+      </div>
+      <p class="title">職能：TR7600 Automated X-Ray Inspection (AXI) 系統唯一 UI/UX 負責人</p>
+      <p class="ctx" style="margin-bottom:0;">TR7600 為電子與半導體製造業 PCB 元件品質檢測設備，部署於 Tier-1 全球 EMS 製造商（Foxconn、Quanta、Wistron、OSE）多條製造產線，覆蓋主要消費性電子產品產線。德律全球服務 3,000+ 家電子製造業客戶、50+ 國際代理商。</p>
+
+      <div class="block">
+        <div class="bt">TR7600 AXI 完整 Redesign（量化驗證）</div>
+        <ul>
+          <li><strong>主導 TR7600 AXI v34257 → v36333 完整產品 redesign，單板總編程時間從 295 分鐘縮短至 186 分鐘，降幅 37%（節省 109 分鐘）</strong></li>
+          <li><strong>重新設計 Library 與 Fine Tune 兩大高耗時工作流：Library 縮短 38%（124 → 76 分鐘）、Fine Tune 縮短 51%（158 → 77 分鐘）</strong></li>
+          <li>部署於 Tier-1 全球 EMS 製造商：Foxconn、Quanta、Wistron、OSE 多條製造產線</li>
+          <li>親赴客戶工廠執行 Field Study 與 Contextual Inquiry，對現場操作員與製程工程師進行情境訪查與實地觀察，將研究發現轉譯為設計決策</li>
+          <li>定義高資訊密度檢測儀表板之 IA、互動模式、視覺階層，平衡進階用戶效率與新進操作員可上手程度</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">Design System、Design Guideline &amp; Internationalization</div>
+        <ul>
+          <li><strong>建立 AXI 產品線統一設計系統，跨 10 個 TR7600 系列機種共用單一 UX 框架</strong>，並定義並維護 Design Guideline 達 6 年（涵蓋互動模式、視覺規範、組件樣式、文件規範）</li>
+          <li>主導多國語系架構，支援 5 種語系（English、Traditional Chinese、Simplified Chinese、Spanish、Japanese），擔任國際化與在地化問題主要負責人</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">Design Practice &amp; Cross-functional Process Innovation</div>
+        <ul>
+          <li><strong>設計並導入「客戶 → FAE → RD」跨部門需求收斂流程，獲 AXI 產品線 FAE 與 RD 共 50+ 人員採用並持續實踐</strong>，解決需求傳遞失真與規格收斂效率問題</li>
+          <li>於工程主導之硬體製造公司從零導入 Product Design 實踐，將用戶研究、可用性評估、原型製作嵌入工程主導之開發週期</li>
+          <li>擔任內部 UX 講師傳授 20+ RD 工程師使用 Design Guideline，並推動 UX 體驗訓練成為公司新人必修課程</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="bt">自動化檢測流程設計</div>
+        <ul>
+          <li>設計 PASS / FAIL 自動化報表與機台報警系統，支援客戶端個別 QA 需求</li>
+          <li>建構 GRR（Gauge R&amp;R）量測重複性分析工具與 Alignment Fiducial 檢測 UX，簡化現場操作員校準流程</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 學歷 -->
+  <section class="sec reveal">
+    <span class="sec-num">[04] &nbsp; 學歷</span>
+    <h2>學歷</h2>
+    <div class="edu">
+      <div class="e">
+        <div>
+          <b>國立臺北科技大學 · 互動設計研究所 碩士</b>
+          <div class="meta">設計能力學歷根基；碩士論文方向：AR 復健遊戲（C# / Unity3D）</div>
+        </div>
+        <span class="when">2014.09 – 2016.06</span>
+      </div>
+      <div class="e">
+        <div>
+          <b>世新大學 · 資訊管理系 資訊科技組 學士</b>
+          <div class="meta">程式能力學歷根基；課程涵蓋軟體開發、資料庫、系統分析</div>
+        </div>
+        <span class="when">2010.09 – 2014.06</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="r-foot">
+  <div class="container">
+    <p class="big">聊聊<em>難搞的工具</em>吧。</p>
+    <div class="actions">
+      <a class="btn primary" href="index.html">檢視作品集 <span aria-hidden="true">→</span></a>
+      <a class="btn" href="mailto:alyssahuang0510@gmail.com">來信 <span aria-hidden="true">→</span></a>
+      <a class="btn" href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX Designer · 台北</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
+  }, { threshold:0.08, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
