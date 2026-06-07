@@ -206,7 +206,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .lead-impact .eyebrow .ix{color:var(--accent);}
 .lead-impact .sec-head h2{color:#fff;}
 .lead-impact .sec-head h2 em{color:#6E8BFF;}
-.li-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,40px);margin-top:24px;}
+.li-grid{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,40px);margin-top:24px;max-width:760px;}
 .li-card{border:1px solid var(--dark-rule);background:var(--dark-2);border-radius:10px;padding:clamp(28px,3vw,40px);position:relative;transition:border-color .25s,transform .25s;}
 .li-card:hover{border-color:var(--accent);transform:translateY(-3px);}
 .li-card .badge{position:absolute;top:24px;right:24px;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:#8FA5FF;padding:4px 9px;border:1px solid #3A437A;border-radius:5px;}
@@ -511,13 +511,13 @@ html, body { overflow-x: clip; }
         <p class="case-desc" data-lang="zh">德律的旗艦 3D AXI 軟體負責檢測產線上每一片 PCB 的焊點缺陷——以輪班方式操作，一個令人困惑的流程就是真實的停機損失。我主導了從舊版 2D AOI 介面到 3D-AXI 原生工作流程的<strong>完整重新設計</strong>，並以唯一 UI/UX 設計師的身分負責了六年。改版讓<strong>總編程時間減少約 38%</strong>——由 FAE 團隊在兩塊量產板上獨立量測（4,160 顆零件的板：295&rarr;186 分；3,495 顆零件的板：386&rarr;237 分），改善最大的是 Fine Tune 與 Library 兩個步驟。</p>
         <ul class="case-points" data-lang="en">
           <li><strong>Fine Tune &minus;51% (158&rarr;77 min), Library &minus;39% (124&rarr;76 min)</strong> — the two slowest steps. Collapsing F3/F4 into one Fine Tune page and replacing manual height calculation with mouse-wheel adjustment is what drove most of the saving.</li>
-          <li><strong>One standardized interface across the entire AXI line</strong> (SIII / LL / TL / F3D / FB / HP / SV families) — consistency that survives every new machine.</li>
+          <li><strong>Authored the UX Design Guideline</strong> — buttons, layout, dialogs, typography — and applied it as one standardized interface across the entire AXI line (SIII / LL / TL / F3D / FB / HP / SV families): a design system that survives every new machine.</li>
           <li>Owned programming, alignment, GR&amp;R, and multi-language deployment for global major accounts (automotive, server, semiconductor).</li>
           <li>Worked directly with algorithm &amp; mechanical teams; C# / MFC literacy made spec arguments shorter and feasibility calls faster.</li>
         </ul>
         <ul class="case-points" data-lang="zh">
           <li><strong>Fine Tune &minus;51%（158&rarr;77 分）、Library &minus;39%（124&rarr;76 分）</strong>——兩個最慢的步驟。把 F3／F4 整併進單一 Fine Tune 頁、以滑鼠滾輪取代手動計算高度，是時間縮短的主因。</li>
-          <li><strong>單一標準化介面套用於整條 AXI 產品線</strong>（SIII / LL / TL / F3D / FB / HP / SV 系列）——每出一台新機都能維持一致性。</li>
+          <li><strong>撰寫了 UX 設計原則文件</strong>（按鈕、排版、彈窗、文字規範），並以此建立單一標準化介面、套用於整條 AXI 產品線（SIII / LL / TL / F3D / FB / HP / SV 系列）：一套每出一台新機都能延續的設計系統。</li>
           <li>獨力負責編程、定位、GR&amp;R 與多國語系部署，服務汽車、伺服器、半導體等全球大客戶。</li>
           <li>直接與演算法與機構團隊協作；C# / MFC 的底子讓規格討論更短、可行性判斷更快。</li>
         </ul>
@@ -534,8 +534,8 @@ html, body { overflow-x: clip; }
       <div class="case-body">
         <div class="case-kicker" data-lang="en">ASUS · Enterprise B2B · 2024–present</div>
         <div class="case-kicker" data-lang="zh">ASUS · 企業 B2B · 2024–至今</div>
-        <h2 class="case-title" data-lang="en">Taking a standalone search app from zero onto every 2026 ASUS commercial device</h2>
-        <h2 class="case-title" data-lang="zh">把獨立搜尋 App 從零打造，預載進 2026 年每一台華碩商用裝置</h2>
+        <h2 class="case-title" data-lang="en">Taking a standalone search app from zero onto ASUS&rsquo;s 2026 commercial line</h2>
+        <h2 class="case-title" data-lang="zh">把一個獨立的搜尋 App 從零做起，預載進華碩 2026 年的商用機種</h2>
         <div class="case-context" data-lang="en"><span class="hl">Product-level ownership</span><span>0 → 1</span><span>IA &amp; competitive strategy</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">產品級 ownership</span><span>0 → 1</span><span>資訊架構與競品策略</span></div>
         <div class="case-bigstat">
@@ -543,8 +543,8 @@ html, body { overflow-x: clip; }
           <div class="d" data-lang="en">sibling apps in MyExpert — File Search is an app, not a feature buried in a menu</div>
           <div class="d" data-lang="zh">MyExpert 中的並列 App——File Search 是一個 App，而非藏在選單裡的功能</div>
         </div>
-        <p class="case-desc" data-lang="en">File Search unifies local and cloud files behind a single query and <strong>pre-installs on ASUS Commercial notebooks, AiOs, and desktops from 2026 onward</strong>. I owned its UX from zero to launch: product positioning, competitive teardown, information architecture, result hierarchy, and the integration boundary with the rest of MyExpert (Chat, Knowledge Hub, ExpertMeet).</p>
-        <p class="case-desc" data-lang="zh">File Search 將本機與雲端檔案整合在單一查詢之後，<strong>從 2026 年起預載於華碩商用筆電、AiO 與桌機</strong>。我從零到上線負責它的 UX：產品定位、競品拆解、資訊架構、搜尋結果階層，以及與 MyExpert 其他模組（Chat、Knowledge Hub、ExpertMeet）的整合邊界。</p>
+        <p class="case-desc" data-lang="en">File Search unifies local and cloud files behind a single query and <strong>pre-installs on ASUS commercial notebooks, AiOs and desktops from 2026 onward</strong>. I owned its UX from zero to launch: product positioning, competitive teardown, information architecture, result hierarchy, and the integration boundary with the rest of MyExpert (Chat, Knowledge Hub, ExpertMeet).</p>
+        <p class="case-desc" data-lang="zh">File Search 把本機與雲端檔案整合在同一個查詢底下，<strong>自 2026 年起預載於華碩的商用筆電、一體機與桌機</strong>。我從零到上線一手負責它的 UX：產品定位、競品拆解、資訊架構、搜尋結果排序，以及它和 MyExpert 其他模組（Chat、Knowledge Hub、ExpertMeet）之間的整合界線。</p>
         <ul class="case-points" data-lang="en">
           <li>Reconciled <strong>two mental models in one result list</strong> — file-manager behaviour (browse, sort) and search behaviour (rank, snippet) — without making either feel bolted on.</li>
           <li>Scoped it as a <strong>peer app</strong> to Chat and Knowledge Hub, defending product-level boundaries against feature-creep pressure.</li>
@@ -563,7 +563,7 @@ html, body { overflow-x: clip; }
     <article class="case flip reveal">
       <div class="case-visual">
         <span class="tape"><span data-lang="en">Takeover · multi-feature</span><span data-lang="zh">接手 · 多功能</span></span>
-        <img class="case-shot" src="images/asus-config-manager.jpg" alt="ASUS Config Manager running inside the SCCM console on a commercial desktop — the BIOS Authentication wizard's Manage Certificate Key step shown on screen." />
+        <img class="case-shot" src="images/asus-config-manager.jpg" alt="ASUS Config Manager running inside the SCCM console — the BIOS Authentication wizard's Manage Certificate Key step shown on screen." />
       </div>
       <div class="case-body">
         <div class="case-kicker" data-lang="en">ASUS · Enterprise IT · 2024–present</div>
@@ -578,7 +578,7 @@ html, body { overflow-x: clip; }
           <div class="d" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
         </div>
         <p class="case-desc" data-lang="en">ASUS Config Manager extends Microsoft SCCM — adding BIOS configuration, faster updates, and remote management via Intune/DFCI. I inherited a queue of <strong>high-stakes features touching enterprise device fleets</strong>, where a confusing flow means real downtime on real machines.My job: make cryptographic and policy complexity legible to non-developer IT admins. This is security UX in practice — surfacing security posture and risk so admins act with confidence instead of fear.</p>
-        <p class="case-desc" data-lang="zh">ASUS Config Manager 擴充了微軟 SCCM——加入 BIOS 設定、加速更新，並透過 Intune/DFCI 進行遠端管理。我接手了一系列<strong>牽動企業裝置群的高風險功能</strong>，在這裡，一個令人困惑的流程就代表真實機器的停機。我的工作：把密碼學與政策的複雜度，翻譯成非開發背景的 IT 管理者也能讀懂的介面。這就是落地的資安 UX——把安全狀態與風險清楚呈現，讓管理者帶著信任而非恐懼去操作。</p>
+        <p class="case-desc" data-lang="zh">ASUS Config Manager 擴充了微軟 SCCM——加入 BIOS 設定、加速更新，並透過 Intune/DFCI 進行遠端管理。我接手了一系列<strong>牽動整批企業裝置的高風險功能</strong>；在這裡，一個讓人搞不清楚的流程，就代表真實機器的停機。我的工作，是把密碼學和政策上的複雜，做成非技術背景的 IT 管理者也讀得懂、用得放心的介面。這就是真正落地的資安 UX——把安全狀態和風險清楚攤出來，讓管理者帶著信任、而不是恐懼去操作。</p>
         <ul class="case-points" data-lang="en">
           <li><strong>Encrypted BIOS deployment</strong> &amp; <strong>Silent Update</strong> — surfaced security posture and update state without burying admins in jargon.</li>
           <li><strong>Driver Command Policy</strong> — designed version detection, severity filters, and customizable update cadence.</li>
@@ -632,7 +632,7 @@ html, body { overflow-x: clip; }
         <div class="case-kicker" data-lang="en">ASUS · Platform UX · 2024–present</div>
         <div class="case-kicker" data-lang="zh">ASUS · 平台 UX · 2024–至今</div>
         <h2 class="case-title" data-lang="en">Designing platform features from zero — and resolving the conflicts no single feature owns</h2>
-        <h2 class="case-title" data-lang="zh">從零設計平台功能——並解決沒有任何單一功能會負責的衝突</h2>
+        <h2 class="case-title" data-lang="zh">從零設計平台功能——也解決那些夾在功能之間、沒人負責的衝突</h2>
         <div class="case-context" data-lang="en"><span class="hl">System-level UX</span><span>0 → 1</span><span>Cross-product</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">系統級 UX</span><span>0 → 1</span><span>跨產品線</span></div>
         <div class="case-bigstat">
@@ -641,7 +641,7 @@ html, body { overflow-x: clip; }
           <div class="d" data-lang="zh">跨兩條產品線、從零設計的平台功能</div>
         </div>
         <p class="case-desc" data-lang="en">When Android ships a platform capability, every OEM must design the UX above it — settings IA, entry points, toggle behaviour, and the <strong>conflicts between features that can&rsquo;t coexist</strong>. I led from-zero UX for Predictive Back, Edge-to-edge, Circle to Search, Auto Rotate, default Gemini assistant, and gaming-phone gyroscope on ROG and Zenfone. The hardest work isn&rsquo;t any single feature — it&rsquo;s the <strong>system view</strong>.</p>
-        <p class="case-desc" data-lang="zh">當 Android 推出一個平台能力，每家 OEM 都得設計它之上的 UX——設定的資訊架構、入口、開關行為，以及<strong>無法並存的功能之間的衝突</strong>。我在 ROG 與 Zenfone 上，從零主導了 Predictive Back、Edge-to-edge、Circle to Search、Auto Rotate、預設 Gemini 助理，以及電競手機陀螺儀的 UX。最難的不是任何單一功能——而是<strong>系統視角</strong>。</p>
+        <p class="case-desc" data-lang="zh">Android 推出一項平台能力時，真正面對使用者的那層體驗，還是得每家 OEM 自己設計——設定怎麼編排、從哪裡進入、開關怎麼運作，還有那些無法並存的功能彼此之間的衝突。我在 ROG 與 Zenfone 上，從零主導了 Predictive Back、Edge-to-edge、Circle to Search、Auto Rotate、預設 Gemini 助理，以及電競手機陀螺儀的 UX。最難的從來不是某一個功能，而是<strong>看清楚這些功能怎麼湊成一個系統</strong>。</p>
         <ul class="case-points" data-lang="en">
           <li><strong>Conflict resolution</strong> — for mutually exclusive features, defined the rule set, the resolution UI, and the recovery path.</li>
           <li><strong>Cross-product differentiation</strong> — ROG (gaming, tunable) vs Zenfone (general); diverged the IA only where it earned its keep.</li>
@@ -664,8 +664,8 @@ html, body { overflow-x: clip; }
   <div class="container">
     <div class="sec-head">
       <span class="eyebrow"><span class="ix">[02]</span> &nbsp; <span data-lang="en">Impact Beyond Design</span><span data-lang="zh">設計之外的影響力</span></span>
-      <h2 data-lang="en">Two things <em>most UX designers</em> can&rsquo;t put on a CV.</h2>
-      <h2 data-lang="zh">兩件<em>多數 UX 設計師</em>寫不進履歷的事。</h2>
+      <h2 data-lang="en">One thing <em>most UX designers</em> can&rsquo;t put on a CV.</h2>
+      <h2 data-lang="zh">一件<em>多數 UX 設計師</em>寫不進履歷的事。</h2>
     </div>
     <div class="li-grid">
       <div class="li-card reveal">
@@ -677,31 +677,13 @@ html, body { overflow-x: clip; }
         <div class="org" data-lang="zh">德律科技 · 2017–2023</div>
         <ul class="rows" data-lang="en">
           <li><b>Before</b><span>A precision-instrument company where engineering owned every screen and &ldquo;UX&rdquo; was not a function.</span></li>
-          <li><b>I did</b><span>Built UX into requirements review, trained internal teams, onboarded new hires, made design reviews part of the release cycle.</span></li>
+          <li><b>I did</b><span>Built UX into requirements review, trained 20+ RD engineers on a shared Design Guideline, made UX training mandatory for new hires, and put design reviews into the release cycle.</span></li>
           <li><b>Result</b><span>UX now exists as a function inside a hardware OEM that never had one — and outlasted my tenure.</span></li>
         </ul>
         <ul class="rows" data-lang="zh">
           <li><b>之前</b><span>一家精密儀器公司，每個畫面都由工程主導，「UX」並不是一個職能。</span></li>
-          <li><b>我做了</b><span>把 UX 帶進需求審查、訓練內部團隊、負責新人訓練，並讓設計審查成為發布流程的一環。</span></li>
+          <li><b>我做了</b><span>把 UX 帶進需求審查、訓練 20+ 位 RD 工程師使用共用的設計原則文件、讓 UX 訓練成為新人必修，並把設計審查納入發布流程。</span></li>
           <li><b>成果</b><span>UX 如今在一家原本沒有 UX 的硬體 OEM 裡，成為一個職能——並在我離開後延續下來。</span></li>
-        </ul>
-      </div>
-      <div class="li-card reveal">
-        <div class="badge" data-lang="en">Lead signal</div>
-        <div class="badge" data-lang="zh">Lead 訊號</div>
-        <h3 data-lang="en">Set up an <em>AI-assisted planning workflow</em> for the design team I&rsquo;m on</h3>
-        <h3 data-lang="zh">為所屬設計團隊建立一套<em>AI 輔助規劃流程</em></h3>
-        <div class="org" data-lang="en">ASUS · 2024–present</div>
-        <div class="org" data-lang="zh">ASUS · 2024–至今</div>
-        <ul class="rows" data-lang="en">
-          <li><b>Pain</b><span>The team was slow and inconsistent on early architecture work — IA, scope framing, cross-feature impact.</span></li>
-          <li><b>I set up</b><span>An AI-assisted planning workflow and shared templates that draft a consistent first-pass IA, so the team edits instead of starting from blank.</span></li>
-          <li><b>Result</b><span>Adopted by the 10-person design team; on one product the sitemap reached a confirmed direction in ~2 weeks — DesignOps in practice, not slideware.</span></li>
-        </ul>
-        <ul class="rows" data-lang="zh">
-          <li><b>痛點</b><span>團隊在早期架構工作上又慢又不一致——資訊架構、範圍界定、跨功能影響。</span></li>
-          <li><b>我建立</b><span>一套 AI 輔助的規劃流程與共用範本，先產出一致的初版資訊架構，讓團隊在此基礎上修改、而非從空白開始。</span></li>
-          <li><b>成果</b><span>10 人設計團隊採用；某產品的 sitemap 約兩週內確定方向、進入下一步——這是實作出來的 DesignOps，不是簡報。</span></li>
         </ul>
       </div>
     </div>
@@ -719,11 +701,11 @@ html, body { overflow-x: clip; }
     <div class="about-grid">
       <div>
         <p data-lang="en">I&rsquo;m a pure UX designer working on <strong>tool-shaped products</strong> — the kind operators, IT admins, and developers depend on daily. My undergraduate degree is in <strong>Information Management</strong>; my master&rsquo;s is in <strong>Interaction Design</strong>. That dual root means I read engineering tickets the way I read research notes.</p>
-        <p data-lang="zh">我是專注於<strong>工具型產品</strong>的純 UX 設計師——那種產線操作員、IT 管理者與開發者每天依賴的產品。我的學士是<strong>資訊管理</strong>，碩士是<strong>互動設計</strong>。這雙重根基讓我讀工程票券，就像讀研究筆記一樣自然。</p>
+        <p data-lang="zh">我是專注在<strong>工具型產品</strong>的純 UX 設計師——就是產線操作員、IT 管理者與開發者每天都得用的那種產品。我大學念<strong>資訊管理</strong>，研究所念<strong>互動設計</strong>。也因為有這兩種背景，我讀工程端的需求單，就跟讀使用者研究筆記一樣自然。</p>
         <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room.</p>
-        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式不再是我的主要產出，但它形塑了我對可行性、系統限制，以及該向工程師要什麼的判斷——這也是為什麼有我在的跨職能團隊跑得更快。</p>
+        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。</p>
         <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
-        <p data-lang="zh">我偏好的工具都不華麗：高密度資料、專家使用者、長時間的任務、彼此衝突的模式。我的工作是讓這些變得清晰可讀——而且越來越多時候，是<em>親手打造設計團隊用來規劃的工具。</em></p>
+        <p data-lang="zh">我喜歡做的工具都不華麗：資料密度高、使用者是專家、一用就是好幾個小時、各種模式還會互相打架。我的工作，就是把這些東西整理到讓人一看就懂、用得順手——而且這幾年越來越常是<em>親手打造設計團隊自己拿來規劃的工具。</em></p>
       </div>
       <aside class="cv" aria-label="Career and education">
         <h4 data-lang="en">→ &nbsp; Career &amp; Education</h4>
@@ -741,8 +723,8 @@ html, body { overflow-x: clip; }
 
     <div class="tools reveal">
       <span class="lbl" data-lang="en">Design</span><span class="lbl" data-lang="zh">設計工具</span>
-      <span class="t">Figma <span>2y</span></span>
-      <span class="t">AxureRP <span>6y</span></span>
+      <span class="t">Figma</span>
+      <span class="t">AxureRP</span>
       <span class="lbl" style="margin-left:auto" data-lang="en">Engineering literacy</span><span class="lbl" style="margin-left:auto" data-lang="zh">工程素養</span>
       <span class="t">C# · Unity3D</span>
       <span class="t">MFC · Visual Studio</span>

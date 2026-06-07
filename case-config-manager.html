@@ -253,7 +253,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
     <h2 data-lang="zh">我接手了一連串<em>風險最高</em>的功能</h2>
     <div class="fact-grid">
       <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Feature-level UX ownership on takeover — the encrypted-credential and fleet-deploy flows below, plus input into the console&rsquo;s overall architecture.</span><span data-lang="zh">接手後的功能級 UX ownership——下方的加密憑證與機隊部署流程，並參與主控台整體架構。</span></div>
-      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">Security UX — translating cryptographic and policy complexity into flows a non-developer admin can operate with confidence.</span><span data-lang="zh">資安 UX——把密碼學與政策的複雜度，翻譯成非開發背景管理者能放心操作的流程。</span></div>
+      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">Security UX — translating cryptographic and policy complexity into flows a non-developer admin can operate with confidence.</span><span data-lang="zh">資安 UX——把密碼學和政策上的複雜，做成非技術背景的管理者也能放心操作的流程。</span></div>
       <div class="f"><b data-lang="en">Users</b><b data-lang="zh">使用者</b><span data-lang="en">Corporate IT administrators managing enterprise device fleets — high responsibility, low tolerance for an action that silently does the wrong thing.</span><span data-lang="zh">管理企業裝置群的 IT 管理者——責任高、對「默默做錯事」的動作零容忍。</span></div>
       <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Firmware / security engineering teams. Reading the constraints around BIOS, certificates and DFCI directly shortened spec and feasibility loops.</span><span data-lang="zh">韌體／資安工程團隊。直接讀懂 BIOS、憑證與 DFCI 的限制，縮短了規格與可行性的來回。</span></div>
     </div>
@@ -263,10 +263,10 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   <section class="sec reveal">
     <span class="sec-num">[03] &nbsp; <span data-lang="en">The problem</span><span data-lang="zh">問題</span></span>
     <h2 data-lang="en">Cryptographic state is <em>invisible</em> until it bites</h2>
-    <h2 data-lang="zh">密碼學的狀態是<em>看不見</em>的，直到它咬你一口</h2>
+    <h2 data-lang="zh">密碼學的狀態是<em>看不見</em>的——直到出事那一刻才現形</h2>
     <div class="prose">
       <p data-lang="en">The hard part of this tool isn&rsquo;t any single screen — it&rsquo;s that the riskiest state is hidden. A certificate key might itself be encrypted; a BIOS password might not match; a deploy might force a reboot on a machine someone is mid-task on. Each of these is a security or trust state the admin can&rsquo;t see until something fails. My job was to <strong>surface those states, gate progression on them, and make the unsafe path structurally hard to take</strong> — without dumbing the tool down for the experts who depend on its depth.</p>
-      <p data-lang="zh">這個工具難的不是任何單一畫面——而是最危險的狀態是隱藏的。憑證金鑰本身可能被加密；BIOS 密碼可能對不上；一次部署可能在某人工作到一半時強制重啟他的機器。這每一項都是管理者在出錯之前看不見的資安／信任狀態。我的工作是<strong>把這些狀態浮出來、用它們把流程「卡」住，並讓不安全的路徑在結構上就難以走到</strong>——同時不為了簡化，犧牲仰賴其深度的專家。</p>
+      <p data-lang="zh">這個工具真正難的地方，不在任何一個畫面，而在於：最危險的狀態是看不見的。憑證金鑰本身可能被加密；BIOS 密碼可能對不上；一次部署，可能在某人工作到一半時強制重開他的機器。這些都是管理者在出錯之前看不見的資安／信任狀態。我的工作，就是<strong>把這些狀態攤到檯面上、用它們擋住流程，並讓不安全的操作在結構上根本走不到</strong>——同時又不為了簡化，犧牲掉那些需要這套工具深度的專家。</p>
     </div>
   </section>
 
@@ -340,7 +340,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <p data-lang="zh">BIOS 憑證操作所用的金鑰，本身可能被密碼加密。最直覺（但最糟）的行為，是讓管理者在已經送出之後，才撞上一個看不懂的錯誤。</p>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
         <p data-lang="en"><strong>Detected the encrypted state and gated progression</strong> — the next action stays disabled and the flow explains the state in plain language, asking for the key password with the reason rather than an error code. A wrong password returns a clear re-enter path; a correct one unlocks the step. Security state becomes legible and <strong>recoverable</strong>, never a wall.</p>
-        <p data-lang="zh"><strong>偵測到加密狀態並把流程卡住</strong>——下一步維持停用，流程用白話解釋目前狀態，附上原因地請使用者輸入金鑰密碼，而不是丟出一串錯誤碼。密碼錯了，給出清楚的重新輸入路徑；對了，就解鎖該步驟。資安狀態變得看得懂、而且<strong>可復原</strong>，不再是一面牆。</p>
+        <p data-lang="zh"><strong>先偵測到金鑰被加密，就把流程擋下來</strong>——下一步維持停用，並用白話說明現在的狀態、告訴使用者原因，再請他輸入金鑰密碼，而不是丟一串錯誤碼給他。密碼打錯，就給一條清楚的重新輸入路徑；打對了，就解鎖這一步。資安狀態因此變得看得懂、也<strong>救得回來</strong>，不再是一道死牆。</p>
       </div>
     </div>
 
@@ -410,7 +410,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
           </svg>
         </div>
         <p class="fig-cap" data-lang="en">Fig. 2 — Safe-by-default deployment (abstracted reconstruction). Defaults protect the end-user; interlocks protect the admin from themselves.</p>
-        <p class="fig-cap" data-lang="zh">圖 2 — 預設安全的部署（示意重繪）。預設值保護終端使用者；連動式控制保護管理者不出錯。</p>
+        <p class="fig-cap" data-lang="zh">圖 2 — 預設就安全的部署（示意重繪）。預設值保護的是用機器的人；連動式控制保護的是管理者自己不出錯。</p>
       </div>
       <div class="find-body">
         <span class="ftag" data-lang="en">Decision · Fleet deployment</span>
@@ -421,7 +421,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <p data-lang="zh">原本一個高密度的設定畫面，逼管理者一次把所有選項記在腦中——其中有些選項一旦組合錯誤，就會把擾人的更新推送到整批機器。</p>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
         <p data-lang="en"><strong>Split it into a guided flow with safe defaults and interlocked controls.</strong> Admins can suppress the forced reboot so an update never restarts someone mid-task, and hide the install progress bar so end-users on managed machines aren&rsquo;t alarmed. The deploy controls enable and disable together, so an invalid combination simply can&rsquo;t be reached — the structure prevents the unsafe state instead of warning about it afterwards.</p>
-        <p data-lang="zh"><strong>把它拆成引導式流程，搭配安全預設值與連動式控制項。</strong>管理者可關閉強制重啟，讓更新不會在使用者工作中重開機；也可隱藏安裝進度條，避免驚擾受管機器上的終端使用者。部署相關控制項會一起啟用、一起停用，因此根本走不到無效的組合——是用結構防止不安全狀態，而不是事後才警告。</p>
+        <p data-lang="zh"><strong>把它拆成一步一步的引導流程，配上安全的預設值和連動的控制項。</strong>管理者可以關掉強制重啟，更新就不會在別人工作到一半時把機器重開；也可以隱藏安裝進度條，避免嚇到那些正在用被管理機器的人。部署相關的選項會一起開、一起關，所以根本組不出無效的設定——是用結構去擋掉不安全的狀態，而不是等出事了才跳警告。</p>
       </div>
     </div>
 
@@ -505,7 +505,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <p data-lang="zh">想知道機隊部署「為什麼」失敗，管理者得在 SCCM 監控裡逐台下鑽、讀出一個原始 exit code，再回去對照表格才知道真正壞在哪——而且「還在派送中」看起來和「真的失敗」長得一模一樣。</p>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
         <p data-lang="en"><strong>Designed one consolidated result report.</strong> I benchmarked a competitor&rsquo;s compliance report, then rebuilt the model around ASUS&rsquo;s BIOS-config flow: every device&rsquo;s outcome in a single view, each <strong>raw exit code rewritten as a plain-language, item-level result</strong>, a distinct <strong>in-progress</strong> state so &ldquo;not done yet&rdquo; is never read as failure, and one-click CSV export of just the failures. Diagnosis goes from a per-device hunt to a glance.</p>
-        <p data-lang="zh"><strong>設計了一份整合的結果報表。</strong>我先 benchmark 競品的 compliance report，再針對 ASUS 的 BIOS 設定流程重建模型：所有裝置的結果集中在同一視圖，每個<strong>原始 exit code 改寫成逐項、白話的結果</strong>，並獨立出<strong>派送中</strong>狀態，讓「還沒完成」不會被誤判成「失敗」，再加上只匯出失敗項目的一鍵 CSV。診斷從逐台追查，變成一眼看完。</p>
+        <p data-lang="zh"><strong>做了一份整合的結果報表。</strong>我先研究了競品的 compliance report，再重新設計成貼合 ASUS BIOS 設定流程的版本：所有裝置的結果集中在同一個畫面，每個<strong>原始 exit code 都改寫成逐項、白話的結果</strong>，並把<strong>派送中</strong>獨立成一個狀態，讓「還沒跑完」不會被誤認成「失敗」，再加上一鍵只匯出失敗項目的 CSV。診斷從一台一台追查，變成一眼就看完。</p>
       </div>
     </div>
 
@@ -527,7 +527,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
           <h4 data-lang="en">Gated progression on valid state, not on trust</h4>
           <h4 data-lang="zh">用「有效狀態」卡流程，而不是靠信任</h4>
           <p data-lang="en"><span class="trade">Trade-off:</span> a few extra seconds vs. shipping a broken or insecure action across a fleet. I chose to disable the next step until an encrypted key is unlocked and a password validates. At fleet scale, a blocked step is cheap; a bad deployment is not.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>多花幾秒，對上把壞掉或不安全的動作推送到整批機器。我選擇在加密金鑰解鎖、密碼驗證通過之前停用下一步。在機隊規模下，被卡住的步驟很便宜；錯誤的部署不是。</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>多等幾秒，還是把一個壞掉或不安全的動作推送到整批機器。我選擇在金鑰解鎖、密碼驗證通過之前，先停用下一步。在整批機器的規模下，多卡幾秒很便宜；推錯一次部署，代價就很大。</p>
         </div>
       </li>
       <li>
@@ -536,7 +536,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
           <h4 data-lang="en">Explained the security state instead of hiding it</h4>
           <h4 data-lang="zh">把資安狀態說清楚，而不是藏起來</h4>
           <p data-lang="en"><span class="trade">Trade-off:</span> a denser prompt vs. an admin stuck at a cryptic wall. I surfaced <em>why</em> a step is blocked — encrypted key, wrong password — in language a non-developer can act on, rather than a silent failure or an error code.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>較密的提示，對上管理者卡在看不懂的牆前。我把步驟「為什麼」被擋——金鑰加密、密碼錯誤——用非開發者能據以行動的白話講出來，而不是默默失敗或丟一串錯誤碼。</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>提示多一點，還是讓管理者卡在一道看不懂的牆前面。我選擇把「這一步為什麼被擋」——金鑰被加密、密碼錯了——用非技術人員也能照著做的白話講清楚，而不是默默失敗、或丟一串錯誤碼。</p>
         </div>
       </li>
       <li>
@@ -545,7 +545,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
           <h4 data-lang="en">Let structure prevent invalid states</h4>
           <h4 data-lang="zh">讓結構本身防止無效狀態</h4>
           <p data-lang="en"><span class="trade">Trade-off:</span> less raw flexibility vs. fewer fleet-scale mistakes. Interlocked controls and stepped disclosure remove whole classes of error before they happen — I&rsquo;d rather make the wrong action unreachable than warn about it.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>較少的原始彈性，對上較少的機隊級錯誤。連動式控制與分步揭露，在錯誤發生前就消去整類問題——我寧可讓錯誤動作走不到，也不要事後才警告。</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>少一點自由度，換來整批機器少出一些錯。用連動的控制項和一步步揭露的設計，在錯誤發生之前就把一整類問題消掉——我寧可讓錯的操作根本做不出來，也不要等它做了才警告。</p>
         </div>
       </li>
     </ul>
@@ -574,8 +574,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       </div>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">The encrypted-credential, safe-deploy and reporting flows shipped inside ASUS Config Manager, which extends Microsoft SCCM with BIOS configuration and Intune / DFCI remote management, and is positioned by ASUS as roughly <strong>2× faster for BIOS &amp; driver management</strong> than standard SCCM. The clearer win I can speak to is legibility: diagnosing a failed fleet deployment used to mean drilling through the SCCM monitor one device at a time and reading a raw exit code, then matching it to a table to learn what broke. The consolidated report collapses that into <strong>one view across the whole fleet</strong>, rewrites every raw code as a plain-language item-level result, separates &ldquo;in-progress&rdquo; from real failure, and adds one-click CSV export of just the failures.</p>
-      <p data-lang="zh">加密憑證、安全部署與結果報表這幾條流程，隨 ASUS Config Manager 出貨；該產品以 BIOS 設定與 Intune / DFCI 遠端管理擴充 Microsoft SCCM，並由華碩定位為 BIOS 與驅動管理約<strong>較標準 SCCM 快 2 倍</strong>。而我更能明確講的成果是「看得懂」：過去要診斷一次機隊部署失敗，得在 SCCM 監控裡逐台下鑽、讀出原始 exit code，再對照表格才知道壞在哪。整合報表把這件事收斂成<strong>整批機隊的單一視圖</strong>，把每個原始碼改寫成逐項白話結果，把「派送中」和「真的失敗」分開，並加上只匯出失敗項目的一鍵 CSV。</p>
+      <p data-lang="en">The encrypted-credential, safe-deploy and reporting flows shipped inside ASUS Config Manager — which extends Microsoft SCCM with BIOS configuration and Intune / DFCI remote management, and is positioned by ASUS as roughly <strong>2× faster for BIOS &amp; driver management</strong> than standard SCCM. The win I can speak to most directly is legibility: fleet-wide diagnosis that used to be a per-device hunt through raw exit codes now reads at a glance.</p>
+      <p data-lang="zh">加密憑證、安全部署與結果報表這幾條流程，隨 ASUS Config Manager 出貨——該產品以 BIOS 設定與 Intune / DFCI 遠端管理擴充 Microsoft SCCM，並由華碩定位為 BIOS 與驅動管理約<strong>較標準 SCCM 快 2 倍</strong>。我最能直接講的成果是「看得懂」：過去要逐台追查原始 exit code 的機隊診斷，現在一眼看完。</p>
       <p data-lang="en" style="font-size:.92rem;color:var(--muted);">Note — figures describe design scope I own (states surfaced, codes rewritten), not internal business metrics. Adoption, ticket-volume or device-count numbers are deliberately left out unless verified.</p>
       <p data-lang="zh" style="font-size:.92rem;color:var(--muted);">註——上述數字描述的是我負責的設計範圍（呈現的狀態數、改寫的錯誤碼），不是內部商業指標。採用數、工單量或裝置數在未經查證前刻意不列。</p>
     </div>
@@ -588,7 +588,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
     <h2 data-lang="zh">資安 UX，是讓<em>不安全的路</em>難以走到</h2>
     <div class="prose">
       <p data-lang="en">Security UX isn&rsquo;t decoration on top of cryptography. It is making cryptographic and policy state legible, and making the unsafe action structurally hard — ideally impossible — to reach. On a fleet tool the highest-leverage move is to prevent an invalid or insecure action before it ships, then explain every blocked state in language a non-developer admin can act on. That same conviction — that complex, high-stakes systems deserve interfaces that reduce fear rather than add to it — is what I want to bring to security products at scale.</p>
-      <p data-lang="zh">資安 UX 不是在密碼學上面貼裝飾。它是把密碼學與政策的狀態變得看得懂，並讓不安全的動作在結構上難以——最好是不可能——走到。在機隊工具上，槓桿最大的動作，是在錯誤動作送出之前就先防止它，再把每一個被擋的狀態，用非開發者能據以行動的語言講清楚。同樣的信念——複雜、高風險的系統，值得一個降低恐懼而非製造恐懼的介面——就是我想帶進大規模資安產品的東西。</p>
+      <p data-lang="zh">資安 UX 不是在密碼學外面貼一層裝飾。它是把密碼學和政策的狀態變得看得懂，並讓不安全的動作在結構上很難——最好是根本不可能——做得出來。在這種管理整批機器的工具上，最有效的做法，是在錯誤的動作送出去之前就先擋住它，再把每一個被擋下來的狀態，用非技術人員也能照著行動的話講清楚。複雜、高風險的系統，本來就該配上一個能降低恐懼、而不是製造恐懼的介面——這個信念，正是我想帶進大型資安產品的東西。</p>
     </div>
   </section>
 
