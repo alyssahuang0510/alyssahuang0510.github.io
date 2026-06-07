@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>履歷 · Alyssa Huang — Product Designer</title>
-<meta name="description" content="Alyssa Huang 履歷 — 8+ 年產品設計師，專注 B2B 系統與端側 AI 產品。工業檢測系統 TR7600 完整 redesign（核心工作流 −37%）、ASUS Config Manager、File Search。" />
+<title>Résumé · Alyssa Huang — Senior Product Designer</title>
+<meta name="description" content="Alyssa Huang — Senior Product Designer. ~8 years across enterprise systems (industrial inspection, IT endpoint management) and on-device AI products. Engineer-turned-designer; sole UI/UX owner of TR7600 AXI (board programming −37%); File Search & ASUS Config Manager at ASUS." />
 <meta name="robots" content="index, follow" />
+
+<!-- Set language before paint to avoid flash -->
+<script>
+(function(){
+  var KEY='ah-lang', lang=null;
+  try{ var s=localStorage.getItem(KEY); if(s==='en'||s==='zh') lang=s; }catch(e){}
+  if(!lang){
+    var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    for(var i=0;i<ls.length;i++){ var L=(ls[i]||'').toLowerCase();
+      if(L.indexOf('zh')===0){lang='zh';break;}
+      if(L.indexOf('en')===0){lang='en';break;}
+    }
+    if(!lang) lang='en';
+  }
+  var h=document.documentElement;
+  h.classList.add('lang-'+lang);
+  h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+})();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,17 +53,28 @@ p{margin:0;}
 .container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
 .accent{color:var(--accent-2);font-weight:600;}
 
+/* Language toggle visibility */
+html.lang-en [data-lang="zh"]{display:none !important;}
+html.lang-zh [data-lang="en"]{display:none !important;}
+[data-lang="zh"]{letter-spacing:normal;}
+[data-lang="zh"] em{font-style:normal;}
+
 /* Nav */
 .nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--rule);}
 .nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:.86rem;white-space:nowrap;}
 .brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
 .brand strong{font-weight:500;letter-spacing:-0.01em;}
-.nav-right{display:flex;align-items:center;gap:18px;}
-.nav-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-link{font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;transition:color .18s;white-space:nowrap;}
 .nav-link:hover{color:var(--accent);}
-.nav-print{font-family:var(--ff-mono);font-size:.76rem;letter-spacing:.03em;padding:8px 14px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
+.lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
+.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg:not(.on):hover{color:var(--accent);}
+.nav-print{font-family:var(--ff-mono);font-size:.76rem;letter-spacing:.03em;padding:8px 14px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;white-space:nowrap;}
 .nav-print:hover{background:var(--ink);color:#fff;}
+@media (max-width:560px){.nav-link span.lbl{display:none;}}
 
 /* Header */
 .r-head{padding:clamp(44px,6vw,80px) 0 clamp(30px,3.5vw,44px);}
@@ -60,12 +90,15 @@ p{margin:0;}
 .sec h2{font-weight:600;font-size:clamp(1.4rem,3vw,2rem);line-height:1.2;letter-spacing:-0.02em;margin-bottom:clamp(20px,2.5vw,28px);}
 
 /* Summary */
-.summary{max-width:72ch;font-size:1.04rem;line-height:2;color:var(--ink-2);}
+.summary{max-width:74ch;font-size:1.04rem;line-height:2;color:var(--ink-2);}
+.summary[data-lang="en"]{line-height:1.85;}
 .summary strong{color:var(--ink);font-weight:600;}
 
 /* Skills */
 .skills{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
 .skills .row{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:20px;padding:16px 22px;}
+.skills .row.core{background:var(--bg-2);}
+.skills .row.core span{color:var(--ink);font-weight:500;}
 .skills .row b{font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.03em;color:var(--accent-2);font-weight:600;padding-top:2px;}
 .skills .row span{font-size:.95rem;color:var(--ink-2);line-height:1.7;}
 @media (max-width:640px){.skills .row{grid-template-columns:1fr;gap:6px;}}
@@ -76,14 +109,19 @@ p{margin:0;}
 .job-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:6px;}
 .job-head h3{font-weight:600;font-size:1.32rem;letter-spacing:-0.01em;}
 .job-head .when{font-family:var(--ff-mono);font-size:.78rem;color:var(--muted);white-space:nowrap;}
-.job .title{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.02em;color:var(--accent-2);margin-bottom:18px;}
+.job .title{font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.02em;color:var(--accent-2);margin-bottom:6px;}
+.job .official{font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:14px;max-width:78ch;}
 .block{margin-top:22px;}
 .block .bt{font-family:var(--ff-display);font-weight:600;font-size:1.06rem;letter-spacing:-0.01em;margin-bottom:6px;}
-.block .ctx{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:12px;max-width:74ch;}
+.block .ctx{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:12px;max-width:78ch;}
 .block ul{list-style:none;margin:0;padding:0;display:grid;gap:11px;}
 .block ul li{font-size:.96rem;color:var(--ink-2);line-height:1.7;padding-left:24px;position:relative;}
 .block ul li::before{content:"";position:absolute;left:0;top:.75em;width:13px;height:2px;background:var(--accent);border-radius:1px;}
 .block ul li strong{color:var(--ink);font-weight:600;}
+
+/* Gap note */
+.gap-note{border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);padding:14px 0;margin:4px 0 0;}
+.gap-note span{font-family:var(--ff-mono);font-size:.84rem;letter-spacing:.02em;color:var(--muted);}
 
 /* Education */
 .edu{display:grid;gap:0;border-top:1px solid var(--rule);}
@@ -96,6 +134,7 @@ p{margin:0;}
 /* Footer */
 .r-foot{background:var(--dark);color:#fff;padding:clamp(48px,6vw,76px) 0 28px;margin-top:clamp(40px,5vw,64px);}
 .r-foot .big{font-weight:600;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.1;letter-spacing:-0.02em;margin-bottom:26px;}
+.r-foot .big[data-lang="zh"]{line-height:1.25;}
 .r-foot .big em{font-style:normal;color:#6E8BFF;}
 .r-foot .actions{display:flex;flex-wrap:wrap;gap:12px;}
 .r-foot a.btn{font-family:var(--ff-mono);font-size:.8rem;letter-spacing:.03em;padding:12px 18px;border:1px solid #fff;border-radius:7px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;}
@@ -132,38 +171,45 @@ p{margin:0;}
   <div class="container inner">
     <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
     <div class="nav-right">
-      <a class="nav-link" href="index.html"><span aria-hidden="true">←</span> 回到作品</a>
-      <button class="nav-print" type="button" onclick="window.print()">列印 / 存 PDF</button>
+      <a class="nav-link" href="index.html"><span aria-hidden="true">←</span> <span class="lbl" data-lang="en">Back to work</span><span class="lbl" data-lang="zh">回到作品</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-seg" data-set="en" type="button" aria-pressed="false">EN</button>
+        <button class="lang-seg" data-set="zh" type="button" aria-pressed="false">中</button>
+      </div>
+      <button class="nav-print" type="button" onclick="window.print()"><span data-lang="en">Print / Save PDF</span><span data-lang="zh">列印 / 存 PDF</span></button>
     </div>
   </div>
 </nav>
 
 <header class="r-head">
   <div class="container">
-    <div class="role">Product Designer · B2B Systems &amp; On-device AI</div>
+    <div class="role">Senior Product Designer · Enterprise Systems &amp; On-device AI</div>
     <h1>Alyssa Huang</h1>
     <div class="contact">
-      <span>台北</span>
+      <span data-lang="en">Taipei</span><span data-lang="zh">台北</span>
       <a href="mailto:alyssahuang0510@gmail.com">alyssahuang0510@gmail.com</a>
       <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      <a href="index.html">作品集 →</a>
+      <a href="index.html"><span data-lang="en">Portfolio →</span><span data-lang="zh">作品集 →</span></a>
     </div>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- 個人簡介 -->
+  <!-- 個人簡介 / Summary -->
   <section class="sec reveal">
-    <span class="sec-num">[01] &nbsp; 個人簡介</span>
-    <p class="summary">8+ 年產品 / UX 設計師，專注 <strong>B2B 系統</strong>與<strong>端側 AI 產品</strong>，擅長將高資訊密度、技術受限的產品，轉譯為使用者能信任操作的工具。獨力主導工業檢測系統 TR7600 完整 redesign，核心工作流時間縮短 <strong>37%</strong>（295 → 186 分鐘），部署於 Tier-1 全球 EMS 製造商。現於華碩與 PM 共同推進端側 AI 產品 File Search：主導其體驗與產品行為設計，涵蓋 unified search 資訊架構、搜尋結果階層，以及索引在裝置記憶體上限下的生命週期取捨。具<strong>資訊管理（學士）＋互動設計（碩士）</strong>雙背景與 6 年軟體開發實戰，能以工程共同語言推進產品決策、加速跨團隊收斂。</p>
+    <span class="sec-num">[01] &nbsp; <span data-lang="en">Summary</span><span data-lang="zh">個人簡介</span></span>
+    <p class="summary" data-lang="en">An engineer-turned-product-designer with <strong>~8 years</strong> across enterprise systems (industrial inspection, IT endpoint management) and on-device AI products — focused on turning information-dense, technically constrained products into tools people can operate with confidence. At TRI, while holding a <strong>Senior Software Engineer</strong> title, I was the de facto sole owner of the TR7600 AXI inspection software's full UI/UX redesign, cutting total board-programming time by <strong>37–39%</strong> across two production boards (295→186 &amp; 386→237 min) on a system deployed at Tier-1 global EMS manufacturers. At ASUS I drive the experience and product behaviour of the on-device AI product <strong>File Search</strong> alongside the PM — owning its unified-search information architecture, result hierarchy, and the index-lifecycle trade-offs under on-device memory limits. A dual background in Information Management (B.S.) and Interaction Design (M.S.), plus six years of hands-on software development, lets me move product decisions forward in engineering's own language and converge cross-functional teams faster.</p>
+    <p class="summary" data-lang="zh">工程出身、約 <strong>8 年</strong>產品／UX 經歷的設計師，橫跨企業級系統（工業檢測、IT 端點管理）與端側 AI 產品，擅長將高資訊密度、技術受限的產品，轉譯為使用者能信任操作的工具。在德律以 <strong>Senior Software Engineer</strong> 任內、實質獨力負責工業檢測系統 TR7600 AXI 的完整 UI/UX redesign，總編程時間縮短 <strong>37–39%</strong>（跨兩塊量產板：295→186、386→237 分鐘），部署於 Tier-1 全球 EMS 製造商。現於華碩與 PM 共同推進端側 AI 產品 <strong>File Search</strong>：主導其體驗與產品行為設計，涵蓋 unified search 資訊架構、搜尋結果階層，以及索引在裝置記憶體上限下的生命週期取捨。具資訊管理（學士）＋互動設計（碩士）雙背景與 6 年軟體開發實戰，能以工程共同語言推進產品決策、加速跨團隊收斂。</p>
   </section>
 
-  <!-- 核心技能 -->
+  <!-- 核心技能 / Skills -->
   <section class="sec reveal">
-    <span class="sec-num">[02] &nbsp; 核心技能</span>
-    <h2>能力組合</h2>
+    <span class="sec-num">[02] &nbsp; <span data-lang="en">Skills</span><span data-lang="zh">核心技能</span></span>
+    <h2 data-lang="en">Capabilities</h2>
+    <h2 data-lang="zh">能力組合</h2>
     <div class="skills">
+      <div class="row core"><b><span data-lang="en">Core Competencies</span><span data-lang="zh">核心能力</span></b><span>Product Design ｜ End-to-end Product Ownership (0→1) ｜ Information Architecture ｜ Systems &amp; Platform UX ｜ Design Strategy &amp; Trade-off Analysis ｜ On-device AI Product UX ｜ Enterprise B2B SaaS ｜ Security UX ｜ Cross-functional &amp; Engineering Collaboration ｜ Usability Research (qual + quant)</span></div>
       <div class="row"><b>Design Focus</b><span>Product Design / UX Strategy / End-to-end Product Ownership / Systems Design / Cross-product UX Standards</span></div>
       <div class="row"><b>UX Methods</b><span>Information Architecture / Sitemap Design / User Flow / Wireframing / Prototyping / Interaction Design / Design System / Design Guideline / Accessibility (WCAG) / Cross-platform Design</span></div>
       <div class="row"><b>User Research &amp; Analysis</b><span>User Interview (Qualitative) / Field Study &amp; Contextual Inquiry / Survey Research (Quantitative) / Competitive Analysis / Usability Testing / Heuristic Evaluation / Analytics-driven Design (Google Analytics) / Experience Risk Assessment / Trade-off Analysis</span></div>
@@ -179,124 +225,198 @@ p{margin:0;}
     </div>
   </section>
 
-  <!-- 工作經歷 -->
+  <!-- 工作經歷 / Experience -->
   <section class="sec reveal">
-    <span class="sec-num">[03] &nbsp; 工作經歷</span>
-    <h2>工作經歷</h2>
+    <span class="sec-num">[03] &nbsp; <span data-lang="en">Experience</span><span data-lang="zh">工作經歷</span></span>
+    <h2 data-lang="en">Experience</h2>
+    <h2 data-lang="zh">工作經歷</h2>
 
     <!-- ASUS -->
     <div class="job">
       <div class="job-head">
-        <h3>華碩電腦股份有限公司 ASUS · UX Designer</h3>
-        <span class="when">2024.06 – 至今 · 台北</span>
+        <h3 data-lang="en">ASUSTeK Computer Inc. · UX Designer</h3>
+        <h3 data-lang="zh">華碩電腦股份有限公司 ASUS · UX Designer</h3>
+        <span class="when"><span data-lang="en">2024.06 – Present · Taipei</span><span data-lang="zh">2024.06 – 至今 · 台北</span></span>
       </div>
 
-      <div class="block">
-        <div class="bt">Enterprise IT Management — ASUS Config Manager (ACM)</div>
-        <p class="ctx">ACM 為 ASUS Control Center 套件中的 SCCM 擴展工具，支援 ASUS Commercial 全產品線（Notebook / Desktop / All-in-One，2020 年後機種）。</p>
-        <ul>
-          <li><strong>達成 BIOS 與 Driver 管理效率為標準 SCCM 兩倍</strong>，支援 Silent Update，作為 ASUS Control Center 套件中的 SCCM 擴展模組</li>
-          <li>完成 v1.0 (2024.10) 至 v2.0 (2026.02) 多版本 UX 端到端交付，涵蓋 Information Architecture、User Flow、Wireframe 至 Prototype；跨 RD、PM、QTC 團隊協調規格收斂</li>
-          <li>設計 Driver Management（Driver Package Creator、Driver Updater、Driver Updater Policy）與 BIOS Management（BIOS Updater、BIOS Authentication with Certificate Key、BIOS Configuration、BIOS Asset Tag）核心模組 UX</li>
-        </ul>
-      </div>
-
+      <!-- File Search -->
       <div class="block">
         <div class="bt">On-device AI Products — File Search (MyExpert AI Assistant)</div>
-        <p class="ctx">File Search 為 ASUS MyExpert（2026 商務 AI 助理產品）旗下獨立 APP，定位為 all-in-one file manager，整合本地與雲端檔案於單一介面。</p>
-        <ul>
-          <li><strong>主動建立 MyExpert、IT Console、MyASUS 三產品線共同 UX 行為準則</strong>，推動團隊持續新增與維護，提升跨產品設計一致性</li>
-          <li>唯一 UX 負責人，從概念到上市完整主導 File Search 產品設計，作為 MyExpert AI 助理生態下整合本地與雲端檔案之獨立 APP</li>
-          <li>定義 unified search 資訊架構與漸進式揭露策略；規劃並實作 Accessibility（WCAG）合規設計，確保產品於企業部署環境符合無障礙標準</li>
+        <p class="ctx" data-lang="en">File Search is a standalone app under ASUS MyExpert (a 2026 commercial AI-assistant product), positioned as an all-in-one file manager that unifies local and cloud files in one interface; product positioning and launch timeline led by the PM.</p>
+        <p class="ctx" data-lang="zh">File Search 為 ASUS MyExpert（2026 商務 AI 助理產品）旗下獨立 APP，定位為 all-in-one file manager，整合本地與雲端檔案於單一介面；產品定位與上市時程由 PM 主導。</p>
+        <ul data-lang="en">
+          <li><strong>Designed index-lifecycle behaviour under on-device memory limits</strong> — as the on-device semantic index nears the device memory ceiling, the current version proactively releases least-recently-used entries to preserve device performance, making an explicit "data completeness vs. device performance" trade-off; concurrently defined a deletion-free next-generation index architecture.</li>
+          <li>Sole UX owner; drove the product alongside the PM, leading File Search's entire experience and product-behaviour design (positioning &amp; launch timeline led by PM).</li>
+          <li>Defined the unified-search information architecture, progressive-disclosure strategy, and result hierarchy across local and multi-cloud sources (OneDrive, Dropbox, Google Drive), balancing power-user efficiency with first-time-user approachability.</li>
+          <li>Planned and implemented File Search accessibility (WCAG), ensuring compliance for enterprise-deployment scenarios.</li>
+          <li>Proactively proposed a cross-product-line UX behaviour standard — shared interaction norms across MyExpert, the enterprise IT management console, and MyASUS — and drove the team to maintain and extend it.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li><strong>設計索引生命週期在裝置記憶體上限下的行為取捨</strong>：當端側語意索引接近裝置記憶體上限時，現行版本主動釋放最久未使用項目以維持裝置效能，並在「資料完整性 vs 裝置效能」之間做出明確取捨；同步定義免刪除的下一代索引架構。</li>
+          <li>唯一 UX 負責人；與 PM 共同推進產品，主導 File Search 全體驗與產品行為設計（產品定位與上市時程由 PM 主導）。</li>
+          <li>定義 unified search 資訊架構、漸進式揭露策略與跨本機與多雲端來源（OneDrive、Dropbox、Google Drive）之搜尋結果階層，平衡進階用戶效率與新用戶可上手程度。</li>
+          <li>規劃並實作 File Search 無障礙 UX（Accessibility / WCAG），確保產品於企業部署情境下符合無障礙標準。</li>
+          <li>主動提出跨產品線共同 UX 行為準則，建立 MyExpert、企業 IT 管理主控台、MyASUS 三產品線共同遵循之互動規範，並推動團隊持續新增與維護。</li>
         </ul>
       </div>
 
+      <!-- Config Manager -->
+      <div class="block">
+        <div class="bt">Enterprise IT Management — ASUS Config Manager (ACM)</div>
+        <p class="ctx" data-lang="en">ACM is the SCCM-extension tool in the ASUS Control Center suite, supporting the full ASUS Commercial line (Notebook / Desktop / All-in-One, 2020+ models); ASUS positions its BIOS &amp; driver management as ~2× the efficiency of standard SCCM.</p>
+        <p class="ctx" data-lang="zh">ACM 為 ASUS Control Center 套件中的 SCCM 擴展工具，支援 ASUS Commercial 全產品線（Notebook / Desktop / All-in-One，2020 年後機種）；官方標示其 BIOS 與 Driver 管理效率為標準 SCCM 兩倍。</p>
+        <ul data-lang="en">
+          <li>Designed the UX of ACM's core modules — translating technical complexity such as BIOS certificate authentication and driver-deployment policy into an interface IT admins operate directly: Driver Management (Driver Package Creator, Driver Updater, Driver Updater Policy) and BIOS Management (BIOS Updater, BIOS Authentication with Certificate Key, BIOS Configuration, BIOS Asset Tag).</li>
+          <li>Owned ACM's full UX — Information Architecture, User Flow, Wireframe through Prototype — supporting enterprise endpoint-management scenarios such as Silent Update.</li>
+          <li>Led ACM's multi-version UX evolution from v1.0 (2024.10) to v2.0 (2026.02), converging specs across RD, PM, and QTC teams.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>設計 ACM 核心模組 UX，將 BIOS 憑證驗證與 Driver 派送政策等技術複雜度，轉譯為 IT 管理者可直接操作的介面：Driver Management（Driver Package Creator、Driver Updater、Driver Updater Policy）與 BIOS Management（BIOS Updater、BIOS Authentication with Certificate Key、BIOS Configuration、BIOS Asset Tag）。</li>
+          <li>負責 ACM 完整 UX，從 Information Architecture、User Flow、Wireframe 至 Prototype，支援 Silent Update 等企業端點管理情境。</li>
+          <li>主導 ACM 從 v1.0 首發版本（2024.10）至 v2.0（2026.02）多版本 UX 演進，與 RD、PM、QTC 跨團隊協調規格收斂。</li>
+        </ul>
+      </div>
+
+      <!-- ROG / Zenfone -->
       <div class="block">
         <div class="bt">Mobile Platform &amp; On-device AI Integration — ROG / Zenfone</div>
-        <p class="ctx">Android GMS 平台與 AI 功能於電競（ROG）與商用（Zenfone）行動產品線之系統層級 UX 設計。</p>
-        <ul>
-          <li><strong>緊急處理中國區陀螺儀客訴危機，1 個月內完成 7 件客訴解決與 4 件退貨案件挽回</strong>，跨部門協調（客服、RD、MKT）並基於玩家行為研究調整設計，避免品牌與營收損失</li>
-          <li>從零設計 ROG 陀螺儀控制體驗——介面呈現為單一開關，背後進行深度研究涵蓋靈敏度極端值範圍與射擊遊戲玩家習慣模式，完成靈敏度校準、遊戲內整合與用戶校準流程</li>
-          <li>設計 Gemini Assistant 預設整合與 Circle to Search 等 6+ Android 平台功能 UX，跨 ROG（電競）與 Zenfone（商用）兩條產品線，涵蓋 Settings Architecture、入口設計、跨功能衝突處理與既有 ASUS AI 功能共存策略</li>
-          <li>整合電競選手深度訪談、ROG 用戶大規模研究與 Google Analytics 數據作為設計決策依據；常態監控 ZenTalk 繁中論壇、ROG Forum、官方社群與客服等多元管道用戶反饋</li>
-          <li>跨部門協作對象涵蓋 MKT、SQ (QTC)、RD、SWPM、SPM，進行需求收斂與可行性評估</li>
+        <p class="ctx" data-lang="en">System-level UX for the Android GMS platform and AI features across the gaming (ROG) and commercial (Zenfone) mobile product lines.</p>
+        <p class="ctx" data-lang="zh">Android GMS 平台與 AI 功能於電競（ROG）與商用（Zenfone）行動產品線之系統層級 UX 設計。</p>
+        <ul data-lang="en">
+          <li><strong>Designed the ROG gyroscope control experience from zero</strong> — surfaced as a single switch, backed by deep research into sensitivity extremes and shooter-gamer habit patterns; completed sensitivity calibration, in-game integration, and the user-calibration flow.</li>
+          <li><strong>After launch, handled an urgent China-region complaint crisis — resolving 7 complaints and recovering 4 return cases within one month</strong> — coordinating across CS, RD, and MKT and adjusting the design from player-behaviour research, averting brand and revenue loss.</li>
+          <li>Designed the default Gemini Assistant integration UX and the Circle to Search integration across both ROG and Zenfone — Settings architecture, entry points, and conflict handling with existing ASUS AI features.</li>
+          <li>On top of existing Android behaviour, owned ASUS-side settings architecture, toggle UI, and entry points across Predictive Back, Edge-to-edge, Auto Rotate, screen recording, Gemini Assistant, and Circle to Search.</li>
+          <li>Defined conflict-resolution rules between mutually exclusive features and assessed knock-on effects systematically; differentiated integration strategy by the distinct mental models of gaming vs. commercial lines.</li>
+          <li>Ran qualitative esports-player interviews and large-scale ROG user research with Google Analytics data as the basis for prioritisation; monitored feedback across ZenTalk (TC forum), ROG Forum, official communities, fan groups, and support. Cross-functional partners: MKT, SQ (QTC), RD, SWPM, SPM.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li><strong>從零設計 ROG 陀螺儀控制體驗</strong>——介面呈現為單一開關，背後進行深度研究涵蓋靈敏度極端值範圍與射擊遊戲玩家習慣模式，完成靈敏度校準、遊戲內整合與用戶校準流程設計。</li>
+          <li><strong>於陀螺儀功能上市後，緊急處理中國區用戶客訴危機，1 個月內完成 7 件客訴解決與 4 件退貨案件挽回</strong>，跨部門協調（含客服、RD、MKT）並基於玩家行為研究調整設計，避免品牌與營收損失。</li>
+          <li>設計 Gemini Assistant 預設整合與 Circle to Search 整合 UX，跨 ROG 與 Zenfone 兩條產品線，涵蓋 Settings Architecture、入口設計、與既有 ASUS AI 功能之衝突處理。</li>
+          <li>於 Android 平台既有行為之上，負責 ASUS 端設定架構、開關 UI 與入口設計，涵蓋 Predictive Back、Edge-to-edge、Auto Rotate、螢幕錄影、Gemini Assistant、Circle to Search 等功能。</li>
+          <li>定義互斥功能間的衝突處理規則，系統性評估對既有功能之連帶影響；依電競與商用產品線之用戶心智模型差異化整合策略。</li>
+          <li>執行電競選手深度訪談與大規模 ROG 用戶研究，結合 Google Analytics 量化數據作為功能優先序依據；常態監控 ZenTalk 繁中論壇、ROG Forum、官方社群、粉絲社團與客服等多元管道反饋。跨部門協作對象涵蓋 MKT、SQ (QTC)、RD、SWPM、SPM。</li>
         </ul>
       </div>
 
+      <!-- Cross-product / AI workflow -->
       <div class="block">
         <div class="bt">Cross-product Module Design &amp; AI Workflow Methodology</div>
-        <ul>
-          <li><strong>建立 AI 輔助 UX 設計工作流框架並文件化方法論，獲 10 人設計團隊採用</strong>於 sitemap 規劃與 UIRS 文件流程</li>
-          <li>實作並推廣部門使用 AI 工具（Claude、Gemini、ChatGPT、NotebookLM）進行 vibe coding，快速生成情境分析、prototype 與簡報，加速跨團隊問題討論與設計分析</li>
-          <li>負責 IT Console（開發中，2026 規劃上線）核心模組 UX：電池管理、儲存空間設定、警報狀態、預測結果、電源計畫部署與結果回報、更新部署與更新狀態</li>
-          <li>跨產品線常態執行競品分析、使用者訪談（質化）、問卷調查（量化）、體驗風險評估與優劣分析，作為跨部門溝通與設計決策依據</li>
+        <ul data-lang="en">
+          <li>Designed the battery, storage, and power-saving module UX of the enterprise IT management console (in development): low-battery / low-capacity alerts, battery &amp; disk health prediction, power-plan deployment, and energy-saving reporting.</li>
+          <li>Routinely ran competitive analysis, qualitative interviews, quantitative surveys, experience-risk assessment, and trade-off analysis across product lines as the basis for cross-functional communication and design decisions.</li>
+          <li>Proposed an AI-assisted UX workflow framework to the design lead, validated on the IT-console project — confirming the full project sitemap within 2 weeks; documented the methodology and FigJam templates, adopted by the 10-person design team for sitemap planning and UIRS documentation.</li>
+          <li>Implemented and championed department use of AI tools (Claude, Gemini, ChatGPT, NotebookLM) for vibe coding — rapidly generating scenario analyses, prototypes, and decks to accelerate cross-team discussion.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>設計企業 IT 管理主控台（開發中）之電池、儲存與節能模組 UX：低電量／低容量提醒、電池與硬碟健康預測、電源計畫部署與節能成效回報。</li>
+          <li>跨產品線常態執行競品分析、使用者訪談（質化）、問卷調查（量化）、體驗風險評估與優劣分析，作為跨部門溝通與設計決策依據。</li>
+          <li>向設計主管提案 AI 輔助 UX 工作流框架，驗證於企業 IT 管理主控台專案，於 2 週內完成整個專案 Sitemap 架構確認；文件化方法論與 FigJam 範本，獲 10 人設計團隊採用於 sitemap 規劃與 UIRS 文件流程。</li>
+          <li>實作並推廣部門使用 AI 工具（Claude、Gemini、ChatGPT、NotebookLM）進行 vibe coding，快速生成情境分析、prototype 與簡報，加速跨團隊問題討論與設計分析。</li>
         </ul>
       </div>
+    </div>
+
+    <!-- Gap -->
+    <div class="gap-note">
+      <span data-lang="en"><strong>2023 – 2024 · Career break</strong> (family circumstances &amp; health recovery)</span>
+      <span data-lang="zh"><strong>2023 – 2024 · 職涯空檔</strong>（家庭因素與健康調整）</span>
     </div>
 
     <!-- TRI -->
     <div class="job">
       <div class="job-head">
-        <h3>德律科技股份有限公司 TRI · Senior Software Engineer（高級工程師）</h3>
-        <span class="when">2017.04 – 2023.04 · 台北</span>
+        <h3 data-lang="en">Test Research Inc. (TRI) · Senior Software Engineer</h3>
+        <h3 data-lang="zh">德律科技股份有限公司 TRI · 高級軟體工程師</h3>
+        <span class="when">2017.04 – 2023.04 · <span data-lang="en">Taipei</span><span data-lang="zh">台北</span></span>
       </div>
-      <p class="title">職能：TR7600 Automated X-Ray Inspection (AXI) 系統唯一 UI/UX 負責人</p>
-      <p class="ctx" style="margin-bottom:0;">TR7600 為電子與半導體製造業 PCB 元件品質檢測設備，部署於 Tier-1 全球 EMS 製造商（Foxconn、Quanta、Wistron、OSE）多條製造產線，覆蓋主要消費性電子產品產線。德律全球服務 3,000+ 家電子製造業客戶、50+ 國際代理商。</p>
+      <p class="title" data-lang="en">Official title: AXI System Software R&amp;D Engineer (level: Senior Engineer) · Function: sole UI/UX owner of the TR7600 AXI system (6 years)</p>
+      <p class="title" data-lang="zh">正式職稱：AXI 系統軟體研發工程師（職階：高級工程師） · 職能：TR7600 AXI 系統唯一 UI/UX 負責人（6 年）</p>
+      <p class="official" data-lang="en">TR7600 is PCB-component quality-inspection equipment for the electronics and semiconductor manufacturing industry, deployed across multiple production lines at Tier-1 global EMS manufacturers (Foxconn, Quanta, Wistron, OSE), covering major consumer-electronics lines. TRI serves 3,000+ electronics-manufacturing clients and 50+ international distributors worldwide.</p>
+      <p class="official" data-lang="zh">TR7600 為電子與半導體製造業 PCB 元件品質檢測設備，部署於 Tier-1 全球 EMS 製造商（Foxconn、Quanta、Wistron、OSE）多條製造產線，覆蓋主要消費性電子產品產線。德律全球服務 3,000+ 家電子製造業客戶、50+ 國際代理商。</p>
 
       <div class="block">
-        <div class="bt">TR7600 AXI 完整 Redesign（量化驗證）</div>
-        <ul>
-          <li><strong>主導 TR7600 AXI v34257 → v36333 完整產品 redesign，單板總編程時間從 295 分鐘縮短至 186 分鐘，降幅 37%（節省 109 分鐘）</strong></li>
-          <li><strong>重新設計 Library 與 Fine Tune 兩大高耗時工作流：Library 縮短 38%（124 → 76 分鐘）、Fine Tune 縮短 51%（158 → 77 分鐘）</strong></li>
-          <li>部署於 Tier-1 全球 EMS 製造商：Foxconn、Quanta、Wistron、OSE 多條製造產線</li>
-          <li>親赴客戶工廠執行 Field Study 與 Contextual Inquiry，對現場操作員與製程工程師進行情境訪查與實地觀察，將研究發現轉譯為設計決策</li>
-          <li>定義高資訊密度檢測儀表板之 IA、互動模式、視覺階層，平衡進階用戶效率與新進操作員可上手程度</li>
+        <div class="bt">TR7600 AXI Full Redesign — Quantified</div>
+        <ul data-lang="en">
+          <li><strong>Led the full TR7600 AXI v34257 → v36333 redesign and shipped it to production myself — from IA, User Flow, Wireframe, and hi-fi Prototype to interface implementation — cutting total board-programming time by 37–39%, independently timed by FAE teams on two production boards (4,160-component: 295→186 min; 3,495-component: 386→237 min).</strong></li>
+          <li><strong>Redesigned the two most time-consuming workflows: Library −39% (124 → 76 min), Fine Tune −51% (158 → 77 min).</strong></li>
+          <li>Defined the IA, interaction patterns, and visual hierarchy of a high-information-density inspection dashboard, balancing power-user efficiency with new-operator approachability.</li>
+          <li>Conducted on-site Field Study &amp; Contextual Inquiry at customer factories — contextual interviews and direct observation of line operators and process engineers — translating findings into design decisions and validating via before/after board-programming-time measurement.</li>
+          <li>Deployed across multiple production lines at Tier-1 global EMS manufacturers: Foxconn, Quanta, Wistron, OSE.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li><strong>主導 TR7600 AXI v34257 → v36333 完整產品 redesign 並親自實作上線，從 IA、User Flow、Wireframe、高保真 Prototype 至介面實作，總編程時間縮短 37–39%，由 FAE 團隊在兩塊量產板上獨立量測（4,160 顆：295→186 分；3,495 顆：386→237 分）。</strong></li>
+          <li><strong>重新設計 Library 與 Fine Tune 兩大高耗時工作流：Library 縮短 39%（124 → 76 分鐘）、Fine Tune 縮短 51%（158 → 77 分鐘）。</strong></li>
+          <li>定義高資訊密度檢測儀表板之 IA、互動模式、視覺階層，平衡進階用戶效率與新進操作員可上手程度。</li>
+          <li>親赴客戶工廠執行 Field Study 與 Contextual Inquiry，對現場操作員與製程工程師進行情境訪查與實地觀察，將研究發現轉譯為設計決策，並透過部署前後單板編程時間量測驗證成效。</li>
+          <li>部署於 Tier-1 全球 EMS 製造商：Foxconn、Quanta、Wistron、OSE 多條製造產線。</li>
         </ul>
       </div>
 
       <div class="block">
-        <div class="bt">Design System、Design Guideline &amp; Internationalization</div>
-        <ul>
-          <li><strong>建立 AXI 產品線統一設計系統，跨 10 個 TR7600 系列機種共用單一 UX 框架</strong>，並定義並維護 Design Guideline 達 6 年（涵蓋互動模式、視覺規範、組件樣式、文件規範）</li>
-          <li>主導多國語系架構，支援 5 種語系（English、Traditional Chinese、Simplified Chinese、Spanish、Japanese），擔任國際化與在地化問題主要負責人</li>
+        <div class="bt">Design System, Design Guideline &amp; Internationalization</div>
+        <ul data-lang="en">
+          <li><strong>Built a unified design system for the AXI product line — a single UX framework shared across 10 TR7600-series machine variants</strong> — and defined and maintained the Design Guideline for 6 years (interaction patterns, visual standards, component styles, documentation norms).</li>
+          <li>Led the multi-language architecture supporting 5 locales (English, Traditional Chinese, Simplified Chinese, Spanish, Japanese), as primary owner of internationalization and localization issues.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li><strong>建立 AXI 產品線統一設計系統，跨 10 個 TR7600 系列機種共用單一 UX 框架</strong>，並定義與維護 Design Guideline 達 6 年（涵蓋互動模式、視覺規範、組件樣式、文件規範）。</li>
+          <li>主導多國語系架構，支援 5 種語系（English、Traditional Chinese、Simplified Chinese、Spanish、Japanese），擔任國際化與在地化問題主要負責人。</li>
         </ul>
       </div>
 
       <div class="block">
         <div class="bt">Design Practice &amp; Cross-functional Process Innovation</div>
-        <ul>
-          <li><strong>設計並導入「客戶 → FAE → RD」跨部門需求收斂流程，獲 AXI 產品線 FAE 與 RD 共 50+ 人員採用並持續實踐</strong>，解決需求傳遞失真與規格收斂效率問題</li>
-          <li>於工程主導之硬體製造公司從零導入 Product Design 實踐，將用戶研究、可用性評估、原型製作嵌入工程主導之開發週期</li>
-          <li>擔任內部 UX 講師傳授 20+ RD 工程師使用 Design Guideline，並推動 UX 體驗訓練成為公司新人必修課程</li>
+        <ul data-lang="en">
+          <li><strong>Designed and rolled out a "Customer → FAE → RD" requirements-convergence process — a requirement-definition table with constraint rules, adopted and sustained by 50+ AXI-line FAE and RD staff</strong> — solving requirement-transmission distortion and spec-convergence efficiency.</li>
+          <li>Introduced Product Design practice from zero at an engineering-led hardware manufacturer, embedding user research, usability evaluation, and prototyping into an engineering-led development cycle.</li>
+          <li>Served as internal UX instructor for 20+ RD engineers on the Design Guideline, and made UX-experience training a required course for new hires.</li>
+          <li>Wrote design-document styles and reusable templates, applied across all 10 machine variants of the AXI line.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li><strong>設計並導入「客戶 → FAE → RD」跨部門需求收斂流程，建立需求定義表格規範與填寫限制條件，獲 AXI 產品線 FAE 與 RD 共 50+ 人員採用並持續實踐</strong>，解決需求傳遞失真與規格收斂效率問題。</li>
+          <li>於工程主導之硬體製造公司從零導入 Product Design 實踐，將用戶研究、可用性評估、原型製作嵌入工程主導之開發週期。</li>
+          <li>擔任內部 UX 講師傳授 20+ RD 工程師使用 Design Guideline，並推動 UX 體驗訓練成為公司新人必修課程。</li>
+          <li>撰寫設計文件樣式與可重用設計範本，套用至 AXI 產品線全 10 個機種。</li>
         </ul>
       </div>
 
       <div class="block">
-        <div class="bt">自動化檢測流程設計</div>
-        <ul>
-          <li>設計 PASS / FAIL 自動化報表與機台報警系統，支援客戶端個別 QA 需求</li>
-          <li>建構 GRR（Gauge R&amp;R）量測重複性分析工具與 Alignment Fiducial 檢測 UX，簡化現場操作員校準流程</li>
+        <div class="bt"><span data-lang="en">Automated Inspection Process Design</span><span data-lang="zh">自動化檢測流程設計</span></div>
+        <ul data-lang="en">
+          <li>Designed PASS / FAIL automated reports and a machine-alarm system to support customer-specific QA needs.</li>
+          <li>Built a GRR (Gauge R&amp;R) measurement-repeatability analysis tool and Alignment Fiducial inspection UX, simplifying on-site operator calibration.</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>設計 PASS / FAIL 自動化報表與機台報警系統，支援客戶端個別 QA 需求。</li>
+          <li>建構 GRR（Gauge R&amp;R）量測重複性分析工具與 Alignment Fiducial 檢測 UX，簡化現場操作員校準流程。</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 學歷 -->
+  <!-- 學歷 / Education -->
   <section class="sec reveal">
-    <span class="sec-num">[04] &nbsp; 學歷</span>
-    <h2>學歷</h2>
+    <span class="sec-num">[04] &nbsp; <span data-lang="en">Education</span><span data-lang="zh">學歷</span></span>
+    <h2 data-lang="en">Education</h2>
+    <h2 data-lang="zh">學歷</h2>
     <div class="edu">
       <div class="e">
         <div>
-          <b>國立臺北科技大學 · 互動設計研究所 碩士</b>
-          <div class="meta">設計能力學歷根基；碩士論文方向：AR 復健遊戲（C# / Unity3D）</div>
+          <b data-lang="en">National Taipei University of Technology · M.S., Institute of Interaction Design</b>
+          <b data-lang="zh">國立臺北科技大學 · 互動設計研究所 碩士</b>
+          <div class="meta" data-lang="en">Foundation of design capability; thesis direction: AR rehabilitation game (C# / Unity3D)</div>
+          <div class="meta" data-lang="zh">設計能力學歷根基；碩士論文方向：AR 復健遊戲（C# / Unity3D）</div>
         </div>
         <span class="when">2014.09 – 2016.06</span>
       </div>
       <div class="e">
         <div>
-          <b>世新大學 · 資訊管理系 資訊科技組 學士</b>
-          <div class="meta">程式能力學歷根基；課程涵蓋軟體開發、資料庫、系統分析</div>
+          <b data-lang="en">Shih Hsin University · B.A., Dept. of Information Management (IT Group)</b>
+          <b data-lang="zh">世新大學 · 資訊管理系 資訊科技組 學士</b>
+          <div class="meta" data-lang="en">Foundation of engineering capability; coursework in software development, databases, systems analysis</div>
+          <div class="meta" data-lang="zh">程式能力學歷根基；課程涵蓋軟體開發、資料庫、系統分析</div>
         </div>
         <span class="when">2010.09 – 2014.06</span>
       </div>
@@ -307,18 +427,38 @@ p{margin:0;}
 
 <footer class="r-foot">
   <div class="container">
-    <p class="big">聊聊<em>難搞的工具</em>吧。</p>
+    <p class="big" data-lang="en">Let&rsquo;s talk about <em>hard tools.</em></p>
+    <p class="big" data-lang="zh">聊聊<em>難搞的工具</em>吧。</p>
     <div class="actions">
-      <a class="btn primary" href="index.html">檢視作品集 <span aria-hidden="true">→</span></a>
-      <a class="btn" href="mailto:alyssahuang0510@gmail.com">來信 <span aria-hidden="true">→</span></a>
+      <a class="btn primary" href="index.html"><span data-lang="en">View portfolio</span><span data-lang="zh">檢視作品集</span> <span aria-hidden="true">→</span></a>
+      <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
       <a class="btn" href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Product Designer · 台北</div>
+    <div class="base">© 2026 Alyssa Huang · Senior Product Designer · <span data-lang="en">Taipei</span><span data-lang="zh">台北</span></div>
   </div>
 </footer>
 
 <script>
 (function(){
+  var KEY='ah-lang';
+  function cur(){ return document.documentElement.classList.contains('lang-zh') ? 'zh' : 'en'; }
+  function apply(lang){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+lang);
+    h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+    var segs=document.querySelectorAll('.lang-seg');
+    for(var i=0;i<segs.length;i++){
+      var on = segs[i].getAttribute('data-set')===lang;
+      segs[i].classList.toggle('on', on);
+      segs[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  apply(cur());
+  var segs=document.querySelectorAll('.lang-seg');
+  for(var i=0;i<segs.length;i++){
+    segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
+  }
   var io=new IntersectionObserver(function(es){
     for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('in'); io.unobserve(es[i].target); } }
   }, { threshold:0.08, rootMargin:'0px 0px -40px 0px' });
