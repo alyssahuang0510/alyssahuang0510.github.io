@@ -414,6 +414,68 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <div class="gbody"><h4 data-lang="en">Inspection summary</h4><h4 data-lang="zh">檢測總覽</h4></div>
       </div>
     </div>
+    <div class="chart-fig" style="margin-top:34px;">
+      <svg viewBox="0 0 840 372" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Before-and-after of the Fine Tune step. Before: two separate pages, F3 and F4, each requiring a manually typed height value. After: one Fine Tune page where height is set by mouse-wheel, driving a 51% time reduction.">
+        <text x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">FINE TUNE · BEFORE &#8594; AFTER</text>
+
+        <!-- BEFORE label -->
+        <text x="24" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#A1A1A6">BEFORE &#183; 2 PAGES, MANUAL ENTRY</text>
+
+        <!-- F3 window -->
+        <rect x="24" y="64" width="300" height="118" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/>
+        <rect x="24" y="64" width="300" height="24" rx="6" fill="#0C0C0D"/>
+        <rect x="24" y="78" width="300" height="10" fill="#0C0C0D"/>
+        <text x="38" y="80" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">F3 &#183; Component height</text>
+        <text x="40" y="118" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">Height</text>
+        <rect x="110" y="104" width="120" height="22" rx="3" fill="#FFFFFF" stroke="#A1A1A6"/>
+        <text x="120" y="119" font-family="Geist Mono, monospace" font-size="10.5" fill="#6E6E73">1.42 mm</text>
+        <text x="240" y="119" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">&#9000; type</text>
+        <text x="40" y="156" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">calc by hand &#8594; re-enter</text>
+
+        <!-- F4 window -->
+        <rect x="24" y="200" width="300" height="118" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/>
+        <rect x="24" y="200" width="300" height="24" rx="6" fill="#0C0C0D"/>
+        <rect x="24" y="214" width="300" height="10" fill="#0C0C0D"/>
+        <text x="38" y="216" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">F4 &#183; Threshold</text>
+        <text x="40" y="254" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">Value</text>
+        <rect x="110" y="240" width="120" height="22" rx="3" fill="#FFFFFF" stroke="#A1A1A6"/>
+        <text x="120" y="255" font-family="Geist Mono, monospace" font-size="10.5" fill="#6E6E73">0.85 mm</text>
+        <text x="240" y="255" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">&#9000; type</text>
+        <text x="40" y="292" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">switch page &#8594; lose context</text>
+
+        <!-- arrow -->
+        <line x1="356" y1="190" x2="486" y2="190" stroke="#2B4DE0" stroke-width="1.4"/>
+        <path d="M486 190 l-9 -5 v10 z" fill="#2B4DE0"/>
+        <text x="360" y="178" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#2B4DE0">MERGED INTO ONE</text>
+
+        <!-- AFTER window -->
+        <text x="516" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#2B4DE0">AFTER &#183; 1 PAGE, WHEEL ADJUST</text>
+        <rect x="516" y="64" width="300" height="254" rx="6" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <rect x="516" y="64" width="300" height="24" rx="6" fill="#0C0C0D"/>
+        <rect x="516" y="78" width="300" height="10" fill="#0C0C0D"/>
+        <text x="530" y="80" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">Fine Tune &#183; one page</text>
+        <text x="532" y="116" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">Height</text>
+        <rect x="600" y="102" width="150" height="24" rx="3" fill="#EDF0FC" stroke="#2B4DE0"/>
+        <text x="612" y="118" font-family="Geist Mono, monospace" font-size="10.5" fill="#0C0C0D">1.42 mm</text>
+        <circle cx="735" cy="114" r="9" fill="none" stroke="#2B4DE0" stroke-width="1.3"/>
+        <line x1="735" y1="109" x2="735" y2="119" stroke="#2B4DE0" stroke-width="1.3"/>
+        <path d="M731 110 l4 -4 l4 4" fill="none" stroke="#2B4DE0" stroke-width="1.1"/>
+        <path d="M731 118 l4 4 l4 -4" fill="none" stroke="#2B4DE0" stroke-width="1.1"/>
+        <text x="532" y="150" font-family="Geist Mono, monospace" font-size="9.5" fill="#2B4DE0">scroll to set &#8594; live readout, no typing</text>
+        <line x1="532" y1="168" x2="800" y2="168" stroke="#E6E6E4"/>
+        <text x="532" y="192" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">Threshold</text>
+        <rect x="600" y="178" width="150" height="24" rx="3" fill="#EDF0FC" stroke="#2B4DE0"/>
+        <text x="612" y="194" font-family="Geist Mono, monospace" font-size="10.5" fill="#0C0C0D">0.85 mm</text>
+        <text x="532" y="234" font-family="Geist Mono, monospace" font-size="9.5" fill="#6E6E73">F3 + F4 in one context &#183; no page switch</text>
+        <rect x="532" y="256" width="120" height="40" rx="5" fill="#0C0C0D"/>
+        <text x="592" y="280" font-family="Geist Mono, monospace" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">&#8722;51%</text>
+        <text x="664" y="274" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">Fine Tune time</text>
+        <text x="664" y="290" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">158 &#8594; 77 min</text>
+      </svg>
+      <p class="fig-cap" data-lang="en">Fig. 2 — The largest single saving, reconstructed. Two pages (F3 / F4) requiring a hand-calculated, typed height became one Fine Tune page where height is set by mouse-wheel with a live readout — collapsing the slowest step and cutting its time 51%.</p>
+      <p class="fig-cap" data-lang="zh">圖 2 — 單項最大的時間縮短（示意重繪）。原本要手算、手打高度的兩頁（F3／F4），併成單一 Fine Tune 頁，改以滑鼠滾輪即時調整——把最慢的步驟收成一頁，時間縮短 51%。</p>
+    </div>
   </section>
 
   <!-- 06 Key decisions -->

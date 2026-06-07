@@ -475,6 +475,58 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <p data-lang="en">The from-zero features shipped across ROG and Zenfone on one shared, maintainable system. The clashes that used to resolve themselves silently — Circle to Search vs. the assistant, the duplicate Screen Recording controls — now resolve by an explicit rule, and future platform features inherit that ruleset instead of re-litigating each conflict.</p>
       <p data-lang="zh">從零的功能在 ROG 與 Zenfone 上交付，共用同一套可維護的系統。過去那些會自己默默分出勝負、讓另一個悄悄失效的衝突——Circle to Search 跟助理搶同一個手勢、螢幕錄影控制項重複——如今都依明確規則解決；未來的平台功能可以直接沿用這套規則，不必每次重打一輪。</p>
     </div>
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en">The same system lens held under live pressure. When a gyroscope feature drew a cluster of field complaints in the China region after launch, I treated it as a research signal rather than a one-off bug — studied the player behaviour behind the reports, adjusted the design accordingly, and closed the issue fast.</p>
+      <p data-lang="zh">同一套系統視角，在真實壓力下一樣成立。陀螺儀功能上市後在中國區引發一波客訴時，我把它當成研究訊號、而不是單一 bug——研究客訴背後玩家真正的使用行為，據此調整設計，並快速收掉問題。</p>
+    </div>
+    <div class="chart-fig" style="margin-top:8px;">
+      <svg viewBox="0 0 840 196" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="A four-step flow: a cluster of seven field complaints in the China region after launch becomes a player-behaviour study, which drives a design adjustment, resolving all seven complaints and recovering four returns within one month.">
+        <text x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">FIELD SIGNAL &#8594; RESEARCH &#8594; DESIGN &#8594; RECOVERY</text>
+
+        <!-- node 1 SIGNAL -->
+        <rect x="12" y="44" width="174" height="120" rx="7" fill="#FFFFFF" stroke="#E6E6E4"/>
+        <rect x="12" y="44" width="174" height="24" rx="7" fill="#0C0C0D"/><rect x="12" y="58" width="174" height="10" fill="#0C0C0D"/>
+        <text x="26" y="60" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#FFFFFF">SIGNAL</text>
+        <text x="26" y="92" font-family="Geist Mono, monospace" font-size="15" font-weight="600" fill="#0C0C0D">7 complaints</text>
+        <text x="26" y="116" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">China region</text>
+        <text x="26" y="134" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">post-launch</text>
+
+        <line x1="186" y1="104" x2="216" y2="104" stroke="#2B4DE0" stroke-width="1.4"/><path d="M224 104 l-9 -5 v10 z" fill="#2B4DE0"/>
+
+        <!-- node 2 RESEARCH -->
+        <rect x="224" y="44" width="174" height="120" rx="7" fill="#FFFFFF" stroke="#E6E6E4"/>
+        <rect x="224" y="44" width="174" height="24" rx="7" fill="#0C0C0D"/><rect x="224" y="58" width="174" height="10" fill="#0C0C0D"/>
+        <text x="238" y="60" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#FFFFFF">RESEARCH</text>
+        <text x="238" y="92" font-family="Geist Mono, monospace" font-size="11.5" fill="#0C0C0D">Player-behaviour</text>
+        <text x="238" y="110" font-family="Geist Mono, monospace" font-size="11.5" fill="#0C0C0D">study</text>
+        <text x="238" y="134" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">what players</text>
+        <text x="238" y="150" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">actually did</text>
+
+        <line x1="398" y1="104" x2="428" y2="104" stroke="#2B4DE0" stroke-width="1.4"/><path d="M436 104 l-9 -5 v10 z" fill="#2B4DE0"/>
+
+        <!-- node 3 DESIGN -->
+        <rect x="436" y="44" width="174" height="120" rx="7" fill="#FFFFFF" stroke="#E6E6E4"/>
+        <rect x="436" y="44" width="174" height="24" rx="7" fill="#0C0C0D"/><rect x="436" y="58" width="174" height="10" fill="#0C0C0D"/>
+        <text x="450" y="60" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#FFFFFF">DESIGN</text>
+        <text x="450" y="92" font-family="Geist Mono, monospace" font-size="11.5" fill="#0C0C0D">Gyroscope</text>
+        <text x="450" y="110" font-family="Geist Mono, monospace" font-size="11.5" fill="#0C0C0D">behaviour</text>
+        <text x="450" y="128" font-family="Geist Mono, monospace" font-size="11.5" fill="#0C0C0D">adjusted</text>
+        <text x="450" y="150" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">to real usage</text>
+
+        <line x1="610" y1="104" x2="640" y2="104" stroke="#2B4DE0" stroke-width="1.4"/><path d="M648 104 l-9 -5 v10 z" fill="#2B4DE0"/>
+
+        <!-- node 4 OUTCOME -->
+        <rect x="648" y="44" width="174" height="120" rx="7" fill="#EDF0FC" stroke="#2B4DE0" stroke-width="1.5"/>
+        <rect x="648" y="44" width="174" height="24" rx="7" fill="#2B4DE0"/><rect x="648" y="58" width="174" height="10" fill="#2B4DE0"/>
+        <text x="662" y="60" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#FFFFFF">OUTCOME</text>
+        <text x="662" y="92" font-family="Geist Mono, monospace" font-size="15" font-weight="600" fill="#0C0C0D">7 resolved</text>
+        <text x="662" y="116" font-family="Geist Mono, monospace" font-size="13" font-weight="600" fill="#0C0C0D">4 returns back</text>
+        <text x="662" y="140" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">within 1 month</text>
+      </svg>
+      <p class="fig-cap" data-lang="en">Fig. 3 — A post-launch field crisis, handled as research. Seven China-region complaints about the gyroscope feature became a player-behaviour study that drove a design adjustment — resolving all seven and recovering four returns within a month.</p>
+      <p class="fig-cap" data-lang="zh">圖 3 — 把上市後的現場危機，當研究來處理。陀螺儀功能在中國區的 7 件客訴，化成一份玩家行為研究、據以調整設計——一個月內解決全部 7 件、並挽回 4 件退貨。</p>
+    </div>
   </section>
 
   <!-- 08 Reflection -->

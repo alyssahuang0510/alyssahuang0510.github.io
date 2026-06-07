@@ -212,6 +212,73 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <p data-lang="en">File Search lets people query local and cloud files from one place, and ships pre-installed on ASUS commercial notebooks, AiOs and desktops from 2026 onward. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
       <p data-lang="zh">File Search 讓使用者在同一個地方查詢本機和雲端的檔案，自 2026 年起預載於華碩的商用筆電、一體機與桌機。它不是埋在選單裡的某個功能，而是 MyExpert 裡和 Chat、Knowledge Hub、ExpertMeet 並列的一個 App。也正因為它跑在一般的商用機器上，就必須在沒有專屬伺服器、也沒有人在旁邊顧著的情況下，依然好用。</p>
     </div>
+    <div class="chart-fig" style="margin-top:8px;">
+      <svg viewBox="0 0 840 404" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Information architecture decision. Before: four separate places to search — local files, cloud drive, Chat, Knowledge Hub. After: one query returns a single ranked list spanning all sources, delivered as a standalone peer app alongside Chat, Knowledge Hub and ExpertMeet rather than a search box inside one of them.">
+        <text x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">INFORMATION ARCHITECTURE &#183; 4 SOURCES &#8594; 1 QUERY</text>
+
+        <!-- BEFORE -->
+        <text x="24" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#A1A1A6">BEFORE &#183; 4 PLACES TO LOOK</text>
+        <g font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">
+          <rect x="24" y="64" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <circle cx="44" cy="84" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="88" x2="52" y2="92" stroke="#A1A1A6"/>
+          <text x="62" y="88">Local files</text>
+          <rect x="24" y="114" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <circle cx="44" cy="134" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="138" x2="52" y2="142" stroke="#A1A1A6"/>
+          <text x="62" y="138">Cloud drive</text>
+          <rect x="24" y="164" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <circle cx="44" cy="184" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="188" x2="52" y2="192" stroke="#A1A1A6"/>
+          <text x="62" y="188">Chat history</text>
+          <rect x="24" y="214" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <circle cx="44" cy="234" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="238" x2="52" y2="242" stroke="#A1A1A6"/>
+          <text x="62" y="238">Knowledge Hub</text>
+        </g>
+        <text x="24" y="278" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">each with its own search box, scope and ranking</text>
+
+        <!-- converging arrows -->
+        <g stroke="#2B4DE0" stroke-width="1.2" fill="none">
+          <path d="M234 84 C 300 84, 320 159, 392 159"/>
+          <path d="M234 134 C 300 134, 330 159, 392 159"/>
+          <path d="M234 184 C 300 184, 330 159, 392 159"/>
+          <path d="M234 234 C 300 234, 320 159, 392 159"/>
+        </g>
+        <path d="M392 159 l-9 -5 v10 z" fill="#2B4DE0"/>
+        <text x="262" y="120" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#2B4DE0">UNIFIED</text>
+
+        <!-- AFTER -->
+        <text x="470" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#2B4DE0">AFTER &#183; 1 QUERY, 1 RANKED LIST</text>
+        <rect x="470" y="64" width="346" height="34" rx="6" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <circle cx="492" cy="81" r="6" fill="none" stroke="#2B4DE0"/><line x1="496.5" y1="85.5" x2="501" y2="90" stroke="#2B4DE0"/>
+        <text x="510" y="85" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">one query, every source</text>
+        <g font-family="Geist Mono, monospace" font-size="9">
+          <rect x="470" y="110" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <rect x="480" y="118" width="46" height="14" rx="2" fill="#0C0C0D"/><text x="503" y="128" fill="#FFFFFF" text-anchor="middle">LOCAL</text>
+          <text x="536" y="128" font-size="10.5" fill="#3A3A3D">Q3-report-final.xlsx</text>
+          <rect x="470" y="144" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <rect x="480" y="152" width="46" height="14" rx="2" fill="#2B4DE0"/><text x="503" y="162" fill="#FFFFFF" text-anchor="middle">CLOUD</text>
+          <text x="536" y="162" font-size="10.5" fill="#3A3A3D">vendor-contract.pdf</text>
+          <rect x="470" y="178" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <rect x="480" y="186" width="46" height="14" rx="2" fill="#6E6E73"/><text x="503" y="196" fill="#FFFFFF" text-anchor="middle">CHAT</text>
+          <text x="536" y="196" font-size="10.5" fill="#3A3A3D">spec thread &#183; June</text>
+          <rect x="470" y="212" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
+          <rect x="480" y="220" width="46" height="14" rx="2" fill="#A1A1A6"/><text x="503" y="230" fill="#FFFFFF" text-anchor="middle">HUB</text>
+          <text x="536" y="230" font-size="10.5" fill="#3A3A3D">onboarding guide</text>
+        </g>
+        <text x="470" y="262" font-family="Geist Mono, monospace" font-size="9.5" fill="#6E6E73">ranked together, source shown &#8212; not four separate result sets</text>
+
+        <!-- peer-app boundary -->
+        <line x1="24" y1="312" x2="816" y2="312" stroke="#E6E6E4"/>
+        <text x="24" y="336" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#6E6E73">BOUNDARY DECISION &#183; A PEER APP IN MYEXPERT, NOT A SEARCH BOX INSIDE ONE</text>
+        <g font-family="Geist Mono, monospace" font-size="10.5">
+          <rect x="24" y="350" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/><text x="109" y="373" fill="#3A3A3D" text-anchor="middle">Chat</text>
+          <rect x="208" y="350" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/><text x="293" y="373" fill="#3A3A3D" text-anchor="middle">Knowledge Hub</text>
+          <rect x="392" y="350" width="170" height="38" rx="6" fill="#EDF0FC" stroke="#2B4DE0" stroke-width="1.4"/><text x="477" y="373" fill="#0C0C0D" text-anchor="middle">File Search</text>
+          <rect x="576" y="350" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/><text x="661" y="373" fill="#3A3A3D" text-anchor="middle">ExpertMeet</text>
+        </g>
+      </svg>
+      <p class="fig-cap" data-lang="en">Fig. 1 — The core IA call. Four separate places to search collapse into one query returning a single ranked list with the source shown — and File Search is scoped as a peer app inside MyExpert, owning its own IA and roadmap, rather than a search box bolted inside another product.</p>
+      <p class="fig-cap" data-lang="zh">圖 1 — 最核心的資訊架構決策。四個各自獨立的搜尋入口，收斂成一個查詢、一份標明來源的排序清單——並把 File Search 定位成 MyExpert 裡的並列 App，擁有自己的資訊架構與 roadmap，而不是塞進別的產品裡的一個搜尋框。</p>
+    </div>
   </section>
 
   <!-- 02 Role -->
@@ -290,8 +357,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <line x1="185" y1="262" x2="185" y2="138" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
         <text x="200" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="start">resources free up</text>
       </svg>
-      <p class="fig-cap" data-lang="en">Fig. 1 — The semantic index governs itself: it builds while resources are sufficient, pauses as they tighten, prunes least-recently-used entries when pressure peaks, then settles once headroom returns.</p>
-      <p class="fig-cap" data-lang="zh">圖 1 — 語意索引自己調節：資源夠時就建立，資源變緊就暫停，壓力到頂時優先釋放最久沒用到的項目，空間回來後再停止釋放。</p>
+      <p class="fig-cap" data-lang="en">Fig. 2 — The semantic index governs itself: it builds while resources are sufficient, pauses as they tighten, prunes least-recently-used entries when pressure peaks, then settles once headroom returns.</p>
+      <p class="fig-cap" data-lang="zh">圖 2 — 語意索引自己調節：資源夠時就建立，資源變緊就暫停，壓力到頂時優先釋放最久沒用到的項目，空間回來後再停止釋放。</p>
     </div>
 
     <div class="prose" style="margin-top:30px;">
@@ -329,8 +396,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <line x1="310" y1="50" x2="310" y2="172" stroke="#2B4DE0" stroke-width="0.9" stroke-dasharray="4 4"/>
         <text x="150" y="194" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Sleep fires first &rarr; idle is never reached &rarr; the index never updates.</text>
       </svg>
-      <p class="fig-cap" data-lang="en">Fig. 2 — When the sleep timer is shorter than the idle threshold, idle never triggers — so the redesigned condition can&rsquo;t strand the index.</p>
-      <p class="fig-cap" data-lang="zh">圖 2 — 當睡眠時間短於閒置門檻，閒置永遠不會觸發——所以重新設計的條件不能把索引晾在那裡。</p>
+      <p class="fig-cap" data-lang="en">Fig. 3 — When the sleep timer is shorter than the idle threshold, idle never triggers — so the redesigned condition can&rsquo;t strand the index.</p>
+      <p class="fig-cap" data-lang="zh">圖 3 — 當睡眠時間短於閒置門檻，閒置永遠不會觸發——所以重新設計的條件不能把索引晾在那裡。</p>
     </div>
 
     <div class="note">
