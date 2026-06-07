@@ -273,8 +273,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   <!-- 04 Decisions -->
   <section class="sec reveal">
     <span class="sec-num">[04] &nbsp; <span data-lang="en">Design decisions</span><span data-lang="zh">設計決策</span></span>
-    <h2 data-lang="en">Two flows, one principle: <em>never fail silently</em></h2>
-    <h2 data-lang="zh">兩條流程，一個原則：<em>絕不默默失敗</em></h2>
+    <h2 data-lang="en">Three decisions, one principle: <em>never fail silently</em></h2>
+    <h2 data-lang="zh">三個決策，一個原則：<em>絕不默默失敗</em></h2>
 
     <!-- Decision A -->
     <div class="find reveal">
@@ -425,6 +425,90 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       </div>
     </div>
 
+    <!-- Decision C -->
+    <div class="find reveal">
+      <div class="find-media">
+        <div class="chart-fig fig-tag">
+          <span class="tg"><span data-lang="en">Schematic · Result report</span><span data-lang="zh">示意 · 結果報表</span></span>
+          <svg viewBox="0 0 840 360" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="Before-and-after schematic of failure diagnosis: before, an admin drills through a pie chart, a device list, and one device's raw exit code, then matches it against a lookup table; after, a single consolidated report lists the whole fleet with plain-language status and a one-click export.">
+            <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">FAILURE DIAGNOSIS · BEFORE &rarr; AFTER</text>
+
+            <!-- BEFORE panel -->
+            <text x="0" y="54" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#6E6E73">BEFORE &middot; PER-DEVICE DRILL-DOWN</text>
+            <!-- pie -->
+            <circle cx="40" cy="98" r="22" fill="#E5484D"/>
+            <path d="M40 98 L40 76 A22 22 0 0 1 58 88 Z" fill="#3DA35D"/>
+            <text x="74" y="94" font-family="Geist, sans-serif" font-size="12.5" fill="#0C0C0D">Deployment failed</text>
+            <text x="74" y="110" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">click pie &rarr; view status</text>
+            <!-- arrow down -->
+            <line x1="40" y1="124" x2="40" y2="146" stroke="#6E6E73" stroke-width="1.3"/><path d="M40 146 l-5 -9 l10 0 z" fill="#6E6E73"/>
+            <!-- device list -->
+            <rect x="0" y="150" width="180" height="50" rx="7" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.3"/>
+            <line x1="14" y1="166" x2="120" y2="166" stroke="#E6E6E4" stroke-width="6"/>
+            <line x1="14" y1="180" x2="150" y2="180" stroke="#E6E6E4" stroke-width="6"/>
+            <text x="0" y="216" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">pick ONE device &rarr; more details</text>
+            <!-- arrow down -->
+            <line x1="40" y1="222" x2="40" y2="244" stroke="#6E6E73" stroke-width="1.3"/><path d="M40 244 l-5 -9 l10 0 z" fill="#6E6E73"/>
+            <!-- raw code -->
+            <rect x="0" y="248" width="180" height="46" rx="7" fill="#161618"/>
+            <text x="16" y="270" font-family="Geist Mono, monospace" font-size="11" fill="#A1A1A6">Exit Code:</text>
+            <text x="86" y="270" font-family="Geist Mono, monospace" font-size="12" fill="#FFFFFF">12</text>
+            <text x="16" y="286" font-family="Geist Mono, monospace" font-size="9" fill="#6E6E73">? match to code table by hand</text>
+
+            <!-- transform arrow -->
+            <line x1="206" y1="180" x2="250" y2="180" stroke="#0C0C0D" stroke-width="1.6"/><path d="M250 180 l-10 -6 l0 12 z" fill="#0C0C0D"/>
+            <text x="200" y="166" font-family="Geist Mono, monospace" font-size="9" fill="#2B4DE0">REDESIGN</text>
+
+            <!-- AFTER panel -->
+            <text x="276" y="54" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#2B4DE0">AFTER &middot; ONE CONSOLIDATED REPORT</text>
+            <rect x="276" y="64" width="564" height="252" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
+            <!-- header bar -->
+            <rect x="276" y="64" width="564" height="40" rx="12" fill="#0C0C0D"/>
+            <rect x="276" y="84" width="564" height="20" fill="#0C0C0D"/>
+            <text x="296" y="89" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">SN</text>
+            <text x="392" y="89" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">MODEL</text>
+            <text x="560" y="89" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">STATUS</text>
+            <text x="700" y="89" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">REASON</text>
+            <!-- row 1 compliant -->
+            <text x="296" y="136" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">1677…78</text>
+            <text x="392" y="136" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">B1402CGA</text>
+            <circle cx="566" cy="132" r="5" fill="#3DA35D"/><text x="578" y="136" font-family="Geist, sans-serif" font-size="12" fill="#0C0C0D">Compliant</text>
+            <text x="700" y="136" font-family="Geist, sans-serif" font-size="12" fill="#6E6E73">All items applied</text>
+            <line x1="292" y1="150" x2="824" y2="150" stroke="#EFEFED"/>
+            <!-- row 2 error -->
+            <text x="296" y="184" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">1677…81</text>
+            <text x="392" y="184" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">B1402CGA</text>
+            <circle cx="566" cy="180" r="5" fill="#E5484D"/><text x="578" y="184" font-family="Geist, sans-serif" font-size="12" fill="#0C0C0D">Error</text>
+            <text x="700" y="184" font-family="Geist, sans-serif" font-size="12" fill="#0C0C0D">Model name mismatch</text>
+            <line x1="292" y1="198" x2="824" y2="198" stroke="#EFEFED"/>
+            <!-- row 3 in progress -->
+            <text x="296" y="232" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">1677…92</text>
+            <text x="392" y="232" font-family="Geist Mono, monospace" font-size="11" fill="#3A3A3D">B3404CVA</text>
+            <circle cx="566" cy="228" r="5" fill="#A1A1A6"/><text x="578" y="232" font-family="Geist, sans-serif" font-size="12" fill="#0C0C0D">In progress</text>
+            <text x="700" y="232" font-family="Geist, sans-serif" font-size="12" fill="#6E6E73">Not reported yet</text>
+            <!-- export -->
+            <rect x="700" y="270" width="124" height="30" rx="15" fill="#2B4DE0"/>
+            <text x="762" y="289" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Export CSV</text>
+            <text x="296" y="289" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">whole fleet &middot; plain language</text>
+          </svg>
+        </div>
+        <p class="fig-cap" data-lang="en">Fig. 3 — Consolidated result report (abstracted reconstruction). The raw exit code becomes a reason an admin can act on; the whole fleet is one view, not a per-device hunt.</p>
+        <p class="fig-cap" data-lang="zh">圖 3 — 整合結果報表（示意重繪）。原始 exit code 變成管理者能據以行動的原因；整批機隊在同一個視圖，而不是逐台追查。</p>
+      </div>
+      <div class="find-body">
+        <span class="ftag" data-lang="en">Decision · Result report</span>
+        <span class="ftag" data-lang="zh">設計決策 · 結果報表</span>
+        <h3 data-lang="en">A failed deploy shouldn&rsquo;t mean reading exit codes by hand</h3>
+        <h3 data-lang="zh">部署失敗，不該還要人工去讀 exit code</h3>
+        <p data-lang="en">To learn <em>why</em> a fleet deployment failed, an admin had to drill through the SCCM monitor one device at a time, read a raw exit code, then cross-reference it against a table to find out what actually broke — and the in-progress state looked identical to a real failure.</p>
+        <p data-lang="zh">想知道機隊部署「為什麼」失敗，管理者得在 SCCM 監控裡逐台下鑽、讀出一個原始 exit code，再回去對照表格才知道真正壞在哪——而且「還在派送中」看起來和「真的失敗」長得一模一樣。</p>
+        <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
+        <p data-lang="en"><strong>Designed one consolidated result report.</strong> I benchmarked a competitor&rsquo;s compliance report, then rebuilt the model around ASUS&rsquo;s BIOS-config flow: every device&rsquo;s outcome in a single view, each <strong>raw exit code rewritten as a plain-language, item-level result</strong>, a distinct <strong>in-progress</strong> state so &ldquo;not done yet&rdquo; is never read as failure, and one-click CSV export of just the failures. Diagnosis goes from a per-device hunt to a glance.</p>
+        <p data-lang="zh"><strong>設計了一份整合的結果報表。</strong>我先 benchmark 競品的 compliance report，再針對 ASUS 的 BIOS 設定流程重建模型：所有裝置的結果集中在同一視圖，每個<strong>原始 exit code 改寫成逐項、白話的結果</strong>，並獨立出<strong>派送中</strong>狀態，讓「還沒完成」不會被誤判成「失敗」，再加上只匯出失敗項目的一鍵 CSV。診斷從逐台追查，變成一眼看完。</p>
+      </div>
+    </div>
+
     <div class="note">
       <p data-lang="en"><strong>On confidentiality:</strong> every interface visual on this page is an abstracted schematic created for this portfolio. No confidential ASUS design files, production screenshots, or internal copy are reproduced; the diagrams illustrate design <em>decisions</em>, not shipping screens.</p>
       <p data-lang="zh"><strong>關於機密：</strong>本頁所有介面圖都是為作品集重繪的抽象示意。未複製任何 ASUS 機密設計檔、產品截圖或內部文案；圖示呈現的是設計<em>決策</em>，而非實際出貨畫面。</p>
@@ -479,19 +563,21 @@ html.lang-zh [data-lang="en"]{display:none !important;}
         <div class="l" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
       </div>
       <div class="m">
-        <div class="v"><span class="fill">[填]</span></div>
-        <div class="l" data-lang="en">reduction in mis-config / support tickets (add if available)</div>
-        <div class="l" data-lang="zh">設定錯誤／客服工單下降（有數據再填）</div>
+        <div class="v">11</div>
+        <div class="l" data-lang="en">raw firmware &amp; auth exit codes rewritten into plain-language, item-level status — no more cross-referencing a code table</div>
+        <div class="l" data-lang="zh">原始韌體／驗證 exit code 改寫成逐項、白話的狀態——不必再對照錯誤碼表</div>
       </div>
       <div class="m">
-        <div class="v"><span class="fill">[填]</span></div>
-        <div class="l" data-lang="en">enterprise accounts or devices reached (add if available)</div>
-        <div class="l" data-lang="zh">服務的企業客戶或裝置數（有數據再填）</div>
+        <div class="v">4</div>
+        <div class="l" data-lang="en">deployment states made legible — compliant, non-compliant, error, in-progress — each with a reason an admin can act on</div>
+        <div class="l" data-lang="zh">把派送結果收斂成 4 種看得懂的狀態——符合、不符合、錯誤、派送中——每種都附可行動的原因</div>
       </div>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">The encrypted-credential and safe-deploy flows shipped as part of ASUS Config Manager, which extends Microsoft SCCM with BIOS configuration and remote management via Intune / DFCI, and is positioned by ASUS as roughly <strong>2× faster for BIOS &amp; driver management</strong> than standard SCCM. <span class="fill">[填：你想補的採用情況／錯誤下降／客戶回饋——例如導入企業數、工單變化、IT 管理者訪談引言]</span></p>
-      <p data-lang="zh">加密憑證與安全部署這兩條流程，隨 ASUS Config Manager 出貨；該產品以 BIOS 設定與 Intune / DFCI 遠端管理擴充 Microsoft SCCM，並由華碩定位為 BIOS 與驅動管理約<strong>較標準 SCCM 快 2 倍</strong>。<span class="fill">[填：你想補的採用情況／錯誤下降／客戶回饋——例如導入企業數、工單變化、IT 管理者訪談引言]</span></p>
+      <p data-lang="en">The encrypted-credential, safe-deploy and reporting flows shipped inside ASUS Config Manager, which extends Microsoft SCCM with BIOS configuration and Intune / DFCI remote management, and is positioned by ASUS as roughly <strong>2× faster for BIOS &amp; driver management</strong> than standard SCCM. The clearer win I can speak to is legibility: diagnosing a failed fleet deployment used to mean drilling through the SCCM monitor one device at a time and reading a raw exit code, then matching it to a table to learn what broke. The consolidated report collapses that into <strong>one view across the whole fleet</strong>, rewrites every raw code as a plain-language item-level result, separates &ldquo;in-progress&rdquo; from real failure, and adds one-click CSV export of just the failures.</p>
+      <p data-lang="zh">加密憑證、安全部署與結果報表這幾條流程，隨 ASUS Config Manager 出貨；該產品以 BIOS 設定與 Intune / DFCI 遠端管理擴充 Microsoft SCCM，並由華碩定位為 BIOS 與驅動管理約<strong>較標準 SCCM 快 2 倍</strong>。而我更能明確講的成果是「看得懂」：過去要診斷一次機隊部署失敗，得在 SCCM 監控裡逐台下鑽、讀出原始 exit code，再對照表格才知道壞在哪。整合報表把這件事收斂成<strong>整批機隊的單一視圖</strong>，把每個原始碼改寫成逐項白話結果，把「派送中」和「真的失敗」分開，並加上只匯出失敗項目的一鍵 CSV。</p>
+      <p data-lang="en" style="font-size:.92rem;color:var(--muted);">Note — figures describe design scope I own (states surfaced, codes rewritten), not internal business metrics. Adoption, ticket-volume or device-count numbers are deliberately left out unless verified.</p>
+      <p data-lang="zh" style="font-size:.92rem;color:var(--muted);">註——上述數字描述的是我負責的設計範圍（呈現的狀態數、改寫的錯誤碼），不是內部商業指標。採用數、工單量或裝置數在未經查證前刻意不列。</p>
     </div>
   </section>
 
