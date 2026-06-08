@@ -532,12 +532,14 @@ html, body { overflow-x: clip; }
         <ul class="case-points" data-lang="en">
           <li>Reconciled <strong>two mental models in one result list</strong> — file-manager behaviour (browse, sort) and search behaviour (rank, snippet) — without making either feel bolted on.</li>
           <li>Scoped it as a <strong>peer app</strong> to Chat and Knowledge Hub, defending product-level boundaries against feature-creep pressure.</li>
-          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.</li>           <li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>
+          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.</li>
+          <li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>
         </ul>
         <ul class="case-points" data-lang="zh">
           <li>在同一份結果清單中調和<strong>兩種心智模型</strong>——檔案管理（瀏覽、排序）與搜尋（排名、摘要）——讓兩者都不像勉強拼裝。</li>
           <li>把它定位為與 Chat、Knowledge Hub <strong>並列的 App</strong>，在功能擴張的壓力下守住產品級邊界。</li>
-          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI 工作流程，而不必重構其資訊架構。</li>           <li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
+          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI 工作流程，而不必重構其資訊架構。</li>
+          <li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
         </ul>
         <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
       </div>
@@ -579,38 +581,9 @@ html, body { overflow-x: clip; }
 
     <!-- CASE 05 -->
     <article class="case reveal">
-      <div class="case-visual">
+      <div class="case-visual" style="aspect-ratio:1808/870">
         <span class="tape"><span data-lang="en">0 → 1 · Conflict design</span><span data-lang="zh">0 → 1 · 衝突設計</span></span>
-          <div class="viz" role="img" aria-label="Mini conflict matrix: under 3-button navigation, long-press center is claimed by both search and the assistant on ASUS, a conflict; the fix moves the assistant elsewhere.">
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="300" fill="#FFFFFF"/>
-              <text x="16" y="30" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1" fill="#6E6E73">LONG-PRESS CENTER · WHO GETS IT?</text>
-              <rect x="120" y="128" width="264" height="58" fill="#ECECEA"/>
-              <rect x="120" y="186" width="264" height="58" fill="#EDF0FC"/>
-              <text x="130" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">SEARCH</text>
-              <text x="262" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">ASSISTANT</text>
-              <line x1="16" y1="72" x2="384" y2="72" stroke="#0C0C0D" stroke-width="1"/>
-              <line x1="16" y1="128" x2="384" y2="128" stroke="#E6E6E4" stroke-width="1"/>
-              <line x1="16" y1="186" x2="384" y2="186" stroke="#E6E6E4" stroke-width="1"/>
-              <line x1="16" y1="244" x2="384" y2="244" stroke="#0C0C0D" stroke-width="1"/>
-              <line x1="120" y1="72" x2="120" y2="244" stroke="#E6E6E4" stroke-width="1"/>
-              <line x1="256" y1="72" x2="256" y2="244" stroke="#E6E6E4" stroke-width="1"/>
-              <text x="16" y="104" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">Others</text>
-              <text x="130" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">center</text>
-              <text x="262" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">elsewhere</text>
-              <text x="16" y="156" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
-              <text x="16" y="170" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#6E6E73">NOW</text>
-              <text x="130" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
-              <text x="262" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
-              <path d="M150 166 L150 172 L300 172 L300 166" fill="none" stroke="#3A3A3D" stroke-width="0.8"/>
-              <text x="16" y="214" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
-              <text x="16" y="228" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#2B4DE0">FIX</text>
-              <text x="130" y="220" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
-              <rect x="262" y="207" width="104" height="22" rx="11" fill="#2B4DE0"/>
-              <text x="276" y="221" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">moved</text>
-            </svg>
-            <div class="viz-foot"><span>Gesture conflict</span><span class="live">● resolved</span></div>
-        </div>
+        <img class="case-shot" style="object-position:center" src="images/asus-android.jpg" alt="ASUS ROG Game Genie in-game overlay (X-Mode) showing platform features including gyroscope acceleration (陀螺儀加速), edge-touch protection, AirTriggers, and Circle to Search — surfaced over live gameplay." />
       </div>
       <div class="case-body">
         <div class="case-kicker" data-lang="en">ASUS · Platform UX · 2024–present</div>
