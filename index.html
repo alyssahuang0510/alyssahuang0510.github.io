@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Alyssa Huang — Senior UX Designer | Industrial Tools, Enterprise B2B & Platform UX</title>
+<title>Alyssa Huang — Senior UX & Product Designer | Industrial Tools, Enterprise B2B & Platform UX</title>
 
-<meta name="description" content="Senior UX Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background. Introduced UX practice at a hardware manufacturer; building AI workflows for design teams at ASUS." />
-<meta name="keywords" content="Senior UX Designer, Lead UX Designer, B2B SaaS UX, Enterprise UX, Industrial Software UX, IT Management Tools, Platform UX, System-level UX, Design Operations, AI Tool Development for Design, Internal Tool Building, UX Redesign, Security UX, Cybersecurity UX, Trust and Safety Design, Usability Testing, SUS, UX Research, Localization, Design Systems, Accessibility, Figma, AxureRP, Cross-functional Collaboration, Engineering Collaboration, Taipei" />
+<meta name="description" content="Senior UX & Product Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background. Introduced UX practice at a hardware manufacturer; building AI workflows for design teams at ASUS." />
+<meta name="keywords" content="Senior UX Designer, Product UX Designer, Senior Product Designer, Lead UX Designer, B2B SaaS UX, Enterprise UX, Industrial Software UX, IT Management Tools, Platform UX, System-level UX, Design Operations, AI Tool Development for Design, Internal Tool Building, UX Redesign, Security UX, Cybersecurity UX, Trust and Safety Design, Usability Testing, SUS, UX Research, Localization, Design Systems, Accessibility, Figma, AxureRP, Cross-functional Collaboration, Engineering Collaboration, Taipei" />
 <meta name="robots" content="index, follow" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Alyssa Huang — Senior UX Designer | Industrial Tools, Enterprise B2B & Platform UX" />
+<meta property="og:title" content="Alyssa Huang — Senior UX & Product Designer | Industrial Tools, Enterprise B2B & Platform UX" />
 <meta property="og:description" content="Eight years designing tools — industrial AXI inspection, enterprise IT consoles, Android platform UX. CS + Design background. Building AI workflows for design teams." />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="zh_TW" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Alyssa Huang — Senior UX Designer" />
+<meta name="twitter:title" content="Alyssa Huang — Senior UX & Product Designer" />
 <meta name="twitter:description" content="Designing tools across industrial, enterprise B2B, and mobile platforms. Engineer-turned-designer with eight years of tool-shaped work." />
 
 <!-- Set language before paint to avoid flash -->
@@ -45,8 +45,8 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Alyssa Huang",
-  "jobTitle": "Senior UX Designer",
-  "description": "Senior UX Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background.",
+  "jobTitle": "Senior UX & Product Designer",
+  "description": "Senior UX & Product Designer with 8 years across industrial inspection systems, enterprise IT tools, and Android platform UX. CS + Design hybrid background.",
   "address": { "@type": "PostalAddress", "addressLocality": "Taipei", "addressCountry": "TW" },
   "alumniOf": [
     { "@type": "CollegeOrUniversity", "name": "National Taipei University of Technology", "description": "Master of Interaction Design, 2014-2016" },
@@ -135,6 +135,16 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .cred-strip .lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
 .cred-strip .co{font-family:var(--ff-display);font-weight:600;font-size:1.35rem;letter-spacing:-0.02em;}
 .cred-strip .co span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);letter-spacing:.03em;vertical-align:.6em;margin-left:5px;}
+.logos{padding:22px 0 28px;border-bottom:1px solid var(--rule);}
+.logos .lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:20px;}
+.logos .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
+.logos .row{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(22px,3.5vw,44px);}
+.logos .logo-item{display:inline-flex;align-items:center;}
+.logos img{height:var(--lh,24px);width:auto;opacity:.5;filter:grayscale(1);transition:opacity .25s ease,filter .25s ease;}
+.logos img:hover{opacity:1;filter:grayscale(0);}
+.logos .wordmark{font-family:var(--ff-display);font-weight:600;font-size:1.18rem;letter-spacing:-0.01em;color:var(--ink-2);opacity:.62;transition:opacity .25s ease;}
+.logos .logo-item:hover .wordmark{opacity:1;}
+@media (max-width:640px){.logos .row{gap:16px 24px;}.logos img{height:calc(var(--lh,24px) * .82);}.logos .wordmark{font-size:1.02rem;}}
 
 /* Impact band */
 .impact-band{background:var(--bg-2);padding:clamp(64px,9vw,120px) 0;margin-top:clamp(48px,6vw,80px);}
@@ -224,6 +234,22 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .li-card .rows[data-lang="zh"] li span{line-height:1.75;}
 @media (max-width:820px){.li-grid{grid-template-columns:1fr;}}
 
+/* Method */
+.method{padding:clamp(8px,2vw,20px) 0 clamp(40px,5vw,64px);}
+.method-name{font-family:var(--ff-display);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:-0.03em;line-height:1.1;max-width:24ch;margin:14px 0 0;}
+.method-name[data-lang="zh"]{line-height:1.35;letter-spacing:-0.01em;max-width:26ch;}
+.method-name em{font-style:normal;color:var(--accent);}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,36px);margin-top:clamp(34px,4vw,52px);}
+.method-step{border-top:2px solid var(--ink);padding-top:20px;}
+.method-step .n{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.method-step h4{font-family:var(--ff-display);font-weight:600;font-size:1.22rem;letter-spacing:-0.01em;margin-bottom:10px;}
+.method-step p{font-size:.96rem;line-height:1.6;color:var(--ink-2);}
+.method-step p[data-lang="zh"]{line-height:1.8;}
+.method-foot{margin-top:clamp(28px,3vw,40px);font-size:1.02rem;line-height:1.65;color:var(--ink-2);max-width:62ch;}
+.method-foot[data-lang="zh"]{line-height:1.9;}
+.method-foot em{font-style:normal;color:var(--accent-2);font-weight:500;}
+@media (max-width:760px){.method-grid{grid-template-columns:1fr;gap:0;}.method-step{padding-bottom:22px;}}
+
 /* About */
 .about{padding-bottom:clamp(52px,6vw,92px);}
 .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;}
@@ -245,6 +271,14 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .tools .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
 .tools .t{font-family:var(--ff-display);font-weight:600;font-size:1.22rem;letter-spacing:-0.02em;}
 .tools .t span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);vertical-align:.6em;margin-left:4px;}
+.skills{margin-top:clamp(42px,5vw,62px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,44px);}
+.skills .col h5{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--rule);font-weight:500;}
+.skills .col h5[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
+.skills ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+.skills li{font-size:.95rem;color:var(--ink-2);line-height:1.5;padding-left:18px;position:relative;}
+.skills ul[data-lang="zh"] li{line-height:1.7;}
+.skills li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:2px;background:var(--accent);border-radius:1px;}
+@media (max-width:760px){.skills{grid-template-columns:1fr;gap:28px;}}
 @media (max-width:820px){.about-grid{grid-template-columns:1fr;}}
 
 /* Footer */
@@ -374,7 +408,7 @@ html, body { overflow-x: clip; }
 
 <nav class="nav" id="nav" aria-label="Primary">
   <div class="container inner">
-    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong><small data-lang="en">Senior UX Designer</small><small data-lang="zh">資深 UX 設計師</small></a>
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong><small data-lang="en">Senior UX &amp; Product Designer</small><small data-lang="zh">資深 UX / 產品設計師</small></a>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#work"><span data-lang="en">Work</span><span data-lang="zh">作品</span></a></li>
@@ -393,15 +427,15 @@ html, body { overflow-x: clip; }
 <!-- Hero -->
 <header id="top" class="hero">
   <div class="container">
-    <span class="status"><span class="pip" aria-hidden="true"></span><span data-lang="en">Open to Senior &amp; Lead UX roles · Taipei / Remote</span><span data-lang="zh">開放 Senior / Lead UX 職缺 · 台北 / 遠端</span></span>
+    <span class="status"><span class="pip" aria-hidden="true"></span><span data-lang="en">Open to Senior UX &amp; Product Designer roles · Taipei / Remote</span><span data-lang="zh">開放 Senior UX / Product 設計師職缺 · 台北 / 遠端</span></span>
 
     <h1 data-lang="en">I design the <em>tools</em> that engineers, IT admins, and operators rely on — and I build the AI tools my design team plans with.</h1>
     <h1 data-lang="zh">我設計工程師、IT 管理者與產線操作員每天依賴的<em>工具</em>——也親手打造設計團隊用來規劃的 AI 工具。</h1>
 
     <div class="hero-foot">
       <div class="who">
-        <div class="name" data-lang="en">Alyssa Huang — Senior UX Designer</div>
-        <div class="name" data-lang="zh">Alyssa Huang — 資深 UX 設計師</div>
+        <div class="name" data-lang="en">Alyssa Huang — Senior UX &amp; Product Designer</div>
+        <div class="name" data-lang="zh">Alyssa Huang — 資深 UX / 產品設計師</div>
         <p data-lang="en">Eight years of pure UX across three domains most designers never touch: <strong>industrial inspection systems</strong>, <strong>enterprise IT tooling</strong>, and <strong>Android platform UX</strong>. CS &amp; Interaction-Design hybrid; for six years I wrote the code and owned the design at the same time.</p>
         <p data-lang="zh">八年純 UX 經歷，橫跨多數設計師不會碰的三個領域：<strong>工業檢測系統</strong>、<strong>企業 IT 工具</strong>，以及 <strong>Android 平台 UX</strong>。資訊管理與互動設計雙背景；那六年我同時寫程式、也完全主導產品設計。</p>
       </div>
@@ -431,6 +465,60 @@ html, body { overflow-x: clip; }
     <span class="lbl" style="margin-left:auto">學歷</span>
     <span class="co">互動設計碩士</span>
     <span class="co">資訊管理學士</span>
+  </div>
+</div>
+
+<!-- Client logos -->
+<div class="container">
+  <div class="logos reveal">
+    <span class="lbl" data-lang="en">Companies I&rsquo;ve worked with</span>
+    <span class="lbl" data-lang="zh">合作過的廠商</span>
+    <div class="row">
+      <span class="logo-item">
+        <img src="images/logos/foxconn.png" alt="Foxconn" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Foxconn</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Quanta</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/wistron.png" alt="Wistron" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Wistron</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">WNC</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/accton.png" alt="Accton" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Accton</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/liteon.png" alt="Lite-On" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Lite-On</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/ose.png" alt="OSE" style="--lh:34px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">OSE</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/amkor.png" alt="Amkor" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Amkor</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Garmin</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/nexcom.svg" alt="Nexcom" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Nexcom</span>
+      </span>
+      <span class="logo-item">
+        <img src="images/logos/panasonic.png" alt="Panasonic" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+        <span class="wordmark" style="display:none">Panasonic</span>
+      </span>
+    </div>
   </div>
 </div>
 
@@ -532,14 +620,12 @@ html, body { overflow-x: clip; }
         <ul class="case-points" data-lang="en">
           <li>Reconciled <strong>two mental models in one result list</strong> — file-manager behaviour (browse, sort) and search behaviour (rank, snippet) — without making either feel bolted on.</li>
           <li>Scoped it as a <strong>peer app</strong> to Chat and Knowledge Hub, defending product-level boundaries against feature-creep pressure.</li>
-          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.</li>
-          <li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>
+          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.<<li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>/li>
         </ul>
         <ul class="case-points" data-lang="zh">
           <li>在同一份結果清單中調和<strong>兩種心智模型</strong>——檔案管理（瀏覽、排序）與搜尋（排名、摘要）——讓兩者都不像勉強拼裝。</li>
           <li>把它定位為與 Chat、Knowledge Hub <strong>並列的 App</strong>，在功能擴張的壓力下守住產品級邊界。</li>
-          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI 工作流程，而不必重構其資訊架構。</li>
-          <li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
+          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI<li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
         </ul>
         <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
       </div>
@@ -581,9 +667,38 @@ html, body { overflow-x: clip; }
 
     <!-- CASE 05 -->
     <article class="case reveal">
-      <div class="case-visual" style="aspect-ratio:1808/870">
+      <div class="case-visual">
         <span class="tape"><span data-lang="en">0 → 1 · Conflict design</span><span data-lang="zh">0 → 1 · 衝突設計</span></span>
-        <img class="case-shot" style="object-position:center" src="images/asus-android.jpg" alt="ASUS ROG Game Genie in-game overlay (X-Mode) showing platform features including gyroscope acceleration (陀螺儀加速), edge-touch protection, AirTriggers, and Circle to Search — surfaced over live gameplay." />
+          <div class="viz" role="img" aria-label="Mini conflict matrix: under 3-button navigation, long-press center is claimed by both search and the assistant on ASUS, a conflict; the fix moves the assistant elsewhere.">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="300" fill="#FFFFFF"/>
+              <text x="16" y="30" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1" fill="#6E6E73">LONG-PRESS CENTER · WHO GETS IT?</text>
+              <rect x="120" y="128" width="264" height="58" fill="#ECECEA"/>
+              <rect x="120" y="186" width="264" height="58" fill="#EDF0FC"/>
+              <text x="130" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">SEARCH</text>
+              <text x="262" y="62" font-family="Geist Mono, monospace" font-size="9" fill="#0C0C0D">ASSISTANT</text>
+              <line x1="16" y1="72" x2="384" y2="72" stroke="#0C0C0D" stroke-width="1"/>
+              <line x1="16" y1="128" x2="384" y2="128" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="16" y1="186" x2="384" y2="186" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="16" y1="244" x2="384" y2="244" stroke="#0C0C0D" stroke-width="1"/>
+              <line x1="120" y1="72" x2="120" y2="244" stroke="#E6E6E4" stroke-width="1"/>
+              <line x1="256" y1="72" x2="256" y2="244" stroke="#E6E6E4" stroke-width="1"/>
+              <text x="16" y="104" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">Others</text>
+              <text x="130" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">center</text>
+              <text x="262" y="104" font-family="Geist Mono, monospace" font-size="10" fill="#3A3A3D">elsewhere</text>
+              <text x="16" y="156" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
+              <text x="16" y="170" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#6E6E73">NOW</text>
+              <text x="130" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <text x="262" y="158" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <path d="M150 166 L150 172 L300 172 L300 166" fill="none" stroke="#3A3A3D" stroke-width="0.8"/>
+              <text x="16" y="214" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">ASUS</text>
+              <text x="16" y="228" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".5" fill="#2B4DE0">FIX</text>
+              <text x="130" y="220" font-family="Geist Mono, monospace" font-size="10" fill="#0C0C0D">center</text>
+              <rect x="262" y="207" width="104" height="22" rx="11" fill="#2B4DE0"/>
+              <text x="276" y="221" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">moved</text>
+            </svg>
+            <div class="viz-foot"><span>Gesture conflict</span><span class="live">● resolved</span></div>
+        </div>
       </div>
       <div class="case-body">
         <div class="case-kicker" data-lang="en">ASUS · Platform UX · 2024–present</div>
@@ -647,11 +762,44 @@ html, body { overflow-x: clip; }
   </div>
 </section>
 
+<!-- Method -->
+<section id="method" class="method">
+  <div class="container">
+    <div class="sec-head" style="padding-bottom:0">
+      <span class="eyebrow"><span class="ix">[03]</span> &nbsp; <span data-lang="en">How I work</span><span data-lang="zh">工作方法</span></span>
+      <h3 class="method-name" data-lang="en">Every decision sits on a <em>traceable line</em> — finding, decision, outcome.</h3>
+      <h3 class="method-name" data-lang="zh">每個設計決策都落在一條<em>可追溯的線</em>上——證據、決策、成果。</h3>
+    </div>
+    <div class="method-grid reveal">
+      <div class="method-step">
+        <div class="n">01 — Finding</div>
+        <h4 data-lang="en">Start from evidence</h4><h4 data-lang="zh">從證據出發</h4>
+        <p data-lang="en">A usability study, FAE-measured data, a field complaint, a system constraint. I don&rsquo;t move until the problem is named in numbers or observed behaviour.</p>
+        <p data-lang="zh">一份可用性研究、FAE 量到的數據、一則現場客訴、一個系統限制。在問題能用數字或觀察到的行為說清楚之前,我不動手。</p>
+      </div>
+      <div class="method-step">
+        <div class="n">02 — Decision</div>
+        <h4 data-lang="en">Change one thing, on purpose</h4><h4 data-lang="zh">有意識地改一件事</h4>
+        <p data-lang="en">Each design move ties back to a specific finding — and I can say what I traded off for it. Feasibility is part of the call; I read the engineering constraint, not just the mockup.</p>
+        <p data-lang="zh">每個設計動作都連回某個具體發現——而且我說得出為此取捨了什麼。可行性是決策的一部分;我讀的是工程限制,不只是畫面。</p>
+      </div>
+      <div class="method-step">
+        <div class="n">03 — Outcome</div>
+        <h4 data-lang="en">Measure what moved</h4><h4 data-lang="zh">量出改變了什麼</h4>
+        <p data-lang="en">Programming time, returns recovered, sources unified, SUS lift. If a change can&rsquo;t be measured, I say so — and I don&rsquo;t claim it.</p>
+        <p data-lang="zh">編程時間、挽回的退貨、收斂的來源數、SUS 提升。如果一個改變無法被量測,我會直說——而且不會把它當成果宣稱。</p>
+      </div>
+    </div>
+    <p class="method-foot reveal" data-lang="en">Every case on this site is built this way. You can always trace a <em>shipped outcome</em> back to the finding that justified it — and that traceability is what I bring to a team, not just to my own work.</p>
+    <p class="method-foot reveal" data-lang="zh">這個網站上的每個案例都是這樣寫的。你永遠可以把一個<em>已落地的成果</em>,回溯到當初支持它的那個發現——而我帶進團隊的,正是這種可追溯性,不只是我自己的產出。</p>
+  </div>
+</section>
+
 <!-- About -->
 <section id="about" class="about">
   <div class="container">
     <div class="sec-head">
-      <span class="eyebrow"><span class="ix">[03]</span> &nbsp; <span data-lang="en">About</span><span data-lang="zh">關於</span></span>
+      <span class="eyebrow"><span class="ix">[04]</span> &nbsp; <span data-lang="en">About</span><span data-lang="zh">關於</span></span>
       <h2 data-lang="en">A designer who <em>wrote the code</em> and <em>owned the design</em> — at the same time.</h2>
       <h2 data-lang="zh">同時寫<em>程式</em>、也完全主導<em>設計</em>的設計師。</h2>
     </div>
@@ -678,6 +826,60 @@ html, body { overflow-x: clip; }
       </aside>
     </div>
 
+    <div class="skills reveal">
+      <div class="col">
+        <h5 data-lang="en">Research &amp; Strategy</h5><h5 data-lang="zh">研究與策略</h5>
+        <ul data-lang="en">
+          <li>UX research &amp; user interviews</li>
+          <li>Usability testing · SUS (n=14 studies)</li>
+          <li>Field-complaint &amp; behaviour analysis</li>
+          <li>Information architecture</li>
+          <li>Competitive &amp; platform analysis</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>使用者研究與訪談</li>
+          <li>可用性測試 · SUS(n=14 研究)</li>
+          <li>現場客訴與行為分析</li>
+          <li>資訊架構</li>
+          <li>競品與平台分析</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5 data-lang="en">Design &amp; Delivery</h5><h5 data-lang="zh">設計與交付</h5>
+        <ul data-lang="en">
+          <li>Interaction &amp; flow design</li>
+          <li>Design systems &amp; UX guidelines</li>
+          <li>Prototyping — Figma, AxureRP</li>
+          <li>Localization / multi-language UX</li>
+          <li>Security &amp; trust UX</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>互動與流程設計</li>
+          <li>設計系統與 UX 原則文件</li>
+          <li>原型設計 — Figma、AxureRP</li>
+          <li>本地化 / 多國語系 UX</li>
+          <li>資安與信任 UX</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5 data-lang="en">Systems &amp; Leadership</h5><h5 data-lang="zh">系統與領導</h5>
+        <ul data-lang="en">
+          <li>Sole UX ownership (6 yrs, one product line)</li>
+          <li>Introducing UX practice from zero</li>
+          <li>Cross-functional w/ algorithm &amp; mechanical teams</li>
+          <li>Engineering literacy — C# / MFC / Unity</li>
+          <li>Building AI tools for design teams</li>
+        </ul>
+        <ul data-lang="zh">
+          <li>獨力 UX ownership(6 年、單一產品線)</li>
+          <li>從零導入 UX 實踐</li>
+          <li>與演算法、機構團隊跨職能協作</li>
+          <li>工程素養 — C# / MFC / Unity</li>
+          <li>為設計團隊打造 AI 工具</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="tools reveal">
       <span class="lbl" data-lang="en">Design</span><span class="lbl" data-lang="zh">設計工具</span>
       <span class="t">Figma</span>
@@ -698,8 +900,8 @@ html, body { overflow-x: clip; }
       <div class="foot-col">
         <h5 data-lang="en">Email</h5><h5 data-lang="zh">Email</h5>
         <a href="mailto:alyssahuang0510@gmail.com">alyssahuang0510@gmail.com</a>
-        <p data-lang="en" style="margin-top:14px">Open to Senior &amp; Lead UX, Senior Product Designer (UX-leaning), Design Operations Lead, and Senior UX Researcher roles.</p>
-        <p data-lang="zh" style="margin-top:14px">開放 Senior / Lead UX、資深產品設計師（偏 UX）、Design Operations Lead 與資深 UX 研究員職缺。</p>
+        <p data-lang="en" style="margin-top:14px">Open to Senior UX Designer &amp; Product UX Designer roles — B2B, enterprise &amp; platform.</p>
+        <p data-lang="zh" style="margin-top:14px">開放 Senior UX Designer 與 Product UX Designer 職缺 — B2B、企業與平台。</p>
       </div>
       <div class="foot-col">
         <h5 data-lang="en">Profiles</h5><h5 data-lang="zh">個人檔案</h5>
@@ -715,7 +917,7 @@ html, body { overflow-x: clip; }
       </div>
     </div>
     <div class="foot-base">
-      <span>© 2026 Alyssa Huang · Senior UX Designer</span>
+      <span>© 2026 Alyssa Huang · Senior UX &amp; Product Designer</span>
       <span data-lang="en">Built by hand · HTML, restraint &amp; a tight grotesque</span>
       <span data-lang="zh">手工打造 · HTML、克制與一套俐落的無襯線</span>
     </div>
