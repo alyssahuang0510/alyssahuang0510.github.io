@@ -102,7 +102,7 @@ main:focus{outline:none;}
 /* Nav */
 .nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:border-color .3s ease;}
 .nav.scrolled{border-color:var(--rule);}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:15px 0;gap:16px;}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:15px var(--gutter);gap:16px;}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.86rem;white-space:nowrap;}
 .brand .dot{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
 .brand strong{font-weight:500;letter-spacing:-0.01em;}
@@ -338,7 +338,7 @@ html, body { overflow-x: clip; }
   body{font-size:16px;}
 
   /* Nav: tighten spacing on phones (link/CTA visibility handled globally) */
-  .nav .inner{padding:12px 0;}
+  .nav .inner{padding:12px var(--gutter);}
   .brand{font-size:.82rem;gap:8px;}
 
   /* Hero */
