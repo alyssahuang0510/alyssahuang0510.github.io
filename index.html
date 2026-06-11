@@ -33,6 +33,11 @@
   var h=document.documentElement;
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+
+  var TKEY='ah-theme', theme=null;
+  try{ var t=localStorage.getItem(TKEY); if(t==='dark'||t==='light') theme=t; }catch(e){}
+  if(!theme){ try{ theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }catch(e){ theme='light'; } }
+  if(theme==='dark') h.setAttribute('data-theme','dark');
 })();
 </script>
 
@@ -63,6 +68,7 @@
   --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
   --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
   --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --on-ink:#FFFFFF; --logo-filter:grayscale(1); --logo-opacity:.5;
   --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
@@ -104,10 +110,10 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .nav-links a:hover{color:var(--accent);}
 .lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
 .lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
-.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg.on{background:var(--ink);color:var(--on-ink);}
 .lang-seg:not(.on):hover{color:var(--accent);}
 .nav-cta{font-family:var(--ff-mono);font-size:0.79rem;letter-spacing:.03em;padding:9px 15px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;white-space:nowrap;}
-.nav-cta:hover{background:var(--ink);color:#fff;}
+.nav-cta:hover{background:var(--ink);color:var(--on-ink);}
 @media (max-width:760px){.brand small{display:none;}.nav-links{gap:16px;font-size:.74rem;}.nav-links li:nth-child(3){display:none;}.nav-cta{display:none;}.nav-right{gap:14px;}}
 @media (max-width:440px){.nav-links li:nth-child(2){display:none;}}
 
@@ -140,7 +146,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .logos .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
 .logos .row{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(22px,3.5vw,44px);}
 .logos .logo-item{display:inline-flex;align-items:center;}
-.logos img{height:var(--lh,24px);width:auto;opacity:.5;filter:grayscale(1);transition:opacity .25s ease,filter .25s ease;}
+.logos img{height:var(--lh,24px);width:auto;opacity:var(--logo-opacity);filter:var(--logo-filter);transition:opacity .25s ease,filter .25s ease;}
 .logos img:hover{opacity:1;filter:grayscale(0);}
 .logos .wordmark{font-family:var(--ff-display);font-weight:600;font-size:1.18rem;letter-spacing:-0.01em;color:var(--ink-2);opacity:.62;transition:opacity .25s ease;}
 .logos .logo-item:hover .wordmark{opacity:1;}
@@ -172,7 +178,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case.flip .case-visual{order:2;}
 .case-visual{position:relative;background:var(--bg-3);border:1px solid var(--rule);border-radius:10px;overflow:hidden;aspect-ratio:4/3;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;}
 .case:hover .case-visual{transform:translateY(-5px);box-shadow:0 26px 54px -30px rgba(12,12,13,.35);}
-.case-visual .tape{position:absolute;top:15px;left:15px;z-index:2;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;}
+.case-visual .tape{position:absolute;top:15px;left:15px;z-index:2;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--on-ink);padding:5px 10px;border-radius:5px;}
 .case-visual .tape [data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
 .viz{position:absolute;inset:0;}
 .viz svg{width:100%;height:100%;display:block;}
@@ -187,7 +193,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-context{display:flex;flex-wrap:wrap;gap:6px 7px;margin-bottom:24px;}
 .case-context span{font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:4px 9px;border:1px solid var(--rule);border-radius:5px;}
 .case-context[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
-.case-context span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.case-context span.hl{background:var(--ink);color:var(--on-ink);border-color:var(--ink);}
 .case-bigstat{display:flex;align-items:baseline;gap:18px;padding:22px 0;margin-bottom:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
 .case-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.6rem,4.5vw,3.5rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .case-bigstat .v sup{font-size:.36em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
@@ -205,7 +211,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-points li strong{color:var(--ink);font-weight:600;}
 .case-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:.79rem;letter-spacing:.03em;text-transform:uppercase;padding:11px 17px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;}
 .case-link [data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
-.case-link:hover{background:var(--ink);color:#fff;}
+.case-link:hover{background:var(--ink);color:var(--on-ink);}
 .case-link .ar{transition:transform .2s;}
 .case-link:hover .ar{transform:translateX(4px);}
 @media (max-width:880px){.case,.case.flip{grid-template-columns:1fr;}.case.flip .case-visual{order:0;}}
@@ -402,6 +408,65 @@ html, body { overflow-x: clip; }
   .case-bigstat{flex-wrap:wrap;}
   .foot-col a{font-size:1.05rem;}
 }
+
+/* --- Company chips: rest straight, tilt on hover --- */
+.cred-strip .co.job{display:inline-flex;align-items:center;padding:7px 15px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-size:1.02rem;line-height:1;cursor:default;transform:rotate(0deg);transform-origin:center;transition:transform .24s cubic-bezier(.2,.7,.25,1),border-color .24s ease,box-shadow .24s ease;will-change:transform;}
+.cred-strip .co.job span{vertical-align:baseline;margin-left:7px;}
+.cred-strip .co.job:hover{transform:rotate(-3.4deg) translateY(-1px);border-color:var(--accent);box-shadow:0 6px 18px -8px color-mix(in srgb,var(--accent) 55%,transparent);}
+.cred-strip .co.job:nth-of-type(even):hover{transform:rotate(3.4deg) translateY(-1px);}
+@media (prefers-reduced-motion:reduce){.cred-strip .co.job{transition:border-color .24s ease;}.cred-strip .co.job:hover{transform:none;}}
+
+/* --- Theme toggle (sun / moon pill) --- */
+.theme-toggle{position:relative;display:inline-flex;align-items:center;width:58px;height:30px;padding:0;border:1px solid var(--rule);border-radius:999px;background:var(--bg-2);flex:none;transition:background .25s ease,border-color .25s ease;}
+.theme-toggle:hover{border-color:var(--accent);}
+.theme-toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.22);transition:transform .28s cubic-bezier(.2,.7,.25,1),background .25s ease;}
+html[data-theme="dark"] .theme-toggle .knob{transform:translateX(28px);}
+.theme-toggle .ic{position:absolute;top:50%;width:14px;height:14px;transform:translateY(-50%);color:var(--muted);transition:color .25s ease,opacity .25s ease;pointer-events:none;}
+.theme-toggle .ic.sun{left:7px;}
+.theme-toggle .ic.moon{right:7px;}
+html:not([data-theme="dark"]) .theme-toggle .ic.sun{color:var(--accent);opacity:1;}
+html:not([data-theme="dark"]) .theme-toggle .ic.moon{opacity:.5;}
+html[data-theme="dark"] .theme-toggle .ic.moon{color:var(--accent);opacity:1;}
+html[data-theme="dark"] .theme-toggle .ic.sun{opacity:.5;}
+@media (max-width:760px){.theme-toggle{width:52px;height:28px;}.theme-toggle .knob{width:22px;height:22px;}html[data-theme="dark"] .theme-toggle .knob{transform:translateX(24px);}}
+
+/* --- Logo marquee (seamless, hover-pause, edge fade) --- */
+.logos .marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+.logos .marquee-track{display:flex;align-items:center;width:max-content;animation:logos-scroll 36s linear infinite;}
+.logos .marquee:hover .marquee-track{animation-play-state:paused;}
+.logos .marquee .logo-item{flex:none;margin-right:clamp(30px,4vw,58px);}
+@keyframes logos-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.logos .marquee-track{animation:none;}.logos .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none;}}
+
+/* --- Footer: traditional sitemap (brand block + link columns) --- */
+.foot-main{display:grid;grid-template-columns:1.05fr 2fr;gap:clamp(34px,5vw,76px);padding-top:48px;border-top:1px solid var(--dark-rule);align-items:start;}
+.foot-brand .mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-display);font-weight:600;font-size:1.4rem;letter-spacing:-0.02em;margin-bottom:18px;}
+.foot-brand .mark .dot{width:8px;height:8px;border-radius:2px;background:var(--accent);flex:none;}
+.foot-brand .tag{font-family:var(--ff-display);font-weight:500;font-size:1.3rem;line-height:1.28;letter-spacing:-0.02em;color:#fff;max-width:22ch;margin-bottom:18px;}
+.foot-brand .tag[data-lang="zh"]{line-height:1.5;letter-spacing:0;}
+.foot-brand .meta{font-size:.9rem;color:#C2C2BE;line-height:1.75;}
+.foot-brand .meta[data-lang="zh"]{line-height:2;}
+.foot-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);}
+.foot-navcol h5{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px;font-weight:500;}
+.foot-navcol h5[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
+.foot-navcol a{display:block;font-family:var(--ff-body);font-size:1rem;color:#C2C2BE;margin-bottom:11px;transition:color .18s ease,padding-left .18s ease;}
+.foot-navcol a:hover{color:#fff;padding-left:3px;}
+@media (max-width:860px){.foot-main{grid-template-columns:1fr;gap:40px;}}
+@media (max-width:560px){.foot-nav{grid-template-columns:1fr 1fr;gap:28px 20px;}}
+
+/* --- Dark theme tokens --- */
+html[data-theme="dark"]{
+  --bg:#101012; --bg-2:#1A1A1D; --bg-3:#161618; --surface:#1A1A1D;
+  --ink:#F4F4F3; --ink-2:#C9C9CE; --muted:#9A9AA1; --muted-2:#6E6E73;
+  --rule:#2C2C2F; --rule-2:#242427; --accent:#6E86FF; --accent-2:#5670F0;
+  --dark:#000000; --dark-2:#0C0C0D; --dark-rule:#2A2A2C;
+  --on-ink:#101012; --logo-filter:grayscale(1) brightness(0) invert(.82); --logo-opacity:.62;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink);}
+html[data-theme="dark"] .logos img:hover{filter:none;opacity:1;}
+html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
+html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5);}
+
 </style>
 </head>
 <body>
@@ -415,6 +480,11 @@ html, body { overflow-x: clip; }
         <li><a href="#impact"><span data-lang="en">Impact</span><span data-lang="zh">影響力</span></a></li>
         <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">關於</span></a></li>
       </ul>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Light / Dark">
+        <span class="knob" aria-hidden="true"></span>
+        <svg class="ic sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+        <svg class="ic moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.2A8.2 8.2 0 0 1 9.8 3.5a.7.7 0 0 0-.9-.9 9.6 9.6 0 1 0 12.5 12.5.7.7 0 0 0-.9-.9z"/></svg>
+      </button>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
         <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
@@ -452,16 +522,16 @@ html, body { overflow-x: clip; }
 <div class="container">
   <div class="cred-strip reveal" data-lang="en">
     <span class="lbl">Shipped at</span>
-    <span class="co">ASUS <span>2024–now</span></span>
-    <span class="co">Test Research Inc. <span>2017–23</span></span>
+    <span class="co job">ASUS <span>2024–now</span></span>
+    <span class="co job">Test Research Inc. <span>2017–23</span></span>
     <span class="lbl" style="margin-left:auto">Education</span>
     <span class="co">M.S. Interaction Design</span>
     <span class="co">B.A. Info Management</span>
   </div>
   <div class="cred-strip reveal" data-lang="zh">
     <span class="lbl">任職於</span>
-    <span class="co">ASUS 華碩 <span>2024–至今</span></span>
-    <span class="co">德律科技 <span>2017–23</span></span>
+    <span class="co job">ASUS 華碩 <span>2024–至今</span></span>
+    <span class="co job">德律科技 <span>2017–23</span></span>
     <span class="lbl" style="margin-left:auto">學歷</span>
     <span class="co">互動設計碩士</span>
     <span class="co">資訊管理學士</span>
@@ -473,51 +543,97 @@ html, body { overflow-x: clip; }
   <div class="logos reveal">
     <span class="lbl" data-lang="en">Companies I&rsquo;ve worked with</span>
     <span class="lbl" data-lang="zh">合作過的廠商</span>
-    <div class="row">
-      <span class="logo-item">
-        <img src="images/logos/foxconn.png" alt="Foxconn" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Foxconn</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Quanta</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/wistron.png" alt="Wistron" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Wistron</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">WNC</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/accton.png" alt="Accton" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Accton</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/liteon.png" alt="Lite-On" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Lite-On</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/ose.png" alt="OSE" style="--lh:34px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">OSE</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/amkor.png" alt="Amkor" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Amkor</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Garmin</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/nexcom.svg" alt="Nexcom" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Nexcom</span>
-      </span>
-      <span class="logo-item">
-        <img src="images/logos/panasonic.png" alt="Panasonic" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
-        <span class="wordmark" style="display:none">Panasonic</span>
-      </span>
+    <div class="marquee" aria-label="Companies I have worked with">
+      <div class="marquee-track">
+        <span class="logo-item">
+          <img src="images/logos/foxconn.png" alt="Foxconn" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Foxconn</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Quanta</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/wistron.png" alt="Wistron" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Wistron</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">WNC</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/accton.png" alt="Accton" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Accton</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/liteon.png" alt="Lite-On" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Lite-On</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/ose.png" alt="OSE" style="--lh:34px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">OSE</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/amkor.png" alt="Amkor" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Amkor</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Garmin</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/nexcom.svg" alt="Nexcom" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Nexcom</span>
+        </span>
+        <span class="logo-item">
+          <img src="images/logos/panasonic.png" alt="Panasonic" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Panasonic</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/foxconn.png" alt="Foxconn" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Foxconn</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Quanta</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/wistron.png" alt="Wistron" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Wistron</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">WNC</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/accton.png" alt="Accton" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Accton</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/liteon.png" alt="Lite-On" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Lite-On</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/ose.png" alt="OSE" style="--lh:34px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">OSE</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/amkor.png" alt="Amkor" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Amkor</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Garmin</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/nexcom.svg" alt="Nexcom" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Nexcom</span>
+        </span>
+        <span class="logo-item" aria-hidden="true">
+          <img src="images/logos/panasonic.png" alt="Panasonic" style="--lh:22px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <span class="wordmark" style="display:none">Panasonic</span>
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -898,26 +1014,40 @@ html, body { overflow-x: clip; }
   <div class="container">
     <p class="big" data-lang="en">Let&rsquo;s talk about <em>hard tools.</em></p>
     <p class="big" data-lang="zh">難搞的<em>工具</em>，交給我。來聊聊吧。</p>
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h5 data-lang="en">Email</h5><h5 data-lang="zh">Email</h5>
-        <a href="mailto:alyssahuang0510@gmail.com">alyssahuang0510@gmail.com</a>
-        <p data-lang="en" style="margin-top:14px">Open to Senior UX Designer &amp; Senior Product Designer roles — B2B, enterprise &amp; platform.</p>
-        <p data-lang="zh" style="margin-top:14px">開放 Senior UX Designer 與 Senior Product Designer 職缺 — B2B、企業與平台。</p>
+
+    <div class="foot-main">
+      <div class="foot-brand">
+        <span class="mark"><span class="dot" aria-hidden="true"></span>Alyssa Huang</span>
+        <p class="tag" data-lang="en">Designing the tools engineers, IT admins &amp; operators rely on.</p>
+        <p class="tag" data-lang="zh">設計工程師、IT 管理者與產線操作員每天依賴的工具。</p>
+        <p class="meta" data-lang="en">Taipei, Taiwan &middot; open to remote &amp; hybrid<br>Mandarin (native) &middot; intermediate English<br>Designing tools since 2016</p>
+        <p class="meta" data-lang="zh">台灣 · 台北 · 開放遠端與混合辦公<br>中文母語 · 英文中等<br>2016 年起專注於工具設計</p>
       </div>
-      <div class="foot-col">
-        <h5 data-lang="en">Profiles</h5><h5 data-lang="zh">個人檔案</h5>
-        <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="resume.html"><span data-lang="en">Résumé</span><span data-lang="zh">履歷</span></a>
-      </div>
-      <div class="foot-col">
-        <h5 data-lang="en">Based in</h5><h5 data-lang="zh">所在地</h5>
-        <a style="cursor:default" data-lang="en">Taipei, Taiwan</a>
-        <a style="cursor:default" data-lang="zh">台灣 · 台北</a>
-        <p data-lang="en" style="margin-top:14px">Open to remote &amp; hybrid.<br>Mandarin (native) · intermediate English.</p>
-        <p data-lang="zh" style="margin-top:14px">開放遠端與混合辦公。<br>中文母語 · 英文中等。</p>
-      </div>
+
+      <nav class="foot-nav" aria-label="Footer">
+        <div class="foot-navcol">
+          <h5 data-lang="en">Portfolio</h5><h5 data-lang="zh">作品</h5>
+          <a href="#top"><span data-lang="en">Home</span><span data-lang="zh">首頁</span></a>
+          <a href="#work"><span data-lang="en">Work</span><span data-lang="zh">作品</span></a>
+          <a href="#impact"><span data-lang="en">Impact</span><span data-lang="zh">影響力</span></a>
+          <a href="#about"><span data-lang="en">About</span><span data-lang="zh">關於</span></a>
+        </div>
+        <div class="foot-navcol">
+          <h5 data-lang="en">Case Studies</h5><h5 data-lang="zh">案例研究</h5>
+          <a href="case-tr7600.html"><span data-lang="en">TR7600 AXI</span><span data-lang="zh">TR7600 AXI</span></a>
+          <a href="case-filesearch.html"><span data-lang="en">File Search</span><span data-lang="zh">File Search</span></a>
+          <a href="case-config-manager.html"><span data-lang="en">Config Manager</span><span data-lang="zh">Config Manager</span></a>
+          <a href="case-android.html"><span data-lang="en">Android Platform</span><span data-lang="zh">Android 平台</span></a>
+        </div>
+        <div class="foot-navcol">
+          <h5 data-lang="en">Contact</h5><h5 data-lang="zh">聯絡</h5>
+          <a href="mailto:alyssahuang0510@gmail.com">Email</a>
+          <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span></a>
+        </div>
+      </nav>
     </div>
+
     <div class="foot-base">
       <span>© 2026 Alyssa Huang · Senior UX &amp; Product Designer</span>
       <span data-lang="en">Built by hand · HTML, restraint &amp; a tight grotesque</span>
@@ -943,6 +1073,21 @@ html, body { overflow-x: clip; }
     try{ localStorage.setItem(KEY, lang); }catch(e){}
   }
   apply(cur());
+
+  // Theme toggle
+  var TKEY='ah-theme';
+  var tbtn=document.getElementById('themeToggle');
+  function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
+  function syncTbtn(){ if(tbtn) tbtn.setAttribute('aria-pressed', isDark() ? 'true' : 'false'); }
+  function setTheme(mode){
+    var h=document.documentElement;
+    if(mode==='dark') h.setAttribute('data-theme','dark'); else h.removeAttribute('data-theme');
+    try{ localStorage.setItem(TKEY, mode); }catch(e){}
+    syncTbtn();
+  }
+  syncTbtn();
+  if(tbtn){ tbtn.addEventListener('click', function(){ setTheme(isDark() ? 'light' : 'dark'); }); }
+
   var segs=document.querySelectorAll('.lang-seg');
   for(var i=0;i<segs.length;i++){
     segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
