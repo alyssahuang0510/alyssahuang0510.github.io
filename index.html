@@ -575,12 +575,12 @@ html, body { overflow-x: clip; }
         <div class="case-context" data-lang="en"><span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>Quantified impact</span><span>SMT process engineers</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">唯一 UI/UX 負責人</span><span>完整重新設計</span><span>量化成效</span><span>SMT 製程工程師</span></div>
         <div class="case-bigstat">
-          <div class="v">38<sup>%</sup></div>
-          <div class="d" data-lang="en">less total programming time after the redesign — measured on two production boards (295&rarr;186 &amp; 386&rarr;237 min)</div>
-          <div class="d" data-lang="zh">改版後總編程時間減少——以兩塊量產板量測（295&rarr;186、386&rarr;237 分鐘）</div>
+          <div class="v">37<sup>%</sup></div>
+          <div class="d" data-lang="en">less programming time on the main production board after the redesign (295&rarr;186 min), independently timed by FAE teams</div>
+          <div class="d" data-lang="zh">改版後主要量產板的編程時間減少（295&rarr;186 分鐘），由 FAE 團隊獨立量測</div>
         </div>
-        <p class="case-desc" data-lang="en">TRI&rsquo;s flagship 3D AXI software detects solder-joint defects on every PCB leaving a production line — operated in shifts, where a confusing flow costs real downtime. I led the <strong>full redesign from a legacy 2D AOI interface</strong> into a 3D-AXI-native workflow, then owned it for six years as the sole UI/UX designer. The redesign cut <strong>total programming time by ~38%</strong> — independently measured by FAE teams on two production boards (a 4,160-component board: 295&rarr;186 min; a 3,495-component board: 386&rarr;237 min), with the heaviest gains in the Fine Tune and Library steps.</p>
-        <p class="case-desc" data-lang="zh">德律的旗艦 3D AXI 軟體負責檢測產線上每一片 PCB 的焊點缺陷——以輪班方式操作，一個令人困惑的流程就是真實的停機損失。我主導了從舊版 2D AOI 介面到 3D-AXI 原生工作流程的<strong>完整重新設計</strong>，並以唯一 UI/UX 設計師的身分負責了六年。改版讓<strong>總編程時間減少約 38%</strong>——由 FAE 團隊在兩塊量產板上獨立量測（4,160 顆零件的板：295&rarr;186 分；3,495 顆零件的板：386&rarr;237 分），改善最大的是 Fine Tune 與 Library 兩個步驟。</p>
+        <p class="case-desc" data-lang="en">TRI&rsquo;s flagship 3D AXI software detects solder-joint defects on every PCB leaving a production line — operated in shifts, where a confusing flow costs real downtime. I led the <strong>full redesign from a legacy 2D AOI interface</strong> into a 3D-AXI-native workflow, then owned it for six years as the sole UI/UX designer. The redesign cut <strong>programming time by 37%</strong> on a 4,160-component board (295&rarr;186 min), independently measured by FAE teams — a denser 3,495-component board fell from 386&rarr;237 min too — with the heaviest gains in the Fine Tune and Library steps.</p>
+        <p class="case-desc" data-lang="zh">德律的旗艦 3D AXI 軟體負責檢測產線上每一片 PCB 的焊點缺陷——以輪班方式操作，一個令人困惑的流程就是真實的停機損失。我主導了從舊版 2D AOI 介面到 3D-AXI 原生工作流程的<strong>完整重新設計</strong>，並以唯一 UI/UX 設計師的身分負責了六年。改版讓 4,160 顆零件那塊板的<strong>編程時間減少 37%</strong>（295&rarr;186 分），由 FAE 團隊獨立量測——另一塊 3,495 顆零件的較密板也從 386&rarr;237 分——改善最大的是 Fine Tune 與 Library 兩個步驟。</p>
         <ul class="case-points" data-lang="en">
           <li><strong>Fine Tune &minus;51% (158&rarr;77 min), Library &minus;39% (124&rarr;76 min)</strong> — the two slowest steps. Collapsing F3/F4 into one Fine Tune page and replacing manual height calculation with mouse-wheel adjustment is what drove most of the saving.</li>
           <li><strong>Authored the UX Design Guideline</strong> — buttons, layout, dialogs, typography — and applied it as one standardized interface across the entire AXI line (SIII / LL / TL / F3D / FB / HP / SV families): a design system that survives every new machine.</li>
@@ -620,12 +620,14 @@ html, body { overflow-x: clip; }
         <ul class="case-points" data-lang="en">
           <li>Reconciled <strong>two mental models in one result list</strong> — file-manager behaviour (browse, sort) and search behaviour (rank, snippet) — without making either feel bolted on.</li>
           <li>Scoped it as a <strong>peer app</strong> to Chat and Knowledge Hub, defending product-level boundaries against feature-creep pressure.</li>
-          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.<<li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>/li>
+          <li>Mapped the AI integration surface so File Search can graduate into AI workflows without re-architecting its IA.</li>
+          <li><strong>Designed a self-regulating indexing lifecycle</strong> (index → pause → prune → settle) so the heavier semantic index frees memory before it can slow or crash the device — pruning least-recently-used entries first, with the trade-off made explicit.</li>
         </ul>
         <ul class="case-points" data-lang="zh">
           <li>在同一份結果清單中調和<strong>兩種心智模型</strong>——檔案管理（瀏覽、排序）與搜尋（排名、摘要）——讓兩者都不像勉強拼裝。</li>
           <li>把它定位為與 Chat、Knowledge Hub <strong>並列的 App</strong>，在功能擴張的壓力下守住產品級邊界。</li>
-          <li>梳理 AI 整合介面，讓 File Search 能升級進 AI<li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
+          <li>梳理 AI 整合介面，讓 File Search 日後能升級進 AI 工作流，而不必重構它的資訊架構。</li>
+          <li><strong>設計了一套會自我調節的索引生命週期</strong>（建立 → 暫停 → 釋放 → 穩定），讓較重的語意索引在拖慢或拖垮裝置之前主動釋放記憶體——優先釋放最久未使用的項目，並把取捨講清楚。</li> 
         </ul>
         <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
       </div>
@@ -775,23 +777,23 @@ html, body { overflow-x: clip; }
         <div class="n">01 — Finding</div>
         <h4 data-lang="en">Start from evidence</h4><h4 data-lang="zh">從證據出發</h4>
         <p data-lang="en">A usability study, FAE-measured data, a field complaint, a system constraint. I don&rsquo;t move until the problem is named in numbers or observed behaviour.</p>
-        <p data-lang="zh">一份可用性研究、FAE 量到的數據、一則現場客訴、一個系統限制。在問題能用數字或觀察到的行為說清楚之前,我不動手。</p>
+        <p data-lang="zh">一份可用性研究、FAE 量到的數據、一則現場客訴、一個系統限制。在問題能用數字或觀察到的行為說清楚之前，我不動手。</p>
       </div>
       <div class="method-step">
         <div class="n">02 — Decision</div>
         <h4 data-lang="en">Change one thing, on purpose</h4><h4 data-lang="zh">有意識地改一件事</h4>
         <p data-lang="en">Each design move ties back to a specific finding — and I can say what I traded off for it. Feasibility is part of the call; I read the engineering constraint, not just the mockup.</p>
-        <p data-lang="zh">每個設計動作都連回某個具體發現——而且我說得出為此取捨了什麼。可行性是決策的一部分;我讀的是工程限制,不只是畫面。</p>
+        <p data-lang="zh">每個設計動作都連回某個具體發現——而且我說得出為此取捨了什麼。可行性是決策的一部分；我讀的是工程限制，不只是畫面。</p>
       </div>
       <div class="method-step">
         <div class="n">03 — Outcome</div>
         <h4 data-lang="en">Measure what moved</h4><h4 data-lang="zh">量出改變了什麼</h4>
         <p data-lang="en">Programming time, returns recovered, sources unified, SUS lift. If a change can&rsquo;t be measured, I say so — and I don&rsquo;t claim it.</p>
-        <p data-lang="zh">編程時間、挽回的退貨、收斂的來源數、SUS 提升。如果一個改變無法被量測,我會直說——而且不會把它當成果宣稱。</p>
+        <p data-lang="zh">編程時間、挽回的退貨、收斂的來源數、SUS 提升。如果一個改變無法被量測，我會直說——而且不會把它當成果宣稱。</p>
       </div>
     </div>
     <p class="method-foot reveal" data-lang="en">Every case on this site is built this way. You can always trace a <em>shipped outcome</em> back to the finding that justified it — and that traceability is what I bring to a team, not just to my own work.</p>
-    <p class="method-foot reveal" data-lang="zh">這個網站上的每個案例都是這樣寫的。你永遠可以把一個<em>已落地的成果</em>,回溯到當初支持它的那個發現——而我帶進團隊的,正是這種可追溯性,不只是我自己的產出。</p>
+    <p class="method-foot reveal" data-lang="zh">這個網站上的每個案例都是這樣寫的。你永遠可以把一個<em>已落地的成果</em>，回溯到當初支持它的那個發現——而我帶進團隊的，正是這種可追溯性，不只是我自己的產出。</p>
   </div>
 </section>
 
@@ -900,8 +902,8 @@ html, body { overflow-x: clip; }
       <div class="foot-col">
         <h5 data-lang="en">Email</h5><h5 data-lang="zh">Email</h5>
         <a href="mailto:alyssahuang0510@gmail.com">alyssahuang0510@gmail.com</a>
-        <p data-lang="en" style="margin-top:14px">Open to Senior UX Designer &amp; Product UX Designer roles — B2B, enterprise &amp; platform.</p>
-        <p data-lang="zh" style="margin-top:14px">開放 Senior UX Designer 與 Product UX Designer 職缺 — B2B、企業與平台。</p>
+        <p data-lang="en" style="margin-top:14px">Open to Senior UX Designer &amp; Senior Product Designer roles — B2B, enterprise &amp; platform.</p>
+        <p data-lang="zh" style="margin-top:14px">開放 Senior UX Designer 與 Senior Product Designer 職缺 — B2B、企業與平台。</p>
       </div>
       <div class="foot-col">
         <h5 data-lang="en">Profiles</h5><h5 data-lang="zh">個人檔案</h5>
