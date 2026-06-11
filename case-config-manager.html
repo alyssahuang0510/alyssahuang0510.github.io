@@ -137,7 +137,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
 .dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
 .dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
-.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li h3{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
 .dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
 .dec li p[data-lang="zh"]{line-height:1.8;}
 .dec li p .trade{color:var(--muted);}
@@ -170,7 +170,11 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
 .reveal.in{opacity:1;transform:none;}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto !important;}
+  .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
 
 /* Finding -> decision blocks */
 .find{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(22px,4vw,52px);align-items:center;padding:clamp(30px,4vw,48px) 0;border-top:1px solid var(--rule);}
@@ -195,9 +199,21 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .fig-tag .tg{position:absolute;top:0;left:0;font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;z-index:3;}
 .fig-tag .tg[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
 
+
+/* ── Accessibility · EAA / EN 301 549 → WCAG 2.2 AA ── */
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.skip-link{position:fixed;top:8px;left:8px;z-index:9999;background:var(--accent);color:#fff;font-family:var(--ff-mono);font-size:.85rem;padding:10px 16px;border-radius:6px;text-decoration:none;transform:translateY(-160%);transition:transform .18s;}
+.skip-link:focus{transform:translateY(0);}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px;}
+:focus:not(:focus-visible){outline:none;}
+main:focus{outline:none;}
+.c-foot a:focus-visible{outline-color:#9FB2FF;}
+.lang-seg{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;}
+.back-link{min-height:40px;}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to main content</span><span data-lang="zh">跳到主要內容</span></a>
 
 <nav class="nav" aria-label="Primary">
   <div class="container inner">
@@ -206,7 +222,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <a class="back-link" href="index.html"><span aria-hidden="true">←</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
-        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false" aria-label="中文">中</button>
       </div>
     </div>
   </div>
@@ -233,7 +249,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   </div>
 </header>
 
-<main class="container">
+<main id="main-content" tabindex="-1" class="container">
 
   <!-- 01 Context -->
   <section class="sec first reveal">
@@ -567,8 +583,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">01</span>
         <div>
-          <h4 data-lang="en">Gated progression on valid state, not on trust</h4>
-          <h4 data-lang="zh">用「有效狀態」卡流程，而不是靠信任</h4>
+          <h3 data-lang="en">Gated progression on valid state, not on trust</h3>
+          <h3 data-lang="zh">用「有效狀態」卡流程，而不是靠信任</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> a few extra seconds vs. shipping a broken or insecure action across a fleet. I chose to disable the next step until an encrypted key is unlocked and a password validates. At fleet scale, a blocked step is cheap; a bad deployment is not.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>多等幾秒，還是把一個壞掉或不安全的動作推送到整批機器。我選擇在金鑰解鎖、密碼驗證通過之前，先停用下一步。在整批機器的規模下，多卡幾秒很便宜；推錯一次部署，代價就很大。</p>
         </div>
@@ -576,8 +592,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">02</span>
         <div>
-          <h4 data-lang="en">Explained the security state instead of hiding it</h4>
-          <h4 data-lang="zh">把資安狀態說清楚，而不是藏起來</h4>
+          <h3 data-lang="en">Explained the security state instead of hiding it</h3>
+          <h3 data-lang="zh">把資安狀態說清楚，而不是藏起來</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> a denser prompt vs. an admin stuck at a cryptic wall. I surfaced <em>why</em> a step is blocked — encrypted key, wrong password — in language a non-developer can act on, rather than a silent failure or an error code.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>提示多一點，還是讓管理者卡在一道看不懂的牆前面。我選擇把「這一步為什麼被擋」——金鑰被加密、密碼錯了——用非技術人員也能照著做的白話講清楚，而不是默默失敗、或丟一串錯誤碼。</p>
         </div>
@@ -585,8 +601,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">03</span>
         <div>
-          <h4 data-lang="en">Let structure prevent invalid states</h4>
-          <h4 data-lang="zh">讓結構本身防止無效狀態</h4>
+          <h3 data-lang="en">Let structure prevent invalid states</h3>
+          <h3 data-lang="zh">讓結構本身防止無效狀態</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> less raw flexibility vs. fewer fleet-scale mistakes. Interlocked controls and stepped disclosure remove whole classes of error before they happen — I&rsquo;d rather make the wrong action unreachable than warn about it.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>少一點自由度，換來整批機器少出一些錯。用連動的控制項和一步步揭露的設計，在錯誤發生之前就把一整類問題消掉——我寧可讓錯的操作根本做不出來，也不要等它做了才警告。</p>
         </div>
@@ -647,7 +663,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <a class="btn" href="https://www.asus.com/business/services/bios-and-drivers-management/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS BIOS &amp; Drivers Management</span><span data-lang="zh">ASUS BIOS &amp; Drivers Management</span> <span aria-hidden="true">↗</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei</div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
   </div>
 </footer>
 

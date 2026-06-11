@@ -135,7 +135,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .dec{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);}
 .dec li{padding:24px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
 .dec li .di{font-family:var(--ff-display);font-weight:500;font-size:1.5rem;color:var(--accent);line-height:1;letter-spacing:-0.03em;}
-.dec li h4{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
+.dec li h3{font-weight:600;font-size:1.12rem;line-height:1.3;margin-bottom:7px;letter-spacing:-0.01em;}
 .dec li p{font-size:.98rem;color:var(--ink-2);line-height:1.6;}
 .dec li p[data-lang="zh"]{line-height:1.8;}
 .dec li p .trade{color:var(--muted);}
@@ -162,10 +162,26 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
 .reveal.in{opacity:1;transform:none;}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto !important;}
+  .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+/* ── Accessibility · EAA / EN 301 549 → WCAG 2.2 AA ── */
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.skip-link{position:fixed;top:8px;left:8px;z-index:9999;background:var(--accent);color:#fff;font-family:var(--ff-mono);font-size:.85rem;padding:10px 16px;border-radius:6px;text-decoration:none;transform:translateY(-160%);transition:transform .18s;}
+.skip-link:focus{transform:translateY(0);}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px;}
+:focus:not(:focus-visible){outline:none;}
+main:focus{outline:none;}
+.c-foot a:focus-visible{outline-color:#9FB2FF;}
+.lang-seg{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;}
+.back-link{min-height:40px;}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to main content</span><span data-lang="zh">跳到主要內容</span></a>
 
 <nav class="nav" aria-label="Primary">
   <div class="container inner">
@@ -174,7 +190,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <a class="back-link" href="index.html"><span aria-hidden="true">&larr;</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
-        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false" aria-label="中文">中</button>
       </div>
     </div>
   </div>
@@ -201,7 +217,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
   </div>
 </header>
 
-<main class="container">
+<main id="main-content" tabindex="-1" class="container">
 
   <!-- 01 Context -->
   <section class="sec first reveal">
@@ -425,8 +441,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">01</span>
         <div>
-          <h4 data-lang="en">Pruned least-recently-used first — and never hid the cost</h4>
-          <h4 data-lang="zh">優先釋放最久未使用——且不隱藏代價</h4>
+          <h3 data-lang="en">Pruned least-recently-used first — and never hid the cost</h3>
+          <h3 data-lang="zh">優先釋放最久未使用——且不隱藏代價</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> freshness vs. honesty. Dropping an index frees memory but removes that file from semantic results, so I ordered both pruning and recovery by access recency — and made the behaviour predictable rather than silent.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>要即時，還是要誠實。釋放索引能省記憶體，但也會讓那個檔暫時從語意搜尋裡消失，所以我讓「釋放」和「找回」都照使用頻率來排——讓行為可以被預期，而不是默默發生。</p>
         </div>
@@ -434,8 +450,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">02</span>
         <div>
-          <h4 data-lang="en">Two indexes, two policies — didn&rsquo;t manage them the same way</h4>
-          <h4 data-lang="zh">兩種索引，兩套政策——沒有用同一套管</h4>
+          <h3 data-lang="en">Two indexes, two policies — didn&rsquo;t manage them the same way</h3>
+          <h3 data-lang="zh">兩種索引，兩套政策——沒有用同一套管</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> simplicity vs. fit. Managing both indexes identically would&rsquo;ve been simpler — but the cheap one needs no governance and the expensive one needs all of it. Matching policy to cost kept the light index always-on and the heavy one safe.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>要省事，還是要對症下藥。兩個索引用同一套方式管當然比較省事，但便宜的那個根本不用管，貴的那個則什麼都要管。讓管理方式各自貼合它的成本，才能讓輕量索引一直在線、又把沉重的那個顧好。</p>
         </div>
@@ -443,8 +459,8 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <li>
         <span class="di">03</span>
         <div>
-          <h4 data-lang="en">Scoped as a peer app, not a buried feature</h4>
-          <h4 data-lang="zh">定位為並列 App，而非被埋的功能</h4>
+          <h3 data-lang="en">Scoped as a peer app, not a buried feature</h3>
+          <h3 data-lang="zh">定位為並列 App，而非被埋的功能</h3>
           <p data-lang="en"><span class="trade">Trade-off:</span> discoverability vs. scope creep. I defended File Search as an app sibling to Chat and Knowledge Hub — not a search box inside something else — so it carries its own IA and can grow without being constrained by a host feature.</p>
           <p data-lang="zh"><span class="trade">取捨：</span>要讓人找得到，又不能讓範圍無限擴張。我堅持讓 File Search 是一個和 Chat、Knowledge Hub 並列的 App——而不是塞在別的功能裡的一個搜尋框——這樣它才有自己的資訊架構，能獨立長大，不被某個母功能綁住。</p>
         </div>
@@ -486,7 +502,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
       <a class="btn" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei</div>
+    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
   </div>
 </footer>
 
