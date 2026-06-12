@@ -25,6 +25,11 @@
   var h=document.documentElement;
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
+
+  var TKEY='ah-theme', theme=null;
+  try{ var t=localStorage.getItem(TKEY); if(t==='dark'||t==='light') theme=t; }catch(e){}
+  if(!theme){ try{ theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }catch(e){ theme='light'; } }
+  if(theme==='dark') h.setAttribute('data-theme','dark');
 })();
 </script>
 
@@ -49,6 +54,7 @@
   --bg:#FFFFFF; --bg-2:#F4F4F3; --bg-3:#F9F9F8; --surface:#FFFFFF;
   --ink:#0C0C0D; --ink-2:#3A3A3D; --muted:#6E6E73; --muted-2:#A1A1A6;
   --rule:#E6E6E4; --rule-2:#EFEFED; --accent:#2B4DE0; --accent-2:#1E3AC0;
+  --on-ink:#FFFFFF; --logo-filter:grayscale(1); --logo-opacity:.5;
   --dark:#0C0C0D; --dark-2:#161618; --dark-rule:#2A2A2C;
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
@@ -85,7 +91,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .back-link:hover{color:var(--accent);}
 .lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
 .lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
-.lang-seg.on{background:var(--ink);color:#fff;}
+.lang-seg.on{background:var(--ink);color:var(--on-ink);}
 .lang-seg:not(.on):hover{color:var(--accent);}
 @media (max-width:560px){.brand small{display:none;}.nav-right{gap:12px;}.back-link span.bt{display:none;}}
 
@@ -99,7 +105,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-meta{display:flex;flex-wrap:wrap;gap:7px 8px;margin-bottom:clamp(30px,4vw,44px);}
 .c-meta span{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border:1px solid var(--rule);border-radius:5px;}
 .c-meta[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
-.c-meta span.hl{background:var(--ink);color:#fff;border-color:var(--ink);}
+.c-meta span.hl{background:var(--ink);color:var(--on-ink);border-color:var(--ink);}
 .c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
@@ -141,12 +147,12 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .shot{position:relative;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#222;margin-top:8px;}
 .shot img{width:100%;display:block;}
 .shot .marker{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--ff-mono);font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(43,77,224,.28),0 4px 12px rgba(0,0,0,.4);transform:translate(-50%,-50%);}
-.shot-tag{position:absolute;top:12px;left:12px;font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:5px;z-index:3;}
+.shot-tag{position:absolute;top:12px;left:12px;font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--on-ink);padding:5px 10px;border-radius:5px;z-index:3;}
 .shot-tag[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
 .legend{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px;max-width:60ch;}
 .legend li{display:grid;grid-template-columns:26px 1fr;gap:13px;align-items:start;font-size:.97rem;color:var(--ink-2);line-height:1.55;}
 .legend li[data-lang="zh"]{line-height:1.75;}
-.legend li .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--ff-mono);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+.legend li .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--on-ink);font-family:var(--ff-mono);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
 .legend li strong{color:var(--ink);font-weight:600;}
 
 /* Gallery of redesigned stages */
@@ -238,6 +244,33 @@ main:focus{outline:none;}
 .c-foot a:focus-visible{outline-color:#9FB2FF;}
 .lang-seg{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;}
 .back-link{min-height:40px;}
+
+/* --- Theme toggle (sun / moon pill) --- */
+.theme-toggle{position:relative;display:inline-flex;align-items:center;width:58px;height:30px;padding:0;border:1px solid var(--rule);border-radius:999px;background:var(--bg-2);flex:none;transition:background .25s ease,border-color .25s ease;}
+.theme-toggle:hover{border-color:var(--accent);}
+.theme-toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.22);transition:transform .28s cubic-bezier(.2,.7,.25,1),background .25s ease;}
+html[data-theme="dark"] .theme-toggle .knob{transform:translateX(28px);}
+.theme-toggle .ic{position:absolute;top:50%;width:14px;height:14px;transform:translateY(-50%);color:var(--muted);transition:color .25s ease,opacity .25s ease;pointer-events:none;}
+.theme-toggle .ic.sun{left:7px;}
+.theme-toggle .ic.moon{right:7px;}
+html:not([data-theme="dark"]) .theme-toggle .ic.sun{color:var(--accent);opacity:1;}
+html:not([data-theme="dark"]) .theme-toggle .ic.moon{opacity:.5;}
+html[data-theme="dark"] .theme-toggle .ic.moon{color:var(--accent);opacity:1;}
+html[data-theme="dark"] .theme-toggle .ic.sun{opacity:.5;}
+@media (max-width:760px){.theme-toggle{width:52px;height:28px;}.theme-toggle .knob{width:22px;height:22px;}html[data-theme="dark"] .theme-toggle .knob{transform:translateX(24px);}}
+
+/* --- Dark theme tokens (chrome flips automatically; SVG diagrams keep their own light card) --- */
+html[data-theme="dark"]{
+  --bg:#101012; --bg-2:#1A1A1D; --bg-3:#161618; --surface:#1A1A1D;
+  --ink:#F4F4F3; --ink-2:#C9C9CE; --muted:#9A9AA1; --muted-2:#6E6E73;
+  --rule:#2C2C2F; --rule-2:#242427; --accent:#6E86FF; --accent-2:#5670F0;
+  --dark:#000000; --dark-2:#0C0C0D; --dark-rule:#2A2A2C;
+  --on-ink:#101012; --logo-filter:grayscale(1) brightness(0) invert(.82); --logo-opacity:.62;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink);}
+html[data-theme="dark"] .logos img:hover{filter:none;opacity:1;}
+html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
+
 </style>
 </head>
 <body>
@@ -248,6 +281,11 @@ main:focus{outline:none;}
     <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
     <div class="nav-right">
       <a class="back-link" href="index.html"><span aria-hidden="true">←</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Light / Dark">
+        <span class="knob" aria-hidden="true"></span>
+        <svg class="ic sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+        <svg class="ic moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.2A8.2 8.2 0 0 1 9.8 3.5a.7.7 0 0 0-.9-.9 9.6 9.6 0 1 0 12.5 12.5.7.7 0 0 0-.9-.9z"/></svg>
+      </button>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
         <button class="lang-seg" type="button" data-set="zh" aria-pressed="false" aria-label="中文">中</button>
@@ -602,6 +640,21 @@ main:focus{outline:none;}
     try{ localStorage.setItem(KEY, lang); }catch(e){}
   }
   apply(cur());
+
+  // Theme toggle
+  var TKEY='ah-theme';
+  var tbtn=document.getElementById('themeToggle');
+  function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
+  function syncTbtn(){ if(tbtn) tbtn.setAttribute('aria-pressed', isDark() ? 'true' : 'false'); }
+  function setTheme(mode){
+    var h=document.documentElement;
+    if(mode==='dark') h.setAttribute('data-theme','dark'); else h.removeAttribute('data-theme');
+    try{ localStorage.setItem(TKEY, mode); }catch(e){}
+    syncTbtn();
+  }
+  syncTbtn();
+  if(tbtn){ tbtn.addEventListener('click', function(){ setTheme(isDark() ? 'light' : 'dark'); }); }
+
   var segs=document.querySelectorAll('.lang-seg');
   for(var i=0;i<segs.length;i++){
     segs[i].addEventListener('click', function(){ apply(this.getAttribute('data-set')); });
