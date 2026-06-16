@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ASUS Config Manager — Security UX Case Study · Alyssa Huang</title>
-<meta name="description" content="A security-UX case study: making fleet-scale BIOS and credential management legible and safe-by-default for enterprise IT admins, on a console that extends Microsoft SCCM. All visuals are abstracted reconstructions — no confidential material." />
+<meta name="description" content="A security-UX case study: making fleet-scale BIOS and credential management legible and safe-by-default for enterprise IT admins, on a console that extends Microsoft SCCM. Interface screenshots are from ASUS's published user guide; no internal or unreleased material." />
 <meta name="robots" content="index, follow" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="ASUS Config Manager — Security UX Case Study · Alyssa Huang" />
@@ -201,6 +201,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 /* Schematic figure */
 .chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(18px,2.6vw,30px);}
 .chart-fig svg{width:100%;height:auto;display:block;}
+.chart-fig img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--rule);}
 .fig-tag{position:relative;}
 .fig-tag .tg{position:absolute;top:0;left:0;font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--on-ink);padding:5px 10px;border-radius:5px;z-index:3;}
 .fig-tag .tg[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
@@ -377,56 +378,11 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <div class="find reveal">
       <div class="find-media">
         <div class="chart-fig fig-tag">
-          <span class="tg"><span data-lang="en">Schematic · Encrypted credential</span><span data-lang="zh">示意 · 加密憑證</span></span>
-          <svg viewBox="0 0 840 320" xmlns="http://www.w3.org/2000/svg" role="img"
-               aria-label="Schematic of the encrypted-credential flow: an encrypted key is detected, progression is held and a password is requested with an explanation, then a decision on whether the password is correct branches to a clear re-enter path or to unlocked progression.">
-            <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">ENCRYPTED-CREDENTIAL FLOW · STATE-GATED</text>
-            <!-- Node 1 -->
-            <rect x="0" y="58" width="186" height="74" rx="9" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <text x="20" y="92" font-family="Geist, sans-serif" font-size="14" fill="#0C0C0D">Encrypted key</text>
-            <text x="20" y="112" font-family="Geist, sans-serif" font-size="14" fill="#0C0C0D">detected</text>
-            <!-- arrow -->
-            <line x1="186" y1="95" x2="226" y2="95" stroke="#0C0C0D" stroke-width="1.4"/>
-            <path d="M226 95 l-9 -5 l0 10 z" fill="#0C0C0D"/>
-            <!-- Node 2 -->
-            <rect x="228" y="50" width="214" height="90" rx="9" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="246" y="70" width="14" height="11" rx="2" fill="none" stroke="#2B4DE0" stroke-width="1.6"/>
-            <path d="M249 70 v-3 a4 4 0 0 1 8 0 v3" fill="none" stroke="#2B4DE0" stroke-width="1.6"/>
-            <text x="270" y="80" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Next held</text>
-            <text x="246" y="104" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Password required,</text>
-            <text x="246" y="122" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">explained inline</text>
-            <!-- arrow to diamond -->
-            <line x1="442" y1="95" x2="486" y2="95" stroke="#0C0C0D" stroke-width="1.4"/>
-            <path d="M486 95 l-9 -5 l0 10 z" fill="#0C0C0D"/>
-            <!-- Diamond -->
-            <polygon points="560,52 624,95 560,138 496,95" fill="#F4F4F3" stroke="#0C0C0D" stroke-width="1.4"/>
-            <text x="560" y="91" font-family="Geist, sans-serif" font-size="12.5" fill="#0C0C0D" text-anchor="middle">Password</text>
-            <text x="560" y="108" font-family="Geist, sans-serif" font-size="12.5" fill="#0C0C0D" text-anchor="middle">correct?</text>
-            <!-- branch NO up -->
-            <line x1="560" y1="52" x2="560" y2="32" stroke="#6E6E73" stroke-width="1.4"/>
-            <line x1="560" y1="32" x2="664" y2="32" stroke="#6E6E73" stroke-width="1.4"/>
-            <line x1="664" y1="32" x2="664" y2="40" stroke="#6E6E73" stroke-width="1.4"/>
-            <path d="M664 40 l-5 -9 l10 0 z" fill="#6E6E73"/>
-            <text x="566" y="27" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">NO</text>
-            <rect x="664" y="40" width="160" height="56" rx="9" fill="#FFFFFF" stroke="#6E6E73" stroke-width="1.3"/>
-            <text x="682" y="66" font-family="Geist, sans-serif" font-size="13" fill="#3A3A3D">Clear error,</text>
-            <text x="682" y="84" font-family="Geist, sans-serif" font-size="13" fill="#3A3A3D">re-enter</text>
-            <!-- loop back dashed -->
-            <path d="M744 96 v44 a8 8 0 0 1 -8 8 H 348 a8 8 0 0 1 -8 -8 V 142" fill="none" stroke="#A1A1A6" stroke-width="1.2" stroke-dasharray="4 4"/>
-            <path d="M340 142 l-5 9 l10 0 z" fill="#A1A1A6"/>
-            <!-- branch YES down -->
-            <line x1="560" y1="138" x2="560" y2="190" stroke="#2B4DE0" stroke-width="1.4"/>
-            <line x1="560" y1="190" x2="664" y2="190" stroke="#2B4DE0" stroke-width="1.4"/>
-            <line x1="664" y1="190" x2="664" y2="198" stroke="#2B4DE0" stroke-width="1.4"/>
-            <path d="M664 198 l-5 -9 l10 0 z" fill="#2B4DE0"/>
-            <text x="566" y="160" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">YES</text>
-            <rect x="664" y="198" width="160" height="56" rx="9" fill="#2B4DE0"/>
-            <text x="682" y="224" font-family="Geist, sans-serif" font-size="13" fill="#FFFFFF">Unlocked,</text>
-            <text x="682" y="242" font-family="Geist, sans-serif" font-size="13" fill="#FFFFFF">Next enabled</text>
-          </svg>
+          <span class="tg"><span data-lang="en">Screen · Encrypted credential</span><span data-lang="zh">畫面 · 加密憑證</span></span>
+          <img src="images/config-bios-auth-encrypted-key.jpg" alt="ASUS Config Manager BIOS Authentication Wizard, Enroll Certificate Key step. The left rail lists eight numbered steps with the first four complete. A dialog reads: Detected that the private key is encrypted with a password, please enter the password, with a password field and Cancel and Confirm buttons." loading="lazy" />
         </div>
-        <p class="fig-cap" data-lang="en">Fig. 2 — Encrypted-credential handling (abstracted reconstruction). The state, not the user, decides when the step can advance.</p>
-        <p class="fig-cap" data-lang="zh">圖 2 — 加密憑證處理（示意重繪）。決定步驟能否前進的是「狀態」，不是使用者的硬闖。</p>
+        <p class="fig-cap" data-lang="en">Fig. 2 — The encrypted-key step, from ASUS&rsquo;s public user guide. The wizard detects the encrypted private key, holds progression, and asks for the password in plain language — the state, not the user, decides when the step can advance.</p>
+        <p class="fig-cap" data-lang="zh">圖 2 — 加密金鑰步驟，取自 ASUS 公開使用手冊。精靈偵測到被加密的私鑰、擋下流程，並用白話向使用者要密碼——決定步驟能否前進的是「狀態」，不是使用者的硬闖。</p>
       </div>
       <div class="find-body">
         <span class="ftag" data-lang="en">Decision · Encrypted credentials</span>
@@ -445,80 +401,22 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <div class="find flip reveal">
       <div class="find-media">
         <div class="chart-fig fig-tag">
-          <span class="tg"><span data-lang="en">Schematic · Safe deploy</span><span data-lang="zh">示意 · 安全部署</span></span>
-          <svg viewBox="0 0 840 360" xmlns="http://www.w3.org/2000/svg" role="img"
-               aria-label="Schematic of the fleet-deploy flow: a dense screen split into a stepped wizard, with a do-not-force-reboot default, a hide-progress-on-client option, and deploy controls that enable and disable together so an invalid combination can't be reached.">
-            <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">FLEET-DEPLOY FLOW · SAFE BY DEFAULT</text>
-
-            <!-- Panel L : stepped wizard + advanced -->
-            <rect x="0" y="46" width="396" height="296" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="0" y="46" width="396" height="32" rx="12" fill="#0C0C0D"/>
-            <rect x="0" y="62" width="396" height="16" fill="#0C0C0D"/>
-            <text x="18" y="68" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">Task sequence</text>
-            <!-- stepper dots -->
-            <g font-family="Geist Mono, monospace" font-size="10">
-              <circle cx="30" cy="112" r="9" fill="#2B4DE0"/><text x="30" y="116" fill="#FFFFFF" text-anchor="middle">1</text>
-              <circle cx="30" cy="146" r="9" fill="none" stroke="#A1A1A6"/><text x="30" y="150" fill="#A1A1A6" text-anchor="middle">2</text>
-              <circle cx="30" cy="180" r="9" fill="none" stroke="#A1A1A6"/><text x="30" y="184" fill="#A1A1A6" text-anchor="middle">3</text>
-              <line x1="30" y1="121" x2="30" y2="137" stroke="#E6E6E4"/><line x1="30" y1="155" x2="30" y2="171" stroke="#E6E6E4"/>
-            </g>
-            <!-- default name field -->
-            <rect x="60" y="102" width="300" height="26" rx="5" fill="#F4F4F3" stroke="#E6E6E4"/>
-            <text x="72" y="119" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Model_BiosUpdate_date</text>
-            <circle cx="372" cy="98" r="9" fill="#0C0C0D"/><text x="372" y="102" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF" text-anchor="middle">1</text>
-            <!-- advanced settings -->
-            <text x="60" y="172" font-family="Geist, sans-serif" font-size="13" font-weight="600" fill="#0C0C0D">Advanced settings</text>
-            <!-- toggle off : don't auto reboot -->
-            <rect x="60" y="190" width="34" height="18" rx="9" fill="#E6E6E4"/>
-            <circle cx="69" cy="199" r="7" fill="#FFFFFF" stroke="#A1A1A6"/>
-            <text x="104" y="203" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Don&rsquo;t force reboot mid-work</text>
-            <circle cx="372" cy="199" r="9" fill="#0C0C0D"/><text x="372" y="203" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF" text-anchor="middle">2</text>
-            <!-- nav -->
-            <rect x="296" y="298" width="80" height="26" rx="13" fill="#2B4DE0"/><text x="336" y="315" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Next</text>
-
-            <!-- arrow between panels -->
-            <line x1="404" y1="194" x2="436" y2="194" stroke="#0C0C0D" stroke-width="1.4"/>
-            <path d="M436 194 l-9 -5 l0 10 z" fill="#0C0C0D"/>
-
-            <!-- Panel R : deploy with interlock -->
-            <rect x="444" y="46" width="396" height="296" rx="12" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1.4"/>
-            <rect x="444" y="46" width="396" height="32" rx="12" fill="#0C0C0D"/>
-            <rect x="444" y="62" width="396" height="16" fill="#0C0C0D"/>
-            <text x="462" y="68" font-family="Geist Mono, monospace" font-size="10" fill="#FFFFFF">Choose deploy device</text>
-            <!-- master checkbox -->
-            <rect x="476" y="104" width="16" height="16" rx="3" fill="#2B4DE0"/>
-            <path d="M480 112 l3 3 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-            <text x="502" y="117" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Deploy to selected device</text>
-            <!-- interlock bracket -->
-            <path d="M484 124 v118" fill="none" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
-            <!-- device field (enabled) -->
-            <line x1="484" y1="156" x2="500" y2="156" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
-            <rect x="504" y="144" width="210" height="26" rx="5" fill="#FFFFFF" stroke="#0C0C0D"/>
-            <text x="516" y="161" font-family="Geist, sans-serif" font-size="12" fill="#A1A1A6">Device</text>
-            <rect x="724" y="144" width="78" height="26" rx="5" fill="#2B4DE0"/><text x="763" y="161" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Browse</text>
-            <!-- hide progress -->
-            <line x1="484" y1="200" x2="500" y2="200" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="4 4"/>
-            <rect x="504" y="192" width="16" height="16" rx="3" fill="none" stroke="#0C0C0D"/>
-            <text x="530" y="205" font-family="Geist, sans-serif" font-size="12.5" fill="#3A3A3D">Hide progress on client devices</text>
-            <!-- interlock label -->
-            <text x="476" y="252" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">INTERLOCKED &mdash; ENABLE / DISABLE TOGETHER</text>
-            <text x="476" y="276" font-family="Geist, sans-serif" font-size="12" fill="#6E6E73">No invalid combination is reachable</text>
-            <rect x="724" y="298" width="80" height="26" rx="13" fill="#2B4DE0"/><text x="764" y="315" font-family="Geist, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Next</text>
-          </svg>
+          <span class="tg"><span data-lang="en">Screen · Auto-update policy</span><span data-lang="zh">畫面 · 自動更新政策</span></span>
+          <img src="images/config-driver-update-policy.jpg" alt="ASUS Config Manager Driver Auto Update Policy Wizard, Configure Update Behavior step. Update frequency: Manual update only, Weekly (selected, scheduled Sunday 9:00 PM), or Monthly. Update behavior: Notify Only, or Download and Install with Allow user to pause update checked." loading="lazy" />
         </div>
-        <p class="fig-cap" data-lang="en">Fig. 3 — Safe-by-default deployment (abstracted reconstruction). Defaults protect the end-user; interlocks protect the admin from themselves.</p>
-        <p class="fig-cap" data-lang="zh">圖 3 — 預設就安全的部署（示意重繪）。預設值保護的是用機器的人；連動式控制保護的是管理者自己不出錯。</p>
+        <p class="fig-cap" data-lang="en">Fig. 3 — The driver auto-update policy, from ASUS&rsquo;s public user guide. The cautious option is the default: notify or install on a set schedule, with the user always able to pause.</p>
+        <p class="fig-cap" data-lang="zh">圖 3 — 驅動程式自動更新政策，取自 ASUS 公開使用手冊。預設就是最保守的選項：依排程通知或安裝，而且使用者隨時可以暫停。</p>
       </div>
       <div class="find-body">
-        <span class="ftag" data-lang="en">Decision · Fleet deployment</span>
-        <span class="ftag" data-lang="zh">設計決策 · 機隊部署</span>
-        <h3 data-lang="en">A fleet update should never surprise the people using the machines</h3>
-        <h3 data-lang="zh">一次機隊更新，不該驚擾正在用機器的人</h3>
-        <p data-lang="en">A single dense configuration screen forced the admin to hold every choice in their head at once — including choices that, combined wrongly, push a disruptive update across a fleet.</p>
-        <p data-lang="zh">原本一個高密度的設定畫面，逼管理者一次把所有選項記在腦中——其中有些選項一旦組合錯誤，就會把擾人的更新推送到整批機器。</p>
+        <span class="ftag" data-lang="en">Decision · Auto-update policy</span>
+        <span class="ftag" data-lang="zh">設計決策 · 自動更新政策</span>
+        <h3 data-lang="en">An always-on update policy must never ambush the person at the keyboard</h3>
+        <h3 data-lang="zh">一個一直開著的更新政策，絕不能突襲正在用機器的人</h3>
+        <p data-lang="en">A driver auto-update policy runs unattended across the whole fleet on a schedule. Left on a naive default, it could download, install, and reboot on its own cadence — including on someone in the middle of their work.</p>
+        <p data-lang="zh">驅動程式自動更新政策會依排程、在整批機器上無人值守地執行。如果預設值設得太隨便，它就可能照自己的節奏下載、安裝、重開機——包括在某個人工作到一半的時候。</p>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
-        <p data-lang="en"><strong>Split it into a guided flow with safe defaults and interlocked controls.</strong> Admins can suppress the forced reboot so an update never restarts someone mid-task, and hide the install progress bar so end-users on managed machines aren&rsquo;t alarmed. The deploy controls enable and disable together, so an invalid combination simply can&rsquo;t be reached — the structure prevents the unsafe state instead of warning about it afterwards.</p>
-        <p data-lang="zh"><strong>把它拆成一步一步的引導流程，配上安全的預設值和連動的控制項。</strong>管理者可以關掉強制重啟，更新就不會在別人工作到一半時把機器重開；也可以隱藏安裝進度條，避免嚇到那些正在用被管理機器的人。部署相關的選項會一起開、一起關，所以根本組不出無效的設定——是用結構去擋掉不安全的狀態，而不是等出事了才跳警告。</p>
+        <p data-lang="en"><strong>Made the cautious option the default.</strong> The policy notifies or installs only on an explicit schedule, and even when set to install it keeps <strong>&ldquo;allow user to pause&rdquo;</strong> on — so an update can be deferred, never forced. Frequency, severity, and driver category are all scoped up front, so the policy can only ever do what the admin deliberately switched on.</p>
+        <p data-lang="zh"><strong>把最保守的選項設成預設。</strong>政策只在明確的排程下通知或安裝，而且就算設成自動安裝，也預設保留<strong>「允許使用者暫停」</strong>——更新可以延後，而不是被硬塞。更新頻率、嚴重度、驅動類別都得事先界定清楚，所以這套政策永遠只能做管理者刻意打開的那些事。</p>
       </div>
     </div>
 
@@ -590,8 +488,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
             <text x="296" y="289" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">whole fleet &middot; plain language</text>
           </svg>
         </div>
-        <p class="fig-cap" data-lang="en">Fig. 4 — Consolidated result report (abstracted reconstruction). The raw exit code becomes a reason an admin can act on; the whole fleet is one view, not a per-device hunt.</p>
-        <p class="fig-cap" data-lang="zh">圖 4 — 整合結果報表（示意重繪）。原始 exit code 變成管理者能據以行動的原因；整批機隊在同一個視圖，而不是逐台追查。</p>
+        <p class="fig-cap" data-lang="en">Fig. 4 — Consolidated result report (design concept). The raw exit code becomes a reason an admin can act on; the whole fleet is one view, not a per-device hunt.</p>
+        <p class="fig-cap" data-lang="zh">圖 4 — 整合結果報表（設計概念）。原始 exit code 變成管理者能據以行動的原因；整批機隊在同一個視圖，而不是逐台追查。</p>
       </div>
       <div class="find-body">
         <span class="ftag" data-lang="en">Decision · Result report</span>
@@ -607,8 +505,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
 
     <div class="note">
-      <p data-lang="en"><strong>On confidentiality:</strong> every interface visual on this page is an abstracted schematic created for this portfolio. No confidential ASUS design files, production screenshots, or internal copy are reproduced; the diagrams illustrate design <em>decisions</em>, not shipping screens.</p>
-      <p data-lang="zh"><strong>關於機密：</strong>本頁所有介面圖都是為作品集重繪的抽象示意。未複製任何 ASUS 機密設計檔、產品截圖或內部文案；圖示呈現的是設計<em>決策</em>，而非實際出貨畫面。</p>
+      <p data-lang="en"><strong>On sources:</strong> the screenshots in Figures 2 and 3 are taken from ASUS&rsquo;s publicly published Config Manager user guide, which documents the shipping product. Figure 4 is a design-concept diagram of the consolidated result report — the public guide documents the underlying exit codes and per-device status, but not a single consolidated screen, so it is shown as a concept. No internal, unreleased, or customer-identifying material appears on this page.</p>
+      <p data-lang="zh"><strong>關於來源：</strong>圖 2 與圖 3 的截圖取自 ASUS 已公開發佈的 Config Manager 使用手冊，內容對應已出貨的產品。圖 4 是「整合結果報表」的設計概念圖——公開手冊記錄了底層的 exit code 與逐台狀態，但沒有單一的整合畫面，因此以概念圖呈現。本頁不含任何內部、未發佈或可識別客戶的資料。</p>
     </div>
   </section>
 
