@@ -138,6 +138,19 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 
 .fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
 .fig-cap[data-lang="zh"]{line-height:1.8;}
+.td-kick{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.12em;color:var(--muted);margin-bottom:14px;}
+.td-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.teardown{min-width:700px;width:100%;border-collapse:collapse;font-family:var(--ff-mono);}
+.teardown th,.teardown td{border-bottom:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top;font-size:.74rem;line-height:1.45;color:var(--ink-2);}
+.teardown thead tr:first-child th{font-size:.62rem;letter-spacing:.1em;color:var(--muted);font-weight:500;border-bottom:1px solid var(--rule);}
+.teardown thead tr:nth-child(2) th{font-size:.66rem;letter-spacing:.04em;color:var(--muted);font-weight:500;border-bottom:1px solid var(--ink);}
+.teardown td.oem{font-weight:600;color:var(--ink);white-space:nowrap;}
+.teardown .cur{color:#C42B2B;}
+.teardown .pro{color:var(--accent);}
+.teardown .mut{color:var(--muted-2);}
+.td-foot{font-family:var(--ff-mono);font-size:.68rem;color:var(--muted);margin-top:13px;line-height:1.8;}
+.td-foot .key{display:inline-block;margin-right:20px;}
+.td-foot .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;}
 
 /* Note / disclosure band */
 .note{background:var(--bg-2);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin-top:26px;}
@@ -278,9 +291,9 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <span class="hl">系統級 UX</span><span>0 → 1</span><span>6+ 功能</span><span>跨產品線</span><span>衝突處理</span><span>ROG · Zenfone</span>
     </div>
     <div class="c-bigstat">
-      <div class="v">6<sup>+</sup></div>
-      <div class="d" data-lang="en">platform features designed from zero across two product lines — but the hardest, most senior work was the system view between them: the conflicts.</div>
-      <div class="d" data-lang="zh">跨兩條產品線、從零設計的平台功能——但最難、最資深的工作，是它們之間的系統視角：那些衝突。</div>
+      <div class="v">7 → 0</div>
+      <div class="d" data-lang="en">field complaints cleared within a month &mdash; with four returns recovered &mdash; by treating a post-launch gyroscope crisis as a research signal, not a one-off bug. The harder, more senior work sits between features: the cross-feature conflicts no single owner has.</div>
+      <div class="d" data-lang="zh">一個月內把 7 件現場客訴全數解決、並挽回 4 件退貨——把上市後的陀螺儀危機當成研究訊號，而不是單一 bug。更難、更資深的工作，其實夾在功能之間：那些沒人負責的跨功能衝突。</div>
     </div>
   </div>
 </header>
@@ -333,51 +346,57 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
 
     <div class="chart-fig">
-      <svg viewBox="0 0 820 442" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="Conflict matrix under 3-button navigation. Samsung and Pixel route the assistant to a separate gesture, so Circle to Search keeps long-press center with no clash. ASUS currently maps both Circle to Search and the assistant to long-press center, which is mutually exclusive. The proposed fix moves the assistant to bottom swipe plus power key, freeing the center gesture.">
-        <text x="0" y="18" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.2" fill="#6E6E73">TRIGGER CONFLICT · 3-BUTTON NAVIGATION · 4 OEMs</text>
-        <text x="0" y="42" font-family="Geist, sans-serif" font-size="14" fill="#3A3A3D">Who owns &ldquo;long-press center&rdquo; &mdash; Circle to Search or the assistant?</text>
-
-        <rect x="195" y="244" width="625" height="76" fill="#ECECEA"/>
-        <rect x="195" y="320" width="625" height="76" fill="#EDF0FC"/>
-
-        <text x="200" y="80" font-family="Geist Mono, monospace" font-size="11" letter-spacing=".5" fill="#0C0C0D">CIRCLE TO SEARCH</text>
-        <text x="515" y="80" font-family="Geist Mono, monospace" font-size="11" letter-spacing=".5" fill="#0C0C0D">ASSISTANT</text>
-
-        <line x1="0" y1="92" x2="820" y2="92" stroke="#0C0C0D" stroke-width="1"/>
-        <line x1="0" y1="168" x2="820" y2="168" stroke="#E6E6E4" stroke-width="1"/>
-        <line x1="0" y1="244" x2="820" y2="244" stroke="#E6E6E4" stroke-width="1"/>
-        <line x1="0" y1="320" x2="820" y2="320" stroke="#E6E6E4" stroke-width="1"/>
-        <line x1="0" y1="396" x2="820" y2="396" stroke="#0C0C0D" stroke-width="1"/>
-        <line x1="195" y1="92" x2="195" y2="396" stroke="#E6E6E4" stroke-width="1"/>
-        <line x1="510" y1="92" x2="510" y2="396" stroke="#E6E6E4" stroke-width="1"/>
-
-        <text x="12" y="134" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">Samsung</text>
-        <text x="210" y="134" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">long-press center</text>
-        <text x="525" y="134" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">bottom swipe / power key</text>
-
-        <text x="12" y="210" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">Pixel</text>
-        <text x="210" y="210" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">long-press center</text>
-        <text x="525" y="210" font-family="Geist Mono, monospace" font-size="12" fill="#3A3A3D">power key only</text>
-
-        <text x="12" y="276" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">ASUS</text>
-        <text x="12" y="294" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#6E6E73">CURRENT</text>
-        <text x="210" y="274" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
-        <text x="525" y="274" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
-        <path d="M269 286 L269 292 L584 292 L584 286" fill="none" stroke="#3A3A3D" stroke-width="1"/>
-        <text x="426" y="310" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing=".4" fill="#3A3A3D" text-anchor="middle">same trigger &mdash; mutually exclusive</text>
-
-        <text x="12" y="352" font-family="Geist Mono, monospace" font-size="13" fill="#0C0C0D">ASUS</text>
-        <text x="12" y="370" font-family="Geist Mono, monospace" font-size="10" letter-spacing=".5" fill="#2B4DE0">PROPOSED</text>
-        <text x="210" y="364" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">long-press center</text>
-        <rect x="520" y="346" width="288" height="32" rx="6" fill="#2B4DE0"/>
-        <text x="534" y="366" font-family="Geist Mono, monospace" font-size="12" fill="#FFFFFF">bottom swipe + power key</text>
-
-        <text x="0" y="420" font-family="Geist Mono, monospace" font-size="10.5" fill="#A1A1A6">On 3-button nav, long-press center is the platform-default assistant gesture &mdash; the constraint that forced the collision.</text>
-      </svg>
+      <div class="td-kick">COMPETITIVE TEARDOWN &middot; CIRCLE TO SEARCH (CTS) vs GOOGLE ASSISTANT (GA) &middot; BY NAVIGATION MODE</div>
+      <div class="td-wrap">
+        <table class="teardown" aria-label="Competitive teardown of Circle to Search and Google Assistant triggers across Samsung, Google Pixel, ASUS ROG and ASUS Zenfone, under both gesture navigation and 3-button navigation. Circle to Search and the assistant only collide under 3-button navigation, where both default to long-press center; the proposed fix re-homes the assistant to bottom-swipe plus power key.">
+          <thead>
+            <tr><th></th><th colspan="2">Circle to Search</th><th>Trigger options</th><th colspan="2">Google Assistant</th></tr>
+            <tr><th>OEM</th><th>gesture nav</th><th>3-button</th><th>where it&rsquo;s set</th><th>gesture nav</th><th>3-button</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="oem">Samsung</td>
+              <td>long-press pill</td>
+              <td>long-press center</td>
+              <td>gesture</td>
+              <td>swipe + power key</td>
+              <td>swipe + power key</td>
+            </tr>
+            <tr>
+              <td class="oem">Google &middot; Pixel</td>
+              <td>long-press pill</td>
+              <td>long-press center</td>
+              <td>gesture &middot; tap-to-search &middot; power key</td>
+              <td>swipe + power key</td>
+              <td>power-key long-press <span class="mut">(no CTS on power key)</span></td>
+            </tr>
+            <tr>
+              <td class="oem">ASUS ROG</td>
+              <td>long-press pill</td>
+              <td>long-press center</td>
+              <td>gesture &middot; back-tap &middot; AirTrigger</td>
+              <td>swipe + power key</td>
+              <td><span class="cur">current: long-press center &rarr; mutually exclusive</span><br><span class="pro">proposed: swipe + power key</span></td>
+            </tr>
+            <tr>
+              <td class="oem">ASUS Zenfone</td>
+              <td>long-press pill</td>
+              <td>long-press center</td>
+              <td>gesture &middot; back-tap &middot; smart key</td>
+              <td>swipe + power key</td>
+              <td><span class="cur">current: long-press center &rarr; mutually exclusive</span><br><span class="pro">proposed: swipe + power key</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="td-foot">
+        <div>&#10037;&nbsp; Long-press center can&rsquo;t be reassigned &mdash; a Google platform restriction.</div>
+        <div>&#10037;&nbsp; The collision only reaches users on 3-button navigation.</div>
+        <div style="margin-top:9px;"><span class="key"><span class="sw" style="background:#C42B2B;"></span>current conflict</span><span class="key"><span class="sw" style="background:var(--accent);"></span>proposed design</span></div>
+      </div>
     </div>
-    <p class="fig-cap" data-lang="en">Fig. 1 — Mapping the long-press-center conflict across the gesture-navigation ecosystem. Samsung and Pixel route the assistant elsewhere, so the clash never arises; ASUS had both features on the same trigger.</p>
-    <p class="fig-cap" data-lang="zh">圖 1 — 把「長按中間」這個衝突，放到整個手勢導航生態裡對照。Samsung 和 Pixel 把助理擺到別的手勢上，所以根本不會撞；ASUS 則是兩個功能綁在同一個手勢上。</p>
+    <p class="fig-cap" data-lang="en">Fig. 1 &mdash; The full competitive teardown behind the fix. Circle to Search and the assistant only collide under 3-button navigation, where both default to long-press center; re-homing the assistant to bottom-swipe + power key (where Samsung already puts it) clears the clash without fighting the platform default.</p>
+    <p class="fig-cap" data-lang="zh">圖 1 — 修正背後完整的競品拆解。Circle to Search 與助理只有在三鍵導航下才會相撞——兩者預設都用長按中間；把助理改到底部上滑＋電源鍵長按（也就是 Samsung 早就在用的位置），就能在不對抗平台預設的前提下解開衝突。</p>
 
     <div class="note">
       <p data-lang="en"><strong>Finding:</strong> both Circle to Search and the assistant claimed long-press-center, and the assistant trigger is the platform default — it can&rsquo;t simply be removed.</p>
@@ -387,6 +406,78 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <span class="arrow" data-lang="zh">於是我 &rarr;</span>
       <p data-lang="zh"><strong>把助理改到底部上滑＋電源鍵長按</strong>——也就是 Samsung 既有的位置——把長按中間讓給 Circle to Search。在不對抗平台預設的前提下解掉衝突，兩個功能不再互相默默取消。我也刻意保留了一個既有的特殊行為，因為拿掉它會擋掉使用者真正用來觸發這個功能的一條路徑。</p>
     </div>
+
+    <div class="prose" style="margin-top:28px;margin-bottom:24px;">
+      <p data-lang="en">Re-homing the trigger fixed the clash &mdash; but the settings menu still had to make sense. The assistant&rsquo;s toggle had ended up stranded on the gesture-sensitivity page, away from every other assistant control. I moved it up one level, so all the assistant triggers live together on the System-navigation page and the gesture page only holds gesture settings.</p>
+      <p data-lang="zh">把觸發手勢重新安置，解掉了衝突——但設定選單本身也得合理。助理的開關原本被孤零零放在「手勢敏感度」那一頁，和其他助理設定分開。我把它往上移一層，讓所有跟助理有關的觸發設定都集中在「系統導覽」頁，手勢頁則回到只管手勢。</p>
+    </div>
+    <div class="chart-fig">
+      <svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Settings information-architecture fix. Before, the digital-assistant toggle is stranded on the gesture-sensitivity page among unrelated controls. It is relocated up one level onto the System-navigation page, grouped with the other assistant triggers, leaving a gesture page that holds only gesture settings.">
+        <text x="0" y="16" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.2" fill="#6E6E73">SETTINGS IA &#183; WHERE THE ASSISTANT TRIGGER LIVES</text>
+        <text x="0" y="40" font-family="Geist, sans-serif" font-size="14" fill="#3A3A3D">Moving a stranded toggle onto the page it belongs to</text>
+
+        <text x="140" y="76" text-anchor="middle" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">Before</text>
+        <text x="140" y="91" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" letter-spacing=".4" fill="#6E6E73">CLUTTERED GESTURE PAGE</text>
+        <text x="680" y="76" text-anchor="middle" font-family="Geist Mono, monospace" font-size="12" fill="#0C0C0D">After</text>
+        <text x="680" y="91" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" letter-spacing=".4" fill="#2B4DE0">GESTURES ONLY</text>
+
+        <!-- Phone BEFORE -->
+        <rect x="40" y="100" width="200" height="296" rx="18" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
+        <path d="M62 122 l-7 6 l7 6" fill="none" stroke="#0C0C0D" stroke-width="1.3"/>
+        <text x="56" y="158" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Gesture controls</text>
+        <!-- stranded assistant block -->
+        <rect x="54" y="170" width="172" height="44" rx="8" fill="#EDF0FC" stroke="#2B4DE0" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="66" y="190" font-family="Geist, sans-serif" font-size="10.5" fill="#0C0C0D">Digital assistant</text>
+        <text x="66" y="204" font-family="Geist Mono, monospace" font-size="8" fill="#6E6E73">launch on swipe</text>
+        <rect x="194" y="183" width="24" height="14" rx="7" fill="#2B4DE0"/>
+        <circle cx="211" cy="190" r="5" fill="#FFFFFF"/>
+        <text x="54" y="232" font-family="Geist Mono, monospace" font-size="9" fill="#2B4DE0">&#8593; stranded on the wrong page</text>
+        <!-- sensitivity -->
+        <text x="54" y="256" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing=".3" fill="#6E6E73">BACK SENSITIVITY</text>
+        <line x1="66" y1="272" x2="222" y2="272" stroke="#E6E6E4" stroke-width="2"/><circle cx="170" cy="272" r="4" fill="#2B4DE0"/>
+        <line x1="66" y1="290" x2="222" y2="290" stroke="#E6E6E4" stroke-width="2"/><circle cx="188" cy="290" r="4" fill="#2B4DE0"/>
+        <!-- gesture line -->
+        <text x="54" y="318" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing=".3" fill="#6E6E73">GESTURE LINE</text>
+        <circle cx="64" cy="334" r="5" fill="none" stroke="#0C0C0D" stroke-width="1.2"/><text x="78" y="338" font-family="Geist, sans-serif" font-size="9.5" fill="#0C0C0D">Hide line</text>
+        <circle cx="64" cy="356" r="5" fill="#2B4DE0"/><text x="78" y="360" font-family="Geist, sans-serif" font-size="9.5" fill="#0C0C0D">Show line</text>
+        <rect x="110" y="380" width="60" height="4" rx="2" fill="#E6E6E4"/>
+
+        <!-- Middle relocation motif -->
+        <rect x="330" y="150" width="160" height="30" rx="15" fill="#EDF0FC" stroke="#2B4DE0" stroke-width="1"/>
+        <text x="410" y="169" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10.5" fill="#1E3AC0">System navigation</text>
+        <text x="410" y="198" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8.5" fill="#6E6E73">assistant triggers grouped here</text>
+        <rect x="350" y="250" width="120" height="26" rx="13" fill="#2B4DE0"/>
+        <text x="410" y="267" text-anchor="middle" font-family="Geist, sans-serif" font-size="10" fill="#FFFFFF">Digital assistant</text>
+        <text x="410" y="300" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9.5" fill="#3A3A3D">moved up a level</text>
+        <!-- arrow: stranded block -> chip -->
+        <path d="M228 192 C 286 196 300 250 346 261" fill="none" stroke="#2B4DE0" stroke-width="1.4"/>
+        <polygon points="343,255 352,262 342,267" fill="#2B4DE0"/>
+        <!-- arrow: chip -> System navigation pill -->
+        <line x1="410" y1="248" x2="410" y2="186" stroke="#2B4DE0" stroke-width="1.4"/>
+        <polygon points="405,192 410,182 415,192" fill="#2B4DE0"/>
+        <!-- arrow: pill -> after phone -->
+        <path d="M492 165 C 540 165 545 235 576 246" fill="none" stroke="#C8D2F5" stroke-width="1.4"/>
+        <polygon points="573,240 582,247 572,252" fill="#C8D2F5"/>
+
+        <!-- Phone AFTER -->
+        <rect x="580" y="100" width="200" height="296" rx="18" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
+        <path d="M602 122 l-7 6 l7 6" fill="none" stroke="#0C0C0D" stroke-width="1.3"/>
+        <text x="596" y="158" font-family="Geist, sans-serif" font-size="13" fill="#0C0C0D">Gesture controls</text>
+        <text x="594" y="186" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing=".3" fill="#6E6E73">BACK SENSITIVITY</text>
+        <line x1="606" y1="202" x2="762" y2="202" stroke="#E6E6E4" stroke-width="2"/><circle cx="710" cy="202" r="4" fill="#2B4DE0"/>
+        <line x1="606" y1="220" x2="762" y2="220" stroke="#E6E6E4" stroke-width="2"/><circle cx="728" cy="220" r="4" fill="#2B4DE0"/>
+        <text x="594" y="250" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing=".3" fill="#6E6E73">GESTURE LINE</text>
+        <circle cx="604" cy="266" r="5" fill="none" stroke="#0C0C0D" stroke-width="1.2"/><text x="618" y="270" font-family="Geist, sans-serif" font-size="9.5" fill="#0C0C0D">Hide line</text>
+        <circle cx="604" cy="288" r="5" fill="#2B4DE0"/><text x="618" y="292" font-family="Geist, sans-serif" font-size="9.5" fill="#0C0C0D">Show line</text>
+        <text x="594" y="326" font-family="Geist Mono, monospace" font-size="9" fill="#2B4DE0">&#10003; gesture settings only</text>
+        <rect x="650" y="380" width="60" height="4" rx="2" fill="#E6E6E4"/>
+
+        <text x="0" y="422" font-family="Geist Mono, monospace" font-size="10.5" fill="#A1A1A6">Same conflict, two layers of fix: the trigger remap (Fig.&#8201;1) and the menu where the toggle lives.</text>
+      </svg>
+    </div>
+    <p class="fig-cap" data-lang="en">Fig. 2 &mdash; The same fix, in the settings IA. The assistant toggle, stranded on the gesture page (left), is consolidated onto the System-navigation page with the other assistant triggers &mdash; leaving a gesture page that only does gestures (right).</p>
+    <p class="fig-cap" data-lang="zh">圖 2 &mdash; 同一個修正，落在設定的資訊架構上。原本卡在手勢頁的助理開關（左），被收斂到「系統導覽」頁、和其他助理觸發設定放在一起，讓手勢頁回到只管手勢（右）。</p>
   </section>
 
   <!-- 05 Native vs custom -->
@@ -454,8 +545,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <text x="0" y="412" font-family="Geist Mono, monospace" font-size="10.5" fill="#6E6E73">Decision: consolidate to the capability-complete panel; suppress the redundant native countdown.</text>
       </svg>
     </div>
-    <p class="fig-cap" data-lang="en">Fig. 2 — Comparing the in-house panel, the native chip, and the redundant current state. Capability, not platform-default, drove the call.</p>
-    <p class="fig-cap" data-lang="zh">圖 2 — 比較自建面板、原生 chip 與重複並存的現況。決定的依據是能力，而非平台預設。</p>
+    <p class="fig-cap" data-lang="en">Fig. 3 — Comparing the in-house panel, the native chip, and the redundant current state. Capability, not platform-default, drove the call.</p>
+    <p class="fig-cap" data-lang="zh">圖 3 — 比較自建面板、原生 chip 與重複並存的現況。決定的依據是能力，而非平台預設。</p>
 
     <div class="note">
       <p data-lang="en"><strong>Finding:</strong> the native chip couldn&rsquo;t move, delete a recording, or screenshot; the in-house panel could — but the native chip carried platform consistency.</p>
@@ -464,11 +555,6 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <p data-lang="zh"><strong>研究發現：</strong>原生 chip 不能移動位置、不能刪除錄影、也不能截圖；自建面板都做得到——但原生 chip 的好處是跟整個平台一致。</p>
       <span class="arrow" data-lang="zh">於是我 &rarr;</span>
       <p data-lang="zh"><strong>收斂到功能完整的自建面板</strong>，並關掉重複的原生倒數，讓使用者得到一個能完成整件事的控制項，而不是兩個半重疊的。</p>
-    </div>
-    <div class="chart-fig" style="margin-top:24px;">
-      <img src="images/android-recording-conflict.jpg" alt="Three-way comparison of screen-recording controls: A the in-house mini-panel (movable, can stop, delete and screenshot), B the native status-bar chip (fixed, stop only), C both present at once causing duplicate countdowns." loading="lazy" style="border-radius:8px;border:1px solid var(--rule);width:100%;height:auto;display:block;" />
-      <p class="fig-cap" data-lang="en">The trade-off, side by side — the in-house panel (A) can move, delete and screenshot; the native chip (B) can&rsquo;t but carries platform consistency; shipping both (C) produced duplicate countdowns. That comparison drove the call to consolidate.</p>
-      <p class="fig-cap" data-lang="zh">把取捨並排攤開——自建面板（A）可移動、刪除、截圖；原生 chip（B）做不到，但有平台一致性；兩者並存（C）會出現重複倒數。正是這張比較，推動了「收斂成一個」的決定。</p>
     </div>
   </section>
 
@@ -535,8 +621,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <p data-lang="zh">從零的功能在 ROG 與 Zenfone 上交付，共用同一套可維護的系統。過去那些會自己默默分出勝負、讓另一個悄悄失效的衝突——Circle to Search 跟助理搶同一個手勢、螢幕錄影控制項重複——如今都依明確規則解決；未來的平台功能可以直接沿用這套規則，不必每次重打一輪。</p>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">The same system lens held under live pressure. When a gyroscope feature drew a cluster of field complaints in the China region after launch, I treated it as a research signal rather than a one-off bug — studied the player behaviour behind the reports, adjusted the design accordingly, and closed the issue fast.</p>
-      <p data-lang="zh">同一套系統視角，在真實壓力下一樣成立。陀螺儀功能上市後在中國區引發一波客訴時，我把它當成研究訊號、而不是單一 bug——研究客訴背後玩家真正的使用行為，據此調整設計，並快速收掉問題。</p>
+      <p data-lang="en">The same system lens held under live pressure. When the gyroscope-acceleration tool &mdash; part of Game Genie&rsquo;s in-game X-MODE panel on ROG &mdash; drew a cluster of field complaints in the China region after launch, I treated it as a research signal rather than a one-off bug — studied the player behaviour behind the reports, adjusted the design accordingly, and closed the issue fast.</p>
+      <p data-lang="zh">同一套系統視角，在真實壓力下一樣成立。陀螺儀加速功能——ROG Game Genie 遊戲內 X-MODE 面板中的工具——上市後在中國區引發一波客訴時，我把它當成研究訊號、而不是單一 bug——研究客訴背後玩家真正的使用行為，據此調整設計，並快速收掉問題。</p>
     </div>
     <div class="chart-fig" style="margin-top:8px;">
       <svg viewBox="0 0 840 196" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -583,8 +669,17 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <text x="662" y="116" font-family="Geist Mono, monospace" font-size="13" font-weight="600" fill="#0C0C0D">4 returns back</text>
         <text x="662" y="140" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">within 1 month</text>
       </svg>
-      <p class="fig-cap" data-lang="en">Fig. 3 — A post-launch field crisis, handled as research. Seven China-region complaints about the gyroscope feature became a player-behaviour study that drove a design adjustment — resolving all seven and recovering four returns within a month.</p>
-      <p class="fig-cap" data-lang="zh">圖 3 — 把上市後的現場危機，當研究來處理。陀螺儀功能在中國區的 7 件客訴，化成一份玩家行為研究、據以調整設計——一個月內解決全部 7 件、並挽回 4 件退貨。</p>
+      <p class="fig-cap" data-lang="en">Fig. 4 — A post-launch field crisis, handled as research. Seven China-region complaints about the gyroscope feature became a player-behaviour study that drove a design adjustment — resolving all seven and recovering four returns within a month.</p>
+      <p class="fig-cap" data-lang="zh">圖 4 — 把上市後的現場危機，當研究來處理。陀螺儀功能在中國區的 7 件客訴，化成一份玩家行為研究、據以調整設計——一個月內解決全部 7 件、並挽回 4 件退貨。</p>
+    </div>
+    <div class="chart-fig" style="margin-top:24px;">
+      <img src="images/android-gyroscope-gamegenie.jpg"
+           alt="ROG Game Genie in-game X-MODE panel, where the gyroscope-acceleration tool sits among the in-game controls."
+           loading="lazy"
+           onerror="var f=this.closest('.chart-fig'); if(f) f.style.display='none';"
+           style="border-radius:8px;border:1px solid var(--rule);width:100%;height:auto;display:block;" />
+      <p class="fig-cap" data-lang="en">The gyroscope-acceleration tool lives inside Game Genie&rsquo;s in-game X-MODE panel on ROG &mdash; the surface the field complaints pointed at.</p>
+      <p class="fig-cap" data-lang="zh">陀螺儀加速是 ROG Game Genie 遊戲內 X-MODE 面板裡的工具——也就是那波客訴指向的介面。</p>
     </div>
   </section>
 
