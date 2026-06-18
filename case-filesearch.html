@@ -211,6 +211,33 @@ html[data-theme="dark"] body{background:var(--bg);color:var(--ink);}
 html[data-theme="dark"] .logos img:hover{filter:none;opacity:1;}
 html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
+/* ── Dousan-style additions ── */
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;}
+.hero-icon{width:46px;height:46px;border:1px solid var(--rule);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--accent);background:var(--surface);flex:none;}
+.hero-icon svg{width:24px;height:24px;}
+.status-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--bg-2);border:1px solid var(--rule);border-radius:999px;padding:6px 13px;white-space:nowrap;}
+.status-pill .led{width:7px;height:7px;border-radius:50%;background:#1FAE62;box-shadow:0 0 0 3px rgba(31,174,98,.18);flex:none;}
+.status-pill.pre .led{background:#D9930A;box-shadow:0 0 0 3px rgba(217,147,10,.18);}
+.status-pill[data-lang="zh"]{letter-spacing:.04em;text-transform:none;}
+.hero-sub{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.15rem,2.4vw,1.6rem);line-height:1.35;letter-spacing:-0.01em;color:var(--ink-2);max-width:34ch;margin:-8px 0 clamp(22px,3vw,30px);}
+.hero-sub[data-lang="zh"]{line-height:1.55;}
+.hero-sub em{font-style:normal;color:var(--accent);}
+.hero-intro{max-width:62ch;margin-bottom:clamp(24px,3vw,32px);}
+.hero-intro p{font-size:1.08rem;line-height:1.72;color:var(--ink-2);}
+.hero-intro p[data-lang="zh"]{line-height:2;}
+.hero-intro strong{color:var(--ink);font-weight:600;}
+.hero-cta{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.03em;padding:12px 19px;border-radius:8px;background:var(--ink);color:var(--on-ink);transition:background .2s,transform .2s;margin-bottom:clamp(30px,4vw,42px);}
+.hero-cta:hover{background:var(--accent);transform:translateY(-1px);}
+.metastrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+.metastrip .m{background:var(--surface);padding:22px 24px;}
+.metastrip .m b{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:9px;}
+.metastrip .m b[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.metastrip .m span{font-size:.98rem;color:var(--ink);line-height:1.5;}
+.metastrip .m span[data-lang="zh"]{line-height:1.7;}
+.metastrip .m.wide{grid-column:1 / -1;border-top:1px solid var(--rule);}
+@media (max-width:860px){.metastrip{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:480px){.metastrip{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -237,57 +264,79 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 <!-- Hero -->
 <header class="c-hero">
   <div class="container">
+    <div class="hero-top">
+      <span class="hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><path d="M19.5 19.5l-4.6-4.6"/><path d="M7.4 8.8h5.2M7.4 11.4h3.4"/></svg>
+      </span>
+      <span class="status-pill pre" data-lang="en"><span class="led" aria-hidden="true"></span>Pre-release · ships 2026</span>
+      <span class="status-pill pre" data-lang="zh"><span class="led" aria-hidden="true"></span>尚未上市 · 2026 隨商用線出貨</span>
+    </div>
     <div class="kicker" data-lang="en">Case Study · ASUS · Enterprise B2B · 2024–present</div>
     <div class="kicker" data-lang="zh">案例 · ASUS · 企業 B2B · 2024–至今</div>
-    <h1 data-lang="en">Two indexes, very different costs — so I made the heavy one <em>govern itself</em></h1>
-    <h1 data-lang="zh">兩種索引，成本天差地遠——於是我讓沉重的那一個<em>自我調節</em></h1>
-    <div class="c-meta" data-lang="en">
-      <span class="hl">Product-level owner</span><span>0 → 1</span><span>IA &amp; result hierarchy</span><span>System &amp; index mechanism</span><span>Ships on 2026 ASUS commercial line</span>
+    <h1 data-lang="en">Find a file by what&rsquo;s <em>inside</em> it — within a fixed memory budget</h1>
+    <h1 data-lang="zh">用檔案<em>裡的內容</em>找檔案——而且要待在固定的記憶體預算裡</h1>
+    <p class="hero-sub" data-lang="en">Semantic search for people who never named their files well — built to stay useful even as their files outgrow the index&rsquo;s hard memory cap.</p>
+    <p class="hero-sub" data-lang="zh">為那些從沒把檔名取好的人做的語意搜尋——而且要讓它在檔案多到撐滿索引記憶體上限時，依然好用。</p>
+    <div class="hero-intro">
+      <p data-lang="en">People forget what a file is called, or never named it well — but they remember what&rsquo;s <strong>in</strong> it: a phrase, an image. File Search lets them find it by meaning. I owned it from a blank page — positioning, IA, result hierarchy, and the index mechanism that keeps semantic search living inside a fixed, per-machine memory budget.</p>
+      <p data-lang="zh">人們常忘記檔案叫什麼，或根本沒好好命名——但他們記得檔案<strong>裡</strong>有什麼：一段文字、一張圖。File Search 讓他們用「意思」找到它。我從一張白紙開始負責——定位、資訊架構、結果階層，以及讓語意搜尋待在每台機器固定記憶體預算裡的索引機制。</p>
     </div>
-    <div class="c-meta" data-lang="zh">
-      <span class="hl">產品級負責人</span><span>0 → 1</span><span>資訊架構與結果階層</span><span>系統與索引機制</span><span>隨 2026 ASUS 商用線出貨</span>
-    </div>
+    <a class="hero-cta" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
     <div class="c-bigstat">
-      <div class="v">0<sup>&rarr;1</sup></div>
-      <div class="d" data-lang="en">owned from a blank page to a peer app pre-installed on ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops — including the invisible system that keeps semantic search from degrading the machine.</div>
-      <div class="d" data-lang="zh">從一張白紙一路負責到上線，成為預載於華碩 2026 年商用筆電、一體機與桌機的並列 App——包含背後那套看不見、卻能讓語意搜尋不拖垮機器的系統。</div>
+      <div class="v">3<sup>GB</sup></div>
+      <div class="d" data-lang="en">the hard ceiling the semantic index is designed to live within on an 8&nbsp;GB machine. Search-by-meaning runs on ordinary commercial hardware — no server behind it, and nothing for the user to manage.</div>
+      <div class="d" data-lang="zh">在 8&nbsp;GB 機種上，語意索引被設計成最多只用到 3&nbsp;GB。語意搜尋因此能跑在一般的商用機器上——背後沒有伺服器，也沒有任何要使用者去管的東西。</div>
     </div>
   </div>
 </header>
 
 <main id="main-content" tabindex="-1" class="container">
 
-  <!-- 01 Context -->
-  <section class="sec first reveal">
-    <span class="sec-num">[01] &nbsp; <span data-lang="en">Context</span><span data-lang="zh">背景</span></span>
+  <!-- Meta strip -->
+  <section class="sec first reveal" aria-label="Project details">
+    <div class="metastrip">
+      <div class="m"><b data-lang="en">Product</b><b data-lang="zh">產品</b><span data-lang="en">File Search · semantic search in MyExpert</span><span data-lang="zh">File Search · MyExpert 內的語意搜尋</span></div>
+      <div class="m"><b data-lang="en">My role</b><b data-lang="zh">我的角色</b><span data-lang="en">Sole UX owner · 0 → 1</span><span data-lang="zh">唯一 UX 負責人 · 0 → 1</span></div>
+      <div class="m"><b data-lang="en">Timeline</b><b data-lang="zh">時間</b><span data-lang="en">2024 – present</span><span data-lang="zh">2024 – 至今</span></div>
+      <div class="m"><b data-lang="en">Skills</b><b data-lang="zh">技能</b><span data-lang="en">Product positioning, IA, result hierarchy, resource-aware system design</span><span data-lang="zh">產品定位、資訊架構、結果階層、資源感知系統設計</span></div>
+      <div class="m wide"><b data-lang="en">Scope &amp; collaborators</b><b data-lang="zh">範圍與協作</b><span data-lang="en">From a blank page to a pre-installed peer app — competitive teardown, the integration boundary with the rest of MyExpert, and the resource-aware index beneath it. Built with algorithm &amp; platform engineering, where the index behaviour sits exactly where UX meets memory, disk and power limits.</span><span data-lang="zh">從一張白紙到預載的並列 App——競品拆解、與 MyExpert 其他模組的整合邊界，以及底下那套資源感知的索引。與演算法、平台工程一起做；索引行為正落在 UX 與記憶體、磁碟、電源限制的交界。</span></div>
+    </div>
+  </section>
+
+  <!-- The product & the core IA decision -->
+  <section class="sec reveal">
+    <span class="sec-num"><span data-lang="en">The product &amp; the core IA decision</span><span data-lang="zh">產品定位與最核心的資訊架構決策</span></span>
     <h2 data-lang="en">A search app that unifies <em>local and cloud</em> behind one query</h2>
     <h2 data-lang="zh">一個把<em>本機與雲端</em>整合在單一查詢後的搜尋 App</h2>
     <div class="prose">
-      <p data-lang="en">File Search lets people query local and cloud files from one place, and ships pre-installed on ASUS commercial notebooks, AiOs and desktops from 2026 onward. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
-      <p data-lang="zh">File Search 讓使用者在同一個地方查詢本機和雲端的檔案，自 2026 年起預載於華碩的商用筆電、一體機與桌機。它不是埋在選單裡的某個功能，而是 MyExpert 裡和 Chat、Knowledge Hub、ExpertMeet 並列的一個 App。也正因為它跑在一般的商用機器上，就必須在沒有專屬伺服器、也沒有人在旁邊顧著的情況下，依然好用。</p>
+      <p data-lang="en">File Search lets people query local and cloud files from one place, and is set to ship pre-installed on ASUS commercial notebooks, AiOs and desktops from 2026. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
+      <p data-lang="zh">File Search 讓使用者在同一個地方查詢本機和雲端的檔案，預計自 2026 年起，隨華碩的商用筆電、一體機與桌機預載出貨。它不是埋在選單裡的某個功能，而是 MyExpert 裡和 Chat、Knowledge Hub、ExpertMeet 並列的一個 App。也正因為它跑在一般的商用機器上，就必須在沒有專屬伺服器、也沒有人在旁邊顧著的情況下，依然好用。</p>
     </div>
     <div class="chart-fig" style="margin-top:8px;">
       <svg viewBox="0 0 840 404" xmlns="http://www.w3.org/2000/svg" role="img"
            aria-label="Information architecture decision. Before: four separate places to search — local files, cloud drive, Chat, Knowledge Hub. After: one query returns a single ranked list spanning all sources, delivered as a standalone peer app alongside Chat, Knowledge Hub and ExpertMeet rather than a search box inside one of them.">
-        <text x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">INFORMATION ARCHITECTURE &#183; 4 SOURCES &#8594; 1 QUERY</text>
+        <text data-lang="en" x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">INFORMATION ARCHITECTURE &#183; 4 SOURCES &#8594; 1 QUERY</text>
+        <text data-lang="zh" x="0" y="20" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73">資訊架構 &#183; 4 個來源 &#8594; 1 個查詢</text>
 
         <!-- BEFORE -->
-        <text x="24" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#A1A1A6">BEFORE &#183; 4 PLACES TO LOOK</text>
+        <text data-lang="en" x="24" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#A1A1A6">BEFORE &#183; 4 PLACES TO LOOK</text>
+        <text data-lang="zh" x="24" y="52" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="10.5" fill="#A1A1A6">改版前 &#183; 4 個要找的地方</text>
         <g font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">
           <rect x="24" y="64" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
           <circle cx="44" cy="84" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="88" x2="52" y2="92" stroke="#A1A1A6"/>
-          <text x="62" y="88">Local files</text>
+          <text data-lang="en" x="62" y="88">Local files</text><text data-lang="zh" x="62" y="88" font-family="Geist Mono, 'Noto Sans TC', monospace">本機檔案</text>
           <rect x="24" y="114" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
           <circle cx="44" cy="134" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="138" x2="52" y2="142" stroke="#A1A1A6"/>
-          <text x="62" y="138">Cloud drive</text>
+          <text data-lang="en" x="62" y="138">Cloud drive</text><text data-lang="zh" x="62" y="138" font-family="Geist Mono, 'Noto Sans TC', monospace">雲端硬碟</text>
           <rect x="24" y="164" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
           <circle cx="44" cy="184" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="188" x2="52" y2="192" stroke="#A1A1A6"/>
-          <text x="62" y="188">Chat history</text>
+          <text data-lang="en" x="62" y="188">Chat history</text><text data-lang="zh" x="62" y="188" font-family="Geist Mono, 'Noto Sans TC', monospace">Chat 對話紀錄</text>
           <rect x="24" y="214" width="210" height="40" rx="5" fill="#FFFFFF" stroke="#E6E6E4"/>
           <circle cx="44" cy="234" r="5.5" fill="none" stroke="#A1A1A6"/><line x1="48" y1="238" x2="52" y2="242" stroke="#A1A1A6"/>
           <text x="62" y="238">Knowledge Hub</text>
         </g>
-        <text x="24" y="278" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">each with its own search box, scope and ranking</text>
+        <text data-lang="en" x="24" y="278" font-family="Geist Mono, monospace" font-size="9.5" fill="#A1A1A6">each with its own search box, scope and ranking</text>
+        <text data-lang="zh" x="24" y="278" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="9.5" fill="#A1A1A6">每個都有自己的搜尋框、範圍與排序</text>
 
         <!-- converging arrows -->
         <g stroke="#2B4DE0" stroke-width="1.2" fill="none">
@@ -297,32 +346,37 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
           <path d="M234 234 C 300 234, 320 159, 392 159"/>
         </g>
         <path d="M392 159 l-9 -5 v10 z" fill="#2B4DE0"/>
-        <text x="262" y="120" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#2B4DE0">UNIFIED</text>
+        <text data-lang="en" x="262" y="120" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#2B4DE0">UNIFIED</text>
+        <text data-lang="zh" x="262" y="120" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="10" fill="#2B4DE0">整合</text>
 
         <!-- AFTER -->
-        <text x="470" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#2B4DE0">AFTER &#183; 1 QUERY, 1 RANKED LIST</text>
+        <text data-lang="en" x="470" y="52" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="1" fill="#2B4DE0">AFTER &#183; 1 QUERY, 1 RANKED LIST</text>
+        <text data-lang="zh" x="470" y="52" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="10.5" fill="#2B4DE0">改版後 &#183; 一個查詢、一份排序清單</text>
         <rect x="470" y="64" width="346" height="34" rx="6" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
         <circle cx="492" cy="81" r="6" fill="none" stroke="#2B4DE0"/><line x1="496.5" y1="85.5" x2="501" y2="90" stroke="#2B4DE0"/>
-        <text x="510" y="85" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">one query, every source</text>
+        <text data-lang="en" x="510" y="85" font-family="Geist Mono, monospace" font-size="10.5" fill="#3A3A3D">one query, every source</text>
+        <text data-lang="zh" x="510" y="85" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="10.5" fill="#3A3A3D">一個查詢，涵蓋所有來源</text>
         <g font-family="Geist Mono, monospace" font-size="9">
           <rect x="470" y="110" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
-          <rect x="480" y="118" width="46" height="14" rx="2" fill="#0C0C0D"/><text x="503" y="128" fill="#FFFFFF" text-anchor="middle">LOCAL</text>
+          <rect x="480" y="118" width="46" height="14" rx="2" fill="#0C0C0D"/><text data-lang="en" x="503" y="128" fill="#FFFFFF" text-anchor="middle">LOCAL</text><text data-lang="zh" x="503" y="128" fill="#FFFFFF" text-anchor="middle" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="8">本機</text>
           <text x="536" y="128" font-size="10.5" fill="#3A3A3D">Q3-report-final.xlsx</text>
           <rect x="470" y="144" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
-          <rect x="480" y="152" width="46" height="14" rx="2" fill="#2B4DE0"/><text x="503" y="162" fill="#FFFFFF" text-anchor="middle">CLOUD</text>
+          <rect x="480" y="152" width="46" height="14" rx="2" fill="#2B4DE0"/><text data-lang="en" x="503" y="162" fill="#FFFFFF" text-anchor="middle">CLOUD</text><text data-lang="zh" x="503" y="162" fill="#FFFFFF" text-anchor="middle" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="8">雲端</text>
           <text x="536" y="162" font-size="10.5" fill="#3A3A3D">vendor-contract.pdf</text>
           <rect x="470" y="178" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
-          <rect x="480" y="186" width="46" height="14" rx="2" fill="#6E6E73"/><text x="503" y="196" fill="#FFFFFF" text-anchor="middle">CHAT</text>
-          <text x="536" y="196" font-size="10.5" fill="#3A3A3D">spec thread &#183; June</text>
+          <rect x="480" y="186" width="46" height="14" rx="2" fill="#6E6E73"/><text data-lang="en" x="503" y="196" fill="#FFFFFF" text-anchor="middle">CHAT</text><text data-lang="zh" x="503" y="196" fill="#FFFFFF" text-anchor="middle" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="8">對話</text>
+          <text data-lang="en" x="536" y="196" font-size="10.5" fill="#3A3A3D">spec thread &#183; June</text><text data-lang="zh" x="536" y="196" font-size="10.5" fill="#3A3A3D" font-family="Geist Mono, 'Noto Sans TC', monospace">spec 討論串 &#183; 六月</text>
           <rect x="470" y="212" width="346" height="30" rx="4" fill="#FFFFFF" stroke="#E6E6E4"/>
           <rect x="480" y="220" width="46" height="14" rx="2" fill="#A1A1A6"/><text x="503" y="230" fill="#FFFFFF" text-anchor="middle">HUB</text>
-          <text x="536" y="230" font-size="10.5" fill="#3A3A3D">onboarding guide</text>
+          <text data-lang="en" x="536" y="230" font-size="10.5" fill="#3A3A3D">onboarding guide</text><text data-lang="zh" x="536" y="230" font-size="10.5" fill="#3A3A3D" font-family="Geist Mono, 'Noto Sans TC', monospace">新人上手指南</text>
         </g>
-        <text x="470" y="262" font-family="Geist Mono, monospace" font-size="9.5" fill="#6E6E73">ranked together, source shown &#8212; not four separate result sets</text>
+        <text data-lang="en" x="470" y="262" font-family="Geist Mono, monospace" font-size="9.5" fill="#6E6E73">ranked together, source shown &#8212; not four separate result sets</text>
+        <text data-lang="zh" x="470" y="262" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="9.5" fill="#6E6E73">一起排序、標明來源 &#8212; 而不是四份各自獨立的結果</text>
 
         <!-- peer-app boundary -->
         <line x1="24" y1="312" x2="816" y2="312" stroke="#E6E6E4"/>
-        <text x="24" y="336" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#6E6E73">BOUNDARY DECISION &#183; A PEER APP IN MYEXPERT, NOT A SEARCH BOX INSIDE ONE</text>
+        <text data-lang="en" x="24" y="336" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#6E6E73">BOUNDARY DECISION &#183; A PEER APP IN MYEXPERT, NOT A SEARCH BOX INSIDE ONE</text>
+        <text data-lang="zh" x="24" y="336" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="10" fill="#6E6E73">邊界決策 &#183; MyExpert 裡的並列 App，而不是塞在某功能裡的搜尋框</text>
         <g font-family="Geist Mono, monospace" font-size="10.5">
           <rect x="24" y="350" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/><text x="109" y="373" fill="#3A3A3D" text-anchor="middle">Chat</text>
           <rect x="208" y="350" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E6E6E4"/><text x="293" y="373" fill="#3A3A3D" text-anchor="middle">Knowledge Hub</text>
@@ -345,84 +399,84 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
   </section>
 
-  <!-- 02 Role -->
+  <!-- The problem under the UI -->
   <section class="sec reveal">
-    <span class="sec-num">[02] &nbsp; <span data-lang="en">Role</span><span data-lang="zh">角色</span></span>
-    <h2 data-lang="en">Product-level ownership, from <em>zero</em></h2>
-    <h2 data-lang="zh">從<em>零</em>開始的產品級 ownership</h2>
-    <div class="fact-grid">
-      <div class="f"><b data-lang="en">Ownership</b><b data-lang="zh">負責範圍</b><span data-lang="en">Sole UX owner of File Search — product positioning, IA, result hierarchy, and the index mechanism beneath it.</span><span data-lang="zh">File Search 的唯一 UX 負責人——產品定位、資訊架構、結果階層，以及底下的索引機制。</span></div>
-      <div class="f"><b data-lang="en">Type of work</b><b data-lang="zh">工作類型</b><span data-lang="en">0 → 1. Designed from a blank page to a shipping, pre-installed app.</span><span data-lang="zh">0 → 1。從一張白紙設計到上線、預載的 App。</span></div>
-      <div class="f"><b data-lang="en">Scope</b><b data-lang="zh">設計範圍</b><span data-lang="en">Competitive teardown, result hierarchy, the integration boundary with the rest of MyExpert, and the resource-aware indexing system.</span><span data-lang="zh">競品拆解、結果階層、與 MyExpert 其餘模組的整合邊界，以及資源感知的索引系統。</span></div>
-      <div class="f"><b data-lang="en">Collaborators</b><b data-lang="zh">協作對象</b><span data-lang="en">Algorithm &amp; platform engineering — the index behaviour lives exactly where UX meets memory, disk and power constraints.</span><span data-lang="zh">演算法與平台工程——索引行為正落在 UX 與記憶體、磁碟、電源限制的交界。</span></div>
-    </div>
-  </section>
-
-  <!-- 03 The problem under the UI -->
-  <section class="sec reveal">
-    <span class="sec-num">[03] &nbsp; <span data-lang="en">The problem under the UI</span><span data-lang="zh">介面底下的問題</span></span>
-    <h2 data-lang="en">The hard part wasn&rsquo;t the <em>search screen</em></h2>
-    <h2 data-lang="zh">難的不是<em>搜尋畫面</em></h2>
+    <span class="sec-num"><span data-lang="en">The hard problem</span><span data-lang="zh">真正難的問題</span></span>
+    <h2 data-lang="en">The hard part wasn&rsquo;t the search screen — it was the <em>memory budget</em></h2>
+    <h2 data-lang="zh">難的不是搜尋畫面——是<em>記憶體預算</em></h2>
     <div class="prose">
-      <p data-lang="en">File Search runs two indexes with very different costs. A light exact-match index can run continuously and is essentially free. A semantic index — the one that makes search feel intelligent — is far heavier: left unmanaged, it keeps consuming memory until the machine slows or stalls. On a commercial laptop that isn&rsquo;t an edge case; it&rsquo;s the default failure mode. So the real design problem was never the result list. It was this: <strong>how do you keep semantic search fresh without letting it degrade the device it runs on?</strong></p>
-      <p data-lang="zh">File Search 同時跑兩種成本差很多的索引。一個是輕量的精準比對索引，可以一直跑、幾乎不花什麼資源。另一個是讓搜尋變聰明的語意索引，重得多：放著不管，它會一直吃記憶體，直到機器變慢、甚至卡死。在商用筆電上，這不是什麼罕見的極端狀況，而是放著不管就一定會發生的事。所以真正的設計難題從來不是結果清單，而是：<strong>怎麼讓語意搜尋保持即時，又不拖垮它正在跑的那台機器？</strong></p>
+      <p data-lang="en">File Search runs two indexes with very different costs. A light exact-match index runs continuously and is essentially free. The semantic index — the one that lets you search by meaning — is far heavier, so it&rsquo;s deliberately capped: on an 8&nbsp;GB machine it may use at most 3&nbsp;GB, a hard limit written into the software from day one. That cap is exactly what stops it from ever degrading the device. But it&rsquo;s also where the real design problem starts: as a user&rsquo;s files pile up, the index fills toward its ceiling — around 800k tokens — and something has to give. So the question was never the result list. It was this: <strong>how do you keep semantic search useful inside a fixed budget the user&rsquo;s files will eventually outgrow — without ever asking them to manage it?</strong></p>
+      <p data-lang="zh">File Search 同時跑兩種成本差很多的索引。一個是輕量的精準比對索引，可以一直跑、幾乎不花資源。另一個是讓你能用「意思」搜尋的語意索引，重得多，所以它一開始就被刻意設了上限：在 8&nbsp;GB 機種上最多只用到 3&nbsp;GB——這是寫死在軟體裡的硬限制。正因為有這個上限，它永遠不會拖垮機器。但真正的設計難題也從這裡開始：當使用者的檔案越積越多，索引會慢慢逼近上限——大約 80 萬 token——總得有所取捨。所以問題從來不是結果清單，而是：<strong>當使用者的檔案遲早會超過這個固定預算，要怎麼讓語意搜尋還是好用——又完全不用使用者去管它？</strong></p>
     </div>
     <div class="fact-grid" style="margin-top:24px;">
       <div class="f"><b data-lang="en">Exact-match index</b><b data-lang="zh">精準比對索引</b><span data-lang="en">Continuous, low cost, needs no governance, no real risk.</span><span data-lang="zh">持續運作、成本低、不需治理、幾乎無風險。</span></div>
-      <div class="f"><b data-lang="en">Semantic index</b><b data-lang="zh">語意索引</b><span data-lang="en">Periodic and heavy; high performance cost; needs active resource management; risk is memory exhaustion.</span><span data-lang="zh">週期性且沉重；效能成本高；需要主動的資源管理；風險是把記憶體吃滿。</span></div>
+      <div class="f"><b data-lang="en">Semantic index</b><b data-lang="zh">語意索引</b><span data-lang="en">Heavier and hard-capped (&le;3&nbsp;GB on an 8&nbsp;GB machine, ~800k tokens). The risk isn&rsquo;t crashing the machine — it&rsquo;s filling that budget and going stale.</span><span data-lang="zh">較重，且有硬上限（8&nbsp;GB 機種 &le;3&nbsp;GB、約 80 萬 token）。風險不是把機器弄當，而是塞滿預算後變得過時。</span></div>
     </div>
   </section>
 
   <!-- 04 The system I designed -->
   <section class="sec reveal">
-    <span class="sec-num">[04] &nbsp; <span data-lang="en">The system I designed</span><span data-lang="zh">我設計的系統</span></span>
+    <span class="sec-num"><span data-lang="en">Solution · the system I designed</span><span data-lang="zh">解法 · 我設計的系統</span></span>
     <h2 data-lang="en">A self-regulating index <em>lifecycle</em></h2>
     <h2 data-lang="zh">一套會自我調節的索引<em>生命週期</em></h2>
     <div class="prose" style="margin-bottom:24px;">
-      <p data-lang="en">I designed the semantic index to govern itself — a four-state lifecycle driven by live memory, disk headroom and the device&rsquo;s power state.</p>
-      <p data-lang="zh">我把語意索引設計成會自己調節：依照當下的記憶體、磁碟剩餘空間和電源狀態，在四種狀態之間自動切換。</p>
+      <p data-lang="en">I designed the semantic index to govern itself — a four-state lifecycle driven by how full it is against its cap. It builds while there&rsquo;s budget left, pauses as it nears the ceiling, prunes the least-recently-used entries once it&rsquo;s full, then settles when there&rsquo;s room again. The user never sees or manages any of it.</p>
+      <p data-lang="zh">我把語意索引設計成會自己調節：一套四種狀態的生命週期，依「離上限還有多少空間」來決定。還有預算時就建立，快到頂時暫停，滿了就釋放最久沒用到的項目，空間回來後再停下。整個過程使用者看不到，也不用管。</p>
     </div>
 
     <div class="chart-fig">
       <svg viewBox="0 0 820 384" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="The semantic index as a four-state loop. Indexing builds the index while resources are sufficient; as resources tighten it moves to Paused and stops adding; when pressure peaks it moves to Pruning, freeing the least-recently-used entries first; once space is recovered it Settles and stops freeing, then resumes Indexing when resources free up. Governed by live memory and disk headroom.">
+           aria-label="The semantic index as a four-state loop, governed by how full it is against its cap. It builds while there is budget; as it nears the cap it pauses and stops adding; when the cap is reached it prunes least-recently-used entries first; once space is freed it settles and stops freeing, then resumes building when budget returns.">
         <defs>
           <marker id="fsar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M2 1L8 5L2 9" fill="none" stroke="#0C0C0D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
           </marker>
         </defs>
-        <text x="0" y="24" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">SEMANTIC INDEX · SELF-GOVERNING LIFECYCLE</text>
+        <text data-lang="en" x="0" y="24" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">SEMANTIC INDEX · SELF-GOVERNING LIFECYCLE</text>
+        <text data-lang="zh" x="0" y="24" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73">語意索引 · 會自我調節的生命週期</text>
 
         <rect x="80" y="56" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
-        <text x="185" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">INDEXING</text>
-        <text x="185" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">build new index</text>
+        <text data-lang="en" x="185" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">INDEXING</text>
+        <text data-lang="zh" x="185" y="90" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">建立中</text>
+        <text data-lang="en" x="185" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">build while there&rsquo;s budget</text>
+        <text data-lang="zh" x="185" y="110" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="middle">有預算時建立</text>
 
         <rect x="530" y="56" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
-        <text x="635" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PAUSED</text>
-        <text x="635" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">hold — stop adding</text>
+        <text data-lang="en" x="635" y="90" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PAUSED</text>
+        <text data-lang="zh" x="635" y="90" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">暫停</text>
+        <text data-lang="en" x="635" y="110" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">hold — stop adding</text>
+        <text data-lang="zh" x="635" y="110" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="middle">先停，不再新增</text>
 
         <rect x="80" y="272" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#0C0C0D" stroke-width="1"/>
-        <text x="185" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">SETTLED</text>
-        <text x="185" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">stop freeing space</text>
+        <text data-lang="en" x="185" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">SETTLED</text>
+        <text data-lang="zh" x="185" y="306" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="14" font-weight="500" fill="#0C0C0D" text-anchor="middle">穩定</text>
+        <text data-lang="en" x="185" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">stop freeing space</text>
+        <text data-lang="zh" x="185" y="326" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="middle">停止釋放空間</text>
 
         <rect x="530" y="272" width="210" height="72" rx="8" fill="#FFFFFF" stroke="#2B4DE0" stroke-width="1.4"/>
-        <text x="635" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PRUNING</text>
-        <text x="635" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">free oldest first</text>
+        <text data-lang="en" x="635" y="306" font-family="Geist Mono, monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">PRUNING</text>
+        <text data-lang="zh" x="635" y="306" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="14" font-weight="500" fill="#2B4DE0" text-anchor="middle">釋放中</text>
+        <text data-lang="en" x="635" y="326" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">free oldest first</text>
+        <text data-lang="zh" x="635" y="326" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="middle">先釋放最久沒用的</text>
 
         <line x1="300" y1="92" x2="520" y2="92" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
-        <text x="410" y="80" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="middle">resources tighten</text>
+        <text data-lang="en" x="410" y="80" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="middle">nears the cap</text>
+        <text data-lang="zh" x="410" y="80" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#2B4DE0" text-anchor="middle">接近上限</text>
 
         <line x1="635" y1="138" x2="635" y2="262" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
-        <text x="620" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="end">pressure peaks</text>
+        <text data-lang="en" x="620" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0" text-anchor="end">cap reached</text>
+        <text data-lang="zh" x="620" y="204" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#2B4DE0" text-anchor="end">到達上限</text>
 
         <line x1="520" y1="308" x2="300" y2="308" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
-        <text x="410" y="296" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">space recovered</text>
+        <text data-lang="en" x="410" y="296" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="middle">space freed</text>
+        <text data-lang="zh" x="410" y="296" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="middle">空間釋出</text>
 
         <line x1="185" y1="262" x2="185" y2="138" stroke="#0C0C0D" stroke-width="1" marker-end="url(#fsar)"/>
-        <text x="200" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="start">resources free up</text>
+        <text data-lang="en" x="200" y="204" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73" text-anchor="start">budget returns</text>
+        <text data-lang="zh" x="200" y="204" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73" text-anchor="start">預算回來</text>
       </svg>
-      <p class="fig-cap" data-lang="en">Fig. 2 — The semantic index governs itself: it builds while resources are sufficient, pauses as they tighten, prunes least-recently-used entries when pressure peaks, then settles once headroom returns.</p>
-      <p class="fig-cap" data-lang="zh">圖 2 — 語意索引自己調節：資源夠時就建立，資源變緊就暫停，壓力到頂時優先釋放最久沒用到的項目，空間回來後再停止釋放。</p>
+      <p class="fig-cap" data-lang="en">Fig. 2 — The semantic index governs itself against its cap: it builds while there&rsquo;s budget, pauses as it nears the ceiling, prunes least-recently-used entries once it&rsquo;s full, then settles when there&rsquo;s room again.</p>
+      <p class="fig-cap" data-lang="zh">圖 2 — 語意索引依「離上限多少」自己調節：有預算時就建立，快到頂時暫停，滿了就優先釋放最久沒用到的項目，空間回來後再停下。</p>
     </div>
 
     <div class="prose" style="margin-top:30px;">
@@ -433,7 +487,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
   <!-- 05 The conflict -->
   <section class="sec reveal">
-    <span class="sec-num">[05] &nbsp; <span data-lang="en">The conflict</span><span data-lang="zh">衝突</span></span>
+    <span class="sec-num"><span data-lang="en">The conflict</span><span data-lang="zh">衝突</span></span>
     <h2 data-lang="en">A conflict <em>no single screen</em> owns</h2>
     <h2 data-lang="zh">一個<em>不歸任何畫面管</em>的衝突</h2>
     <div class="prose" style="margin-bottom:24px;">
@@ -444,21 +498,27 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <div class="chart-fig">
       <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg" role="img"
            aria-label="A timeline of two timers. The sleep timer fires before the idle threshold is reached, so the machine sleeps first and indexing is never triggered.">
-        <text x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">WHY INDEXING COULD STALL · A TIMER CONFLICT</text>
+        <text data-lang="en" x="0" y="22" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1" fill="#6E6E73">WHY INDEXING COULD STALL · A TIMER CONFLICT</text>
+        <text data-lang="zh" x="0" y="22" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73">索引為什麼會卡住 · 兩個計時器的衝突</text>
 
-        <text x="20" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">SLEEP TIMER</text>
+        <text data-lang="en" x="20" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">SLEEP TIMER</text>
+        <text data-lang="zh" x="20" y="78" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#0C0C0D">睡眠計時</text>
         <rect x="150" y="68" width="160" height="12" rx="3" fill="#0C0C0D"/>
         <circle cx="310" cy="74" r="5" fill="#2B4DE0"/>
-        <text x="324" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0">machine sleeps</text>
+        <text data-lang="en" x="324" y="78" font-family="Geist Mono, monospace" font-size="11" fill="#2B4DE0">machine sleeps</text>
+        <text data-lang="zh" x="324" y="78" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#2B4DE0">機器睡著</text>
 
-        <text x="20" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">IDLE THRESHOLD</text>
+        <text data-lang="en" x="20" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#0C0C0D">IDLE THRESHOLD</text>
+        <text data-lang="zh" x="20" y="138" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#0C0C0D">閒置門檻</text>
         <rect x="150" y="128" width="330" height="12" rx="3" fill="#E6E6E4"/>
         <rect x="150" y="128" width="160" height="12" rx="3" fill="#A1A1A6"/>
         <circle cx="480" cy="134" r="5" fill="none" stroke="#6E6E73" stroke-width="1.4"/>
-        <text x="494" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">idle would trigger indexing</text>
+        <text data-lang="en" x="494" y="138" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">idle would trigger indexing</text>
+        <text data-lang="zh" x="494" y="138" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73">閒置才會觸發索引</text>
 
         <line x1="310" y1="50" x2="310" y2="172" stroke="#2B4DE0" stroke-width="0.9" stroke-dasharray="4 4"/>
-        <text x="150" y="194" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Sleep fires first &rarr; idle is never reached &rarr; the index never updates.</text>
+        <text data-lang="en" x="150" y="194" font-family="Geist Mono, monospace" font-size="11" fill="#6E6E73">Sleep fires first &rarr; idle is never reached &rarr; the index never updates.</text>
+        <text data-lang="zh" x="150" y="194" font-family="Geist Mono, 'Noto Sans TC', monospace" font-size="11" fill="#6E6E73">睡眠先觸發 &rarr; 永遠到不了閒置 &rarr; 索引永遠不更新。</text>
       </svg>
       <p class="fig-cap" data-lang="en">Fig. 3 — When the sleep timer is shorter than the idle threshold, idle never triggers — so the redesigned condition can&rsquo;t strand the index.</p>
       <p class="fig-cap" data-lang="zh">圖 3 — 當睡眠時間短於閒置門檻，閒置永遠不會觸發——所以重新設計的條件不能把索引晾在那裡。</p>
@@ -472,7 +532,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
   <!-- 06 Key decisions -->
   <section class="sec reveal">
-    <span class="sec-num">[06] &nbsp; <span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
+    <span class="sec-num"><span data-lang="en">Key decisions</span><span data-lang="zh">關鍵取捨</span></span>
     <h2 data-lang="en">What I traded off — and <em>why</em></h2>
     <h2 data-lang="zh">我取捨了什麼——以及<em>為什麼</em></h2>
     <ul class="dec">
@@ -506,25 +566,25 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </ul>
   </section>
 
-  <!-- 07 Outcome -->
+  <!-- Status & contribution -->
   <section class="sec reveal">
-    <span class="sec-num">[07] &nbsp; <span data-lang="en">Outcome</span><span data-lang="zh">成果</span></span>
-    <h2 data-lang="en">It ships where most prototypes <em>wouldn&rsquo;t survive</em></h2>
-    <h2 data-lang="zh">它出貨在多數原型<em>活不下來</em>的地方</h2>
+    <span class="sec-num"><span data-lang="en">Status &amp; contribution</span><span data-lang="zh">現況與貢獻</span></span>
+    <h2 data-lang="en">Built to survive where most prototypes <em>wouldn&rsquo;t</em></h2>
+    <h2 data-lang="zh">為了在多數原型<em>撐不住</em>的地方活下來而設計</h2>
     <div class="prose">
-      <p data-lang="en">File Search ships pre-installed on ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops, as a peer app inside MyExpert. The part I&rsquo;m proudest of is the part users never see: the self-governing index is what lets semantic search run on ordinary, resource-constrained commercial machines — without a server behind it and without anyone tending it.</p>
-      <p data-lang="zh">File Search 以 MyExpert 裡並列 App 的身分，預載於華碩 2026 年的商用筆電、一體機與桌機。我最自豪的，其實是使用者永遠看不到的那一塊：會自己調節的索引，讓語意搜尋能在一般、資源有限的商用機器上跑起來——背後沒有伺服器，也不用任何人去照顧它。</p>
+      <p data-lang="en">File Search is built into MyExpert and is scheduled to ship pre-installed on ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. It hasn&rsquo;t reached the market yet, so there are no usage metrics to report — and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget (&le;3&nbsp;GB on an 8&nbsp;GB machine), governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
+      <p data-lang="zh">File Search 已內建於 MyExpert，預計隨華碩 2026 年的商用筆電、一體機與桌機預載出貨。它還沒上市，所以目前沒有任何使用數據可報——與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內（8&nbsp;GB 機種 &le;3&nbsp;GB）的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
     </div>
   </section>
 
   <!-- 08 Reflection -->
   <section class="sec reveal">
-    <span class="sec-num">[08] &nbsp; <span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
+    <span class="sec-num"><span data-lang="en">Reflection</span><span data-lang="zh">反思</span></span>
     <h2 data-lang="en">In tool products, the best UX is often the part you <em>never see</em></h2>
     <h2 data-lang="zh">在工具型產品裡，最好的 UX 常常是你<em>看不見</em>的那塊</h2>
     <div class="prose">
-      <p data-lang="en">File Search reinforced what the TR7600 redesign first taught me: in genuinely complex tools, the highest-leverage design move is usually structural, not cosmetic. A polished result list means nothing if the index behind it stalls the machine, and the most important decision in the whole project belonged to no single screen. Designing the system — and the conflicts between systems — is the work.</p>
-      <p data-lang="zh">File Search 又一次印證了 TR7600 改版最早教我的事：在真正複雜的工具裡，最有效的設計通常是去動結構，而不是修表面。如果背後的索引會把機器卡死，結果清單做得再漂亮也沒意義；而這整個專案裡最重要的那個決定，根本不在任何一個畫面上。設計整套系統——以及系統和系統之間的衝突——才是真正的工作。</p>
+      <p data-lang="en">File Search reinforced what the TR7600 redesign first taught me: in genuinely complex tools, the highest-leverage design move is usually structural, not cosmetic. A polished result list means nothing if the index behind it quietly fills its budget and goes stale, and the most important decision in the whole project belonged to no single screen. Designing the system — and the conflicts between systems — is the work.</p>
+      <p data-lang="zh">File Search 又一次印證了 TR7600 改版最早教我的事：在真正複雜的工具裡，最有效的設計通常是去動結構，而不是修表面。如果背後的索引會悄悄塞滿預算、然後變得過時，結果清單做得再漂亮也沒意義；而這整個專案裡最重要的那個決定，根本不在任何一個畫面上。設計整套系統——以及系統和系統之間的衝突——才是真正的工作。</p>
     </div>
   </section>
 
@@ -540,7 +600,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
+    <div class="base"><span data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Made with Claude</span><span data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · Made with Claude</span></div>
   </div>
 </footer>
 
