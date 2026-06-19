@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="ASUS Config Manager — Security UX Case Study · Alyssa Huang" />
-<meta property="og:description" content="Encrypted-credential handling and safe-by-default fleet deployment for non-developer IT admins. Extends Microsoft SCCM; 2× faster BIOS & driver management per ASUS." />
+<meta property="og:description" content="Encrypted-credential handling and safe-by-default fleet deployment for non-developer IT admins — raw firmware exit codes and deployment states rewritten into status an admin can act on. Extends Microsoft SCCM." />
 
 <script>
 (function(){
@@ -154,7 +154,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .note p[data-lang="zh"]{line-height:1.85;}
 
 /* Outcome metrics */
-.ometrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:8px;}
+.ometrics{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule);margin-top:8px;}
 .ometrics .m{padding:30px 24px 30px 0;border-right:1px solid var(--rule);}
 .ometrics .m:last-child{border-right:none;}
 .ometrics .m .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.2rem,4vw,3.2rem);line-height:.92;letter-spacing:-0.04em;color:var(--ink);}
@@ -281,9 +281,9 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <span class="hl">功能 ownership · 接手</span><span>資安 UX</span><span>擴充 Microsoft SCCM</span><span>Intune / DFCI</span><span>企業 IT 管理者</span><span>架構參與</span>
     </div>
     <div class="c-bigstat">
-      <div class="v">2<sup>×</sup></div>
-      <div class="d" data-lang="en">faster BIOS &amp; driver management than standard SCCM (per ASUS) — by making high-stakes, fleet-wide actions both legible and hard to get wrong.</div>
-      <div class="d" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）——靠的是讓高風險的全機隊操作既看得懂、又難以出錯。</div>
+      <div class="v">2</div>
+      <div class="d" data-lang="en">highest-stakes flows I redesigned — BIOS Authentication and Driver Updater Policy — where an invisible cryptographic or deployment state could silently do the wrong thing.</div>
+      <div class="d" data-lang="zh">條最高風險流程由我重新設計——BIOS 驗證與 Driver Updater Policy——在這裡，一個看不見的密碼學或部署狀態，可能默默做出錯誤的事。</div>
     </div>
   </div>
 </header>
@@ -552,11 +552,6 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">Faster <em>because</em> it&rsquo;s harder to get wrong</h2>
     <h2 data-lang="zh">更快，<em>正因為</em>更難出錯</h2>
     <div class="ometrics">
-      <div class="m">
-        <div class="v">2<sup style="font-size:.4em;color:var(--accent);">×</sup></div>
-        <div class="l" data-lang="en">faster BIOS &amp; driver management than standard SCCM (per ASUS)</div>
-        <div class="l" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
-      </div>
       <div class="m">
         <div class="v">11</div>
         <div class="l" data-lang="en">raw firmware &amp; auth exit codes rewritten into plain-language, item-level status — no more cross-referencing a code table</div>

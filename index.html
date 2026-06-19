@@ -188,6 +188,12 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-body{padding-top:4px;}
 .case-kicker{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:15px;}
 .case-kicker[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.case-id{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-bottom:15px;}
+.case-id .co{font-family:var(--ff-display);font-weight:600;font-size:1.18rem;line-height:1;letter-spacing:-0.015em;color:var(--ink);}
+.case-id .sep{color:var(--muted-2);font-size:1.05rem;line-height:1;}
+.case-id .proj{font-family:var(--ff-mono);font-size:.92rem;letter-spacing:.01em;color:var(--accent);}
+.case-id .yr{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-left:auto;}
+.case-id .yr[data-lang="zh"]{text-transform:none;letter-spacing:.02em;}
 .case-title{font-weight:500;font-size:clamp(1.55rem,2.9vw,2.35rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:18px;}
 .case-title[data-lang="zh"]{line-height:1.32;font-weight:600;letter-spacing:-0.01em;}
 .case-context{display:flex;flex-wrap:wrap;gap:6px 7px;margin-bottom:24px;}
@@ -506,8 +512,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       <div class="who">
         <div class="name" data-lang="en">Alyssa Huang — Senior UX &amp; Product Designer</div>
         <div class="name" data-lang="zh">Alyssa Huang — 資深 UX / 產品設計師</div>
-        <p data-lang="en">Eight years of UX across three domains most designers never touch: <strong>industrial inspection systems</strong>, <strong>enterprise IT tooling</strong>, and <strong>Android platform UX</strong>. I work the UX layer &mdash; research, IA, interaction &mdash; not UI polish. CS &amp; Interaction-Design hybrid; for six of those years I also wrote the production code and owned the design, so engineering constraints read to me like research notes.</p>
-        <p data-lang="zh">八年 UX 經歷，橫跨多數設計師不會碰的三個領域：<strong>工業檢測系統</strong>、<strong>企業 IT 工具</strong>，以及 <strong>Android 平台 UX</strong>。我做的是 UX 這一層——研究、資訊架構、互動——不是 UI 視覺。資訊管理與互動設計雙背景；其中六年我同時寫產線程式、也主導設計，所以工程端的限制，對我就像研究筆記一樣好讀。</p>
+        <p data-lang="en">Eight years of UX across three domains most designers never touch: <strong>industrial inspection systems</strong>, <strong>enterprise IT tooling</strong>, and <strong>Android platform UX</strong>. I work where the structure lives &mdash; research, IA, interaction, system behaviour &mdash; more than surface styling. CS &amp; Interaction-Design hybrid; for six of those years I also wrote the production code and owned the design, so engineering constraints read to me like research notes.</p>
+        <p data-lang="zh">八年 UX 經歷，橫跨多數設計師不會碰的三個領域：<strong>工業檢測系統</strong>、<strong>企業 IT 工具</strong>，以及 <strong>Android 平台 UX</strong>。我做的是結構那一層——研究、資訊架構、互動、系統行為——而不只是表面樣式。資訊管理與互動設計雙背景；其中六年我同時寫產線程式、也主導設計，所以工程端的限制，對我就像研究筆記一樣好讀。</p>
       </div>
       <div class="links">
         <a href="#work"><span data-lang="en">View work</span><span data-lang="zh">檢視作品</span> <span aria-hidden="true">→</span></a>
@@ -646,8 +652,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
     <div class="metrics reveal">
       <div class="m">
         <div class="v">8<sup>YRS</sup></div>
-        <div class="l" data-lang="en">UX &mdash; not UI polish &mdash;<br>across industrial, enterprise &amp; platform</div>
-        <div class="l" data-lang="zh">做 UX、不做 UI 視覺，<br>橫跨工業、企業與平台</div>
+        <div class="l" data-lang="en">Of UX across industrial,<br>enterprise &amp; platform tools</div>
+        <div class="l" data-lang="zh">UX 經歷，橫跨工業、<br>企業與平台工具</div>
       </div>
       <div class="m">
         <div class="v">10</div>
@@ -655,9 +661,9 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <div class="l" data-lang="zh">由我獨力負責的單一介面，<br>套用於 10 個機種</div>
       </div>
       <div class="m">
-        <div class="v">2<sup>×</sup></div>
-        <div class="l" data-lang="en">Faster BIOS &amp; driver mgmt<br>vs. standard SCCM</div>
-        <div class="l" data-lang="zh">BIOS 與驅動管理速度，<br>較標準 SCCM 快 2 倍</div>
+        <div class="v">11</div>
+        <div class="l" data-lang="en">Firmware exit codes rewritten<br>into status admins can read</div>
+        <div class="l" data-lang="zh">原始韌體 exit code，<br>改寫成管理者讀得懂的狀態</div>
       </div>
       <div class="m">
         <div class="v">1<sup>ST</sup></div>
@@ -684,8 +690,12 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <img class="case-shot" src="images/tr7600-machine.jpg" alt="The TR7600FB SII 3D AXI inspection system — TRI's flagship X-ray inspection machine, with the redesigned inspection interface shown on the operator panel." />
       </div>
       <div class="case-body">
-        <div class="case-kicker" data-lang="en">Test Research Inc. · Industrial B2B · 2017–2023</div>
-        <div class="case-kicker" data-lang="zh">德律科技 · 工業 B2B · 2017–2023</div>
+        <div class="case-id">
+          <span class="co" data-lang="en">Test Research Inc.</span><span class="co" data-lang="zh">德律科技</span>
+          <span class="sep" aria-hidden="true">|</span>
+          <span class="proj">TR7600 AXI</span>
+          <span class="yr" data-lang="en">Industrial B2B · 2017–23</span><span class="yr" data-lang="zh">工業 B2B · 2017–23</span>
+        </div>
         <h2 class="case-title" data-lang="en">Redesigning the X-ray system that inspects every board before it ships</h2>
         <h2 class="case-title" data-lang="zh">重新設計每片電路板出貨前都要過的 X 光檢測系統</h2>
         <div class="case-context" data-lang="en"><span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>Quantified impact</span><span>SMT process engineers</span></div>
@@ -720,10 +730,14 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <img class="case-shot" style="object-position:center" src="images/asus-file-search.jpg" alt="ASUS File Search app — the AI Search home screen with the headline 'One search, from device to cloud', a unified search bar, and example searches spanning local and cloud files." />
       </div>
       <div class="case-body">
-        <div class="case-kicker" data-lang="en">ASUS · Enterprise B2B · 2024–present</div>
-        <div class="case-kicker" data-lang="zh">ASUS · 企業 B2B · 2024–至今</div>
-        <h2 class="case-title" data-lang="en">Taking a standalone search app from zero onto ASUS&rsquo;s 2026 commercial line</h2>
-        <h2 class="case-title" data-lang="zh">把一個獨立的搜尋 App 從零做起，預載進華碩 2026 年的商用機種</h2>
+        <div class="case-id">
+          <span class="co" data-lang="en">ASUS</span><span class="co" data-lang="zh">ASUS 華碩</span>
+          <span class="sep" aria-hidden="true">|</span>
+          <span class="proj">File Search</span>
+          <span class="yr" data-lang="en">Enterprise B2B · 2024–now</span><span class="yr" data-lang="zh">企業 B2B · 2024–至今</span>
+        </div>
+        <h2 class="case-title" data-lang="en">Keeping semantic search useful as files outgrow a fixed memory budget</h2>
+        <h2 class="case-title" data-lang="zh">在固定的記憶體預算下，讓語意搜尋不因檔案塞滿而失去用處</h2>
         <div class="case-context" data-lang="en"><span class="hl">Product-level ownership</span><span>0 → 1</span><span>IA &amp; competitive strategy</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">產品級 ownership</span><span>0 → 1</span><span>資訊架構與競品策略</span></div>
         <div class="case-bigstat">
@@ -756,16 +770,20 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <img class="case-shot" src="images/asus-config-manager.jpg" alt="ASUS Config Manager running inside the SCCM console — the BIOS Authentication wizard's Manage Certificate Key step shown on screen." />
       </div>
       <div class="case-body">
-        <div class="case-kicker" data-lang="en">ASUS · Enterprise IT · 2024–present</div>
-        <div class="case-kicker" data-lang="zh">ASUS · 企業 IT · 2024–至今</div>
+        <div class="case-id">
+          <span class="co" data-lang="en">ASUS</span><span class="co" data-lang="zh">ASUS 華碩</span>
+          <span class="sep" aria-hidden="true">|</span>
+          <span class="proj">Config Manager</span>
+          <span class="yr" data-lang="en">Enterprise IT · 2024–now</span><span class="yr" data-lang="zh">企業 IT · 2024–至今</span>
+        </div>
         <h2 class="case-title" data-lang="en">Making fleet-scale BIOS &amp; driver control something IT admins can trust</h2>
         <h2 class="case-title" data-lang="zh">讓大規模 BIOS 與驅動管理，成為 IT 管理者能信任的工具</h2>
         <div class="case-context" data-lang="en"><span class="hl">Feature ownership</span><span>Takeover</span><span>Corporate IT admins</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">功能 ownership</span><span>接手</span><span>企業 IT 管理者</span></div>
         <div class="case-bigstat">
-          <div class="v">2<sup>×</sup></div>
-          <div class="d" data-lang="en">faster BIOS &amp; driver management than standard SCCM, per ASUS</div>
-          <div class="d" data-lang="zh">BIOS 與驅動管理速度較標準 SCCM 快 2 倍（華碩官方數據）</div>
+          <div class="v">4</div>
+          <div class="d" data-lang="en">fleet deployment states made legible — compliant, non-compliant, error, in-progress — each with a reason an admin can act on</div>
+          <div class="d" data-lang="zh">機隊派送結果收斂成 4 種看得懂的狀態——符合、不符合、錯誤、派送中——每種都附可行動的原因</div>
         </div>
         <p class="case-desc" data-lang="en">ASUS Config Manager extends Microsoft SCCM — adding BIOS configuration, faster updates, and remote management via Intune/DFCI. I inherited a queue of <strong>high-stakes features touching enterprise device fleets</strong>, where a confusing flow means real downtime on real machines.My job: make cryptographic and policy complexity legible to non-developer IT admins. This is security UX in practice — surfacing security posture and risk so admins act with confidence instead of fear.</p>
         <p class="case-desc" data-lang="zh">ASUS Config Manager 擴充了微軟 SCCM——加入 BIOS 設定、加速更新，並透過 Intune/DFCI 進行遠端管理。我接手了一系列<strong>牽動整批企業裝置的高風險功能</strong>；在這裡，一個讓人搞不清楚的流程，就代表真實機器的停機。我的工作，是把密碼學和政策上的複雜，做成非技術背景的 IT 管理者也讀得懂、用得放心的介面。這就是真正落地的資安 UX——把安全狀態和風險清楚攤出來，讓管理者帶著信任、而不是恐懼去操作。</p>
@@ -819,8 +837,12 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         </div>
       </div>
       <div class="case-body">
-        <div class="case-kicker" data-lang="en">ASUS · Platform UX · 2024–present</div>
-        <div class="case-kicker" data-lang="zh">ASUS · 平台 UX · 2024–至今</div>
+        <div class="case-id">
+          <span class="co" data-lang="en">ASUS</span><span class="co" data-lang="zh">ASUS 華碩</span>
+          <span class="sep" aria-hidden="true">|</span>
+          <span class="proj">Android Platform</span>
+          <span class="yr" data-lang="en">Platform UX · 2024–now</span><span class="yr" data-lang="zh">平台 UX · 2024–至今</span>
+        </div>
         <h2 class="case-title" data-lang="en">Designing platform features from zero — and resolving the conflicts no single feature owns</h2>
         <h2 class="case-title" data-lang="zh">從零設計平台功能——也解決那些夾在功能之間、沒人負責的衝突</h2>
         <div class="case-context" data-lang="en"><span class="hl">System-level UX</span><span>0 → 1</span><span>Cross-product</span></div>
@@ -925,8 +947,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       <div>
         <p data-lang="en">I work the UX layer &mdash; research, IA, interaction &mdash; on <strong>tool-shaped products</strong>: the kind operators, IT admins, and developers depend on daily. My undergraduate degree is in <strong>Information Management</strong>; my master&rsquo;s is in <strong>Interaction Design</strong>. That dual root means I read engineering tickets the way I read research notes.</p>
         <p data-lang="zh">我做的是<strong>工具型產品</strong>的 UX 這一層——研究、資訊架構、互動——就是產線操作員、IT 管理者與開發者每天都得用的那種產品。我大學念<strong>資訊管理</strong>，研究所念<strong>互動設計</strong>。也因為有這兩種背景，我讀工程端的需求單，就跟讀使用者研究筆記一樣自然。</p>
-        <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room.</p>
-        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。</p>
+        <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room. This portfolio is hand-coded too — six pages of HTML, CSS and JS, no page builder.</p>
+        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。這個作品集本身也是我手刻的——六頁 HTML、CSS 與 JS，沒有用 Webflow、Framer 這類工具。</p>
         <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
         <p data-lang="zh">我喜歡做的工具都不華麗：資料密度高、使用者是專家、一用就是好幾個小時、各種模式還會互相打架。我的工作，就是把這些東西整理到讓人一看就懂、用得順手——而且這幾年越來越常是<em>親手打造設計團隊自己拿來規劃的工具。</em></p>
       </div>
@@ -1050,6 +1072,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
 
     <div class="foot-base">
       <span>© 2026 Alyssa Huang · Senior UX &amp; Product Designer</span>
+      <span data-lang="en">Updated · Jun 2026</span><span data-lang="zh">更新於 2026.06</span>
     </div>
   </div>
 </footer>
