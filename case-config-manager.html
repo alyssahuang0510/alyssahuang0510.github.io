@@ -110,6 +110,13 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
 .c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+/* ===== Next-case navigation ===== */
+.next-case{border-top:1px solid var(--rule);}
+.next-case a{display:flex;flex-direction:column;gap:9px;max-width:var(--container);margin:0 auto;padding:clamp(34px,5vw,60px) var(--gutter);text-decoration:none;transition:background .2s;}
+.next-case a:hover{background:var(--bg-2);}
+.next-case .nc-label{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);}
+.next-case .nc-title{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-0.02em;line-height:1.14;color:var(--ink);max-width:28ch;}
+.next-case a:hover .nc-title{color:var(--accent);}
 .c-bigstat .d[data-lang="zh"]{line-height:1.7;}
 
 /* Generic section */
@@ -296,8 +303,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">A console that controls <em>thousands of machines</em> at once</h2>
     <h2 data-lang="zh">一個一次掌控<em>數千台機器</em>的主控台</h2>
     <div class="prose">
-      <p data-lang="en">ASUS Config Manager extends Microsoft SCCM — adding BIOS configuration, encrypted BIOS deployment, faster updates, and remote management via Intune / DFCI. Its users are <strong>corporate IT admins</strong>, not developers, and a single action can reconfigure firmware, rotate credentials, or push a BIOS update across an entire device fleet. In that context a confusing flow isn&rsquo;t a cosmetic problem — it is downtime on real machines, or a fleet locked out of its own firmware.</p>
-      <p data-lang="zh">ASUS Config Manager 擴充了 Microsoft SCCM——加入 BIOS 設定、加密 BIOS 派送、加速更新，並透過 Intune / DFCI 進行遠端管理。它的使用者是<strong>企業 IT 管理者</strong>，不是開發者；而一個動作就可能重設韌體、輪替憑證，或把一次 BIOS 更新推送到整批裝置。在這種情境下，一個令人困惑的流程不是表面問題——而是真實機器的停機，或整批機隊被鎖在自己的韌體之外。</p>
+      <p data-lang="en">ASUS Config Manager extends Microsoft SCCM (System Center Configuration Manager — the tool IT teams use to manage thousands of machines at once), adding BIOS configuration, encrypted BIOS deployment, faster updates, and remote management via Intune / DFCI (Device Firmware Configuration Interface — the channel for changing firmware settings remotely). Its users are <strong>corporate IT admins</strong>, not developers, and a single action can reconfigure firmware, rotate credentials, or push a BIOS update across an entire device fleet. A wrong-looking screen here isn&rsquo;t cosmetic — it&rsquo;s downtime on real machines, or a fleet locked out of its own firmware.</p>
+      <p data-lang="zh">ASUS Config Manager 擴充了 Microsoft SCCM（System Center Configuration Manager——IT 團隊用來一次管理數千台機器的工具），加入 BIOS 設定、加密 BIOS 派送、加速更新，並透過 Intune／DFCI（Device Firmware Configuration Interface——遠端變更韌體設定的管道）進行遠端管理。它的使用者是<strong>企業 IT 管理者</strong>，不是開發者；一個動作就可能重設韌體、輪替憑證，或把一次 BIOS 更新推送到整批裝置。這裡只要畫面讓人會錯意，就不是表面問題——而是真實機器的停機，或整批機隊被鎖在自己的韌體外。</p>
     </div>
   </section>
 
@@ -584,6 +591,15 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
 </main>
 
+<!-- Next case -->
+<nav class="next-case" aria-label="Next case study">
+  <a href="case-android.html">
+    <span class="nc-label" data-lang="en">Next case &rarr;</span><span class="nc-label" data-lang="zh">下一個案例 &rarr;</span>
+    <span class="nc-title" data-lang="en">Android platform UX — features built from zero, and the conflicts between them</span>
+    <span class="nc-title" data-lang="zh">Android 平台 UX — 從零打造的功能，以及它們之間的衝突</span>
+  </a>
+</nav>
+
 <!-- Footer -->
 <footer class="c-foot">
   <div class="container">
@@ -594,7 +610,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="https://www.asus.com/business/services/bios-and-drivers-management/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS BIOS &amp; Drivers Management</span><span data-lang="zh">ASUS BIOS &amp; Drivers Management</span> <span aria-hidden="true">↗</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
+    <div class="base" data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</div>
+    <div class="base" data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</div>
   </div>
 </footer>
 

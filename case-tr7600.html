@@ -110,6 +110,13 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
 .c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+/* ===== Next-case navigation ===== */
+.next-case{border-top:1px solid var(--rule);}
+.next-case a{display:flex;flex-direction:column;gap:9px;max-width:var(--container);margin:0 auto;padding:clamp(34px,5vw,60px) var(--gutter);text-decoration:none;transition:background .2s;}
+.next-case a:hover{background:var(--bg-2);}
+.next-case .nc-label{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);}
+.next-case .nc-title{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-0.02em;line-height:1.14;color:var(--ink);max-width:28ch;}
+.next-case a:hover .nc-title{color:var(--accent);}
 .c-bigstat .d[data-lang="zh"]{line-height:1.7;}
 
 /* Generic section */
@@ -309,8 +316,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
     <div class="c-bigstat">
       <div class="v">37<sup>%</sup></div>
-      <div class="d" data-lang="en">less programming time on the main production board after the redesign (295&rarr;186 min) — independently measured by FAE teams, with the biggest gains on the stages the baseline study flagged.</div>
-      <div class="d" data-lang="zh">改版後主要量產板的編程時間減少（295&rarr;186 分）——由 FAE 團隊獨立量測，改善最大的正是基準研究點出來的那幾個階段。</div>
+      <div class="d" data-lang="en">less programming time on the main production board after the redesign (295&rarr;186 min) — independently measured by the FAE (Field Application Engineer) teams, with the biggest gains on the stages the baseline study flagged.</div>
+      <div class="d" data-lang="zh">改版後主要量產板的編程時間減少（295&rarr;186 分）——由 FAE（客戶應用工程師）團隊獨立量測，改善最大的正是基準研究點出來的那幾個階段。</div>
     </div>
   </div>
 </header>
@@ -323,8 +330,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">A seven-stage tool that inspects <em>every board</em> before it ships</h2>
     <h2 data-lang="zh">一套七階段的工具，檢測出貨前的<em>每一片板</em></h2>
     <div class="prose">
-      <p data-lang="en">TRI&rsquo;s flagship 3D AXI (Automated X-ray Inspection) software inspects solder joints on every PCB leaving an SMT line. Operators program each board through a <strong>seven-stage workflow</strong> — CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune — in shifts, under line-speed pressure where a confusing flow means real downtime. The same software ships to global automotive, server and semiconductor accounts and must run identically across all ten machine variants.</p>
-      <p data-lang="zh">德律的旗艦 3D AXI（自動 X 光檢測）軟體，負責檢測 SMT 產線上每一片 PCB 的焊點。操作員要走完<strong>七個階段的流程</strong>——CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune——以輪班的方式為每一片板編程；在產線速度的壓力下，流程只要讓人卡住，就是真實的停機。而且同一套軟體要賣給全球的汽車、伺服器、半導體大客戶，必須在 10 個機種上都長一樣、操作一致。</p>
+      <p data-lang="en">TRI&rsquo;s flagship 3D AXI (Automated X-ray Inspection) software inspects solder joints on every PCB leaving an SMT line. Operators program each board through a <strong>seven-stage workflow</strong> — CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune — in shifts, at line speed — and every second an operator spends hunting for the next step is a second the line isn&rsquo;t shipping. The same software ships to global automotive, server and semiconductor accounts and must run identically across all ten machine variants.</p>
+      <p data-lang="zh">德律的旗艦 3D AXI（自動 X 光檢測）軟體，負責檢測 SMT 產線上每一片 PCB 的焊點。操作員要走完<strong>七個階段的流程</strong>——CAD &rarr; Scan &rarr; Alignment &rarr; Library &rarr; Warp &rarr; BlockScan &rarr; FineTune——以輪班的方式為每一片板編程，節奏跟著產線走——操作員每多花一秒找下一步，產線就少出一片板。而且同一套軟體要賣給全球的汽車、伺服器、半導體大客戶，必須在 10 個機種上都長一樣、操作一致。</p>
     </div>
   </section>
 
@@ -346,8 +353,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">Before touching the design, I <em>measured</em> the baseline</h2>
     <h2 data-lang="zh">動手設計之前，我先<em>量測</em>了基準</h2>
     <div class="prose">
-      <p data-lang="en">I ran a <strong>task-based usability test with 14 operators</strong>, logging every error and scoring SUS for each of the seven stages, plus <strong>field interviews at five customer sites</strong>. The point was to start the redesign where the data failed — not where opinion was loudest.</p>
-      <p data-lang="zh">我對 <strong>14 位操作員進行任務式易用性測試</strong>，逐筆記錄錯誤並對七個階段各自量測 SUS，再到<strong>五個客戶現場做訪談</strong>。目的是讓改版從數據最痛的地方開始——而不是聲音最大的地方。</p>
+      <p data-lang="en">I ran a <strong>task-based usability test with 14 operators</strong>, logging every error and scoring SUS (System Usability Scale — a standard 0–100 usability score) for each of the seven stages, plus <strong>field interviews at five customer sites</strong>. The point was to start the redesign where the data failed — not where opinion was loudest.</p>
+      <p data-lang="zh">我對 <strong>14 位操作員進行任務式易用性測試</strong>，逐筆記錄錯誤並對七個階段各自量測 SUS（系統易用性量表，0–100 的標準分數），再到<strong>五個客戶現場做訪談</strong>。目的是讓改版從數據最痛的地方開始——而不是聲音最大的地方。</p>
     </div>
 
     <div class="ba-wrap" style="margin-top:24px;">
@@ -609,6 +616,15 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
 </main>
 
+<!-- Next case -->
+<nav class="next-case" aria-label="Next case study">
+  <a href="case-filesearch.html">
+    <span class="nc-label" data-lang="en">Next case &rarr;</span><span class="nc-label" data-lang="zh">下一個案例 &rarr;</span>
+    <span class="nc-title" data-lang="en">File Search — on-device AI that finds files by meaning, not filename</span>
+    <span class="nc-title" data-lang="zh">File Search — 裝置端 AI，用語意而非檔名找檔案</span>
+  </a>
+</nav>
+
 <!-- Footer -->
 <footer class="c-foot">
   <div class="container">
@@ -619,7 +635,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="https://www.tri.com.tw/tw/product/product-18-2.html" target="_blank" rel="noopener noreferrer"><span data-lang="en">TRI AXI product line</span><span data-lang="zh">TRI AXI 產品線</span> <span aria-hidden="true">↗</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
+    <div class="base" data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</div>
+    <div class="base" data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</div>
   </div>
 </footer>
 

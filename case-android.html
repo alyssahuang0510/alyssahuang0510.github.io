@@ -110,6 +110,13 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
 .c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:34ch;}
+/* ===== Next-case navigation ===== */
+.next-case{border-top:1px solid var(--rule);}
+.next-case a{display:flex;flex-direction:column;gap:9px;max-width:var(--container);margin:0 auto;padding:clamp(34px,5vw,60px) var(--gutter);text-decoration:none;transition:background .2s;}
+.next-case a:hover{background:var(--bg-2);}
+.next-case .nc-label{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);}
+.next-case .nc-title{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-0.02em;line-height:1.14;color:var(--ink);max-width:28ch;}
+.next-case a:hover .nc-title{color:var(--accent);}
 .c-bigstat .d[data-lang="zh"]{line-height:1.7;}
 
 /* Generic section */
@@ -696,6 +703,15 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
 </main>
 
+<!-- Next case -->
+<nav class="next-case" aria-label="Next case study">
+  <a href="case-tr7600.html">
+    <span class="nc-label" data-lang="en">Back to the first case &#8635;</span><span class="nc-label" data-lang="zh">回到第一個案例 &#8635;</span>
+    <span class="nc-title" data-lang="en">TR7600 AXI — measuring a seven-stage workflow, then rebuilding what failed</span>
+    <span class="nc-title" data-lang="zh">TR7600 AXI — 量測七階段流程，再重建不及格的那些</span>
+  </a>
+</nav>
+
 <!-- Footer -->
 <footer class="c-foot">
   <div class="container">
@@ -706,7 +722,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="case-tr7600.html"><span data-lang="en">TR7600 AXI redesign</span><span data-lang="zh">TR7600 AXI 改版</span> <span aria-hidden="true">→</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
     </div>
-    <div class="base">© 2026 Alyssa Huang · Senior UX & Product Designer · Taipei · Made with Claude</div>
+    <div class="base" data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</div>
+    <div class="base" data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</div>
   </div>
 </footer>
 

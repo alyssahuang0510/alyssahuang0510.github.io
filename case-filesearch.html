@@ -110,6 +110,13 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
 .c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:36ch;}
+/* ===== Next-case navigation ===== */
+.next-case{border-top:1px solid var(--rule);}
+.next-case a{display:flex;flex-direction:column;gap:9px;max-width:var(--container);margin:0 auto;padding:clamp(34px,5vw,60px) var(--gutter);text-decoration:none;transition:background .2s;}
+.next-case a:hover{background:var(--bg-2);}
+.next-case .nc-label{font-family:var(--ff-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);}
+.next-case .nc-title{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-0.02em;line-height:1.14;color:var(--ink);max-width:28ch;}
+.next-case a:hover .nc-title{color:var(--accent);}
 .c-bigstat .d[data-lang="zh"]{line-height:1.7;}
 
 /* Generic section */
@@ -275,8 +282,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <div class="kicker" data-lang="zh">案例 · ASUS · 企業 B2B · 2024–至今</div>
     <h1 data-lang="en">Find a file by what&rsquo;s <em>inside</em> it — within a fixed memory budget</h1>
     <h1 data-lang="zh">用檔案<em>裡的內容</em>找檔案——而且要待在固定的記憶體預算裡</h1>
-    <p class="hero-sub" data-lang="en">Semantic search for people who never named their files well — built to stay useful even as their files outgrow the index&rsquo;s hard memory cap.</p>
-    <p class="hero-sub" data-lang="zh">為那些從沒把檔名取好的人做的語意搜尋——而且要讓它在檔案多到撐滿索引記憶體上限時，依然好用。</p>
+    <p class="hero-sub" data-lang="en">Semantic search (finding files by meaning, not filename) for people who never named their files well — built to stay useful even as their files outgrow the index&rsquo;s hard memory cap.</p>
+    <p class="hero-sub" data-lang="zh">為那些從沒把檔名取好的人做的語意搜尋（用意思而不是檔名找檔案）——而且要讓它在檔案多到撐滿索引記憶體上限時，依然好用。</p>
     <div class="hero-intro">
       <p data-lang="en">People forget what a file is called, or never named it well — but they remember what&rsquo;s <strong>in</strong> it: a phrase, an image. File Search lets them find it by meaning. I owned it from a blank page — positioning, IA, result hierarchy, and the index mechanism that keeps semantic search living inside a fixed, per-machine memory budget.</p>
       <p data-lang="zh">人們常忘記檔案叫什麼，或根本沒好好命名——但他們記得檔案<strong>裡</strong>有什麼：一段文字、一張圖。File Search 讓他們用「意思」找到它。我從一張白紙開始負責——定位、資訊架構、結果階層，以及讓語意搜尋待在每台機器固定記憶體預算裡的索引機制。</p>
@@ -590,6 +597,15 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
 </main>
 
+<!-- Next case -->
+<nav class="next-case" aria-label="Next case study">
+  <a href="case-config-manager.html">
+    <span class="nc-label" data-lang="en">Next case &rarr;</span><span class="nc-label" data-lang="zh">下一個案例 &rarr;</span>
+    <span class="nc-title" data-lang="en">ASUS Config Manager — fleet-scale BIOS &amp; credentials, made legible for IT admins</span>
+    <span class="nc-title" data-lang="zh">ASUS Config Manager — 大規模 BIOS 與憑證，讓 IT 管理者看得懂</span>
+  </a>
+</nav>
+
 <!-- Footer -->
 <footer class="c-foot">
   <div class="container">
@@ -600,7 +616,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="base"><span data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Made with Claude</span><span data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · Made with Claude</span></div>
+    <div class="base"><span data-lang="en">© 2026 Alyssa Huang · Senior UX &amp; Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</span><span data-lang="zh">© 2026 Alyssa Huang · 資深 UX／產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</span></div>
   </div>
 </footer>
 
