@@ -140,6 +140,18 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .fact-grid .f span{font-size:1rem;color:var(--ink);line-height:1.5;}
 .fact-grid .f span[data-lang="zh"]{line-height:1.7;}
 @media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:24px 0 4px;}
+.statrow .s{background:var(--surface);padding:22px 24px;}
+.statrow .s .n{font-family:var(--ff-display);font-weight:500;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1;letter-spacing:-0.03em;color:var(--accent);}
+.statrow .s .n small{font-family:var(--ff-mono);font-size:.42em;letter-spacing:0;color:var(--muted);margin-left:4px;}
+.statrow .s .l{font-size:.92rem;color:var(--ink-2);line-height:1.5;margin-top:10px;}
+.statrow .s .l[data-lang="zh"]{line-height:1.7;}
+@media (max-width:640px){.statrow{grid-template-columns:1fr;}}
+.quote{margin:26px 0 4px;padding:4px 0 4px 22px;border-left:2px solid var(--accent);}
+.quote p{font-family:var(--ff-display);font-weight:400;font-size:1.18rem;line-height:1.5;color:var(--ink);letter-spacing:-0.01em;margin:0 0 12px;max-width:46ch;}
+.quote p[data-lang="zh"]{line-height:1.7;}
+.quote cite{font-style:normal;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.quote cite[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
 
 .fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
 .fig-cap[data-lang="zh"]{line-height:1.8;}
@@ -275,8 +287,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <span class="hero-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><path d="M19.5 19.5l-4.6-4.6"/><path d="M7.4 8.8h5.2M7.4 11.4h3.4"/></svg>
       </span>
-      <span class="status-pill pre" data-lang="en"><span class="led" aria-hidden="true"></span>Pre-release · ships 2026</span>
-      <span class="status-pill pre" data-lang="zh"><span class="led" aria-hidden="true"></span>尚未上市 · 2026 隨商用線出貨</span>
+      <span class="status-pill" data-lang="en"><span class="led" aria-hidden="true"></span>Shipping in ASUS MyExpert · 2026 commercial line</span>
+      <span class="status-pill" data-lang="zh"><span class="led" aria-hidden="true"></span>已隨 ASUS MyExpert 出貨 · 2026 商用線</span>
     </div>
     <div class="kicker" data-lang="en">Case Study · ASUS · Enterprise B2B · 2024–present</div>
     <div class="kicker" data-lang="zh">案例 · ASUS · 企業 B2B · 2024–至今</div>
@@ -290,9 +302,9 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
     <a class="hero-cta" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
     <div class="c-bigstat">
-      <div class="v">3<sup>GB</sup></div>
-      <div class="d" data-lang="en">the hard ceiling the semantic index is designed to live within on an 8&nbsp;GB machine. Search-by-meaning runs on ordinary commercial hardware — no server behind it, and nothing for the user to manage.</div>
-      <div class="d" data-lang="zh">在 8&nbsp;GB 機種上，語意索引被設計成最多只用到 3&nbsp;GB。語意搜尋因此能跑在一般的商用機器上——背後沒有伺服器，也沒有任何要使用者去管的東西。</div>
+      <div class="v">0<sup>servers</sup></div>
+      <div class="d" data-lang="en">Search-by-meaning runs entirely on the device — no server behind it, inside a fixed slice of the machine&rsquo;s own memory, with nothing for the user to manage. Staying useful within that budget is the whole design problem.</div>
+      <div class="d" data-lang="zh">語意搜尋完全跑在裝置本機上——背後沒有伺服器，待在機器自己一塊固定的記憶體額度裡，也沒有任何要使用者去管的東西。如何在這個額度內維持好用，就是整個設計題目。</div>
     </div>
   </div>
 </header>
@@ -305,8 +317,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <div class="m"><b data-lang="en">Product</b><b data-lang="zh">產品</b><span data-lang="en">File Search · semantic search in MyExpert</span><span data-lang="zh">File Search · MyExpert 內的語意搜尋</span></div>
       <div class="m"><b data-lang="en">My role</b><b data-lang="zh">我的角色</b><span data-lang="en">Sole UX owner · 0 → 1</span><span data-lang="zh">唯一 UX 負責人 · 0 → 1</span></div>
       <div class="m"><b data-lang="en">Timeline</b><b data-lang="zh">時間</b><span data-lang="en">2024 – present</span><span data-lang="zh">2024 – 至今</span></div>
-      <div class="m"><b data-lang="en">Skills</b><b data-lang="zh">技能</b><span data-lang="en">Product positioning, IA, result hierarchy, resource-aware system design</span><span data-lang="zh">產品定位、資訊架構、結果階層、資源感知系統設計</span></div>
-      <div class="m wide"><b data-lang="en">Scope &amp; collaborators</b><b data-lang="zh">範圍與協作</b><span data-lang="en">From a blank page to a pre-installed peer app — competitive teardown, the integration boundary with the rest of MyExpert, and the resource-aware index beneath it. Built with algorithm &amp; platform engineering, where the index behaviour sits exactly where UX meets memory, disk and power limits.</span><span data-lang="zh">從一張白紙到預載的並列 App——競品拆解、與 MyExpert 其他模組的整合邊界，以及底下那套資源感知的索引。與演算法、平台工程一起做；索引行為正落在 UX 與記憶體、磁碟、電源限制的交界。</span></div>
+      <div class="m"><b data-lang="en">Skills</b><b data-lang="zh">技能</b><span data-lang="en">User research, product positioning, IA, result hierarchy, resource-aware system design</span><span data-lang="zh">使用者研究、產品定位、資訊架構、結果階層、資源感知系統設計</span></div>
+      <div class="m wide"><b data-lang="en">Scope &amp; collaborators</b><b data-lang="zh">範圍與協作</b><span data-lang="en">From a blank page to a pre-installed peer app — a concept survey (n=25), competitive teardown, the integration boundary with the rest of MyExpert, and the resource-aware index beneath it. Built with algorithm &amp; platform engineering, where the index behaviour sits exactly where UX meets memory, disk and power limits.</span><span data-lang="zh">從一張白紙到預載的並列 App——一份概念調查（n=25）、競品拆解、與 MyExpert 其他模組的整合邊界，以及底下那套資源感知的索引。與演算法、平台工程一起做；索引行為正落在 UX 與記憶體、磁碟、電源限制的交界。</span></div>
     </div>
   </section>
 
@@ -316,8 +328,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">A search app that unifies <em>local and cloud</em> behind one query</h2>
     <h2 data-lang="zh">一個把<em>本機與雲端</em>整合在單一查詢後的搜尋 App</h2>
     <div class="prose">
-      <p data-lang="en">File Search lets people query local and cloud files from one place, and is set to ship pre-installed on ASUS commercial notebooks, AiOs and desktops from 2026. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
-      <p data-lang="zh">File Search 讓使用者在同一個地方查詢本機和雲端的檔案，預計自 2026 年起，隨華碩的商用筆電、一體機與桌機預載出貨。它不是埋在選單裡的某個功能，而是 MyExpert 裡和 Chat、Knowledge Hub、ExpertMeet 並列的一個 App。也正因為它跑在一般的商用機器上，就必須在沒有專屬伺服器、也沒有人在旁邊顧著的情況下，依然好用。</p>
+      <p data-lang="en">File Search lets people query local and cloud files from one place, and ships pre-installed on ASUS commercial notebooks, AiOs and desktops from the 2026 line. It isn&rsquo;t a feature buried in a menu — it&rsquo;s a peer app inside MyExpert, sibling to Chat, Knowledge Hub and ExpertMeet. Because it runs on ordinary commercial machines, it has to stay useful without a dedicated server and without a power user babysitting it.</p>
+      <p data-lang="zh">File Search 讓使用者在同一個地方查詢本機和雲端的檔案，並隨華碩 2026 年的商用筆電、一體機與桌機預載出貨。它不是埋在選單裡的某個功能，而是 MyExpert 裡和 Chat、Knowledge Hub、ExpertMeet 並列的一個 App。也正因為它跑在一般的商用機器上，就必須在沒有專屬伺服器、也沒有人在旁邊顧著的情況下，依然好用。</p>
     </div>
     <div class="chart-fig" style="margin-top:8px;">
       <svg viewBox="0 0 840 404" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -406,18 +418,50 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
   </section>
 
+  <!-- Research · validating the problem -->
+  <section class="sec reveal">
+    <span class="sec-num"><span data-lang="en">Research · the problem, validated</span><span data-lang="zh">研究 · 驗證問題</span></span>
+    <h2 data-lang="en">Before building, I tested the problem — and its cost — on real users</h2>
+    <h2 data-lang="zh">動手之前，我先在真實使用者身上驗證了問題——和它的代價</h2>
+    <div class="prose">
+      <p data-lang="en">I ran a concept survey (n=25, pre-build) to check three things before a single screen was final: was the problem real, did people read the feature correctly, and would they accept what it costs to run. The demand was clear — <strong>23 of 25 had wanted to find an image by the words inside it and failed</strong>, and nearly half called it a recurring frustration. So the question was never <em>whether</em> to build it. It was how to ship it without making people pay for it up front.</p>
+      <p data-lang="zh">我做了一份概念調查（n=25，開發前），在任何畫面定案之前先確認三件事：問題是不是真的、人們有沒有讀對這個功能、以及他們願不願意接受它的運行代價。需求很明確——<strong>25 人裡有 23 人曾經想用「圖裡寫了什麼」去找一張圖、結果找不到</strong>，近半數說這是反覆出現的困擾。所以問題從來不是「要不要做」，而是怎麼在不讓使用者預先付出代價的前提下把它做出來。</p>
+    </div>
+    <div class="statrow">
+      <div class="s"><div class="n">23<small>/25</small></div><div class="l" data-lang="en">had failed to find an image by the text inside it — the demand was real</div><div class="l" data-lang="zh">曾因「只記得圖裡的字」而找不到圖——需求是真的</div></div>
+      <div class="s"><div class="n">72<small>%</small></div><div class="l" data-lang="en">read &ldquo;search the text in an image&rdquo; over &ldquo;analyse the text in an image&rdquo; — it set the label</div><div class="l" data-lang="zh">偏好「搜尋圖片裡的文字」勝過「分析圖片中的文字」——它定了文案</div></div>
+      <div class="s"><div class="n">3<small>/25</small></div><div class="l" data-lang="en">would accept a blind ~6&nbsp;hr first-run index; a quarter would drop the feature rather than wait</div><div class="l" data-lang="zh">願意無條件接受首次約 6 小時的盲建索引；四分之一寧可放棄功能也不等</div></div>
+    </div>
+    <div class="prose" style="margin-top:24px;">
+      <p data-lang="en"><strong>The exploration I rejected.</strong> The obvious first design was a blind full index on first run — scan everything up front, six hours, then you&rsquo;re done forever. The survey killed that default: only 3 of 25 would accept it, and the open comments were blunt about why.</p>
+      <p data-lang="zh"><strong>我否決掉的方向。</strong>最直覺的第一版是「首次盲建全索引」——一開始把所有東西掃完，等個六小時，之後就一勞永逸。這份調查否決了這個預設值：25 人只有 3 人能接受，而開放回饋把原因講得很直白。</p>
+    </div>
+    <figure class="quote">
+      <p data-lang="en">&ldquo;Six hours just sitting there with it open is too long — I&rsquo;d only consider it if it ran in the background.&rdquo;</p>
+      <p data-lang="zh">「若要開著等六小時太久，背景自動跑才會考慮。」</p>
+      <cite data-lang="en">Software engineer · concept survey response</cite>
+      <cite data-lang="zh">軟體工程師 · 概念調查回饋</cite>
+    </figure>
+    <div class="prose" style="margin-top:24px;">
+      <p data-lang="en">That comment — and the privacy ones beside it (&ldquo;is this processed locally or in the cloud?&rdquo;, &ldquo;let me limit it to certain folders&rdquo;) — pointed at the same principle: <strong>the cost of search has to be invisible and never blocking</strong>. People wanted the result, not the bill. So instead of an upfront index I owe the user, I designed one that builds quietly within a fixed budget — useful from the first minute, governing itself, never asking for hours of their machine. That decision is what the rest of this case study is about.</p>
+      <p data-lang="zh">這句話——加上旁邊那些隱私回饋（「這是在本機還是雲端處理？」、「讓我只掃特定資料夾」）——都指向同一條原則：<strong>搜尋的成本必須是隱形的、而且永不擋路</strong>。使用者要的是結果，不是帳單。所以我沒有做一個「先欠使用者一次」的預先索引，而是設計成在固定預算內安靜地建——第一分鐘就能用、會自我調節、從不佔用使用者好幾個小時的機器。這個決定，就是這篇案例接下來要講的全部。</p>
+    </div>
+    <p class="fig-cap" data-lang="en" style="margin-top:18px;">On the data: this is a directional concept survey (n=25), run before build to pressure-test the problem and the labelling — not production telemetry. The percentages are signal, shown with the sample size visible.</p>
+    <p class="fig-cap" data-lang="zh" style="margin-top:18px;">關於數據：這是一份方向性的概念調查（n=25），在開發前用來壓力測試問題與文案，並非上線後的遙測數據。百分比是訊號，且一律標出樣本數。</p>
+  </section>
+
   <!-- The problem under the UI -->
   <section class="sec reveal">
     <span class="sec-num"><span data-lang="en">The hard problem</span><span data-lang="zh">真正難的問題</span></span>
     <h2 data-lang="en">The hard part wasn&rsquo;t the search screen — it was the <em>memory budget</em></h2>
     <h2 data-lang="zh">難的不是搜尋畫面——是<em>記憶體預算</em></h2>
     <div class="prose">
-      <p data-lang="en">File Search runs two indexes with very different costs. A light exact-match index runs continuously and is essentially free. The semantic index — the one that lets you search by meaning — is far heavier, so it&rsquo;s deliberately capped: on an 8&nbsp;GB machine it may use at most 3&nbsp;GB, a hard limit written into the software from day one. That cap is exactly what stops it from ever degrading the device. But it&rsquo;s also where the real design problem starts: as a user&rsquo;s files pile up, the index fills toward its ceiling — around 800k tokens — and something has to give. So the question was never the result list. It was this: <strong>how do you keep semantic search useful inside a fixed budget the user&rsquo;s files will eventually outgrow — without ever asking them to manage it?</strong></p>
-      <p data-lang="zh">File Search 同時跑兩種成本差很多的索引。一個是輕量的精準比對索引，可以一直跑、幾乎不花資源。另一個是讓你能用「意思」搜尋的語意索引，重得多，所以它一開始就被刻意設了上限：在 8&nbsp;GB 機種上最多只用到 3&nbsp;GB——這是寫死在軟體裡的硬限制。正因為有這個上限，它永遠不會拖垮機器。但真正的設計難題也從這裡開始：當使用者的檔案越積越多，索引會慢慢逼近上限——大約 80 萬 token——總得有所取捨。所以問題從來不是結果清單，而是：<strong>當使用者的檔案遲早會超過這個固定預算，要怎麼讓語意搜尋還是好用——又完全不用使用者去管它？</strong></p>
+      <p data-lang="en">File Search runs two indexes with very different costs. A light exact-match index runs continuously and is essentially free. The semantic index — the one that lets you search by meaning — is far heavier, so it&rsquo;s deliberately capped: it may use only a fixed share of system memory, a hard limit written into the software from day one. That cap is exactly what stops it from ever degrading the device. But it&rsquo;s also where the real design problem starts: as a user&rsquo;s files pile up, the index fills toward that ceiling — and something has to give. So the question was never the result list. It was this: <strong>how do you keep semantic search useful inside a fixed budget the user&rsquo;s files will eventually outgrow — without ever asking them to manage it?</strong></p>
+      <p data-lang="zh">File Search 同時跑兩種成本差很多的索引。一個是輕量的精準比對索引，可以一直跑、幾乎不花資源。另一個是讓你能用「意思」搜尋的語意索引，重得多，所以它一開始就被刻意設了上限：只能用到系統記憶體裡固定的一塊額度——這是寫死在軟體裡的硬限制。正因為有這個上限，它永遠不會拖垮機器。但真正的設計難題也從這裡開始：當使用者的檔案越積越多，索引會慢慢逼近這個上限——總得有所取捨。所以問題從來不是結果清單，而是：<strong>當使用者的檔案遲早會超過這個固定預算，要怎麼讓語意搜尋還是好用——又完全不用使用者去管它？</strong></p>
     </div>
     <div class="fact-grid" style="margin-top:24px;">
       <div class="f"><b data-lang="en">Exact-match index</b><b data-lang="zh">精準比對索引</b><span data-lang="en">Continuous, low cost, needs no governance, no real risk.</span><span data-lang="zh">持續運作、成本低、不需治理、幾乎無風險。</span></div>
-      <div class="f"><b data-lang="en">Semantic index</b><b data-lang="zh">語意索引</b><span data-lang="en">Heavier and hard-capped (&le;3&nbsp;GB on an 8&nbsp;GB machine, ~800k tokens). The risk isn&rsquo;t crashing the machine — it&rsquo;s filling that budget and going stale.</span><span data-lang="zh">較重，且有硬上限（8&nbsp;GB 機種 &le;3&nbsp;GB、約 80 萬 token）。風險不是把機器弄當，而是塞滿預算後變得過時。</span></div>
+      <div class="f"><b data-lang="en">Semantic index</b><b data-lang="zh">語意索引</b><span data-lang="en">Heavier, and hard-capped to a fixed share of system memory. The risk isn&rsquo;t crashing the machine — it&rsquo;s filling that budget and going stale.</span><span data-lang="zh">較重，且被硬限制在系統記憶體裡固定的一塊額度內。風險不是把機器弄當，而是塞滿預算後變得過時。</span></div>
     </div>
   </section>
 
@@ -579,8 +623,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">Built to survive where most prototypes <em>wouldn&rsquo;t</em></h2>
     <h2 data-lang="zh">為了在多數原型<em>撐不住</em>的地方活下來而設計</h2>
     <div class="prose">
-      <p data-lang="en">File Search is built into MyExpert and is scheduled to ship pre-installed on ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. It hasn&rsquo;t reached the market yet, so there are no usage metrics to report — and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget (&le;3&nbsp;GB on an 8&nbsp;GB machine), governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
-      <p data-lang="zh">File Search 已內建於 MyExpert，預計隨華碩 2026 年的商用筆電、一體機與桌機預載出貨。它還沒上市，所以目前沒有任何使用數據可報——與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內（8&nbsp;GB 機種 &le;3&nbsp;GB）的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
+      <p data-lang="en">File Search is built into MyExpert and ships with ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. As it rolls out with that line, I don&rsquo;t have post-launch usage metrics to report yet — and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget, governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
+      <p data-lang="zh">File Search 已內建於 MyExpert，並隨華碩 2026 年的商用筆電、一體機與桌機出貨。隨著這條產品線鋪開，我目前還沒有上市後的使用數據可報——與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
     </div>
   </section>
 

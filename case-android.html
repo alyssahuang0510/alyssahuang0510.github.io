@@ -143,6 +143,11 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .fact-grid .f span[data-lang="zh"]{line-height:1.7;}
 @media (max-width:640px){.fact-grid{grid-template-columns:1fr;}}
 
+.quote{margin:22px 0;padding:4px 0 4px 22px;border-left:2px solid var(--accent);}
+.quote p{font-family:var(--ff-display);font-weight:400;font-size:1.14rem;line-height:1.55;color:var(--ink);letter-spacing:-0.01em;margin:0 0 12px;max-width:48ch;}
+.quote p[data-lang="zh"]{line-height:1.75;}
+.quote cite{font-style:normal;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.quote cite[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
 .fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
 .fig-cap[data-lang="zh"]{line-height:1.8;}
 .td-kick{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.12em;color:var(--muted);margin-bottom:14px;}
@@ -485,6 +490,10 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
     <p class="fig-cap" data-lang="en">Fig. 2 &mdash; The same fix, in the settings IA. The assistant toggle, stranded on the gesture page (left), is consolidated onto the System-navigation page with the other assistant triggers &mdash; leaving a gesture page that only does gestures (right).</p>
     <p class="fig-cap" data-lang="zh">圖 2 &mdash; 同一個修正，落在設定的資訊架構上。原本卡在手勢頁的助理開關（左），被收斂到「系統導覽」頁、和其他助理觸發設定放在一起，讓手勢頁回到只管手勢（右）。</p>
+    <div class="prose" style="margin-top:34px;padding-top:30px;border-top:1px solid var(--rule);">
+      <p data-lang="en"><strong>And one I couldn&rsquo;t resolve into a rule.</strong> Not every conflict ends in a clean fix. Circle to Search arrived as a platform mandate, bundled with a hard dependency: switching it on <strong>forced the gesture-hint line to stay visible</strong>, overriding the setting that let people hide it. A vocal set of users cared about exactly that — classic-nav-bar holdouts, and gesture-mode users who deliberately keep the hint line off. I pushed to decouple the two: keep Circle to Search, still let users hide the line. The dependency was non-negotiable and the proposal was rejected. I&rsquo;m keeping it in the case because the honest version of platform work includes the calls you argue for on the user&rsquo;s behalf and don&rsquo;t win — and the judgement to tell which constraints are above your level to move.</p>
+      <p data-lang="zh"><strong>還有一個，我沒能收成一條規則。</strong>不是每個衝突都有乾淨的解。Circle to Search 是平台強制導入的，而且綁了一個硬相依：一旦開啟，就<strong>強制讓手勢提示線一直顯示</strong>，蓋掉了原本可以把它隱藏的設定。偏偏有一群使用者很在意這件事——習慣經典導覽列的人，還有刻意把提示線關掉的手勢模式使用者。我提案把這兩件事解耦：保留 Circle to Search，同時讓使用者還是能隱藏手勢線。但這個相依沒有商量餘地，提案被否決。我把它留在案例裡，是因為平台工作誠實的樣子，本來就包含那些你替使用者爭取、卻沒爭到的決定——以及看得出哪些限制不是你這個層級能撼動的判斷力。</p>
+    </div>
   </section>
 
   <!-- 05 Native vs custom -->
@@ -628,12 +637,14 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <p data-lang="zh">從零的功能在 ROG 與 Zenfone 上交付，共用同一套可維護的系統。過去那些會自己默默分出勝負、讓另一個悄悄失效的衝突——Circle to Search 跟助理搶同一個手勢、螢幕錄影控制項重複——如今都依明確規則解決；未來的平台功能可以直接沿用這套規則，不必每次重打一輪。</p>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">The same system lens held under live pressure. When the gyroscope-acceleration tool &mdash; part of Game Genie&rsquo;s in-game X-MODE panel on ROG &mdash; drew a cluster of field complaints in the China region after launch, I treated it as a research signal rather than a one-off bug — studied the player behaviour behind the reports, adjusted the design accordingly, and closed the issue fast.</p>
-      <p data-lang="zh">同一套系統視角，在真實壓力下一樣成立。陀螺儀加速功能——ROG Game Genie 遊戲內 X-MODE 面板中的工具——上市後在中國區引發一波客訴時，我把它當成研究訊號、而不是單一 bug——研究客訴背後玩家真正的使用行為，據此調整設計，並快速收掉問題。</p>
+      <p data-lang="en">The same system lens held under live pressure. When the gyroscope-acceleration tool &mdash; part of Game Genie&rsquo;s in-game X-MODE panel on ROG &mdash; drew a cluster of field complaints after launch, I treated it as a research signal rather than a one-off bug — studied the player behaviour behind the reports, adjusted the design accordingly, and closed the issue fast.</p>
+      <p data-lang="zh">同一套系統視角，在真實壓力下一樣成立。陀螺儀加速功能——ROG Game Genie 遊戲內 X-MODE 面板中的工具——上市後引發一波客訴時，我把它當成研究訊號、而不是單一 bug——研究客訴背後玩家真正的使用行為，據此調整設計，並快速收掉問題。</p>
+      <p data-lang="en"><strong>What the tickets were really about.</strong> The complaints came from ROG owners playing competitive shooters like Game for Peace and CrossFire, where gyroscope aiming matters. The built-in gyro-acceleration ceiling sat below what serious players wanted — so some were side-loading a third-party gyroscope app to push sensitivity past it. The signal under the tickets wasn&rsquo;t a bug: a gaming phone had shipped a gyro tool that capped below the very games it&rsquo;s built to play, and players were routing around ASUS to get there. The argument they kept making was simple — a phone marketed for gaming shouldn&rsquo;t lack what the games themselves already expose. So I designed for that ceiling rather than patching the symptom.</p>
+      <p data-lang="zh"><strong>客訴真正在講的是什麼。</strong>這波客訴來自玩《和平菁英》《穿越火線》這類重視陀螺儀瞄準的 ROG 玩家。手機內建的陀螺儀加速上限，低於這些玩家想要的靈敏度——於是有人乾脆裝第三方陀螺儀 App，把靈敏度開到比內建設定還高。客訴底下真正的訊號不是 bug：一支主打電競的手機，內建陀螺儀工具竟然卡在比它本來要玩的那些遊戲還低的上限，逼得玩家繞過 ASUS 自己去開。他們反覆在講的其實很簡單——一支打著電競名號的手機，不該連遊戲本身都已經有的東西都沒有。所以我針對那個上限去設計，而不是去壓症狀。</p>
     </div>
     <div class="chart-fig" style="margin-top:8px;">
       <svg viewBox="0 0 840 196" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="A four-step flow: a cluster of seven field complaints in the China region after launch becomes a player-behaviour study, which drives a design adjustment, resolving all seven complaints and recovering four returns within one month.">
+           aria-label="A four-step flow: a cluster of seven field complaints after launch becomes a player-behaviour study, which drives a design adjustment, resolving all seven complaints and recovering four returns within one month.">
         <text x="0" y="20" font-family="Geist Mono, monospace" font-size="11" letter-spacing="1.5" fill="#6E6E73">FIELD SIGNAL &#8594; RESEARCH &#8594; DESIGN &#8594; RECOVERY</text>
 
         <!-- node 1 SIGNAL -->
@@ -641,7 +652,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <rect x="12" y="44" width="174" height="24" rx="7" fill="#0C0C0D"/><rect x="12" y="58" width="174" height="10" fill="#0C0C0D"/>
         <text x="26" y="60" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1" fill="#FFFFFF">SIGNAL</text>
         <text x="26" y="92" font-family="Geist Mono, monospace" font-size="15" font-weight="600" fill="#0C0C0D">7 complaints</text>
-        <text x="26" y="116" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">China region</text>
+        <text x="26" y="116" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">field reports</text>
         <text x="26" y="134" font-family="Geist Mono, monospace" font-size="10" fill="#6E6E73">post-launch</text>
 
         <line x1="186" y1="104" x2="216" y2="104" stroke="#2B4DE0" stroke-width="1.4"/><path d="M224 104 l-9 -5 v10 z" fill="#2B4DE0"/>
@@ -676,8 +687,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <text x="662" y="116" font-family="Geist Mono, monospace" font-size="13" font-weight="600" fill="#0C0C0D">4 returns back</text>
         <text x="662" y="140" font-family="Geist Mono, monospace" font-size="10" fill="#2B4DE0">within 1 month</text>
       </svg>
-      <p class="fig-cap" data-lang="en">Fig. 4 — A post-launch field crisis, handled as research. Seven China-region complaints about the gyroscope feature became a player-behaviour study that drove a design adjustment — resolving all seven and recovering four returns within a month.</p>
-      <p class="fig-cap" data-lang="zh">圖 4 — 把上市後的現場危機，當研究來處理。陀螺儀功能在中國區的 7 件客訴，化成一份玩家行為研究、據以調整設計——一個月內解決全部 7 件、並挽回 4 件退貨。</p>
+      <p class="fig-cap" data-lang="en">Fig. 4 — A post-launch field crisis, handled as research. Seven field complaints about the gyroscope feature became a player-behaviour study that drove a design adjustment — resolving all seven and recovering four returns within a month.</p>
+      <p class="fig-cap" data-lang="zh">圖 4 — 把上市後的現場危機，當研究來處理。陀螺儀功能的 7 件現場客訴，化成一份玩家行為研究、據以調整設計——一個月內解決全部 7 件、並挽回 4 件退貨。</p>
     </div>
     <div class="chart-fig" style="margin-top:24px;">
       <img src="images/android-gyroscope-gamegenie.jpg"

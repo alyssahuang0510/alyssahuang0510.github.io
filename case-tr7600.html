@@ -151,6 +151,11 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .ba-wrap{margin-top:8px;}
 .ba-diagram{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(22px,3vw,40px);}
 .ba-diagram svg{width:100%;height:auto;display:block;}
+.quote{margin:22px 0;padding:4px 0 4px 22px;border-left:2px solid var(--accent);}
+.quote p{font-family:var(--ff-display);font-weight:400;font-size:1.14rem;line-height:1.55;color:var(--ink);letter-spacing:-0.01em;margin:0 0 12px;max-width:48ch;}
+.quote p[data-lang="zh"]{line-height:1.75;}
+.quote cite{font-style:normal;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.quote cite[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
 .fig-cap{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.03em;color:var(--muted);margin-top:14px;line-height:1.6;}
 .fig-cap[data-lang="zh"]{line-height:1.8;}
 
@@ -418,6 +423,12 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <h3 data-lang="zh">預設畫面主打的，是操作員根本不看的資料</h3>
         <p data-lang="en">Field interviews showed the home screen opened on thumbnails, Board Summary and Device State — none of which an operator consults to make a programming decision.</p>
         <p data-lang="zh">現場訪談發現，首頁一打開就是縮圖、Board Summary 與 Device State——那些都不是操作員做編程判斷時會去看的資料。</p>
+        <figure class="quote">
+          <p data-lang="en">&ldquo;I never look at the thumbnails. I don&rsquo;t look at Board Summary or those charts either. Device State doesn&rsquo;t need to be on the home page.&rdquo;</p>
+          <p data-lang="zh">「縮圖我完全不會去看，Board Summary 跟那幾張圖表也不看。Device State 不用擺在首頁。」</p>
+          <cite data-lang="en">AOI technician · ~4 months on the job · field interview, customer site, 2019</cite>
+          <cite data-lang="zh">AOI 技師 · 約 4 個月年資 · 客戶現場訪談，2019</cite>
+        </figure>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
         <p data-lang="en"><strong>Cut them from the default view</strong> and surfaced only what drives the next decision. The density stays available for experts, but the screen no longer opens on noise.</p>
         <p data-lang="zh"><strong>把它們從預設畫面移走</strong>，只留下會影響下一步判斷的資訊。需要高密度資料的專家還是隨時叫得出來，但畫面不會再一打開就全是雜訊。</p>
@@ -452,8 +463,14 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <span class="ftag" data-lang="zh">研究發現 &rarr; 設計決策 · FineTune</span>
         <h3 data-lang="en">FineTune scored the floor (SUS 51) — it assumed expertise operators lacked</h3>
         <h3 data-lang="zh">FineTune 分數墊底（SUS 51）——它預設了操作員沒有的專業</h3>
-        <p data-lang="en">The lowest-scoring stage of all seven. It demanded algorithm knowledge most shift operators didn&rsquo;t have, and interviews surfaced a real fear: setting a wrong value and crashing the machine.</p>
-        <p data-lang="zh">七個階段中分數最低。它要求多數輪班操作員沒有的演算法知識，訪談也揭露了一個真實的恐懼：設錯值、把機器撞了。</p>
+        <p data-lang="en">The lowest-scoring stage of all seven. It demanded algorithm knowledge most shift operators didn&rsquo;t have — and the complexity wasn&rsquo;t only a beginner problem: even an experienced engineer who&rsquo;d run GE and DAGE systems before found the interface too hard to use.</p>
+        <p data-lang="zh">七個階段中分數最低。它要求多數輪班操作員沒有的演算法知識——而且「複雜」不只是新手的問題：連一位用過 GE 與 DAGE 的資深工程師，都覺得這個介面太難用。</p>
+        <figure class="quote">
+          <p data-lang="en">&ldquo;The screen&rsquo;s too complex — it&rsquo;s just hard to use.&rdquo;</p>
+          <p data-lang="zh">「畫面太複雜了，很難用。」</p>
+          <cite data-lang="en">AOI engineer · prior GE &amp; DAGE experience · field interview, customer site, 2019</cite>
+          <cite data-lang="zh">AOI 工程師 · 有 GE、DAGE 使用經驗 · 客戶現場訪談，2019</cite>
+        </figure>
         <span class="arrow" data-lang="en">So I did &rarr;</span><span class="arrow" data-lang="zh">於是我 &rarr;</span>
         <p data-lang="en"><strong>Added recommended parameters and inline guidance</strong> so non-experts weren&rsquo;t stranded — and collapsed the old F3/F4 screens into one Fine Tune page, replacing manual height calculation with direct mouse-wheel adjustment.</p>
         <p data-lang="zh"><strong>加入推薦參數與行內引導</strong>，讓非專家不會卡住——並把舊版 F3/F4 兩個畫面整併成單一 Fine Tune 頁，以直接的滑鼠滾輪調整取代手動計算高度。</p>
@@ -542,6 +559,10 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <p class="fig-cap" data-lang="en">Fig. 2 — The largest single saving, reconstructed. Two pages (F3 / F4) requiring a hand-calculated, typed height became one Fine Tune page where height is set by mouse-wheel with a live readout — collapsing the slowest step and cutting its time 51%.</p>
       <p class="fig-cap" data-lang="zh">圖 2 — 單項最大的時間縮短（示意重繪）。原本要手算、手打高度的兩頁（F3／F4），併成單一 Fine Tune 頁，改以滑鼠滾輪即時調整——把最慢的步驟收成一頁，時間縮短 51%。</p>
     </div>
+    <div class="prose" style="margin-top:30px;">
+      <p data-lang="en"><strong>What I tried first — and rejected.</strong> My first pass was pure consolidation: take the legacy FineTune windows and merge them into one screen, same controls, just co-located. The layout got cleaner — but the slowest, scariest step didn&rsquo;t move. Height was still hand-calculated and typed in, which was both the time sink and the exact thing operators feared getting wrong. Merging windows treated the symptom, not the cause. So I dropped consolidation-only and redesigned the interaction itself — height set by mouse-wheel against a live readout, with a recommended starting value. That&rsquo;s the move that cut the step 51%, not the merge.</p>
+      <p data-lang="zh"><strong>我先做、後來否決的版本。</strong>第一版只是單純的整併：把舊版的 FineTune 視窗合進同一個畫面，控制項照舊，只是放在一起。版面是乾淨了——但最慢、最讓人怕的那一步沒有變。高度還是要手算、手打，而那正是最花時間、也是操作員最怕設錯的一步。把視窗併在一起只是處理了表面，沒處理根因。所以我放棄「只做整併」，改去重設計操作本身——高度改用滑鼠滾輪對著即時數值調，並給一個推薦起始值。真正讓這步縮短 51% 的是這個改動，不是合併視窗。</p>
+    </div>
   </section>
 
   <!-- 06 Key decisions -->
@@ -555,8 +576,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
         <div>
           <h3 data-lang="en">Recommended defaults without removing expert control</h3>
           <h3 data-lang="zh">給出推薦預設，但不拿走專家控制權</h3>
-          <p data-lang="en"><span class="trade">Trade-off:</span> hand-holding vs. expert speed. The FineTune fear told me non-experts needed a safe starting point — so I gave recommended values, but kept every one of them editable for the engineers who know better.</p>
-          <p data-lang="zh"><span class="trade">取捨：</span>要不要手把手帶新手，會不會拖慢專家。FineTune 那種恐懼讓我知道，非專家需要一個安全的起點——所以我給了推薦值，但每一個都還能改，留給更懂的工程師。</p>
+          <p data-lang="en"><span class="trade">Trade-off:</span> hand-holding vs. expert speed. The expertise gap FineTune exposed told me non-experts needed a safe starting point — so I gave recommended values, but kept every one of them editable for the engineers who know better.</p>
+          <p data-lang="zh"><span class="trade">取捨：</span>要不要手把手帶新手，會不會拖慢專家。FineTune 暴露的這個專業落差讓我知道，非專家需要一個安全的起點——所以我給了推薦值，但每一個都還能改，留給更懂的工程師。</p>
         </div>
       </li>
       <li>
@@ -603,8 +624,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       </div>
     </div>
     <div class="prose" style="margin-top:30px;">
-      <p data-lang="en">Independently timed by FAE teams, programming time on a 4,160-component board fell <strong>37%</strong> (295&rarr;186 min) — a denser 3,495-component board fell from 386&rarr;237 min too — and the heaviest gains landed on the very stages the baseline study had flagged. The redesigned interface then shipped across the AXI line, in multiple languages, to global automotive, server and semiconductor accounts.</p>
-      <p data-lang="zh">由 FAE 團隊獨立量測，4,160 顆零件那塊板的編程時間<strong>減少 37%</strong>（295&rarr;186 分）——另一塊 3,495 顆零件的較密板也從 386&rarr;237 分——改善最大的，正好就是基準研究點出來的那幾個階段。後來這套重設的介面也跟著 AXI 產品線一起出貨，支援多國語系，交付給全球的汽車、伺服器與半導體大客戶。</p>
+      <p data-lang="en">Independently timed by FAE teams, programming time on a high-density production board fell <strong>37%</strong> (295&rarr;186 min) — an even denser board dropped from 386&rarr;237 min too — and the heaviest gains landed on the very stages the baseline study had flagged. The redesigned interface then shipped across the AXI line, in multiple languages, to global automotive, server and semiconductor accounts.</p>
+      <p data-lang="zh">由 FAE 團隊獨立量測，一塊高密度量產板的編程時間<strong>減少 37%</strong>（295&rarr;186 分）——另一塊更密的板子也從 386&rarr;237 分——改善最大的，正好就是基準研究點出來的那幾個階段。後來這套重設的介面也跟著 AXI 產品線一起出貨，支援多國語系，交付給全球的汽車、伺服器與半導體大客戶。</p>
     </div>
   </section>
 
