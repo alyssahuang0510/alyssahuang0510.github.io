@@ -293,6 +293,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .tools .t span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);vertical-align:.6em;margin-left:4px;}
 .offclock{margin-top:clamp(42px,5vw,62px);padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--rule);display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
 .offclock figure{margin:0;}
+.offclock .oc-media{display:flex;flex-direction:column;gap:clamp(16px,2vw,22px);}
 .offclock figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule);}
 .offclock figure figcaption{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted);margin-top:11px;line-height:1.5;}
 .offclock .oc-lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 14px;font-weight:500;}
@@ -418,6 +419,7 @@ html, body { overflow-x: clip; }
 
   /* Off the clock stacks */
   .offclock{grid-template-columns:1fr;gap:24px;}
+  .offclock .oc-media{max-width:280px;}
   .offclock figure{max-width:280px;}
 
   /* Footer */
@@ -1012,19 +1014,26 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
     </div>
 
     <div class="offclock reveal">
-      <figure>
-        <img src="images/off-the-clock-kyudo.jpg" alt="Alyssa practising mounted archery — drawing a Japanese longbow on horseback" loading="lazy" />
-        <figcaption data-lang="en">Mounted kyūdō practice · Hsinchu</figcaption>
-        <figcaption data-lang="zh">騎射練習 · 新竹芎林</figcaption>
-      </figure>
+      <div class="oc-media">
+        <figure>
+          <img src="images/off-the-clock-kyudo.jpg" alt="Alyssa practising mounted archery — drawing a Japanese longbow on horseback" loading="lazy" />
+          <figcaption data-lang="en">Mounted kyūdō practice · Hsinchu</figcaption>
+          <figcaption data-lang="zh">騎射練習 · 新竹芎林</figcaption>
+        </figure>
+        <figure>
+          <img src="images/off-the-clock-photography.jpg" alt="Xinbeitou Station at blue hour — the heritage timber platform&rsquo;s arched steel canopy receding toward a violet-to-orange sunset" loading="lazy" />
+          <figcaption data-lang="en">Blue hour · Xinbeitou Station</figcaption>
+          <figcaption data-lang="zh">藍調時刻 · 新北投車站</figcaption>
+        </figure>
+      </div>
       <div>
         <p class="oc-lbl" data-lang="en">Off the clock</p>
         <p class="oc-lbl" data-lang="zh">工作之外</p>
         <p data-lang="en">I&rsquo;m into mobile photography, anime, and kyūdō &mdash; a single arrow meant to hold a whole life, a world caught in one flower, and the one frame of an anime that truly lands. It&rsquo;s moments like these that make my heart skip.</p>
         <p data-lang="zh">我喜歡手機攝影、動漫與弓道。無論是弓道的一射一生、攝影的一花一世界，還是動漫裡令人動容的那一刻——能讓我怦然心動的，往往就是這瞬間。</p>
         <div class="oc-tags">
-          <a data-lang="en" href="https://www.instagram.com/baichinduan/" target="_blank" rel="noopener noreferrer">Photography ↗</a>
-          <a data-lang="zh" href="https://www.instagram.com/baichinduan/" target="_blank" rel="noopener noreferrer">攝影 ↗</a>
+          <span data-lang="en">Photography</span>
+          <span data-lang="zh">攝影</span>
           <span data-lang="en">Kyūdō</span><span data-lang="zh">弓道</span>
           <span data-lang="en">Anime &amp; manga</span><span data-lang="zh">動漫</span>
         </div>
