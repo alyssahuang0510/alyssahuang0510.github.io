@@ -223,6 +223,11 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-link:hover{background:var(--ink);color:var(--on-ink);}
 .case-link .ar{transition:transform .2s;}
 .case-link:hover .ar{transform:translateX(4px);}
+.case-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+.live-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .18s;}
+.live-link[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
+.live-link::before{content:"";width:6px;height:6px;border-radius:50%;background:#1F9E5A;flex:none;box-shadow:0 0 0 3px color-mix(in srgb,#1F9E5A 20%,transparent);}
+.live-link:hover{color:var(--accent);}
 @media (max-width:880px){.case,.case.flip{grid-template-columns:1fr;}.case.flip .case-visual{order:0;}}
 
 /* Leadership / impact (dark) */
@@ -286,6 +291,18 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .tools .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
 .tools .t{font-family:var(--ff-display);font-weight:600;font-size:1.22rem;letter-spacing:-0.02em;}
 .tools .t span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);vertical-align:.6em;margin-left:4px;}
+.offclock{margin-top:clamp(42px,5vw,62px);padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--rule);display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
+.offclock figure{margin:0;}
+.offclock figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule);}
+.offclock figure figcaption{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted);margin-top:11px;line-height:1.5;}
+.offclock .oc-lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 14px;font-weight:500;}
+.offclock .oc-lbl[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
+.offclock p{font-size:1.04rem;line-height:1.6;color:var(--ink-2);margin:0 0 18px;max-width:46ch;}
+.offclock p em{font-style:normal;color:var(--ink);font-weight:600;}
+.offclock .oc-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.offclock .oc-tags a,.offclock .oc-tags span{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.02em;padding:7px 13px;border:1px solid var(--rule);border-radius:6px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;}
+.offclock .oc-tags a{transition:all .18s;}
+.offclock .oc-tags a:hover{border-color:var(--accent);color:var(--accent);}
 .skills{margin-top:clamp(42px,5vw,62px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,44px);}
 .skills .col h5{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--rule);font-weight:500;}
 .skills .col h5[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
@@ -398,6 +415,10 @@ html, body { overflow-x: clip; }
   /* Tools wrap cleaner */
   .tools{gap:14px 28px;padding:22px 0;}
   .tools .lbl[style]{margin-left:0 !important;flex-basis:100%;}
+
+  /* Off the clock stacks */
+  .offclock{grid-template-columns:1fr;gap:24px;}
+  .offclock figure{max-width:280px;}
 
   /* Footer */
   .footer{padding:58px 0 28px;}
@@ -712,7 +733,10 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <div class="d" data-lang="en">less programming time on the main production board after the redesign (295&rarr;186 min), independently timed by FAE teams</div>
           <div class="d" data-lang="zh">改版後主要量產板的編程時間減少（295&rarr;186 分鐘），由 FAE 團隊獨立量測</div>
         </div>
-        <a class="case-link" href="case-tr7600.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+        <div class="case-cta">
+          <a class="case-link" href="case-tr7600.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="live-link" href="https://www.tri.com.tw/tw/product/product-18-2.html" target="_blank" rel="noopener noreferrer"><span data-lang="en">Live product · TRI ↗</span><span data-lang="zh">官方產品頁 · TRI ↗</span></a>
+        </div>
       </div>
     </article>
 
@@ -764,7 +788,10 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <div class="d" data-lang="en">fleet deployment states made legible — compliant, non-compliant, error, in-progress — each with a reason an admin can act on</div>
           <div class="d" data-lang="zh">機隊派送結果收斂成 4 種看得懂的狀態——符合、不符合、錯誤、派送中——每種都附可行動的原因</div>
         </div>
-        <a class="case-link" href="case-config-manager.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+        <div class="case-cta">
+          <a class="case-link" href="case-config-manager.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="live-link" href="https://www.asus.com/business/services/bios-and-drivers-management/" target="_blank" rel="noopener noreferrer"><span data-lang="en">Live product · ASUS ↗</span><span data-lang="zh">官方產品頁 · ASUS ↗</span></a>
+        </div>
       </div>
     </article>
 
@@ -982,6 +1009,26 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       <span class="lbl" style="margin-left:auto" data-lang="en">Engineering literacy</span><span class="lbl" style="margin-left:auto" data-lang="zh">工程素養</span>
       <span class="t">C# · Unity3D</span>
       <span class="t">MFC · Visual Studio</span>
+    </div>
+
+    <div class="offclock reveal">
+      <figure>
+        <img src="images/off-the-clock-kyudo.jpg" alt="Alyssa practising mounted archery — drawing a Japanese longbow on horseback" loading="lazy" />
+        <figcaption data-lang="en">Mounted kyūdō practice · Hsinchu</figcaption>
+        <figcaption data-lang="zh">騎射練習 · 新竹芎林</figcaption>
+      </figure>
+      <div>
+        <p class="oc-lbl" data-lang="en">Off the clock</p>
+        <p class="oc-lbl" data-lang="zh">工作之外</p>
+        <p data-lang="en">Away from the screen I shoot on my phone, practise <em>kyūdō</em>, and read a lot of manga. The two threads I keep coming back to — a <em>photographer&rsquo;s eye</em> for what to leave out, and the <em>discipline of a repeatable draw</em> — are the same instincts I bring to a dense interface.</p>
+        <p data-lang="zh">離開螢幕，我用手機拍照、練<em>弓道</em>，也讀很多動漫。我一直回去的那兩件事——攝影裡<em>取捨畫面的眼光</em>，以及弓道<em>反覆同一個動作的紀律</em>——其實就是我面對高密度介面時，靠的同一種直覺。</p>
+        <div class="oc-tags">
+          <a data-lang="en" href="https://www.instagram.com/baichinduan/" target="_blank" rel="noopener noreferrer">Photography ↗</a>
+          <a data-lang="zh" href="https://www.instagram.com/baichinduan/" target="_blank" rel="noopener noreferrer">攝影 ↗</a>
+          <span data-lang="en">Kyūdō</span><span data-lang="zh">弓道</span>
+          <span data-lang="en">Anime &amp; manga</span><span data-lang="zh">動漫</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
