@@ -203,6 +203,10 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-context span{font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);padding:4px 9px;border:1px solid var(--rule);border-radius:5px;}
 .case-context[data-lang="zh"] span{text-transform:none;letter-spacing:.02em;}
 .case-context span.hl{background:var(--ink);color:var(--on-ink);border-color:var(--ink);}
+.scan-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.scan-tags .st{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--rule);color:var(--muted);background:var(--bg-2);}
+.scan-tags[data-lang="zh"] .st{text-transform:none;letter-spacing:.02em;}
+.scan-tags .st.ai{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,var(--rule));background:color-mix(in srgb,var(--accent) 8%,transparent);font-weight:500;}
 .case-bigstat{display:flex;align-items:baseline;gap:18px;padding:22px 0;margin-bottom:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
 .case-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.6rem,4.5vw,3.5rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .case-bigstat .v sup{font-size:.36em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;margin-left:0.24em;}
@@ -291,19 +295,22 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .tools .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
 .tools .t{font-family:var(--ff-display);font-weight:600;font-size:1.22rem;letter-spacing:-0.02em;}
 .tools .t span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);vertical-align:.6em;margin-left:4px;}
-.offclock{margin-top:clamp(42px,5vw,62px);padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--rule);display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
-.offclock figure{margin:0;}
-.offclock .oc-media{display:flex;flex-direction:column;gap:clamp(16px,2vw,22px);}
-.offclock figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule);}
-.offclock figure figcaption{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted);margin-top:11px;line-height:1.5;}
+.offclock{margin-top:clamp(42px,5vw,62px);padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--rule);}
+.offclock .oc-intro{max-width:66ch;margin-bottom:clamp(22px,3vw,32px);}
 .offclock .oc-lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 14px;font-weight:500;}
 .offclock .oc-lbl[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
-.offclock p{font-size:1.04rem;line-height:1.6;color:var(--ink-2);margin:0 0 18px;max-width:46ch;}
-.offclock p em{font-style:normal;color:var(--ink);font-weight:600;}
+.offclock .oc-intro p.lead{font-size:1.04rem;line-height:1.6;color:var(--ink-2);margin:0 0 18px;max-width:60ch;}
+.offclock .oc-intro p.lead[data-lang="zh"]{line-height:1.85;}
 .offclock .oc-tags{display:flex;flex-wrap:wrap;gap:10px;}
 .offclock .oc-tags a,.offclock .oc-tags span{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.02em;padding:7px 13px;border:1px solid var(--rule);border-radius:6px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;}
 .offclock .oc-tags a{transition:all .18s;}
 .offclock .oc-tags a:hover{border-color:var(--accent);color:var(--accent);}
+.offclock .oc-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.4vw,16px);}
+.offclock .oc-gallery figure{margin:0;}
+.offclock .oc-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:10px;border:1px solid var(--rule);}
+.offclock .oc-gallery figcaption{font-family:var(--ff-mono);font-size:.69rem;letter-spacing:.02em;color:var(--muted);margin-top:9px;line-height:1.5;}
+.offclock .oc-gallery figure.feat figcaption .ph{color:var(--accent);}
+@media (max-width:900px){.offclock .oc-gallery{grid-template-columns:repeat(3,1fr);}}
 .skills{margin-top:clamp(42px,5vw,62px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,44px);}
 .skills .col h5{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--rule);font-weight:500;}
 .skills .col h5[data-lang="zh"]{text-transform:none;letter-spacing:.05em;}
@@ -418,9 +425,7 @@ html, body { overflow-x: clip; }
   .tools .lbl[style]{margin-left:0 !important;flex-basis:100%;}
 
   /* Off the clock stacks */
-  .offclock{grid-template-columns:1fr;gap:24px;}
-  .offclock .oc-media{max-width:280px;}
-  .offclock figure{max-width:280px;}
+  .offclock .oc-gallery{grid-template-columns:repeat(2,1fr);}
 
   /* Footer */
   .footer{padding:58px 0 28px;}
@@ -532,11 +537,9 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
   <div class="container">
     <span class="status"><span class="pip" aria-hidden="true"></span><span data-lang="en">Open to Senior UX &amp; Product Designer roles · Taipei / Remote</span><span data-lang="zh">開放 Senior UX / Product 設計師職缺 · 台北 / 遠端</span></span>
 
-    <h1 data-lang="en">I design the <em>tools</em> that engineers, IT admins, and operators rely on.</h1>
-    <h1 data-lang="zh">我設計的，是工程師、IT 管理者與產線操作員每天仰賴的<em>工具</em>。</h1>
+    <h1 data-lang="en">I make complex tools <em>simple</em> &mdash; by thinking in code.</h1>
+    <h1 data-lang="zh">我能透過程式邏輯，把複雜的工具<em>變簡單</em>。</h1>
 
-    <p class="hero-sig" data-lang="en">I make complex tools <em>simple</em> &mdash; a designer who wrote the code and owned the design, at the same time.</p>
-    <p class="hero-sig" data-lang="zh">我把複雜的工具<em>變簡單</em>——一個同時寫程式、也主導設計的設計師。</p>
 
     <div class="hero-foot">
       <div class="who">
@@ -549,6 +552,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <a href="#work"><span data-lang="en">View work</span><span data-lang="zh">檢視作品</span> <span aria-hidden="true">→</span></a>
         <a href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
         <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">→</span></a>
+        <a href="https://calendly.com/alyssahuang0510" target="_blank" rel="noopener noreferrer"><span data-lang="en">Book a call</span><span data-lang="zh">預約通話</span> <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -713,8 +717,36 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       <h2 data-lang="zh">以<em>成果</em>定義的問題——而非功能清單。</h2>
     </div>
 
-    <!-- CASE 01 -->
+        <!-- CASE 01 · File Search (AI, 0→1) -->
     <article class="case reveal">
+      <div class="case-visual" style="aspect-ratio:1200/694">
+        <span class="tape"><span data-lang="en">0 → 1 · On-device AI</span><span data-lang="zh">0 → 1 · 裝置端 AI</span></span>
+        <img class="case-shot" style="object-position:center" src="images/asus-file-search.jpg" alt="ASUS File Search app — the AI Search home screen with the headline 'One search, from device to cloud', a unified search bar, and example searches spanning local and cloud files." />
+      </div>
+      <div class="case-body">
+        <div class="case-id">
+          <span class="co" data-lang="en">ASUS</span><span class="co" data-lang="zh">ASUS 華碩</span>
+          <span class="sep" aria-hidden="true">|</span>
+          <span class="proj">File Search</span>
+          <span class="yr" data-lang="en">Enterprise B2B · 2024–now</span><span class="yr" data-lang="zh">企業 B2B · 2024–至今</span>
+        </div>
+        <div class="scan-tags" data-lang="en"><span class="st">Business</span><span class="st">PC</span><span class="st ai">AI</span></div>
+        <div class="scan-tags" data-lang="zh"><span class="st">商務</span><span class="st">電腦</span><span class="st ai">AI</span></div>
+        <h2 class="case-title" data-lang="en">You forgot what the file was called &mdash; so now you can&rsquo;t find it.</h2>
+        <h2 class="case-title" data-lang="zh">你忘了檔案叫什麼——於是再也找不到它。</h2>
+        <div class="case-context" data-lang="en"><span class="hl">Product-level ownership</span><span>AI semantic model</span><span>IA &amp; competitive strategy</span></div>
+        <div class="case-context" data-lang="zh"><span class="hl">產品級 ownership</span><span>AI 語意模型</span><span>資訊架構與競品策略</span></div>
+        <div class="case-bigstat">
+          <div class="v">0<sup>servers</sup></div>
+          <div class="d" data-lang="en">Search-by-meaning that ships pre-installed on ASUS’s 2026 commercial line and runs entirely on-device — no server, nothing for the user to manage.</div>
+          <div class="d" data-lang="zh">用「意思」找檔案的搜尋，隨華碩 2026 商用線預載出貨，且完全跑在裝置上——沒有伺服器，也沒有任何要使用者去管的東西。</div>
+        </div>
+        <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <!-- CASE 02 · TR7600 AXI -->
+    <article class="case flip reveal">
       <div class="case-visual">
         <span class="tape"><span data-lang="en">Redesign · 6-yr ownership</span><span data-lang="zh">改版 · 6 年 ownership</span></span>
         <img class="case-shot" src="images/tr7600-machine.jpg" alt="The TR7600FB SII 3D AXI inspection system — TRI's flagship X-ray inspection machine, with the redesigned inspection interface shown on the operator panel." />
@@ -726,8 +758,10 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="proj">TR7600 AXI</span>
           <span class="yr" data-lang="en">Industrial B2B · 2017–23</span><span class="yr" data-lang="zh">工業 B2B · 2017–23</span>
         </div>
-        <h2 class="case-title" data-lang="en">Redesigning the X-ray system that inspects every board before it ships</h2>
-        <h2 class="case-title" data-lang="zh">重新設計每片電路板出貨前都要過的 X 光檢測系統</h2>
+        <div class="scan-tags" data-lang="en"><span class="st">Industrial</span><span class="st">Desktop</span></div>
+        <div class="scan-tags" data-lang="zh"><span class="st">工業</span><span class="st">桌面軟體</span></div>
+        <h2 class="case-title" data-lang="en">The X-ray system every board passes through took hours just to program.</h2>
+        <h2 class="case-title" data-lang="zh">每片板子都要過的 X 光檢測系統，光是設定就要耗掉好幾小時。</h2>
         <div class="case-context" data-lang="en"><span class="hl">Sole UI/UX owner</span><span>Full redesign</span><span>Quantified impact</span><span>SMT process engineers</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">唯一 UI/UX 負責人</span><span>完整重新設計</span><span>量化成效</span><span>SMT 製程工程師</span></div>
         <div class="case-bigstat">
@@ -742,34 +776,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       </div>
     </article>
 
-<!-- CASE 02 -->
-    <article class="case flip reveal">
-      <div class="case-visual" style="aspect-ratio:1200/694">
-        <span class="tape"><span data-lang="en">0 → 1 · Standalone app</span><span data-lang="zh">0 → 1 · 獨立 App</span></span>
-        <img class="case-shot" style="object-position:center" src="images/asus-file-search.jpg" alt="ASUS File Search app — the AI Search home screen with the headline 'One search, from device to cloud', a unified search bar, and example searches spanning local and cloud files." />
-      </div>
-      <div class="case-body">
-        <div class="case-id">
-          <span class="co" data-lang="en">ASUS</span><span class="co" data-lang="zh">ASUS 華碩</span>
-          <span class="sep" aria-hidden="true">|</span>
-          <span class="proj">File Search</span>
-          <span class="yr" data-lang="en">Enterprise B2B · 2024–now</span><span class="yr" data-lang="zh">企業 B2B · 2024–至今</span>
-        </div>
-        <h2 class="case-title" data-lang="en">Keeping semantic search useful as files outgrow a fixed memory budget</h2>
-        <h2 class="case-title" data-lang="zh">在固定的記憶體預算下，讓語意搜尋不因檔案塞滿而失去用處</h2>
-        <div class="case-context" data-lang="en"><span class="hl">Product-level ownership</span><span>0 → 1</span><span>IA &amp; competitive strategy</span></div>
-        <div class="case-context" data-lang="zh"><span class="hl">產品級 ownership</span><span>0 → 1</span><span>資訊架構與競品策略</span></div>
-        <div class="case-bigstat">
-          <div class="v">1<sup>/ 5</sup></div>
-          <div class="d" data-lang="en">sibling apps in MyExpert — File Search is an app, not a feature buried in a menu</div>
-          <div class="d" data-lang="zh">MyExpert 中的並列 App——File Search 是一個 App，而非藏在選單裡的功能</div>
-        </div>
-        <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
-      </div>
-    </article>
-
-    <!-- CASE 04 -->
-    <article class="case flip reveal">
+<!-- CASE 04 -->
+    <article class="case reveal">
       <div class="case-visual">
         <span class="tape"><span data-lang="en">Takeover · multi-feature</span><span data-lang="zh">接手 · 多功能</span></span>
         <img class="case-shot" src="images/asus-config-manager.jpg" alt="ASUS Config Manager running inside the SCCM console — the BIOS Authentication wizard's Manage Certificate Key step shown on screen." />
@@ -781,8 +789,10 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="proj">Config Manager</span>
           <span class="yr" data-lang="en">Enterprise IT · 2024–now</span><span class="yr" data-lang="zh">企業 IT · 2024–至今</span>
         </div>
-        <h2 class="case-title" data-lang="en">Making fleet-scale BIOS &amp; driver control something IT admins can trust</h2>
-        <h2 class="case-title" data-lang="zh">讓大規模 BIOS 與驅動管理，成為 IT 管理者能信任的工具</h2>
+        <div class="scan-tags" data-lang="en"><span class="st">Business</span><span class="st">PC</span></div>
+        <div class="scan-tags" data-lang="zh"><span class="st">商務</span><span class="st">電腦</span></div>
+        <h2 class="case-title" data-lang="en">IT admins couldn&rsquo;t tell whether a fleet-wide BIOS push had actually worked.</h2>
+        <h2 class="case-title" data-lang="zh">IT 管理者根本看不出來，一次全機隊的 BIOS 派送到底成功了沒。</h2>
         <div class="case-context" data-lang="en"><span class="hl">Feature ownership</span><span>Takeover</span><span>Corporate IT admins</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">功能 ownership</span><span>接手</span><span>企業 IT 管理者</span></div>
         <div class="case-bigstat">
@@ -798,9 +808,9 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
     </article>
 
     <!-- CASE 05 -->
-    <article class="case reveal">
+    <article class="case flip reveal">
       <div class="case-visual">
-        <span class="tape"><span data-lang="en">0 → 1 · Conflict design</span><span data-lang="zh">0 → 1 · 衝突設計</span></span>
+        <span class="tape"><span data-lang="en">0 → 1 · Field-proven</span><span data-lang="zh">0 → 1 · 場域驗證</span></span>
           <div class="viz" role="img" aria-label="Mini conflict matrix: under 3-button navigation, long-press center is claimed by both search and the assistant on ASUS, a conflict; the fix moves the assistant elsewhere.">
             <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
               <rect width="400" height="300" fill="#FFFFFF"/>
@@ -839,14 +849,16 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="proj">Android Platform</span>
           <span class="yr" data-lang="en">Platform UX · 2024–now</span><span class="yr" data-lang="zh">平台 UX · 2024–至今</span>
         </div>
-        <h2 class="case-title" data-lang="en">Designing platform features from zero — and resolving the conflicts no single feature owns</h2>
-        <h2 class="case-title" data-lang="zh">從零設計平台功能——也解決那些夾在功能之間、沒人負責的衝突</h2>
+        <div class="scan-tags" data-lang="en"><span class="st">Gaming + Commercial</span><span class="st">Mobile</span></div>
+        <div class="scan-tags" data-lang="zh"><span class="st">電競＋商務</span><span class="st">手機</span></div>
+        <h2 class="case-title" data-lang="en">A miscalibrated gyroscope was quietly turning phones into returns.</h2>
+        <h2 class="case-title" data-lang="zh">一個沒校正好的陀螺儀，正悂悂把手機變成退貨。</h2>
         <div class="case-context" data-lang="en"><span class="hl">System-level UX</span><span>0 → 1</span><span>Cross-product</span></div>
         <div class="case-context" data-lang="zh"><span class="hl">系統級 UX</span><span>0 → 1</span><span>跨產品線</span></div>
         <div class="case-bigstat">
-          <div class="v">6+</div>
-          <div class="d" data-lang="en">platform features designed from zero across two product lines</div>
-          <div class="d" data-lang="zh">跨兩條產品線、從零設計的平台功能</div>
+          <div class="v">4</div>
+          <div class="d" data-lang="en">returns recovered in one month — with 7 field complaints resolved alongside — after the gyroscope toggle I added shipped</div>
+          <div class="d" data-lang="zh">筆退貨在一個月內被挽回——另有 7 則現場客訴一併解決——就在我新增的陀螺儀開關上線之後。</div>
         </div>
         <a class="case-link" href="case-android.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
       </div>
@@ -933,8 +945,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <p data-lang="zh">我做的是 UX 的結構這一層——研究、資訊架構、互動——服務的是產線操作員、IT 管理者與開發者每天一用就好幾個小時的那種產品。我大學念<strong>資訊管理</strong>，研究所念<strong>互動設計</strong>；正因為這兩種底子，工程端的需求單和使用者研究發現，在我眼裡是同一種文件。</p>
         <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room. This portfolio is hand-built too &mdash; six pages of HTML, CSS and JS, no page builder; I direct the design and the code, paired with Claude.</p>
         <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。這個作品集也是我亲手打造的——六頁 HTML、CSS 與 JS，沒有用 Webflow、Framer 這類拼裝工具；設計與程式都由我主導，搭配 Claude 協作。</p>
-        <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
-        <p data-lang="zh">我喜歡做的工具都不華麗：資料密度高、使用者是專家、一用就是好幾個小時、各種模式還會互相打架。我的工作，就是把這些東西整理到讓人一看就懂、用得順手——而且這幾年越來越常是<em>親手打造設計團隊自己拿來規劃的工具。</em></p>
+        <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. What I enjoy most is finding the rules buried in that mess &mdash; and being the one who gets to define them. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
+        <p data-lang="zh">我喜歡做的工具都不華麗：資料密度高、使用者是專家、一用就是好幾個小時、各種模式還會互相打架。我最享受的，是在這團混亂裡找出背後的規則——然後成為定義那套規則的人。我的工作，就是把這些東西整理到讓人一看就懂、用得順手——而且這幾年越來越常是<em>親手打造設計團隊自己拿來規劃的工具。</em></p>
       </div>
       <aside class="cv" aria-label="Career and education">
         <h4 data-lang="en">→ &nbsp; Career &amp; Education</h4>
@@ -1014,29 +1026,38 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
     </div>
 
     <div class="offclock reveal">
-      <div class="oc-media">
-        <figure>
-          <img src="images/off-the-clock-kyudo.jpg" alt="Alyssa practising mounted archery — drawing a Japanese longbow on horseback" loading="lazy" />
-          <figcaption data-lang="en">Mounted kyūdō practice · Hsinchu</figcaption>
-          <figcaption data-lang="zh">騎射練習 · 新竹芎林</figcaption>
-        </figure>
-        <figure>
-          <img src="images/off-the-clock-photography.jpg" alt="Xinbeitou Station at blue hour — the heritage timber platform&rsquo;s arched steel canopy receding toward a violet-to-orange sunset" loading="lazy" />
-          <figcaption data-lang="en">Blue hour · Xinbeitou Station</figcaption>
-          <figcaption data-lang="zh">藍調時刻 · 新北投車站</figcaption>
-        </figure>
-      </div>
-      <div>
+      <div class="oc-intro">
         <p class="oc-lbl" data-lang="en">Off the clock</p>
         <p class="oc-lbl" data-lang="zh">工作之外</p>
-        <p data-lang="en">I&rsquo;m into mobile photography, anime, and kyūdō &mdash; a single arrow meant to hold a whole life, a world caught in one flower, and the one frame of an anime that truly lands. It&rsquo;s moments like these that make my heart skip.</p>
-        <p data-lang="zh">我喜歡手機攝影、動漫與弓道。無論是弓道的一射一生、攝影的一花一世界，還是動漫裡令人動容的那一刻——能讓我怦然心動的，往往就是這瞬間。</p>
+        <p class="lead" data-lang="en">Mobile photography, anime, and kyūdō. A single arrow meant to hold a whole life; a world caught in one flower; the one frame of an anime that truly lands &mdash; the moments that make my heart skip are usually these.</p>
+        <p class="lead" data-lang="zh">手機攝影、動漫與弓道。弓道的一射一生、攝影的一花一世界，還有動漫裡令人動容的那一刻——能讓我怴然心動的，往往就是這些瞬間。</p>
         <div class="oc-tags">
-          <span data-lang="en">Photography</span>
-          <span data-lang="zh">攝影</span>
+          <a href="https://www.instagram.com/baichinduan/" target="_blank" rel="noopener noreferrer"><span data-lang="en">Photography ↗</span><span data-lang="zh">攝影 ↗</span></a>
           <span data-lang="en">Kyūdō</span><span data-lang="zh">弓道</span>
           <span data-lang="en">Anime &amp; manga</span><span data-lang="zh">動漫</span>
         </div>
+      </div>
+      <div class="oc-gallery">
+        <figure class="feat">
+          <img src="images/off-the-clock-flower.jpg" alt="Close-up of white marguerite daisies with golden centres in a spring garden, purple wisteria blurred behind" loading="lazy" />
+          <figcaption><span class="ph" data-lang="en">A world in one flower</span><span class="ph" data-lang="zh">一花一世界</span></figcaption>
+        </figure>
+        <figure class="feat">
+          <img src="images/off-the-clock-kyudo.jpg" alt="Alyssa practising mounted archery — drawing a Japanese longbow on horseback" loading="lazy" />
+          <figcaption><span class="ph" data-lang="en">One arrow, one life</span><span class="ph" data-lang="zh">一射一生</span></figcaption>
+        </figure>
+        <figure>
+          <img src="images/off-the-clock-bridge.jpg" alt="Looking up at the underside of a curving elevated expressway, a white-railed pedestrian walkway sweeping below against a clear blue sky" loading="lazy" />
+          <figcaption data-lang="en">Beneath the expressway</figcaption><figcaption data-lang="zh">高架橋下</figcaption>
+        </figure>
+        <figure>
+          <img src="images/off-the-clock-night.jpg" alt="Night scene — a red neon-lit elevated walkway with a crescent moon above, four people in silhouette walking through an arched brick underpass below" loading="lazy" />
+          <figcaption data-lang="en">A crescent over the crossing</figcaption><figcaption data-lang="zh">弦月 · 夜行</figcaption>
+        </figure>
+        <figure>
+          <img src="images/off-the-clock-photography.jpg" alt="Xinbeitou Station at blue hour — the heritage timber platform&rsquo;s arched steel canopy receding toward a violet-to-orange sunset" loading="lazy" />
+          <figcaption data-lang="en">Blue hour · Xinbeitou</figcaption><figcaption data-lang="zh">藍調時刻 · 新北投</figcaption>
+        </figure>
       </div>
     </div>
   </div>
@@ -1067,8 +1088,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         </div>
         <div class="foot-navcol">
           <h5 data-lang="en">Case Studies</h5><h5 data-lang="zh">案例研究</h5>
-          <a href="case-tr7600.html"><span data-lang="en">TR7600 AXI</span><span data-lang="zh">TR7600 AXI</span></a>
           <a href="case-filesearch.html"><span data-lang="en">File Search</span><span data-lang="zh">File Search</span></a>
+          <a href="case-tr7600.html"><span data-lang="en">TR7600 AXI</span><span data-lang="zh">TR7600 AXI</span></a>
           <a href="case-config-manager.html"><span data-lang="en">Config Manager</span><span data-lang="zh">Config Manager</span></a>
           <a href="case-android.html"><span data-lang="en">Android Platform</span><span data-lang="zh">Android 平台</span></a>
         </div>
@@ -1077,6 +1098,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <a href="mailto:alyssahuang0510@gmail.com">Email</a>
           <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span></a>
+          <a href="https://calendly.com/alyssahuang0510" target="_blank" rel="noopener noreferrer"><span data-lang="en">Book a call</span><span data-lang="zh">預約通話</span></a>
         </div>
       </nav>
     </div>
