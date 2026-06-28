@@ -72,7 +72,7 @@
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
   --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
-  --container:1280px; --gutter:clamp(1.25rem,4vw,4rem);
+  --container:1200px; --gutter:clamp(1.4rem,6vw,6.5rem);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -104,7 +104,11 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .brand strong{font-weight:500;letter-spacing:-0.01em;}
 .brand small{color:var(--muted);}
 .nav-right{display:flex;align-items:center;gap:22px;}
-.nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-family:var(--ff-mono);font-size:0.81rem;letter-spacing:.02em;}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0;font-family:var(--ff-mono);font-size:0.81rem;letter-spacing:.02em;}
+.nav-links li.nav-doc{margin-left:6px;padding-left:18px;border-left:1px solid var(--rule);}
+.nav-links li.nav-doc a{display:inline-flex;align-items:center;gap:5px;}
+.nav-links .navx{font-size:.82em;opacity:.5;transition:opacity .18s;}
+.nav-links li.nav-doc a:hover .navx{opacity:1;}
 .nav-links a{color:var(--ink-2);transition:color .18s;}
 .nav-links a:hover{color:var(--accent);}
 .lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
@@ -235,7 +239,6 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .case-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
 .live-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .18s;}
 .live-link[data-lang="zh"]{text-transform:none;letter-spacing:.03em;}
-.live-link::before{content:"";width:6px;height:6px;border-radius:50%;background:#1F9E5A;flex:none;box-shadow:0 0 0 3px color-mix(in srgb,#1F9E5A 20%,transparent);}
 .live-link:hover{color:var(--accent);}
 @media (max-width:880px){.case,.case.flip{grid-template-columns:1fr;}.case.flip .case-visual{order:0;}}
 
@@ -245,7 +248,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .lead-impact .eyebrow .ix{color:var(--accent);}
 .lead-impact .sec-head h2{color:var(--ink);}
 .lead-impact .sec-head h2 em{color:var(--accent);}
-.li-grid{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,40px);margin-top:24px;max-width:760px;}
+.li-grid{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:clamp(24px,4vw,40px);margin-top:24px;max-width:980px;}
 .li-card{border:1px solid var(--rule);background:var(--surface);border-radius:10px;padding:clamp(28px,3vw,40px);position:relative;transition:border-color .25s,transform .25s,box-shadow .25s;box-shadow:0 1px 2px rgba(12,12,13,.04);}
 .li-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 24px rgba(12,12,13,.07);}
 .li-card .badge{position:absolute;top:24px;right:24px;font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding:4px 9px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--rule));border-radius:5px;}
@@ -522,7 +525,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <li><a href="#work"><span data-lang="en">Work</span><span data-lang="zh">作品</span></a></li>
         <li><a href="#impact"><span data-lang="en">Impact</span><span data-lang="zh">影響力</span></a></li>
         <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">關於</span></a></li>
-        <li><a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span></a></li>
+        <li class="nav-doc"><a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span><span class="navx" aria-hidden="true">↗</span></a></li>
       </ul>
       <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Light / Dark">
         <span class="knob" aria-hidden="true"></span>
@@ -559,7 +562,6 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span> <span aria-hidden="true">→</span></a>
         <a href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">→</span></a>
         <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">→</span></a>
-        <a href="https://calendly.com/alyssahuang0510" target="_blank" rel="noopener noreferrer"><span data-lang="en">Book a call</span><span data-lang="zh">預約通話</span> <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -589,7 +591,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
 <div class="container">
   <div class="logos reveal">
     <span class="lbl" data-lang="en">Teams running tools I designed</span>
-    <span class="lbl" data-lang="zh">導入我設計工具的廠商</span>
+    <span class="lbl" data-lang="zh">這些團隊，用的是我設計的工具</span>
     <div class="marquee" aria-label="Teams running tools I designed">
       <div class="marquee-track">
         <span class="logo-item">
@@ -597,7 +599,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Foxconn</span>
         </span>
         <span class="logo-item">
-          <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/quanta.svg" alt="Quanta Computer" style="--lh:38px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Quanta</span>
         </span>
         <span class="logo-item">
@@ -605,7 +607,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Wistron</span>
         </span>
         <span class="logo-item">
-          <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:24px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">WNC</span>
         </span>
         <span class="logo-item">
@@ -625,7 +627,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Amkor</span>
         </span>
         <span class="logo-item">
-          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Garmin</span>
         </span>
         <span class="logo-item">
@@ -641,7 +643,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Foxconn</span>
         </span>
         <span class="logo-item" aria-hidden="true">
-          <img src="images/logos/quanta.png" alt="Quanta" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/quanta.svg" alt="Quanta Computer" style="--lh:38px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Quanta</span>
         </span>
         <span class="logo-item" aria-hidden="true">
@@ -649,7 +651,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Wistron</span>
         </span>
         <span class="logo-item" aria-hidden="true">
-          <img src="images/logos/wnc.png" alt="WNC" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:24px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">WNC</span>
         </span>
         <span class="logo-item" aria-hidden="true">
@@ -669,7 +671,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Amkor</span>
         </span>
         <span class="logo-item" aria-hidden="true">
-          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Garmin</span>
         </span>
         <span class="logo-item" aria-hidden="true">
@@ -749,7 +751,10 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <div class="d" data-lang="en">On retrieval accuracy &mdash; measured by F1, the standard precision-and-coverage score for search &mdash; File Search scores above the competing product and clears ASUS&rsquo;s release bar. Ships pre-installed on the 2026 commercial line and runs entirely on-device: no server, nothing to manage.</div>
           <div class="d" data-lang="zh">在搜尋準確度上——以 F1（把精準率與涵蓋率合成一個數字的搜尋標準指標）量測——File Search 高於競品，並通過 ASUS 的上線門檻。隨 2026 商用線預載出貨、完全跑在裝置上：沒有伺服器，也沒有任何要管的東西。</div>
         </div>
-        <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+        <div class="case-cta">
+          <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="live-link" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">Live product · ASUS ↗</span><span data-lang="zh">官方產品頁 · ASUS ↗</span></a>
+        </div>
       </div>
     </article>
 
@@ -912,8 +917,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       <div>
         <p data-lang="en">I work the UX layer &mdash; research, IA, interaction &mdash; on the kind of products operators, IT admins, and developers lean on for hours a day. My undergraduate degree is in <strong>Information Management</strong>; my master&rsquo;s is in <strong>Interaction Design</strong>. That dual root is why an engineering ticket and a research finding read to me as the same kind of document.</p>
         <p data-lang="zh">我做的是 UX 的結構這一層——研究、資訊架構、互動——服務的是產線操作員、IT 管理者與開發者每天一用就好幾個小時的那種產品。我大學念<strong>資訊管理</strong>，研究所念<strong>互動設計</strong>；正因為這兩種底子，工程端的需求單和使用者研究發現，在我眼裡是同一種文件。</p>
-        <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room. This portfolio is hand-built too &mdash; six pages of HTML, CSS and JS, no page builder; I direct the design and the code, paired with Claude.</p>
-        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。這個作品集也是我亲手打造的——六頁 HTML、CSS 與 JS，沒有用 Webflow、Framer 這類拼裝工具；設計與程式都由我主導，搭配 Claude 協作。</p>
+        <p data-lang="en">For six years I owned the UX of an industrial inspection product end-to-end <em>while writing its C# / MFC code</em> — engineering and design were one job, not two phases. My master&rsquo;s thesis was an <em>AR rehabilitation game in Unity</em>. Code isn&rsquo;t my main output anymore, but it shapes how I think about feasibility, system constraints, and exactly what to ask engineers for — which is why cross-functional teams move faster with me in the room.</p>
+        <p data-lang="zh">在德律的那六年，我一邊寫 <em>C# / MFC 程式</em>、一邊完整主導這套工業檢測產品的 UX——工程與設計是同一份工作，不是先後兩個階段。碩士論文則用 <em>Unity 做了一款 AR 復健遊戲</em>。寫程式現在已經不是我的主要產出，但它讓我對可行性、系統限制、以及該跟工程師要什麼，都比一般設計師更有判斷——這也是為什麼，有我在的跨職能團隊溝通起來會更快。</p>
         <p data-lang="en">The tools I gravitate toward are unglamorous: dense data, expert users, long task sessions, conflicting modes. What I enjoy most is finding the rules buried in that mess &mdash; and being the one who gets to define them. My job is to make those legible — and increasingly, to <em>build the tools my own design team plans with.</em></p>
         <p data-lang="zh">我喜歡做的工具都不華麗：資料密度高、使用者是專家、一用就是好幾個小時、各種模式還會互相打架。我最享受的，是在這團混亂裡找出背後的規則——然後成為定義那套規則的人。我的工作，就是把這些東西整理到讓人一看就懂、用得順手——而且這幾年越來越常是<em>親手打造設計團隊自己拿來規劃的工具。</em></p>
       </div>
@@ -1036,7 +1041,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
 <footer id="contact" class="footer">
   <div class="container">
     <p class="big" data-lang="en">Let&rsquo;s talk about <em>hard tools.</em></p>
-    <p class="big" data-lang="zh">難搞的<em>工具</em>，交給我。來聊聊吧。</p>
+    <p class="big" data-lang="zh">複雜的<em>工具</em>，交給我。來聊聊吧。</p>
 
     <div class="foot-main">
       <div class="foot-brand">
@@ -1066,7 +1071,6 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <a href="mailto:alyssahuang0510@gmail.com">Email</a>
           <a href="https://tw.linkedin.com/in/alyssahuang0510" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="resume.html"><span data-lang="en">R&eacute;sum&eacute;</span><span data-lang="zh">履歷</span></a>
-          <a href="https://calendly.com/alyssahuang0510" target="_blank" rel="noopener noreferrer"><span data-lang="en">Book a call</span><span data-lang="zh">預約通話</span></a>
         </div>
       </nav>
     </div>
