@@ -72,7 +72,7 @@
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
   --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
-  --container:1200px; --gutter:clamp(1.4rem,6vw,6.5rem);
+  --container:1200px; --gutter:clamp(1.5rem,5vw,5rem);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -81,6 +81,14 @@ img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 button{font:inherit;cursor:pointer;}
 ::selection{background:var(--accent);color:#fff;}
+
+/* Accessibility: skip link + keyboard focus */
+.skip-link{position:fixed;top:8px;left:8px;z-index:9999;background:var(--accent);color:#fff;font-family:var(--ff-mono);font-size:.85rem;padding:10px 16px;border-radius:6px;text-decoration:none;transform:translateY(-160%);transition:transform .18s;}
+.skip-link:focus{transform:translateY(0);}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px;}
+:focus:not(:focus-visible){outline:none;}
+main:focus{outline:none;}
+.footer a:focus-visible{outline-color:#9FB2FF;}
 h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-0.02em;font-family:var(--ff-display);}
 p{margin:0;}
 
@@ -111,14 +119,15 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .nav-links li.nav-doc a:hover .navx{opacity:1;}
 .nav-links a{color:var(--ink-2);transition:color .18s;}
 .nav-links a:hover{color:var(--accent);}
+.nav-links a.active{color:var(--accent);}
 .lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);}
 .lang-seg{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.04em;padding:6px 11px;color:var(--muted);background:transparent;border:0;line-height:1.4;transition:all .16s;}
 .lang-seg.on{background:var(--ink);color:var(--on-ink);}
 .lang-seg:not(.on):hover{color:var(--accent);}
 .nav-cta{font-family:var(--ff-mono);font-size:0.79rem;letter-spacing:.03em;padding:9px 15px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;white-space:nowrap;}
 .nav-cta:hover{background:var(--ink);color:var(--on-ink);}
-@media (max-width:760px){.brand small{display:none;}.nav-links{gap:16px;font-size:.74rem;}.nav-links li:nth-child(3){display:none;}.nav-cta{display:none;}.nav-right{gap:14px;}}
-@media (max-width:440px){.nav-links li:nth-child(2){display:none;}}
+@media (max-width:760px){.brand small{display:none;}.nav-links{gap:14px;font-size:.74rem;}.nav-links li:nth-child(1),.nav-links li:nth-child(2),.nav-links li:nth-child(3){display:none;}.nav-links li.nav-doc{margin-left:0;padding-left:0;border-left:none;}.nav-cta{padding:8px 13px;font-size:.74rem;}.nav-right{gap:12px;}}
+@media (max-width:440px){.nav-links li.nav-doc{display:none;}}
 
 /* Hero */
 .hero{padding:clamp(60px,9vw,130px) 0 clamp(44px,6vw,84px);}
@@ -446,8 +455,7 @@ html, body { overflow-x: clip; }
 
 /* ---- Small phones (<= 400px) ---- */
 @media (max-width:400px){
-  :root{--gutter:1.15rem;}
-  .nav-cta{display:none;}
+  :root{--gutter:1.25rem;}
   .brand small{display:none;}
   .hero h1{font-size:clamp(1.7rem,8.4vw,2.2rem);}
   .metrics .m .v{font-size:2.3rem;}
@@ -480,6 +488,8 @@ html[data-theme="dark"] .theme-toggle .ic.sun{opacity:.5;}
 .logos .marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
 .logos .marquee-track{display:flex;align-items:center;width:max-content;animation:logos-scroll 36s linear infinite;}
 .logos .marquee:hover .marquee-track{animation-play-state:paused;}
+.logos .marquee{cursor:pointer;}
+.logos .marquee.paused .marquee-track{animation-play-state:paused;}
 .logos .marquee .logo-item{flex:none;margin-right:clamp(30px,4vw,58px);}
 @keyframes logos-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 @media (prefers-reduced-motion:reduce){.logos .marquee-track{animation:none;}.logos .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none;}}
@@ -517,6 +527,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
 </head>
 <body>
 
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to main content</span><span data-lang="zh">跳到主要內容</span></a>
+
 <nav class="nav" id="nav" aria-label="Primary">
   <div class="container inner">
     <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong><small data-lang="en">Product Designer</small><small data-lang="zh">產品設計師</small></a>
@@ -534,12 +546,14 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
       </button>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
-        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false">中</button>
+        <button class="lang-seg" type="button" data-set="zh" aria-pressed="false" aria-label="中文">中</button>
       </div>
       <a class="nav-cta" href="#contact"><span data-lang="en">Get in touch</span><span data-lang="zh">聯絡我</span></a>
     </div>
   </div>
 </nav>
+
+<main id="main-content" tabindex="-1">
 
 <!-- Hero -->
 <header id="top" class="hero">
@@ -1037,6 +1051,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
   </div>
 </section>
 
+</main>
+
 <!-- Footer -->
 <footer id="contact" class="footer">
   <div class="container">
@@ -1129,6 +1145,31 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
   var nav=document.getElementById('nav');
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>20); }
   onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+  // Marquee: tap to pause / resume (touch has no hover)
+  var mq=document.querySelector('.logos .marquee');
+  if(mq){ mq.addEventListener('click', function(){ mq.classList.toggle('paused'); }); }
+
+  // Scroll-spy: highlight the active section in the nav
+  var spyLinks=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+  var spyMap={};
+  spyLinks.forEach(function(a){
+    var id=a.getAttribute('href').slice(1);
+    if(document.getElementById(id)) spyMap[id]=a;
+  });
+  var spyIds=Object.keys(spyMap);
+  if(spyIds.length && 'IntersectionObserver' in window){
+    var spyObs=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          spyLinks.forEach(function(a){ a.classList.remove('active'); a.removeAttribute('aria-current'); });
+          var a=spyMap[e.target.id];
+          if(a){ a.classList.add('active'); a.setAttribute('aria-current','true'); }
+        }
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    spyIds.forEach(function(id){ spyObs.observe(document.getElementById(id)); });
+  }
 })();
 </script>
 
