@@ -42,7 +42,7 @@
   "@context": "https://schema.org",
   "@type": "CreativeWork",
   "name": "ASUS MyExpert File Search — UX & System Design",
-  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "UX & Product Designer" },
+  "creator": { "@type": "Person", "name": "Alyssa Huang", "jobTitle": "Product Designer" },
   "about": ["Enterprise UX","B2B Tool Design","Product Design","Information Architecture","System-level UX","Search UX","Resource-aware Systems"],
   "dateCreated": "2024",
   "inLanguage": ["en","zh-Hant"]
@@ -109,6 +109,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .c-bigstat{display:flex;align-items:baseline;gap:20px;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
 .c-bigstat .v{font-family:var(--ff-display);font-weight:500;font-size:clamp(2.8rem,6vw,4.4rem);line-height:.9;letter-spacing:-0.04em;color:var(--accent);white-space:nowrap;}
 .c-bigstat .v sup{font-size:.34em;vertical-align:.95em;font-family:var(--ff-mono);letter-spacing:0;}
+.c-bigstat .v.phrase{font-size:clamp(1.7rem,3.4vw,2.3rem);white-space:normal;max-width:14ch;line-height:1.06;}
 .c-bigstat .d{font-size:1rem;color:var(--ink-2);line-height:1.5;max-width:36ch;}
 /* ===== Next-case navigation ===== */
 .next-case{border-top:1px solid var(--rule);}
@@ -302,10 +303,10 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     </div>
     <a class="hero-cta" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
     <div class="c-bigstat">
-      <div class="v" data-lang="en">QA-tested</div>
-      <div class="v" data-lang="zh">QA 實測</div>
-      <div class="d" data-lang="en">Precision and coverage were both validated by ASUS QA before release. Search-by-meaning runs entirely on the device — no server behind it, inside a fixed slice of the machine&rsquo;s own memory, with nothing for the user to manage. Staying useful within that budget is the whole design problem.</div>
-      <div class="d" data-lang="zh">精準率與涵蓋率皆於上線前經 ASUS QA 驗證。語意搜尋完全跑在裝置本機上——背後沒有伺服器，待在機器自己一塊固定的記憶體額度裡，也沒有任何要使用者去管的東西。如何在這個額度內維持好用，就是整個設計題目。</div>
+      <div class="v phrase" data-lang="en">Beats the competitor</div>
+      <div class="v phrase" data-lang="zh">領先競品</div>
+      <div class="d" data-lang="en">On retrieval accuracy, measured by F1 &mdash; the standard precision-and-coverage score for search. File Search scores above the competing product and clears ASUS&rsquo;s release bar, while running entirely on-device inside a fixed slice of memory, with nothing for the user to manage. Staying useful within that budget is the whole design problem.</div>
+      <div class="d" data-lang="zh">以 F1——把精準率與涵蓋率合成一個數字的搜尋標準指標——量測的搜尋準確度，File Search 高於競品，並通過 ASUS 的上線門檻；同時完全跑在裝置本機、待在一塊固定的記憶體額度裡，沒有任何要使用者去管的東西。如何在這個額度內維持好用，就是整個設計題目。</div>
     </div>
   </div>
 </header>
@@ -624,8 +625,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">Built to survive where most prototypes <em>wouldn&rsquo;t</em></h2>
     <h2 data-lang="zh">為了在多數原型<em>撐不住</em>的地方活下來而設計</h2>
     <div class="prose">
-      <p data-lang="en">File Search is built into MyExpert and ships with ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. As it rolls out with that line, I don&rsquo;t have post-launch usage metrics to report yet — and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget, governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
-      <p data-lang="zh">File Search 已內建於 MyExpert，並隨華碩 2026 年的商用筆電、一體機與桌機出貨。隨著這條產品線鋪開，我目前還沒有上市後的使用數據可報——與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
+      <p data-lang="en">File Search is built into MyExpert and ships with ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. Before release, its retrieval quality was benchmarked with F1 &mdash; the standard precision-and-coverage score for search &mdash; where it scored above the competing product and cleared ASUS&rsquo;s release bar. What I don&rsquo;t have yet is post-launch usage data, and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget, governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
+      <p data-lang="zh">File Search 已內建於 MyExpert，並隨華碩 2026 年的商用筆電、一體機與桌機出貨。上線前，它的搜尋品質以 F1——把精準率與涵蓋率合成一個數字的搜尋標準指標——做過 benchmark，結果高於競品、並通過 ASUS 的上線門檻。我目前還沒有的，是上市後的使用數據；與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
     </div>
   </section>
 
@@ -661,7 +662,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
       <a class="btn" href="https://www.asus.com/business/discover/myexpert/" target="_blank" rel="noopener noreferrer"><span data-lang="en">ASUS MyExpert</span><span data-lang="zh">ASUS MyExpert</span> <span aria-hidden="true">&#8599;</span></a>
       <a class="btn" href="mailto:alyssahuang0510@gmail.com"><span data-lang="en">Email</span><span data-lang="zh">來信</span> <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="base"><span data-lang="en">© 2026 Alyssa Huang · UX &amp; Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</span><span data-lang="zh">© 2026 Alyssa Huang · UX／產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</span></div>
+    <div class="base"><span data-lang="en">© 2026 Alyssa Huang · Product Designer · Taipei · Designed, coded &amp; shipped by me — built with Claude</span><span data-lang="zh">© 2026 Alyssa Huang · 產品設計師 · 台北 · 設計、程式與交付皆出自我手——以 Claude 協作打造</span></div>
   </div>
 </footer>
 
