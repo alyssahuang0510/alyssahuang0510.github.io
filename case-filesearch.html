@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="lang-en">
+<html lang="en" class="lang-en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,11 +26,6 @@
   h.classList.remove('lang-en','lang-zh');
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
-
-  var TKEY='ah-theme', theme=null;
-  try{ var t=localStorage.getItem(TKEY); if(t==='dark'||t==='light') theme=t; }catch(e){}
-  if(!theme){ try{ theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }catch(e){ theme='light'; } }
-  if(theme==='dark') h.setAttribute('data-theme','dark');
 })();
 </script>
 
@@ -207,19 +202,6 @@ main:focus{outline:none;}
 .lang-seg{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;}
 .back-link{min-height:40px;}
 
-/* --- Theme toggle (sun / moon pill) --- */
-.theme-toggle{position:relative;display:inline-flex;align-items:center;width:58px;height:30px;padding:0;border:1px solid var(--rule);border-radius:999px;background:var(--bg-2);flex:none;transition:background .25s ease,border-color .25s ease;}
-.theme-toggle:hover{border-color:var(--accent);}
-.theme-toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.22);transition:transform .28s cubic-bezier(.2,.7,.25,1),background .25s ease;}
-html[data-theme="dark"] .theme-toggle .knob{transform:translateX(28px);}
-.theme-toggle .ic{position:absolute;top:50%;width:14px;height:14px;transform:translateY(-50%);color:var(--muted);transition:color .25s ease,opacity .25s ease;pointer-events:none;}
-.theme-toggle .ic.sun{left:7px;}
-.theme-toggle .ic.moon{right:7px;}
-html:not([data-theme="dark"]) .theme-toggle .ic.sun{color:var(--accent);opacity:1;}
-html:not([data-theme="dark"]) .theme-toggle .ic.moon{opacity:.5;}
-html[data-theme="dark"] .theme-toggle .ic.moon{color:var(--accent);opacity:1;}
-html[data-theme="dark"] .theme-toggle .ic.sun{opacity:.5;}
-@media (max-width:760px){.theme-toggle{width:52px;height:28px;}.theme-toggle .knob{width:22px;height:22px;}html[data-theme="dark"] .theme-toggle .knob{transform:translateX(24px);}}
 
 /* --- Dark theme tokens (chrome flips automatically; SVG diagrams keep their own light card) --- */
 html[data-theme="dark"]{
@@ -271,11 +253,6 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span><strong>Alyssa Huang</strong></a>
     <div class="nav-right">
       <a class="back-link" href="index.html"><span aria-hidden="true">&larr;</span> <span class="bt" data-lang="en">Back to work</span><span class="bt" data-lang="zh">回到作品</span></a>
-      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Light / Dark">
-        <span class="knob" aria-hidden="true"></span>
-        <svg class="ic sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
-        <svg class="ic moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.2A8.2 8.2 0 0 1 9.8 3.5a.7.7 0 0 0-.9-.9 9.6 9.6 0 1 0 12.5 12.5.7.7 0 0 0-.9-.9z"/></svg>
-      </button>
       <div class="lang-toggle" role="group" aria-label="Language / 語言">
         <button class="lang-seg" type="button" data-set="en" aria-pressed="true">EN</button>
         <button class="lang-seg" type="button" data-set="zh" aria-pressed="false" aria-label="中文">中</button>
@@ -690,19 +667,6 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
   }
   apply(cur());
 
-  // Theme toggle
-  var TKEY='ah-theme';
-  var tbtn=document.getElementById('themeToggle');
-  function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
-  function syncTbtn(){ if(tbtn) tbtn.setAttribute('aria-pressed', isDark() ? 'true' : 'false'); }
-  function setTheme(mode){
-    var h=document.documentElement;
-    if(mode==='dark') h.setAttribute('data-theme','dark'); else h.removeAttribute('data-theme');
-    try{ localStorage.setItem(TKEY, mode); }catch(e){}
-    syncTbtn();
-  }
-  syncTbtn();
-  if(tbtn){ tbtn.addEventListener('click', function(){ setTheme(isDark() ? 'light' : 'dark'); }); }
 
   var segs=document.querySelectorAll('.lang-seg');
   for(var i=0;i<segs.length;i++){
