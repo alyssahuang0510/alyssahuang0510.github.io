@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lang-en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +21,7 @@
     if(!lang) lang='en';
   }
   var h=document.documentElement;
+  h.classList.remove('lang-en','lang-zh');
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
 

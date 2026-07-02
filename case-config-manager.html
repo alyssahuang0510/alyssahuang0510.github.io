@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lang-en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +23,7 @@
     if(!lang) lang='en';
   }
   var h=document.documentElement;
+  h.classList.remove('lang-en','lang-zh');
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
 
@@ -59,7 +60,7 @@
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
   --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
-  --container:1200px; --gutter:clamp(1.5rem,5vw,5rem);
+  --container:820px; --gutter:clamp(1.5rem,5vw,5rem);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
@@ -212,6 +213,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 /* Schematic figure */
 .chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(18px,2.6vw,30px);}
 .chart-fig svg{width:100%;height:auto;display:block;}
+html[data-theme="dark"] .chart-fig svg{background:#EFEFEC;border-radius:8px;padding:10px;}
 .chart-fig img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--rule);}
 .fig-tag{position:relative;}
 .fig-tag .tg{position:absolute;top:0;left:0;font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--on-ink);padding:5px 10px;border-radius:5px;z-index:3;}
@@ -256,6 +258,7 @@ html[data-theme="dark"] .logos img:hover{filter:none;opacity:1;}
 html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-lang="en">Skip to main content</span><span data-lang="zh">跳到主要內容</span></a>

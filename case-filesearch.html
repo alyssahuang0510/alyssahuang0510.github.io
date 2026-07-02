@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lang-en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +23,7 @@
     if(!lang) lang='en';
   }
   var h=document.documentElement;
+  h.classList.remove('lang-en','lang-zh');
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
 
@@ -59,7 +60,7 @@
   --ff-display:"Schibsted Grotesk","Noto Sans TC",system-ui,sans-serif;
   --ff-body:"Geist","Noto Sans TC",system-ui,sans-serif;
   --ff-mono:"Geist Mono","Noto Sans TC",ui-monospace,monospace;
-  --container:1200px; --gutter:clamp(1.5rem,5vw,5rem);
+  --container:820px; --gutter:clamp(1.5rem,5vw,5rem);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
@@ -174,6 +175,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 /* Chart figure */
 .chart-fig{background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;padding:clamp(20px,3vw,34px);margin-top:8px;}
 .chart-fig svg{width:100%;height:auto;display:block;}
+html[data-theme="dark"] .chart-fig svg{background:#EFEFEC;border-radius:8px;padding:10px;}
 
 /* Footer */
 .c-foot{background:var(--dark);color:#fff;padding:clamp(60px,8vw,104px) 0 30px;margin-top:clamp(48px,6vw,80px);}
@@ -259,6 +261,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 @media (max-width:480px){.metastrip{grid-template-columns:1fr;}}
 
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-lang="en">Skip to main content</span><span data-lang="zh">跳到主要內容</span></a>
@@ -305,8 +308,8 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <div class="c-bigstat">
       <div class="v phrase" data-lang="en">Beats the competitor</div>
       <div class="v phrase" data-lang="zh">領先競品</div>
-      <div class="d" data-lang="en">On retrieval accuracy, measured by F1 &mdash; the standard precision-and-coverage score for search. File Search scores above the competing product and clears ASUS&rsquo;s release bar, while running entirely on-device inside a fixed slice of memory, with nothing for the user to manage. Staying useful within that budget is the whole design problem.</div>
-      <div class="d" data-lang="zh">以 F1——把精準率與涵蓋率合成一個數字的搜尋標準指標——量測的搜尋準確度，File Search 高於競品，並通過 ASUS 的上線門檻；同時完全跑在裝置本機、待在一塊固定的記憶體額度裡，沒有任何要使用者去管的東西。如何在這個額度內維持好用，就是整個設計題目。</div>
+      <div class="d" data-lang="en">On retrieval accuracy, measured by F1 &mdash; the standard precision-and-coverage score for search. File Search scores above 0.5 on F1 &mdash; beating the competing product and clearing ASUS&rsquo;s release bar &mdash; while running entirely on-device inside a fixed slice of memory, with nothing for the user to manage. Staying useful within that budget is the whole design problem.</div>
+      <div class="d" data-lang="zh">以 F1——把精準率與涵蓋率合成一個數字的搜尋標準指標——量測的搜尋準確度，File Search 的 F1 高於 0.5、領先競品，並通過 ASUS 的上線門檻；同時完全跑在裝置本機、待在一塊固定的記憶體額度裡，沒有任何要使用者去管的東西。如何在這個額度內維持好用，就是整個設計題目。</div>
     </div>
   </div>
 </header>
@@ -625,8 +628,10 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
     <h2 data-lang="en">Built to survive where most prototypes <em>wouldn&rsquo;t</em></h2>
     <h2 data-lang="zh">為了在多數原型<em>撐不住</em>的地方活下來而設計</h2>
     <div class="prose">
-      <p data-lang="en">File Search is built into MyExpert and ships with ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. Before release, its retrieval quality was benchmarked with F1 &mdash; the standard precision-and-coverage score for search &mdash; where it scored above the competing product and cleared ASUS&rsquo;s release bar. What I don&rsquo;t have yet is post-launch usage data, and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget, governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
-      <p data-lang="zh">File Search 已內建於 MyExpert，並隨華碩 2026 年的商用筆電、一體機與桌機出貨。上線前，它的搜尋品質以 F1——把精準率與涵蓋率合成一個數字的搜尋標準指標——做過 benchmark，結果高於競品、並通過 ASUS 的上線門檻。我目前還沒有的，是上市後的使用數據；與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
+      <p data-lang="en">Before release, retrieval quality was benchmarked with F1, the standard accuracy score for search. F1 balances two forces that pull against each other: <strong>precision</strong> &mdash; of the files it returns, how many are actually relevant &mdash; and <strong>recall</strong>, or coverage &mdash; of all the relevant files, how many it finds. Optimise one and the other usually drops, so F1 is the single 0&ndash;1 number that only climbs when both improve. File Search scored <strong>above 0.5 on F1</strong> &mdash; above the competing product, and past ASUS&rsquo;s release bar.</p>
+      <p data-lang="en">File Search is built into MyExpert and ships with ASUS&rsquo;s 2026 commercial notebooks, AiOs and desktops. What I don&rsquo;t have yet is post-launch usage data, and I&rsquo;d rather say that plainly than dress up numbers that don&rsquo;t exist. What I can speak to is the design contribution: a semantic search that lives inside a fixed, per-machine memory budget, governs itself as a user&rsquo;s files grow past its cap, and needs no server behind it and no one tending it. The part I&rsquo;m proudest of is the part users never see.</p>
+      <p data-lang="zh">上線前，搜尋品質以 F1 做過 benchmark——這是搜尋準確度的標準指標。F1 會平衡兩股互相拉扯的力量：<strong>精準率</strong>——在它回傳的檔案裡，真正相關的有多少——以及<strong>召回率</strong>，也就是涵蓋率——在所有相關的檔案裡，它找回了多少。把其中一邊往上推，另一邊通常就掉，所以 F1 用一個 0 到 1 的數字，只有在兩邊一起變好時才會升高。File Search 的 <strong>F1 高於 0.5</strong>——高於競品，也通過了 ASUS 的上線門檻。</p>
+      <p data-lang="zh">File Search 已內建於 MyExpert，並隨華碩 2026 年的商用筆電、一體機與桌機出貨。我目前還沒有的，是上市後的使用數據；與其拿不存在的數字來包裝，我寧願直說。我能負責的是設計上的貢獻：一個待在每台機器固定記憶體預算內的語意搜尋，會在使用者檔案多到超過上限時自己調節，背後不需要伺服器，也不需要任何人去顧。我最自豪的，正是使用者永遠看不到的那一塊。</p>
     </div>
   </section>
 

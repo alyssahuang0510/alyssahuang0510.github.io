@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lang-en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,6 +30,7 @@
     if(!lang) lang='en';
   }
   var h=document.documentElement;
+  h.classList.remove('lang-en','lang-zh');
   h.classList.add('lang-'+lang);
   h.lang = (lang==='zh') ? 'zh-Hant' : 'en';
 
@@ -127,7 +128,6 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .nav-cta{font-family:var(--ff-mono);font-size:0.79rem;letter-spacing:.03em;padding:9px 15px;border:1px solid var(--ink);border-radius:6px;transition:all .2s;white-space:nowrap;}
 .nav-cta:hover{background:var(--ink);color:var(--on-ink);}
 @media (max-width:760px){.brand small{display:none;}.nav-links{gap:14px;font-size:.74rem;}.nav-links li:nth-child(1),.nav-links li:nth-child(2),.nav-links li:nth-child(3){display:none;}.nav-links li.nav-doc{margin-left:0;padding-left:0;border-left:none;}.nav-cta{padding:8px 13px;font-size:.74rem;}.nav-right{gap:12px;}}
-@media (max-width:440px){.nav-links li.nav-doc{display:none;}}
 
 /* Hero */
 .hero{padding:clamp(60px,9vw,130px) 0 clamp(44px,6vw,84px);}
@@ -158,6 +158,7 @@ html.lang-zh [data-lang="en"]{display:none !important;}
 .cred-strip .co span{font-family:var(--ff-mono);font-size:.67rem;font-weight:400;color:var(--muted);letter-spacing:.03em;vertical-align:.6em;margin-left:5px;}
 .logos{padding:22px 0 28px;border-bottom:1px solid var(--rule);}
 .logos .lbl{font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:20px;}
+.logos .mq-hint{display:block;font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.05em;color:var(--muted-2);margin:-8px 0 18px;}
 .logos .lbl[data-lang="zh"]{text-transform:none;letter-spacing:.04em;}
 .logos .row{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(22px,3.5vw,44px);}
 .logos .logo-item{display:inline-flex;align-items:center;}
@@ -380,7 +381,7 @@ html, body { overflow-x: clip; }
 
   /* Nav: drop inline links, keep brand + language toggle + compact CTA */
   .nav .inner{padding:12px 0;}
-  .nav-links{display:none;}
+  .theme-toggle{display:none;}
   .nav-right{gap:10px;}
   .nav-cta{display:inline-flex;align-items:center;padding:8px 13px;font-size:.75rem;}
   .brand{font-size:.82rem;gap:8px;}
@@ -524,6 +525,7 @@ html[data-theme="dark"] ::selection{background:var(--accent);color:#0C0C0D;}
 html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5);}
 
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -606,6 +608,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
   <div class="logos reveal">
     <span class="lbl" data-lang="en">Teams running tools I designed</span>
     <span class="lbl" data-lang="zh">這些團隊，用的是我設計的工具</span>
+    <span class="mq-hint" data-lang="en">Hover or tap to pause</span>
+    <span class="mq-hint" data-lang="zh">游標移上、或點一下可暫停</span>
     <div class="marquee" aria-label="Teams running tools I designed">
       <div class="marquee-track">
         <span class="logo-item">
@@ -621,7 +625,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Wistron</span>
         </span>
         <span class="logo-item">
-          <img src="images/logos/wnc.png" alt="WNC" style="--lh:24px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">WNC</span>
         </span>
         <span class="logo-item">
@@ -641,7 +645,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Amkor</span>
         </span>
         <span class="logo-item">
-          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:18px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Garmin</span>
         </span>
         <span class="logo-item">
@@ -665,7 +669,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Wistron</span>
         </span>
         <span class="logo-item" aria-hidden="true">
-          <img src="images/logos/wnc.png" alt="WNC" style="--lh:24px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/wnc.png" alt="WNC" style="--lh:26px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">WNC</span>
         </span>
         <span class="logo-item" aria-hidden="true">
@@ -685,7 +689,7 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
           <span class="wordmark" style="display:none">Amkor</span>
         </span>
         <span class="logo-item" aria-hidden="true">
-          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:30px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
+          <img src="images/logos/garmin.png" alt="Garmin" style="--lh:18px" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'" />
           <span class="wordmark" style="display:none">Garmin</span>
         </span>
         <span class="logo-item" aria-hidden="true">
@@ -762,8 +766,8 @@ html[data-theme="dark"] .hero .status .pip{box-shadow:0 0 0 0 rgba(74,200,110,.5
         <div class="case-bigstat">
           <div class="v phrase" data-lang="en">Beats the competitor</div>
           <div class="v phrase" data-lang="zh">領先競品</div>
-          <div class="d" data-lang="en">On retrieval accuracy &mdash; measured by F1, the standard precision-and-coverage score for search &mdash; File Search scores above the competing product and clears ASUS&rsquo;s release bar. Ships pre-installed on the 2026 commercial line and runs entirely on-device: no server, nothing to manage.</div>
-          <div class="d" data-lang="zh">在搜尋準確度上——以 F1（把精準率與涵蓋率合成一個數字的搜尋標準指標）量測——File Search 高於競品，並通過 ASUS 的上線門檻。隨 2026 商用線預載出貨、完全跑在裝置上：沒有伺服器，也沒有任何要管的東西。</div>
+          <div class="d" data-lang="en">On retrieval accuracy &mdash; measured by F1, the standard precision-and-coverage score for search &mdash; File Search scores above 0.5 on F1, beats the competing product, and clears ASUS&rsquo;s release bar. Ships pre-installed on the 2026 commercial line and runs entirely on-device: no server, nothing to manage.</div>
+          <div class="d" data-lang="zh">在搜尋準確度上——以 F1（把精準率與涵蓋率合成一個數字的搜尋標準指標）量測——File Search 的 F1 高於 0.5、領先競品，並通過 ASUS 的上線門檻。隨 2026 商用線預載出貨、完全跑在裝置上：沒有伺服器，也沒有任何要管的東西。</div>
         </div>
         <div class="case-cta">
           <a class="case-link" href="case-filesearch.html"><span data-lang="en">Read the case study</span><span data-lang="zh">閱讀完整案例</span><span class="ar" aria-hidden="true">→</span></a>
